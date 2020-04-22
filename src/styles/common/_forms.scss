@@ -1,0 +1,11 @@
+$form-input-height: 30px;
+
+input,
+textarea {
+    @include font-stack-base;
+    height: $form-input-height;
+    padding: 0 $spacing-xs;
+    border: none;
+    color: $color-black;
+    background-color: $color-gray-lightest;
+}

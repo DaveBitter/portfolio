@@ -1,0 +1,55 @@
+/** Containers */
+$container-sml: 460px;
+$container-med: 890px;
+$container-lrg: 1140px;
+$container-xl: 1440px;
+$container-content: 40em;
+
+/** Block */
+$spacing-base: 8px;
+$spacing-xxxs: $spacing-base / 4; // 2px
+$spacing-xxs: $spacing-base / 2; // 4px
+$spacing-xs: $spacing-base; // 8px
+$spacing-sml: $spacing-base * 2; // 16px
+$spacing-med: $spacing-base * 3; // 24px
+$spacing-lrg: $spacing-base * 6; // 48px
+$spacing-xl: $spacing-base * 8; // 64px
+$spacing-xxl: $spacing-base * 12; // 96px
+$spacing-xxxl: $spacing-base * 16; // 128px
+$spacing-xxxl: $spacing-base * 24; // 192px
+
+/** Font weights */
+$font-weight-light: 200;
+$font-weight-regular: 400;
+$font-weight-bold: 600;
+
+/** Components */
+$border-radius-sml: 2px;
+$border-radius-med: 4px;
+$border-radius-lrg: 8px;
+$border-radius-xl: 16px;
+$box-shadow-default--hard: 0 2px 5px rgba($color-black, 0.1);
+$box-shadow-default--soft: 0 5px 10px rgba($color-black, 0.1);
+
+/** Transition & animation */
+$transition-timing-fast: 0.15s;
+$transition-timing-med: 0.25s;
+$transition-timing-slow: 0.4s;
+$transition-timing-slower: 0.6s;
+$transition-timing-very-slow: 1s;
+$transition-timing-slowest: 1.5s;
+$transition-easing-default: ease-in-out;
+$transition-easing-out: ease-out;
+$transition-easing-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+$transition-easing-cubic: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+/** Media query */
+$mq-mob: 480px;
+$mq-mob--lrg: 640px;
+
+$mq-tab--sml: 768px;
+$mq-tab--lrg: 820px;
+
+$mq-desk--sml: 960px;
+$mq-desk--med: 1200px;
+$mq-desk--lrg: 1440px;

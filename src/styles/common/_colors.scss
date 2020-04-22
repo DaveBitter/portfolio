@@ -1,0 +1,15 @@
+/* COLORS */
+$color-primary: #56cc71;
+$color-primary-dark: darken(#56cc71, 5%);
+
+/* COLOR GRAY */
+$color-white: #fff;
+$color-black: #39393a;
+
+$color-gray: #8d9297;
+$color-gray-light: lighten($color-gray, 10%);
+$color-gray-lighter: lighten($color-gray, 20%);
+$color-gray-lightest: lighten($color-gray, 30%);
+$color-gray-dark: darken($color-gray, 10%);
+$color-gray-darker: darken($color-gray, 20%);
+$color-gray-darkest: darken($color-gray, 30%);
