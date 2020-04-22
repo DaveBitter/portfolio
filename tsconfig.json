@@ -32,7 +32,7 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "strict": false,
-    "noEmit": true,
+    "noEmit": false,
     "resolveJsonModule": true,
     "isolatedModules": true
   },

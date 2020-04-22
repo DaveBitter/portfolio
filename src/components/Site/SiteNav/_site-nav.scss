@@ -1,0 +1,91 @@
+.site-nav {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    @include mq($mq-tab--sml) {
+        right: auto;
+        left: 50%;
+        min-width: $container-content;
+        transform: translateX(-50%);
+    }
+
+    &__items {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__item {
+        flex: 1;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        padding: $spacing-med $spacing-xs;
+        background-color: $color-black;
+        transition: background-color $transition-timing-fast $transition-easing-cubic;
+
+        &:hover,
+        &:focus {
+            background-color: $color-gray-darkest;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: $spacing-xxxs;
+            transform: translateY(100%);
+            background-color: $color-white;
+            transition: transform $transition-timing-fast $transition-easing-cubic;
+        }
+
+        &[data-is-active='true'] {
+            &::after {
+                transform: translateY(-100%);
+            }
+        }
+
+        @include mq($mq-tab--sml) {
+            &:first-of-type {
+                border-top-left-radius: $border-radius-lrg;
+            }
+
+            &:last-of-type {
+                border-top-right-radius: $border-radius-lrg;
+            }
+        }
+    }
+
+    &__link {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        font-size: 0;
+        text-align: center;
+        color: $color-white;
+        text-transform: capitalize;
+        transition: transform $transition-timing-fast $transition-easing-cubic;
+
+        .site-nav__item:hover &,
+        .site-nav__item:focus & {
+            transform: translateY($spacing-xs);
+            font-size: initial;
+        }
+    }
+
+    &__icon {
+        fill: $color-white;
+        pointer-events: none;
+        transition: transform $transition-timing-fast $transition-easing-cubic;
+
+        .site-nav__item:hover &,
+        .site-nav__item:focus & {
+            transform: translateY($spacing-xs);
+        }
+    }
+}

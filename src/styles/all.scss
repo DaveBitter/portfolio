@@ -1,6 +1,9 @@
 // Normalize
 @import 'common/normalize';
 
+// Functions
+@import 'functions/rem';
+
 // Mixins
 @import 'mixins/font-size';
 @import 'mixins/mq';
@@ -14,3 +17,4 @@
 @import 'common/typography';
 
 // Components
+@import '../components/Site/SiteNav/site-nav';
