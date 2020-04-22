@@ -29,9 +29,9 @@
     "start": "next start",
     "storybook": "start-storybook -p 1337",
     "build-storybook": "build-storybook",
-    "test": "jest --config config/tests/jest.config.js",
-    "test:watch": "jest --config config/tests/jest.config.js --watch",
-    "test:coverage": "jest --config config/tests/jest.config.js --coverage",
+    "test": "jest --silent --config config/tests/jest.config.js",
+    "test:watch": "jest --silent --config config/tests/jest.config.js --watch",
+    "test:coverage": "jest --silent --config config/tests/jest.config.js --coverage",
     "eslint": "eslint --fix",
     "stylelint": "stylelint **/*.scss --syntax=scss"
   },

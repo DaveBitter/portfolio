@@ -9,5 +9,12 @@ module.exports = {
         "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "./config/tests/transformers/fileTransform.ts"
     },
     setupFilesAfterEnv: ["./config/tests/setup/setupTests.ts"],
-    transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"]
+    transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
+    globals: {
+        'ts-jest': {
+            tsConfig: {
+                jsx: 'react'
+            }
+        }
+    }
 };
