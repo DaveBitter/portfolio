@@ -55,6 +55,7 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "frontmatter-markdown-loader": "^3.3.0",
     "next": "9.3.5",
     "react": "16.13.1",
     "react-dom": "16.13.1"
