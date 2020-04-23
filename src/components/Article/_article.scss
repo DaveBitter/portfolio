@@ -1,0 +1,138 @@
+$article-header-height: 60vh;
+
+.article {
+    margin-top: -$spacing-lrg * 2;
+
+    &__header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        height: $article-header-height;
+        padding-bottom: $spacing-lrg;
+        overflow: hidden;
+        text-align: right;
+    }
+
+    &__hero {
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: transparentize($color-black, 0.5);
+        }
+    }
+
+    &__hero-image {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        object-fit: cover;
+    }
+
+    &__title,
+    &__date {
+        color: $color-white;
+    }
+
+    &__title {
+        margin-bottom: 0;
+    }
+
+    &__intro {
+        @include text-m;
+
+        @include mq($mq-tab--sml) {
+            @include text-l;
+            margin: $spacing-xxl (-$spacing-xxl);
+        }
+    }
+
+    &__body {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: $spacing-lrg;
+
+            @include mq($mq-tab--sml) {
+                margin-top: $spacing-xl;
+            }
+
+            + p {
+                margin-top: 0;
+            }
+        }
+
+        ol,
+        ul,
+        p {
+            @include text-m;
+        }
+
+        ul,
+        ol {
+            margin: $spacing-med 0;
+            padding-left: $spacing-sml;
+
+            @include mq($mq-mob--lrg) {
+                padding-left: 0;
+            }
+        }
+
+        li {
+            margin: $spacing-sml 0;
+            line-height: 1.6;
+
+            + li {
+                margin-top: $spacing-med;
+            }
+        }
+
+        hr {
+            display: none;
+        }
+
+        figure {
+            position: relative;
+            margin: $spacing-lrg 0;
+            border-radius: $border-radius-med;
+
+            @include mq($mq-tab--sml) {
+                margin: $spacing-xxl 0;
+            }
+
+            figcaption {
+                @include text-s;
+                text-align: center;
+                color: $color-gray;
+            }
+
+            button {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: transparent;
+                border: none;
+                cursor: zoom-in;
+            }
+        }
+    }
+}

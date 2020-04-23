@@ -8,4 +8,6 @@ items:
     value: articles
   - key: 'read'
     value: read
+  - key: 'latestArticles'
+    value: Latest articles
 ---

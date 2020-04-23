@@ -11,7 +11,10 @@ interface IProps { }
 
 // Component
 const Home = ({ }: IProps) => {
-    return <h1>Hello world</h1>
+    return <div className='grid'>
+        <div className='g2'>
+        </div>
+    </div>;
 };
 
 // Props
