@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from 'react';
 
 // Utils
 import { ArticleInterface } from '../../../src/static/utils/Interfaces/Interfaces';
-import formatDate from 'static/utils/formatDate';
-import ArticleElementEnricher from 'static/utils/ArticleElementEnricher';
+import formatDate from '../../static/utils/formatDate';
+import ArticleElementEnricher from '../../static/utils/ArticleElementEnricher';
 import compileMarkdownToJSX from '../../../src/static/utils/compileMarkdownToJSX';
 
 // Resources
