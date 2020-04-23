@@ -11,9 +11,29 @@ collections:
         name: "dictionary"
         file: "content/general/dictionary.md"
         fields:
-          - label: "Labels"
-            name: "labels"
+          - label: "Items"
+            name: "items"
             widget: list
             fields:
               - { label: "Key", name: "key", widget: "string" }
               - { label: "Value", name: "value", widget: "string" }
+      - label: "Headings"
+        name: "headings"
+        file: "content/general/headings.md"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Key", name: "key", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }
+      - label: "Copy"
+        name: "copy"
+        file: "content/general/copy.md"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Key", name: "key", widget: "string" }
+              - { label: "Value", name: "value", widget: "text" }

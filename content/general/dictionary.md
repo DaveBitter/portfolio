@@ -1,5 +1,5 @@
 ---
-labels:
+items:
   - key: 'home'
     value: Home
   - key: 'quickBits'
