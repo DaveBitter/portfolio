@@ -5,7 +5,7 @@ import Link from 'next/link';
 // Utils
 import { getDictionary } from '../../../static/utils/getContent';
 import { ArticleInterface } from '../../../static/utils/Interfaces/Interfaces';
-import formatDate from 'static/utils/formatDate';
+import formatDate from '../../../static/utils/formatDate';
 
 // Resources
 
