@@ -1,7 +1,7 @@
 ---
 labels:
   - key: 'home'
-    value: home
+    value: Home
   - key: 'quickBits'
     value: Quick Bits
   - key: 'articles'

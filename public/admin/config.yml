@@ -4,22 +4,16 @@ backend:
 media_folder: public/img
 public_folder: img
 collections:
-  - name: "dictionary"
-    label: "Dictionary"
-    file: "content/dictionary.md"
-  - name: "pages"
-    label: "Pages"
+  - name: "general"
+    label: "General"
     files:
-      - label: "Home"
-        name: "home"
-        file: "content/home.md"
+      - label: "Dictionary"
+        name: "dictionary"
+        file: "content/general/dictionary.md"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Publish Date", name: "date", widget: "datetime" }
-          - { label: "Body", name: "body", widget: "markdown" }
-          - label: "Cats"
-            name: "cats"
+          - label: "Labels"
+            name: "labels"
             widget: list
             fields:
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Key", name: "key", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }
