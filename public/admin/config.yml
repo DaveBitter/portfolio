@@ -37,3 +37,20 @@ collections:
             fields:
               - { label: "Key", name: "key", widget: "string" }
               - { label: "Value", name: "value", widget: "text" }
+  - name: "articles"
+    label: "Articles"
+    files:
+      - label: "Articles"
+        name: "articles"
+        file: "content/articles/articles.md"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Date", name: "date", widget: "date" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Teaser Copy", name: "teaserCopy", widget: "text" }
+              - { label: "Teaser Image", name: "teaserImage", widget: "image" }
+              - { label: "Intro", name: "teaserImage", widget: "markdown" }
+              - { label: "Body", name: "body", widget: "markdown" }
