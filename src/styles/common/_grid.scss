@@ -37,7 +37,6 @@
         }
 
         @supports (display: grid) {
-            max-width: 100%;
             margin: 0;
         }
     }
@@ -47,7 +46,6 @@
 
         .g0 {
             grid-column: main-start / main-end;
-            margin: 0 calc((#{$container-lrg} - 100vw) / 2);
         }
 
         .g2 {

@@ -7,7 +7,8 @@ import React from 'react';
 import '../src/styles/all.scss';
 
 // Components
-import SiteNav from 'components/Site/SiteNav/SiteNav';
+import SiteHeader from '../src/components/Site/SiteHeader/SiteHeader';
+import SiteNav from '../src/components/Site/SiteNav/SiteNav';
 
 // Interface
 interface IProps {
@@ -17,10 +18,14 @@ interface IProps {
 
 // Component
 const App = ({ Component, pageProps }: IProps) => {
-    return <>
-        <SiteNav />
+    const { title } = pageProps;
 
-        <Component {...pageProps} />
+    return <>
+        <SiteHeader title={title}>
+            <SiteNav />
+        </SiteHeader>
+
+        <main><Component {...pageProps} /></main>
     </>
 };
 

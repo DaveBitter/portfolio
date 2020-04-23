@@ -17,4 +17,8 @@
 @import 'common/typography';
 
 // Components
+@import '../components/Article/article';
+@import '../components/Article/ArticleTeaser/article-teaser';
+@import '../components/Article/ArticleTeasers/article-teasers';
+@import '../components/Site/SiteHeader/site-header';
 @import '../components/Site/SiteNav/site-nav';

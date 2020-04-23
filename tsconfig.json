@@ -37,6 +37,7 @@
     "isolatedModules": true
   },
   "include": [
+    "pages/**/*",
     "src/**/*"
   ],
   "exclude": [

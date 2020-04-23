@@ -1,0 +1,29 @@
+.article-teasers {
+    margin: -$spacing-med;
+
+    @include mq($mq-tab--sml) {
+        display: flex;
+        margin: -$spacing-lrg;
+
+        @supports (display: grid) {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+            grid-gap: $spacing-xl $spacing-xl;
+            margin: unset;
+        }
+    }
+
+    &__item {
+        padding: $spacing-med;
+
+        @include mq($mq-tab--sml) {
+            width: 50%;
+            padding: $spacing-lrg;
+
+            @supports (display: grid) {
+                width: unset;
+                padding: 0;
+            }
+        }
+    }
+}

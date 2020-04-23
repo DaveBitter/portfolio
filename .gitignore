@@ -8,6 +8,7 @@ lerna-debug
 dist/*
 build/*
 .next
+coverage
 
 # Cache
 .sass-cache
