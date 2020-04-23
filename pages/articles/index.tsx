@@ -24,13 +24,6 @@ const Articles = ({ }: IProps) => {
     </div>;
 };
 
-export const getStaticPaths = async () => {
-    return {
-        paths: getArticles().items.map((article: any) => ({ params: { slug: article.slug } })),
-        fallback: false
-    };
-}
-
 export const getStaticProps: GetStaticProps = async (context: any) => {
     const dictionary = getDictionary();
 
