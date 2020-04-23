@@ -17,11 +17,12 @@ interface IProps {
 
 // Component
 const App = ({ Component, pageProps }: IProps) => {
-    return <>
-        <SiteNav />
+    return <div className='grid'>
+        <header className='g2'><SiteNav /></header>
 
-        <Component {...pageProps} />
-    </>
+        <main className='g2'><Component {...pageProps} /></main>
+
+    </div>
 };
 
 // Props
