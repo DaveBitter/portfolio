@@ -1,7 +1,7 @@
 // Utils
 import isExternalURL from "./isExternalUrl";
 
-class EnrichArticleElements {
+class ArticleElementEnricher {
     constructor(element: any, options: any) {
         if (!element) { return; }
         this._element = element;
@@ -59,4 +59,4 @@ class EnrichArticleElements {
     }
 }
 
-export default EnrichArticleElements;
+export default ArticleElementEnricher;
