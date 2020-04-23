@@ -1,11 +1,6 @@
 ---
 items:
   - body: >-
-      !\[dave-10](//images.ctfassets.net/w4dg3cjf42ew/5LbJ7tVLOsPy106mP9rwWf/171544d87d293fb8da7f95c8aa22412b/dave-10.jpg)
-
-
-
-
       Back in 2018, we have updated our main website
       \[mirabeau.nl](https://mirabeau.nl). However, the old blogging platform
       became the sibling that was left behind. The branding and visual style got
@@ -323,7 +318,11 @@ items:
       Our blog was suffering from technical debt. I decided to rebuild it using
       the latest web technologies to make it 2020 ready, which includes boosting
       the overall performance and user-friendliness.
-    teaserImage: /img/dave-09.jpg
+    teaserImage: >-
+      Our blog was suffering from technical debt. I decided to rebuild it using
+      the latest web technologies to make it 2020 ready, which includes boosting
+      the overall performance and user-friendliness. This blog post is about the
+      journey I went and what the possibilities might be for your next platform.
     title: Implementing the latest web technologies to boost our blog
 ---
 
