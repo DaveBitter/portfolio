@@ -1,6 +1,6 @@
 module.exports = {
     rootDir: '../../',
-    collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx,mjs}"],
+    collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx,mjs}", "!**/*.(stories.tsx)"],
     testMatch: ["<rootDir>/**/?(*.)(spec|test).{js,jsx,ts,tsx,mjs}"],
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
