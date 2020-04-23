@@ -1,0 +1,9 @@
+.article-teasers {
+    display: flex;
+    margin: -$spacing-sml;
+
+    &__item {
+        width: 50%;
+        padding: $spacing-sml;
+    }
+}

@@ -16,7 +16,7 @@ interface IProps {
 // Component
 const ArticleTeasers = ({ articles, ...attributes }: IProps) => {
     return <ul className='article-teasers' {...attributes}>
-        {articles.map((article: any, index: number) => <li key={index} className='article-teasers__item'>
+        {[...articles, ...articles].map((article: any, index: number) => <li key={index} className='article-teasers__item'>
             <ArticleTeaser {...article} />
         </li>)}
     </ul>

@@ -6,4 +6,6 @@ items:
     value: Quick Bits
   - key: 'articles'
     value: articles
+  - key: 'read'
+    value: read
 ---

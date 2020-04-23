@@ -8,7 +8,7 @@ items:
       development moves at a rapid pace. Projects that are about five years old
       become outdated both in tooling and functionality. I want to rethink the
       way we build web platforms and construct a stack that stays up-to-date and
-      is resilient for the coming years. 
+      is resilient for the coming years.
 
 
       !\[The old
@@ -18,7 +18,7 @@ items:
       \*Our aged blog platform\*
 
 
-      \## The new blog platform 
+      \## The new blog platform
 
 
       The biggest difference between the new blog platform – compared to the old
@@ -61,17 +61,17 @@ items:
       The biggest drawback is the lack of server-side rendering (SSR)
       capabilities when using React.js or any other SPA. In short, you load a
       blank page and a JavaScript bundle. After loading the bundle, the page is
-      built in the browser and the user can use the application. 
+      built in the browser and the user can use the application.
 
 
       This has multiple implications like:
 
 
-      1. \_\_Performance\_\_: The page needs to load a - in most cases large - 
+      1. \_\_Performance\_\_: The page needs to load a - in most cases large -
       JavaScript bundle to be able to render the first view. Often, you then
       need to get some data - like a blog post - from a server. This then gets
       retrieved and rendered on the page. By utilising SSR, we can do all of
-      this just on the server. 
+      this just on the server.
 
       2. \_\_Providing SEO\_\_: SEO is an important factor for many types of
       websites like our blog platform. Firstly, I wanted to provide
@@ -128,7 +128,7 @@ items:
       control over this. In the CMS the author can give a specific image and
       summary for their article. This then dictates how it looks like when
       shared on social media sites. This gives more fine-grained control over
-      this. 
+      this.
 
       4. \_\_Extending tags in a smart way\_\_. Even though I want to give this
       fine-grained control to the others, I don't want them to worry about it. I
@@ -156,7 +156,7 @@ items:
       2. \_\_Next.js\_\_. I use the \[Serverless Next.js
       plugin](https://serverless.com/blog/serverless-nextjs/). This plugin takes
       the rest of the heavy lifting. It is exactly tailored to deploying a
-      Next.js project with serverless and lambdas. 
+      Next.js project with serverless and lambdas.
 
       3. \_\_Cloud services\_\_. I decided to use AWS, where we host many
       services, to deploy the serverless platform on. Below you can see the
@@ -204,7 +204,7 @@ items:
       keys. This all ensures a nice developer experience.
 
 
-      \    
+      \
 
 
       !\[CI/CD](//images.ctfassets.net/w4dg3cjf42ew/KZlhxIeJqB8y7l954ixcm/04acb40e87638f9dbfed747370ba32aa/diagram-cicd-horizontal-85f50f218b3ff47fd993ab5529b85f0147901b20f18b972fdc48504e4bc3110e-min.png)\*Two
@@ -244,11 +244,6 @@ items:
       Our blog was suffering from technical debt. I decided to rebuild it using
       the latest web technologies to make it 2020 ready, which includes boosting
       the overall performance and user-friendliness.
-    teaserImage: >-
-      Our blog was suffering from technical debt. I decided to rebuild it using
-      the latest web technologies to make it 2020 ready, which includes boosting
-      the overall performance and user-friendliness. This blog post is about the
-      journey I went and what the possibilities might be for your next platform.
+    teaserImage: /img/dave-behind-laptop.jpg
     title: Implementing the latest web technologies to boost our blog
 ---
-
