@@ -4,6 +4,9 @@ backend:
 media_folder: public/img
 public_folder: img
 collections:
+  - name: "dictionary"
+    label: "Dictionary"
+    file: "content/dictionary.md"
   - name: "pages"
     label: "Pages"
     files:

@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { DictionaryInterface } from '../../../static/utils/Interfaces/Interfaces';
 
 // Content
-import { dictionary } from '../../../static/content/dictionary';
+import { getDictionary } from '../../../static/utils/getContent';
 
 // Resources
 // @ts-ignore
@@ -31,6 +31,7 @@ const getNavigationItems = (dictionary: DictionaryInterface) => [
 
 // Component
 const SiteNav = ({ ...attributes }: IProps) => {
+    const dictionary = getDictionary();
     const items = getNavigationItems(dictionary)
     const router = useRouter();
 
