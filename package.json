@@ -55,7 +55,6 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "frontmatter-markdown-loader": "^3.3.0",
     "marked": "^1.0.0",
     "next": "9.3.5",
     "react": "16.13.1",
@@ -91,8 +90,10 @@
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-react": "^7.19.0",
+    "front-matter-loader": "^0.2.0",
     "husky": "^4.2.5",
     "jest": "^25.4.0",
+    "json-loader": "^0.5.7",
     "lint-staged": "^10.1.7",
     "node-sass": "^4.13.1",
     "path": "^0.12.7",

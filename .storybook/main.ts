@@ -1,3 +1,5 @@
+const Mode = require('frontmatter-markdown-loader/mode')
+
 module.exports = {
   webpackFinal: async config => {
     config.module.rules.push({
@@ -8,7 +10,17 @@ module.exports = {
         },
       ],
     });
+
     config.resolve.extensions.push('.ts', '.tsx');
+
+    config.module.rules.push({
+      test: /\.md$/,
+      loaders: [
+        'front-matter-loader',
+      ],
+    });
+
+
     return config;
   },
 };
