@@ -1,5 +1,3 @@
-const Mode = require('frontmatter-markdown-loader/mode')
-
 module.exports = {
   webpackFinal: async config => {
     config.module.rules.push({
