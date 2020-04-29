@@ -1,5 +1,6 @@
 .fancy-image-block {
     position: relative;
+    display: inline-flex;
 
     &__image-wrapper {
         mask: url('/img/shapes/blob-1.svg');
@@ -20,10 +21,14 @@
             bottom: 0;
             left: 0;
             opacity: 0.2;
-            transform: translate(-$spacing-xl, -$spacing-xl);
+            transform: translate(-$spacing-sml, -$spacing-sml);
+
+            @include mq($mq-tab--lrg) {
+                transform: translate(-$spacing-med, -$spacing-med);
+            }
 
             @supports (mask: url('/img/shapes/blob-1.svg')) {
-                display: block;
+                display: inline-block;
             }
 
             &::after {
@@ -38,14 +43,16 @@
             }
 
             &:nth-of-type(2) {
-                transform: translate($spacing-xl, $spacing-xl);
+                transform: translate($spacing-sml, $spacing-sml);
+
+                @include mq($mq-tab--lrg) {
+                    transform: translate($spacing-med, $spacing-med);
+                }
             }
         }
     }
 
     &__image {
-        width: 100%;
-        height: 100%;
         object-fit: cover;
     }
 }

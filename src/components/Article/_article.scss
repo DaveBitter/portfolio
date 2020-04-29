@@ -11,7 +11,6 @@ $article-header-height: 60vh;
         align-items: flex-end;
         height: $article-header-height;
         padding-bottom: $spacing-lrg;
-        overflow: hidden;
         text-align: right;
     }
 
@@ -22,6 +21,16 @@ $article-header-height: 60vh;
         left: 0;
         right: 0;
         bottom: 0;
+
+        @supports (mask: url('/img/shapes/blob-1.svg')) {
+            mask: url('/img/shapes/blob-1.svg');
+            mask-size: cover;
+            mask-position: 25%;
+
+            @include mq($mq-tab--sml) {
+                mask-position: 0;
+            }
+        }
 
         &::after {
             content: '';

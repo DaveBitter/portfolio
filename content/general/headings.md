@@ -1,5 +1,5 @@
 ---
 items:
-  - key: 'foo'
-    value: Foo
+  - key: 'greeting'
+    value: Hi, I'm Dave
 ---

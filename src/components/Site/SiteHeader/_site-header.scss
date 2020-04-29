@@ -1,3 +1,28 @@
 .site-header {
     padding: $spacing-lrg 0;
+    max-width: $container-lrg;
+
+    &__heading-wrapper {
+        @include mq($mq-tab--lrg) {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__heading {
+        @include text-xxl;
+        background: $gradient-primary;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        @include mq($mq-tab--lrg) {
+            @include text-jumbo;
+        }
+    }
+
+    .fancy-image-block {
+        @include mq($mq-tab--lrg) {
+            width: 80%;
+        }
+    }
 }

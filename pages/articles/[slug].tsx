@@ -33,7 +33,12 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
-    return { props: { article: getArticles().items.find((article: any) => article.slug === context.params.slug) || null } }
+    return {
+        props: {
+            article: getArticles().items.find((article: any) => article.slug === context.params.slug) || null,
+            showGenericSiteHeader: false
+        }
+    }
 }
 
 export default ArticlePage;

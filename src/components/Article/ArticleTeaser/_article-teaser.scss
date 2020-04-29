@@ -23,6 +23,16 @@
         right: 0;
         bottom: 0;
 
+        @supports (mask: url('/img/shapes/blob-2.svg')) {
+            mask: url('/img/shapes/blob-2.svg');
+            mask-size: cover;
+            mask-position: 25%;
+
+            @include mq($mq-tab--sml) {
+                mask-position: 0;
+            }
+        }
+
         &::after {
             content: '';
             position: absolute;

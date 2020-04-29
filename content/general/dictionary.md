@@ -12,4 +12,6 @@ items:
     value: read
   - key: 'latestArticles'
     value: Latest articles
+  - key: 'heroImage'
+    value: Hero image
 ---

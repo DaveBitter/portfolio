@@ -1,28 +1,30 @@
 // Libs
 import React from 'react';
+import { GetStaticProps } from 'next';
 
 // Utils
-import { getDictionary } from 'static/utils/getContent';
+import { getHeadings } from 'static/utils/getContent';
 
 // Resources
 
 // Components
-import FancyImageBlock from 'components/FancyImageBlock/FancyImageBlock';
 
 // Interface
 interface IProps { }
 
 // Component
 const Home = ({ }: IProps) => {
-    const dictionary = getDictionary();
-
     return <div className='grid'>
         <div className='g2'>
-            <FancyImageBlock src='/img/dave.jpg' alt={dictionary.daveBitter} />
         </div>
     </div>;
 };
 
+export const getStaticProps: GetStaticProps = async (context: any) => {
+    const headings = getHeadings();
+
+    return { props: { title: headings.greeting || null } }
+}
 // Props
 Home.defaultProps = {};
 

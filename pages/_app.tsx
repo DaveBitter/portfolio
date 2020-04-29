@@ -18,10 +18,10 @@ interface IProps {
 
 // Component
 const App = ({ Component, pageProps }: IProps) => {
-    const { title } = pageProps;
+    const { showGenericSiteHeader = true, title } = pageProps;
 
     return <>
-        <SiteHeader title={title}>
+        <SiteHeader title={title} showGenericSiteHeader={showGenericSiteHeader}>
             <SiteNav />
         </SiteHeader>
 
