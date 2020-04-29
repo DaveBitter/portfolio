@@ -12,4 +12,10 @@ $color-gray-lighter: lighten($color-gray, 20%);
 $color-gray-lightest: lighten($color-gray, 30%);
 $color-gray-dark: darken($color-gray, 10%);
 $color-gray-darker: darken($color-gray, 20%);
-$color-gray-darkest: darken($color-gray, 30%);
+$color-gray-darkest: darken($color-gray, 40%);
+
+/* GRADIENTS */
+$gradient-dark: linear-gradient(45deg, $color-black, $color-gray-darkest);
+
+/* MORPHISMS */
+$morphism-dark: inset -3px -3px 7px $color-black, inset 3px 3px 5px $color-gray-darkest;

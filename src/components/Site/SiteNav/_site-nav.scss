@@ -4,12 +4,15 @@
     right: 0;
     bottom: 0;
     left: 0;
+    box-shadow: $morphism-dark;
 
     @include mq($mq-tab--sml) {
         right: auto;
         left: 50%;
         min-width: $container-content;
         transform: translateX(-50%);
+        border-top-left-radius: $border-radius-lrg;
+        border-top-right-radius: $border-radius-lrg;
     }
 
     &__items {
@@ -23,7 +26,6 @@
         display: flex;
         justify-content: center;
         padding: $spacing-med $spacing-xs;
-        background-color: $color-black;
         transition: background-color $transition-timing-fast $transition-easing-cubic;
 
         &:hover,
@@ -46,16 +48,6 @@
         &[data-is-active='true'] {
             &::after {
                 transform: translateY(-100%);
-            }
-        }
-
-        @include mq($mq-tab--sml) {
-            &:first-of-type {
-                border-top-left-radius: $border-radius-lrg;
-            }
-
-            &:last-of-type {
-                border-top-right-radius: $border-radius-lrg;
             }
         }
     }
