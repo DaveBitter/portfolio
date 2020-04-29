@@ -51,6 +51,7 @@
         text-transform: capitalize;
         transition: transform $transition-timing-fast $transition-easing-cubic;
 
+        .site-nav__item[data-is-active='true'] &,
         .site-nav__item:hover &,
         .site-nav__item:focus & {
             transform: translateY($spacing-xs);
@@ -63,6 +64,7 @@
         pointer-events: none;
         transition: transform $transition-timing-fast $transition-easing-cubic;
 
+        .site-nav__item[data-is-active='true'] &,
         .site-nav__item:hover &,
         .site-nav__item:focus & {
             transform: translateY($spacing-xs);

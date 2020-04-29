@@ -1,4 +1,11 @@
 .card {
-    padding: $spacing-med $spacing-lrg;
+    display: inline-flex;
+    padding: $spacing-sml;
+    margin-bottom: $spacing-med;
     box-shadow: $morphism-dark;
+    border-radius: $border-radius-lrg;
+
+    @include mq($mq-tab--sml) {
+        padding: $spacing-med $spacing-lrg;
+    }
 }

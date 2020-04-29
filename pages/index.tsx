@@ -22,8 +22,8 @@ const Home = ({ }: IProps) => {
     return <>
         <div className='grid'>
             <div className='g6'>
+                <h2 className='text-colored'>{headings.elevatorPitch}</h2>
                 <Card>
-                    <h2 className='text-colored'>{headings.elevatorPitch}</h2>
                     <p className='copy copy--large'>{copy.elevatorPitch}</p>
                 </Card>
             </div>
@@ -32,7 +32,7 @@ const Home = ({ }: IProps) => {
         <div className='grid'>
             <div className='g2'>
                 <h2 className='text-colored'>{headings.latestArticles}</h2>
-                <ArticleTeasers articles={getArticles().items.slice(0, 2)} />
+                <ArticleTeasers articles={getArticles().items.slice(0, 3)} />
             </div>
         </div>
     </>;

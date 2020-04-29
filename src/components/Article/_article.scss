@@ -12,6 +12,10 @@ $article-header-height: 60vh;
         height: $article-header-height;
         padding-bottom: $spacing-lrg;
         text-align: right;
+
+        @supports (mask: url('/img/shapes/blob-1.svg')) {
+            padding: $spacing-lrg;
+        }
     }
 
     &__hero {
@@ -87,6 +91,16 @@ $article-header-height: 60vh;
             }
         }
 
+        q,
+        blockquote {
+            @include text-xl;
+            font-style: italic;
+
+            p {
+                @include text-xl;
+            }
+        }
+
         ol,
         ul,
         p {
@@ -95,6 +109,7 @@ $article-header-height: 60vh;
 
         ul,
         ol {
+            list-style-type: unset;
             margin: $spacing-med 0;
             padding-left: $spacing-sml;
 
@@ -114,6 +129,10 @@ $article-header-height: 60vh;
 
         hr {
             display: none;
+        }
+
+        img {
+            border-radius: $border-radius-med;
         }
 
         figure {
@@ -143,6 +162,11 @@ $article-header-height: 60vh;
                 border: none;
                 cursor: zoom-in;
             }
+        }
+
+        pre {
+            width: 100%;
+            overflow-y: auto;
         }
     }
 }

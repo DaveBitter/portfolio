@@ -13,17 +13,18 @@ import FancyImageBlock from 'components/FancyImageBlock/FancyImageBlock';
 interface IProps {
     children?: any,
     title: string,
-    showGenericSiteHeader?: boolean
+    showGenericSiteHeader?: boolean,
+    src: string,
+    alt: string
 }
 
 // Component
-const SiteHeader = ({ children, title, showGenericSiteHeader, ...attributes }: IProps) => {
-    const dictionary = getDictionary();
+const SiteHeader = ({ children, title, src, alt, showGenericSiteHeader, ...attributes }: IProps) => {
     return <header className='site-header grid' {...attributes}>
         <div className='site-header__content g2'>
             {showGenericSiteHeader && <div className='site-header__heading-wrapper'>
                 {title && <h1 className='site-header__heading'>{title}</h1>}
-                <FancyImageBlock src='/img/dave.jpg' alt={dictionary.daveBitter} />
+                <FancyImageBlock src={src} alt={alt} />
             </div>}
             {children}
         </div>
@@ -31,7 +32,11 @@ const SiteHeader = ({ children, title, showGenericSiteHeader, ...attributes }: I
 };
 
 // Props
+const dictionary = getDictionary();
+
 SiteHeader.defaultProps = {
+    src: '/img/dave.jpg',
+    alt: dictionary.daveBitter,
     showGenericSiteHeader: true
 };
 

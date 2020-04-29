@@ -27,7 +27,13 @@ const Articles = ({ }: IProps) => {
 export const getStaticProps: GetStaticProps = async (context: any) => {
     const headings = getHeadings();
 
-    return { props: { title: headings.latestArticles || null } }
+    return {
+        props: {
+            title: headings.latestArticles || null,
+            src: '/img/articles.jpg',
+            alt: ''
+        }
+    }
 }
 
 // Props

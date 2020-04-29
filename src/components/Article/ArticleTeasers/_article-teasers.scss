@@ -14,6 +14,8 @@
     }
 
     &__item {
+        display: flex;
+        justify-content: stretch;
         padding: $spacing-med;
 
         @include mq($mq-tab--sml) {

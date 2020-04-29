@@ -7,6 +7,7 @@ import React from 'react';
 
 // Components
 import ArticleTeaser from '../ArticleTeaser/ArticleTeaser';
+import Card from 'components/Card/Card';
 
 // Interface
 interface IProps {
@@ -17,7 +18,9 @@ interface IProps {
 const ArticleTeasers = ({ articles, ...attributes }: IProps) => {
     return <ul className='article-teasers' {...attributes}>
         {articles.map((article: any, index: number) => <li key={index} className='article-teasers__item'>
-            <ArticleTeaser {...article} />
+            <Card>
+                <ArticleTeaser {...article} />
+            </Card>
         </li>)}
     </ul>
 };

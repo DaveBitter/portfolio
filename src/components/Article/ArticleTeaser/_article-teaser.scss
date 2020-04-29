@@ -13,10 +13,15 @@
         padding: $spacing-sml;
         overflow: hidden;
         text-align: right;
+
+        @supports (mask: url('/img/shapes/blob-2.svg')) {
+            padding: $spacing-xxl 0;
+            margin-left: -$spacing-xs !important;
+            margin-bottom: -$spacing-xl !important;
+        }
     }
 
     &__hero {
-        z-index: -1;
         position: absolute;
         top: 0;
         left: 0;
@@ -24,12 +29,24 @@
         bottom: 0;
 
         @supports (mask: url('/img/shapes/blob-2.svg')) {
-            mask: url('/img/shapes/blob-2.svg');
+            mask: url('/img/shapes/blob-1.svg');
             mask-size: cover;
             mask-position: 25%;
 
             @include mq($mq-tab--sml) {
                 mask-position: 0;
+            }
+
+            .article-teasers__item & {
+                &:nth-of-type(2n) {
+                    mask: url('/img/shapes/blob-2.svg');
+                }
+            }
+
+            .article-teasers__item & {
+                &:nth-of-type(3n) {
+                    mask: url('/img/shapes/blob-3.svg');
+                }
             }
         }
 
@@ -54,6 +71,7 @@
 
     &__title,
     &__date {
+        z-index: 1;
         color: $color-white;
     }
 

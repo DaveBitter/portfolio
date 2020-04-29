@@ -25,4 +25,4 @@ $gradient-primary: linear-gradient(45deg, $color-primary, $color-secondary);
 $gradient-dark: linear-gradient(45deg, $color-black, $color-gray-darkest);
 
 /* MORPHISMS */
-$morphism-dark: inset -3px -3px 7px $color-black, inset 3px 3px 5px $color-gray-darkest;
+$morphism-dark: inset rem(-3px) rem(-3px) rem(7px) $color-black, inset rem(3px) rem(3px) rem(5px) $color-gray-darkest;
