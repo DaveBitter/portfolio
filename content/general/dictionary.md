@@ -1,5 +1,7 @@
 ---
 items:
+  - key: 'daveBitter'
+    value: Dave Bitter
   - key: 'home'
     value: Home
   - key: 'quickBits'

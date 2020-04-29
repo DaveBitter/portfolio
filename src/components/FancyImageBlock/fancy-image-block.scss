@@ -1,0 +1,51 @@
+.fancy-image-block {
+    position: relative;
+
+    &__image-wrapper {
+        mask: url('/img/shapes/blob-1.svg');
+
+        &:nth-of-type(2) {
+            mask: url('/img/shapes/blob-2.svg');
+        }
+
+        &:nth-of-type(3) {
+            mask: url('/img/shapes/blob-3.svg');
+        }
+
+        &--presentational {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0.2;
+            transform: translate(-$spacing-xl, -$spacing-xl);
+
+            @supports (mask: url('/img/shapes/blob-1.svg')) {
+                display: block;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                opacity: 0.7;
+                background: $gradient-primary;
+            }
+
+            &:nth-of-type(2) {
+                transform: translate($spacing-xl, $spacing-xl);
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
