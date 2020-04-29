@@ -1,6 +1,12 @@
 /* COLORS */
-$color-primary: #56cc71;
-$color-primary-dark: darken(#56cc71, 5%);
+$color-orange: #ff5420;
+$color-torch: #ff1343;
+
+$color-primary: $color-orange;
+$color-primary-dark: darken($color-orange, 5%);
+
+$color-secondary: $color-torch;
+$color-secondary-dark: darken($color-torch, 5%);
 
 /* COLOR GRAY */
 $color-white: #fff;
@@ -15,6 +21,7 @@ $color-gray-darker: darken($color-gray, 20%);
 $color-gray-darkest: darken($color-gray, 40%);
 
 /* GRADIENTS */
+$gradient-primary: linear-gradient(45deg, $color-primary, $color-secondary);
 $gradient-dark: linear-gradient(45deg, $color-black, $color-gray-darkest);
 
 /* MORPHISMS */

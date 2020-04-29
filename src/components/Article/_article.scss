@@ -30,7 +30,8 @@ $article-header-height: 60vh;
             right: 0;
             bottom: 0;
             left: 0;
-            background-color: transparentize($color-black, 0.5);
+            opacity: 0.4;
+            background: $gradient-primary;
         }
     }
 

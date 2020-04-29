@@ -4,6 +4,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+    background-color: $color-black;
     box-shadow: $morphism-dark;
 
     @include mq($mq-tab--sml) {
@@ -33,22 +34,8 @@
             background-color: $color-gray-darkest;
         }
 
-        &::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            height: $spacing-xxxs;
-            transform: translateY(100%);
-            background-color: $color-white;
-            transition: transform $transition-timing-fast $transition-easing-cubic;
-        }
-
         &[data-is-active='true'] {
-            &::after {
-                transform: translateY(-100%);
-            }
+            background: $gradient-primary;
         }
     }
 

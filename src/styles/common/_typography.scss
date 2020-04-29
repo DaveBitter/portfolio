@@ -69,7 +69,7 @@
             h5: 1.2,
             h6: 1.2
         ), $size);
-    color: $color-white;
+    color: $color-gray-lighter;
     font-weight: normal;
 
     @include mq($mq-tab--sml) {
@@ -104,7 +104,7 @@ body,
 input,
 button {
     @include font-stack-base;
-    color: $color-white;
+    color: $color-gray-lighter;
 }
 
 h1,
@@ -176,6 +176,6 @@ p,
 }
 
 a {
-    color: $color-white;
+    color: $color-gray-lighter;
     text-decoration: none;
 }
