@@ -1,0 +1,13 @@
+// Libs
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+
+// Utils
+import { getArticles } from '../../static/utils/getContent';
+
+// Components
+import Article from './Article';
+
+// Story
+storiesOf('Article', module)
+    .add('Article', () => <Article {...getArticles().items[0]} />);

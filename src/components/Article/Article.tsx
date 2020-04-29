@@ -32,7 +32,7 @@ const Article = ({ body, date, intro, slug, teaserCopy, teaserImage, title, ...a
         </header>
         <section className='g6'>
             <p className='article__intro'><strong>{intro}</strong></p>
-            <div className='article__body' dangerouslySetInnerHTML={{ __html: compileMarkdownToJSX(body) }} ref={articleContent} />
+            {body && <div className='article__body' dangerouslySetInnerHTML={{ __html: compileMarkdownToJSX(body) }} ref={articleContent} />}
         </section>
     </article>;
 };
