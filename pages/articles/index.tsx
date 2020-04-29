@@ -3,7 +3,7 @@ import React from 'react';
 import { GetStaticProps } from 'next'
 
 // Utils
-import { getArticles, getDictionary } from '../../src/static/utils/getContent';
+import { getArticles, getHeadings } from '../../src/static/utils/getContent';
 
 // Resources
 
@@ -25,9 +25,9 @@ const Articles = ({ }: IProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
-    const dictionary = getDictionary();
+    const headings = getHeadings();
 
-    return { props: { title: dictionary.latestArticles || null } }
+    return { props: { title: headings.latestArticles || null } }
 }
 
 // Props

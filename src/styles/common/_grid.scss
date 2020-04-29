@@ -5,6 +5,10 @@
     grid-gap: $spacing-lrg $spacing-sml;
     margin: 0 auto;
 
+    + .grid {
+        margin-top: $spacing-xxl;
+    }
+
     .g0 {
         grid-column: main-start / main-end;
     }

@@ -3,9 +3,10 @@
     font-family: 'Public Sans', 'Open Sans', sans-serif;
 }
 
-@mixin text {
-    font-size: rem(20px);
-    line-height: 1.6;
+@mixin colored-text {
+    background: $gradient-primary;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 @mixin text-link {
@@ -73,7 +74,7 @@
             h5: 1.2,
             h6: 1.2
         ), $size);
-    color: $color-gray-lighter;
+    color: $color-white;
     font-weight: normal;
 
     @include mq($mq-tab--sml) {
@@ -108,7 +109,7 @@ body,
 input,
 button {
     @include font-stack-base;
-    color: $color-gray-lighter;
+    color: $color-white;
 }
 
 h1,
@@ -179,7 +180,11 @@ p,
     }
 }
 
+.text-colored {
+    @include colored-text;
+}
+
 a {
-    color: $color-gray-lighter;
+    color: $color-white;
     text-decoration: none;
 }

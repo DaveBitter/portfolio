@@ -11,9 +11,7 @@
 
     &__heading {
         @include text-xxl;
-        background: $gradient-primary;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        @include colored-text;
 
         @include mq($mq-tab--lrg) {
             @include text-jumbo;
