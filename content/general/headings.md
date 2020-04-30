@@ -8,4 +8,6 @@ items:
     value: Latest articles
   - key: 'latestQuickBits'
     value: Latest Quick Bits
+  - key: 'readOn'
+    value: Read on
 ---

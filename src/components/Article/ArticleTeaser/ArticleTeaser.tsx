@@ -17,7 +17,7 @@ const ArticleTeaser = ({ body, date, intro, slug, teaserCopy, teaserImage, title
 
     return <div className='article-teaser' {...attributes}>
         <header className='article-teaser__header g0'>
-            <h1 className='article-teaser__title h4'>{title}</h1>
+            <h3 className='article-teaser__title h4 text-colored'>{title}</h3>
             <time className='article-teaser__date' dateTime={date}>{formatDate(date, { day: 'numeric', month: 'long', year: 'numeric' })}</time>
 
             <div className='article-teaser__hero'>
@@ -25,7 +25,7 @@ const ArticleTeaser = ({ body, date, intro, slug, teaserCopy, teaserImage, title
             </div>
         </header>
 
-        <p className='article-teaser__copy'>{teaserCopy}</p>
+        <p className='article-teaser__copy copy copy--large'>{teaserCopy}</p>
 
         <Link href={href} as={as}>
             <a className='article-teaser__link'>{dictionary.read} {title}</a>

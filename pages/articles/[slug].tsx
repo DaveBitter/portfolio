@@ -3,22 +3,34 @@ import React from 'react';
 import { GetStaticProps } from 'next'
 
 // Utils
-import { getArticles } from '../../src/static/utils/getContent';
+import { getArticles, getHeadings } from '../../src/static/utils/getContent';
+import { ArticleInterface } from 'static/utils/Interfaces/Interfaces';
 
 // Resources
 
 // Components
 import Article from '../../src/components/Article/Article';
+import ArticleTeasers from 'components/Article/ArticleTeasers/ArticleTeasers';
 
 // Interface
 interface IProps {
-    article: any
+    article: ArticleInterface,
+    relatedArticles: any
 }
 
 // Component
-const ArticlePage = ({ article, ...rest }: IProps) => {
+const ArticlePage = ({ article, relatedArticles, }: IProps) => {
+    const headings = getHeadings();
+
     return <>
         <Article {...article} />
+
+        <div className='grid'>
+            <div className='g2'>
+                <h2 className='text-colored h1' data-reveal-in-view>{headings.readOn}</h2>
+                <ArticleTeasers articles={relatedArticles} />
+            </div>
+        </div>
     </>;
 };
 
@@ -36,6 +48,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     return {
         props: {
             article: getArticles().items.find((article: any) => article.slug === context.params.slug) || null,
+            relatedArticles: getArticles().items.filter((article: any) => article.slug !== context.params.slug),
             showGenericSiteHeader: false
         }
     }

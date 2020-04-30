@@ -18,6 +18,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     return {
         props: {
             article: getQuickBits().items.find((quickBit: any) => quickBit.slug === context.params.slug) || null,
+            relatedArticles: getQuickBits().items.filter((quickBit: any) => quickBit.slug !== context.params.slug),
             showGenericSiteHeader: false
         }
     }

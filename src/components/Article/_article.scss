@@ -93,6 +93,7 @@ $article-header-height: 60vh;
         }
 
         a {
+            @include colored-text;
             text-decoration: underline;
         }
 
