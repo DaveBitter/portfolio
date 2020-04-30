@@ -1,8 +1,12 @@
 // Libs
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from "next/router";
+// @ts-ignore
+import { PageTransition } from 'next-page-transitions';
 
 // Utils
+import revealManager from 'static/utils/RevealManager';
 
 // Resources
 import '../src/styles/all.scss';
@@ -18,19 +22,40 @@ interface IProps {
 }
 
 // Component
+let pageTransitionDelay = 0
 const App = ({ Component, pageProps }: IProps) => {
     const { src, alt, showGenericSiteHeader = true, title } = pageProps;
+    const router = useRouter();
+
+    useEffect(() => {
+        document.body.dataset.hasJs = 'true';
+
+        setTimeout(() => {
+            revealManager.init();
+        }, pageTransitionDelay);
+
+        pageTransitionDelay = 800;
+    }, [router.route]);
+
 
     return <>
         <Head>
             <meta name='viewport' id='viewporttag' content='width=device-width, user-scalable=no, initial-scale=1' />
             <meta name='theme-color' content='#222222'></meta>
         </Head>
-        <SiteHeader title={title} src={src} alt={alt} showGenericSiteHeader={showGenericSiteHeader}>
+
+        <PageTransition timeout={pageTransitionDelay} classNames='page-transition' monkeyPatchScrolling={true} skipInitialTransition={true}>
+            <div />
+        </PageTransition>
+
+        <SiteHeader title={title} src={src} alt={alt} showGenericSiteHeader={showGenericSiteHeader} key={router.route}>
             <SiteNav />
         </SiteHeader>
 
-        <main><Component {...pageProps} /></main>
+        <main>
+            <Component {...pageProps} />
+        </main>
+
     </>
 };
 

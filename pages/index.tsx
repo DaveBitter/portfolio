@@ -21,14 +21,14 @@ const Home = ({ }: IProps) => {
     return <>
         <div className='grid'>
             <div className='g6'>
-                <h2 className='text-colored h1'>{headings.elevatorPitch}</h2>
-                <p className='copy copy--jumbo'>{copy.elevatorPitch}</p>
+                <h2 className='text-colored h1' data-reveal-in-view>{headings.elevatorPitch}</h2>
+                <p className='copy copy--jumbo' data-reveal-in-view>{copy.elevatorPitch}</p>
             </div>
         </div>
 
         <div className='grid'>
             <div className='g2'>
-                <h2 className='text-colored h1'>{headings.latestArticles}</h2>
+                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestArticles}</h2>
                 <ArticleTeasers articles={getArticles().items.slice(0, 3)} />
             </div>
         </div>

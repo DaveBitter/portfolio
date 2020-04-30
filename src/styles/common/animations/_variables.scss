@@ -1,0 +1,6 @@
+$fades: (
+    ('fade-up', (0, $spacing-xl)),
+    ('fade-down', (0, -$spacing-xl)),
+    ('fade-left', ($spacing-xl, 0)),
+    ('fade-right', (-$spacing-xl, 0))
+);

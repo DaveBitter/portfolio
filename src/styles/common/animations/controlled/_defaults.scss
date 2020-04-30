@@ -1,0 +1,102 @@
+/**
+ * [data-reduce-all-motion] is only enabled for automatic testing purposes
+ */
+
+// Default fade up animation
+[data-reveal-in-view] {
+    will-change: transform;
+    opacity: 0;
+    transform: translate(0, $spacing-sml);
+
+    body:not([data-has-js]) &,
+    body[data-reduce-all-motion] & {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+// When element is in view
+[data-in-view] {
+    will-change: transform;
+    animation: fade-up $transition-timing-med $transition-easing-cubic both;
+
+    &[data-reveal-animation="fade-right"] {
+        animation: fade-right $transition-timing-med $transition-easing-cubic both;
+    }
+
+    &[data-reveal-animation="fade-down"] {
+        animation: fade-down $transition-timing-med $transition-easing-cubic both;
+    }
+
+    &[data-reveal-animation="fade-left"] {
+        animation: fade-left $transition-timing-med $transition-easing-cubic both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none !important;
+    }
+}
+
+// Full page transition
+.page-transition {
+    &-enter {
+        ~ main::after {
+            z-index: 100000000000;
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: scaleY(1);
+            transform-origin: top;
+            background: $gradient-dark;
+            transition: transform $transition-timing-very-slow $transition-easing-cubic;
+        }
+
+        &-active ~ main::after {
+            transform: scaleY(0);
+        }
+    }
+
+    &-exit {
+        ~ main::before,
+        ~ main::after {
+            z-index: 100000000000;
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform-origin: bottom;
+        }
+
+        ~ main::before {
+            transform: scaleY(0);
+            background: $gradient-primary;
+            transition: transform $transition-timing-slow $transition-easing-cubic;
+        }
+
+        ~ main::after {
+            transform: scaleY(0);
+            background: $gradient-dark;
+            transition: transform $transition-timing-slow $transition-timing-fast $transition-easing-cubic;
+        }
+
+        &-active {
+            ~ main::before {
+                transform: scaleY(1);
+            }
+
+            ~ main::after {
+                transform: scaleY(1);
+            }
+        }
+    }
+}

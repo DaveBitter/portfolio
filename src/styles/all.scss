@@ -16,6 +16,11 @@
 @import 'common/fonts';
 @import 'common/typography';
 
+// JS dynamic enter/exit animations
+@import 'common/animations/variables';
+@import 'common/animations/controlled/defaults';
+@import 'common/animations/fades';
+
 // Components
 @import '../components/Article/article';
 @import '../components/Article/ArticleTeaser/article-teaser';
