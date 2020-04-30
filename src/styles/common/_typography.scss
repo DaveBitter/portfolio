@@ -178,6 +178,15 @@ p,
             @include heading(h5);
         }
     }
+
+    &--jumbo {
+        @include heading(h3);
+        line-height: 1.6;
+
+        p {
+            @include heading(h3);
+        }
+    }
 }
 
 .text-colored {

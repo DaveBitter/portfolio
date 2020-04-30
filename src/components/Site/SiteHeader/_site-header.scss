@@ -2,6 +2,10 @@
     padding: $spacing-lrg 0;
     max-width: $container-lrg;
 
+    &[data-has-generic-site-header='true'] + main {
+        margin-top: $spacing-xxxl;
+    }
+
     &__heading-wrapper {
         @include mq($mq-tab--lrg) {
             display: flex;

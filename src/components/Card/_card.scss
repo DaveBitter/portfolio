@@ -1,5 +1,6 @@
 .card {
     display: inline-flex;
+    flex-direction: column;
     padding: $spacing-sml;
     margin-bottom: $spacing-med;
     box-shadow: $morphism-dark;

@@ -8,17 +8,21 @@
     box-shadow: $morphism-dark;
 
     @include mq($mq-tab--sml) {
+        top: 50%;
         right: auto;
-        left: 50%;
-        min-width: $container-content;
-        transform: translateX(-50%);
-        border-top-left-radius: $border-radius-lrg;
+        bottom: auto;
+        transform: translateY(-50%);
         border-top-right-radius: $border-radius-lrg;
+        border-bottom-right-radius: $border-radius-lrg;
     }
 
     &__items {
         display: flex;
         justify-content: space-around;
+
+        @include mq($mq-tab--sml) {
+            flex-direction: column;
+        }
     }
 
     &__item {
@@ -32,6 +36,10 @@
         &:hover,
         &:focus {
             background-color: $color-gray-darkest;
+        }
+
+        @include mq($mq-tab--sml) {
+            padding: $spacing-med + $spacing-xs $spacing-med + $spacing-xs;
         }
 
         &[data-is-active='true'] {

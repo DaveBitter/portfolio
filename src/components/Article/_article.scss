@@ -25,6 +25,7 @@ $article-header-height: 60vh;
         left: 0;
         right: 0;
         bottom: 0;
+        width: 90%;
 
         @supports (mask: url('/img/shapes/blob-1.svg')) {
             mask: url('/img/shapes/blob-1.svg');
@@ -89,6 +90,10 @@ $article-header-height: 60vh;
             + p {
                 margin-top: 0;
             }
+        }
+
+        a {
+            text-decoration: underline;
         }
 
         q,
