@@ -2,12 +2,12 @@
 import React from 'react';
 
 // Utils
-import { getDictionary } from 'static/utils/getContent';
+import { getDictionary } from '../../../static/utils/getContent';
 
 // Resources
 
 // Components
-import FancyImageBlock from 'components/FancyImageBlock/FancyImageBlock';
+import FancyImageBlock from '../../FancyImageBlock/FancyImageBlock';
 
 // Interface
 interface IProps {

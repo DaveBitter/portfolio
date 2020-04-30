@@ -7,7 +7,7 @@ import React from 'react';
 
 // Components
 import ArticleTeaser from '../ArticleTeaser/ArticleTeaser';
-import Card from 'components/Card/Card';
+import Card from '../../Card/Card';
 
 // Interface
 interface IProps {

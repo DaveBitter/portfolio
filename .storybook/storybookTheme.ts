@@ -1,8 +1,8 @@
 import { create } from '@storybook/theming';
 
 const colors = {
-  primary: '#56cc71',
-  primaryDarker: '#4ac867',
+  primary: '#ff5420',
+  primaryDarker: '#ff1343',
   base: '#24282a',
   white: '#FFFFFF'
 }
