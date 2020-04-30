@@ -12,7 +12,7 @@ import formatDate from '../../../static/utils/formatDate';
 // Components
 
 // Component
-const ArticleTeaser = ({ body, date, intro, slug, teaserCopy, teaserImage, title, ...attributes }: ArticleInterface) => {
+const ArticleTeaser = ({ body, date, intro, slug, teaserCopy, teaserImage, title, as, href, ...attributes }: ArticleInterface) => {
     const dictionary = getDictionary();
 
     return <div className='article-teaser' {...attributes}>
@@ -27,7 +27,7 @@ const ArticleTeaser = ({ body, date, intro, slug, teaserCopy, teaserImage, title
 
         <p className='article-teaser__copy'>{teaserCopy}</p>
 
-        <Link href={`/articles/[slug]?slug=${slug}`} as={`/articles/${slug}`}>
+        <Link href={href} as={as}>
             <a className='article-teaser__link'>{dictionary.read} {title}</a>
         </Link>
     </div>;

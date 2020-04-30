@@ -10,4 +10,6 @@ export interface ArticleInterface {
     teaserCopy: string,
     teaserImage: string,
     title: string,
+    as: string,
+    href: string,
 }

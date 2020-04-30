@@ -1,5 +1,5 @@
 // Libs
-import { getArticles, getCopy, getDictionary, getHeadings } from './getContent';
+import { getArticles, getCopy, getDictionary, getHeadings, getQuickBits } from './getContent';
 
 // Test constants
 
@@ -39,4 +39,13 @@ describe('getContent', () => {
         expect(getHeadings().foo).toBe('bar');
     });
 
+    it('should return array with type object for getQuickBits', () => {
+        expect(typeof getQuickBits()).toBe('object');
+    });
+
+    it('should return quick bit in items property array', () => {
+        const [quickBit] = getQuickBits().items
+
+        expect(quickBit).toBeDefined();
+    });
 });

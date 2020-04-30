@@ -6,4 +6,6 @@ items:
     value: Elevator Pitch
   - key: 'latestArticles'
     value: Latest articles
+  - key: 'latestQuickBits'
+    value: Latest Quick Bits
 ---
