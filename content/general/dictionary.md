@@ -12,4 +12,14 @@ items:
     value: read
   - key: 'heroImage'
     value: Hero image
+  - key: 'linkedIn'
+    value: LinkedIn
+  - key: 'twitter'
+    value: Twitter
+  - key: 'instagram'
+    value: Instagram
+  - key: 'email'
+    value: Email
+  - key: 'github'
+    value: GitHub
 ---

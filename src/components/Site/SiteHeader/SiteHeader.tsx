@@ -8,6 +8,7 @@ import { getDictionary } from '../../../static/utils/getContent';
 
 // Components
 import FancyImageBlock from '../../FancyImageBlock/FancyImageBlock';
+import Socials from '../../Socials/Socials';
 
 // Interface
 interface IProps {
@@ -28,6 +29,8 @@ const SiteHeader = ({ children, title, copy, src, alt, showGenericSiteHeader, ..
                     {title && <h1 className='site-header__heading' data-reveal-in-view>{title}</h1>}
 
                     {copy && <p className='copy copy--jumbo' data-reveal-in-view>{copy}</p>}
+
+                    <Socials />
                 </div>
 
                 <FancyImageBlock src={src} alt={alt} />

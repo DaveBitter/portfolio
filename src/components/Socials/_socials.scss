@@ -1,0 +1,21 @@
+.socials {
+    display: flex;
+
+    &__link {
+        font-size: 0;
+        padding: 0 $spacing-xs;
+
+        &:hover,
+        &:focus {
+            svg {
+                fill: $color-primary;
+            }
+        }
+
+        svg {
+            width: $spacing-med + $spacing-sml;
+            fill: $color-white;
+            transition: fill $transition-timing-fast $transition-easing-cubic;
+        }
+    }
+}

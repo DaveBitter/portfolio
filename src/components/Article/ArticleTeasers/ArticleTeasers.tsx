@@ -20,7 +20,7 @@ interface IProps {
 const getLinkProps = ({ slug }: ArticleInterface) => {
     const router = useRouter();
 
-    switch (router.route) {
+    switch (router && router.route) {
         case '/quick-bits':
             return {
                 href: `/quick-bits/[slug]?slug=${slug}`,

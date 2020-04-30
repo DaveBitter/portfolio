@@ -26,7 +26,7 @@
         width: 80%;
         z-index: -1;
         transform-origin: center left;
-        transform: scale3d(2, 2, 2) translateY($spacing-lrg);
+        transform: scale3d(2, 2, 2) translateY($spacing-xl);
         opacity: 0;
         animation: fade-in $transition-timing-slow $transition-timing-slow $transition-easing-cubic forwards;
     }
