@@ -3,7 +3,7 @@ import React from 'react';
 import { GetStaticProps } from 'next'
 
 // Utils
-import { getArticles, getHeadings } from '../../src/static/utils/getContent';
+import { getArticles, getHeadings, getCopy } from '../../src/static/utils/getContent';
 
 // Resources
 
@@ -26,10 +26,12 @@ const Articles = ({ }: IProps) => {
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
     const headings = getHeadings();
+    const copy = getCopy();
 
     return {
         props: {
             title: headings.latestArticles || null,
+            copy: copy.articlesLead || null,
             src: '/img/articles.jpg',
             alt: ''
         }

@@ -13,17 +13,23 @@ import FancyImageBlock from '../../FancyImageBlock/FancyImageBlock';
 interface IProps {
     children?: any,
     title: string,
+    copy?: string,
     showGenericSiteHeader?: boolean,
     src: string,
     alt: string
 }
 
 // Component
-const SiteHeader = ({ children, title, src, alt, showGenericSiteHeader, ...attributes }: IProps) => {
+const SiteHeader = ({ children, title, copy, src, alt, showGenericSiteHeader, ...attributes }: IProps) => {
     return <header className='site-header grid' {...attributes} data-has-generic-site-header={showGenericSiteHeader}>
         <div className='site-header__content g2' >
             {showGenericSiteHeader && <div className='site-header__heading-wrapper' data-reveal-in-view>
-                {title && <h1 className='site-header__heading' data-reveal-in-view>{title}</h1>}
+                <div>
+                    {title && <h1 className='site-header__heading' data-reveal-in-view>{title}</h1>}
+
+                    {copy && <p className='copy copy--jumbo' data-reveal-in-view>{copy}</p>}
+                </div>
+
                 <FancyImageBlock src={src} alt={alt} />
             </div>}
             {children}

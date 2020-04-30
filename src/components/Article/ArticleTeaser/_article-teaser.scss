@@ -37,16 +37,12 @@
                 mask-position: 0;
             }
 
-            .article-teasers__item & {
-                &:nth-of-type(2n) {
-                    mask: url('/img/shapes/blob-2.svg');
-                }
+            .article-teasers__item:nth-of-type(2n) & {
+                mask: url('/img/shapes/blob-2.svg');
             }
 
-            .article-teasers__item & {
-                &:nth-of-type(3n) {
-                    mask: url('/img/shapes/blob-3.svg');
-                }
+            .article-teasers__item:nth-of-type(3n) & {
+                mask: url('/img/shapes/blob-3.svg');
             }
         }
 
@@ -67,6 +63,7 @@
         height: 100%;
         margin: 0;
         object-fit: cover;
+        object-position: bottom;
     }
 
     &__title,

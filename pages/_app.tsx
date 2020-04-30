@@ -24,7 +24,7 @@ interface IProps {
 // Component
 let pageTransitionDelay = 0
 const App = ({ Component, pageProps }: IProps) => {
-    const { src, alt, showGenericSiteHeader = true, title } = pageProps;
+    const { src, alt, showGenericSiteHeader = true, title, copy } = pageProps;
     const router = useRouter();
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const App = ({ Component, pageProps }: IProps) => {
             <div />
         </PageTransition>
 
-        <SiteHeader title={title} src={src} alt={alt} showGenericSiteHeader={showGenericSiteHeader} key={router.route}>
+        <SiteHeader title={title} copy={copy} src={src} alt={alt} showGenericSiteHeader={showGenericSiteHeader} key={router.route}>
             <SiteNav />
         </SiteHeader>
 

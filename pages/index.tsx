@@ -37,8 +37,14 @@ const Home = ({ }: IProps) => {
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
     const headings = getHeadings();
+    const copy = getCopy();
 
-    return { props: { title: headings.greeting || null } }
+    return {
+        props: {
+            title: headings.greeting || null,
+            copy: copy.greetingIntro || null
+        }
+    }
 }
 // Props
 Home.defaultProps = {};
