@@ -19,8 +19,9 @@
     }
 
     .fancy-image-block {
-        @include mq($mq-tab--lrg) {
-            width: 80%;
-        }
+        width: 80%;
+        z-index: -1;
+        transform-origin: center left;
+        transform: scale3d(2.5, 2.5, 2.5);
     }
 }
