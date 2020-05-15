@@ -25,12 +25,12 @@ const ArticlePage = ({ article, relatedArticles, }: IProps) => {
     return <>
         <Article {...article} />
 
-        <div className='grid'>
+        {!!relatedArticles.length && <div className='grid'>
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.readOn}</h2>
                 <ArticleTeasers articles={relatedArticles} />
             </div>
-        </div>
+        </div>}
     </>;
 };
 
