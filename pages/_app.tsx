@@ -44,7 +44,7 @@ const App = ({ Component, pageProps }: IProps) => {
             <meta name='theme-color' content='#222222'></meta>
         </Head>
 
-        <PageTransition timeout={pageTransitionDelay} classNames='page-transition' monkeyPatchScrolling={true} skipInitialTransition={true}>
+        <PageTransition timeout={pageTransitionDelay} classNames='page-transition' skipInitialTransition={true}>
             <div />
         </PageTransition>
 
