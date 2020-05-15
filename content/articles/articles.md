@@ -90,7 +90,7 @@ items:
       One of the biggest drawbacks when building a Single-Page Application (SPA) is to provide solid Search Engine Optimisation, often shortened to SEO. How can we improve SEO with some modern tools and techniques I love the most and use in my daily work as a front-end developer? Read more about it in this blog.
     teaserCopy: >-
       One of the biggest drawbacks when building a Single-Page Application (SPA) is to provide solid Search Engine Optimisation, often shortened to SEO. How can we improve SEO with some modern tools and techniques I love the most?
-    teaserImage: /img/dave-seo.jpg
+    teaserImage: /img/articles/dave-seo.jpg
     title: How can I handle SEO in my Single-page application?
   - body: >-
       Back in 2018, Mirabeau updated their main website [mirabeau.nl](https://mirabeau.nl). However, the old blogging platform became the sibling that was left behind. The branding and visual style got severely updated and as you might know, the world of (front-end) development moves at a rapid pace. Projects that are about five years old become outdated both in tooling and functionality. I want to rethink the way we build web platforms and construct a stack that stays up-to-date and is resilient for the coming years.
@@ -188,7 +188,7 @@ items:
       The Mirabeau blog was suffering from technical debt. I decided to rebuild it using
       the latest web technologies to make it 2020 ready, which includes boosting
       the overall performance and user-friendliness.
-    teaserImage: /img/dave-behind-laptop.jpg
+    teaserImage: /img/articles/dave-behind-laptop.jpg
     title: Implementing the latest web technologies to boost the Mirabeau blog
   - body: >-
       ### Progressive enhancement
@@ -399,6 +399,6 @@ items:
     slug: custom-inputs-web
     teaserCopy: >-
       How can we make custom inputs for the web while still offering a working solution without JavaScript?
-    teaserImage: /img/progressive-enhancement.png
+    teaserImage: /img/articles/progressive-enhancement.png
     title:  Writing progressively enhanced custom inputs for the web
 ---

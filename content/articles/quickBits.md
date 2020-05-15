@@ -30,7 +30,7 @@ items:
 
       ```
 
-      ![default backdrop](/img/backdrop-default.jpg)*Default backdrop*
+      ![default backdrop](/img/quick-bits/backdrop-default.jpg)*Default backdrop*
 
       Then we add one simple CSS property.
 
@@ -56,7 +56,7 @@ items:
 
       ```
 
-      ![blurry backdrop](/img/backdrop-blur.jpg)*Blurry backdrop*
+      ![blurry backdrop](/img/quick-bits/backdrop-blur.jpg)*Blurry backdrop*
 
 
       And there we have it. It’s a simple way to quickly enhance the feel of your website or web-application. Just add this property below your default slightly transparent backdrop and you will offer this style as soon as it hits in the browser your user is using. Obviously, this effect is more dramatic with a less empty page. [View the demo here](/examples/backdrop-filter/modal/modal.html). This demo was built with the [Mirabeau boilerplate](https://github.com/mirabeau-nl/frontend-boilerplate). The source code for this demo can be found at [this Gist](https://gist.github.com/DaveBitter/dd0cc612ce87bd6f69fc379b101b9265) if you would like to have a look at the final working code.
