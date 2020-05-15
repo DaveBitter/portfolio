@@ -14,7 +14,8 @@ import '../src/styles/all.scss';
 // Components
 import SiteHeader from '../src/components/Site/SiteHeader/SiteHeader';
 import SiteNav from '../src/components/Site/SiteNav/SiteNav';
-import SiteMeta from 'components/Site/SiteMeta/SiteMeta';
+import SiteMeta from '../src/components/Site/SiteMeta/SiteMeta';
+import SiteOpenGraphTags from '../src/components/Site/SiteOpenGraphTags/SiteOpenGraphTags';
 
 // Interface
 interface IProps {
@@ -25,7 +26,8 @@ interface IProps {
 // Component
 let pageTransitionDelay = 0
 const App = ({ Component, pageProps }: IProps) => {
-    const { src, alt, showGenericSiteHeader = true, title, copy } = pageProps;
+    const { article, src, alt, showGenericSiteHeader = true, title, copy } = pageProps;
+
     const router = useRouter();
 
     const [pageTransitionDirection, setPageTransitionDirection] = useState('up')
@@ -76,6 +78,7 @@ const App = ({ Component, pageProps }: IProps) => {
 
     return <>
         <SiteMeta />
+        <SiteOpenGraphTags article={article} pageTitle={title} pageDescription={copy} pageImage={src} />
 
         <PageTransition timeout={pageTransitionDelay} classNames={`page-transition--${pageTransitionDirection} page-transition`} skipInitialTransition={true}>
             <div />

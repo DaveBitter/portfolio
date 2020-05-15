@@ -42,7 +42,8 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     return {
         props: {
             title: headings.greeting || null,
-            copy: copy.greetingIntro || null
+            copy: copy.greetingIntro || null,
+            src: '/img/dave.jpg'
         }
     }
 }

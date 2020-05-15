@@ -9,7 +9,8 @@ import Head from 'next/head';
 // Components
 
 // Interface
-interface IProps { }
+interface IProps {
+}
 
 // Component
 const SiteMeta = ({ }: IProps) => {
