@@ -25,7 +25,6 @@ $article-header-height: 60vh;
         left: 0;
         right: 0;
         bottom: 0;
-        width: 90%;
 
         @supports (mask: url('/img/shapes/blob-1.svg')) {
             mask: url('/img/shapes/blob-1.svg');
@@ -46,6 +45,10 @@ $article-header-height: 60vh;
             left: 0;
             opacity: 0.4;
             background: $gradient-primary;
+        }
+
+        @include mq($mq-tab--sml) {
+            width: 90%;
         }
     }
 
