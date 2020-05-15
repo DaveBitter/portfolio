@@ -15,15 +15,16 @@ items:
 
       ## Do I want to deal with this?
 
-      Well, no. Building applications for the web is hard enough. At the start, I mentioned that I wanted to solve this issue with modern tools and techniques I love to use. Let's pick React.js as the SPA framework. I love to use React.js in combination with [Next.js](https://nextjs.org/) to solve many of the issues with SPA frameworks. You can read up on that in my article on [implementing the latest web technologies to boost our blog](https://blog.mirabeau.nl/en/articles/Implementing_the_latest_web_technologies_to_boost_our_blog/4BJG1jDz7LXNT6o778VgzF).
+      Well, no. Building applications for the web is hard enough. At the start, I mentioned that I wanted to solve this issue with modern tools and techniques I love to use. Let's pick React.js as the SPA framework. I love to use React.js in combination with [Next.js](https://nextjs.org/) to solve many of the issues with SPA frameworks. You can read up on that in my article on [Implementing the latest web technologies to boost the Mirabeau blog](/articles/mirabeau-blog-latest-web-technologies).
 
       ![React.js and Next.js](//images.ctfassets.net/w4dg3cjf42ew/5JdNrYGW2SBKmIoT38kqz0/80b019ca3d6e00871b3603f842814b0c/CDFEF415-123A-4D0E-85AD-BB3B32A0B3A1-min.png)*React.js and Next.js working together*
+
 
       I will leverage the solution that Next.js offers regarding server-side rendering. This solves the issue in the old fashioned way. The page will be rendered on the server, GoogleBot will get the content and metadata and I will have solved my problem.
 
       ## Taking it a bit further
 
-      I can call it a day now, but let's look at how I took it a bit further for the Mirabeau blog. The content, [semantically written](https://html.com/semantic-markup/), is received by the GoogleBot. The metadata implementation needs to be done by me. In theory, it is simple. I have a set of [basic meta tags](https://support.google.com/webmasters/answer/79812?hl=en) that I update for every page. An article page may use the title and description of the article while the home page uses the name of the blog and the tagline.
+      I can call it a day now, but let's look at how I took it a bit further when building the  the [Mirabeau blog](blog.mirabeau.nl). The content, [semantically written](https://html.com/semantic-markup/), is received by the GoogleBot. The metadata implementation needs to be done by me. In theory, it is simple. I have a set of [basic meta tags](https://support.google.com/webmasters/answer/79812?hl=en) that I update for every page. An article page may use the title and description of the article while the home page uses the name of the blog and the tagline.
 
       In the case of Next.js, I load a component called `SiteMeta` the head element of the page using the Next.js `head` component like so:
 
@@ -92,23 +93,23 @@ items:
     teaserImage: /img/dave-seo.jpg
     title: How can I handle SEO in my Single-page application?
   - body: >-
-      Back in 2018, we have updated our main website [mirabeau.nl](https://mirabeau.nl). However, the old blogging platform became the sibling that was left behind. The branding and visual style got severely updated and as you might know, the world of (front-end) development moves at a rapid pace. Projects that are about five years old become outdated both in tooling and functionality. I want to rethink the way we build web platforms and construct a stack that stays up-to-date and is resilient for the coming years.
+      Back in 2018, Mirabeau updated their main website [mirabeau.nl](https://mirabeau.nl). However, the old blogging platform became the sibling that was left behind. The branding and visual style got severely updated and as you might know, the world of (front-end) development moves at a rapid pace. Projects that are about five years old become outdated both in tooling and functionality. I want to rethink the way we build web platforms and construct a stack that stays up-to-date and is resilient for the coming years.
 
       ![The old blog](//images.ctfassets.net/w4dg3cjf42ew/5vXCgxn6BTCy8jqrjMiLXf/2db1ca51a38df55e69951346ab28abbc/49D97C22-25AD-4F85-862D-E6C93A006EE6-min.png)*Our aged blog platform*
 
       ## The new blog platform
 
-      The biggest difference between the new blog platform – compared to the old – is the unified visual language. I took, in close collaboration with our visual designers, elements of the main Mirabeau website to use in our platform. Examples are the page scroll effect and the blog cards. Combining that with our corporate identity ensures a unified look & feel.
+      The biggest difference between [the new blog platform](blog.mirabeau.nl) – compared to the old – is the unified visual language. I took, in close collaboration with the visual designers, elements of the main Mirabeau website to use in the platform. Examples are the page scroll effect and the blog cards. Combining that with the corporate identity ensures a unified look & feel.
 
       The second major improvement is the overall ease of use. For example, you are now able to scan more quickly over the page to find an article of your interest. I implemented this by proving a teaser image and a summary of the blog. This gives authors more room to make a scannable summary of their post.
 
-      ![The new Mirabeau visual branding](//images.ctfassets.net/w4dg3cjf42ew/36VJWDKG568fiDIAdv9Gpg/39118b835a3f11b5d59c8bcde0ee8d66/B323160D-6A46-4AD2-A48C-1FEF85BBF506-min.png)*Our updated branding and visual language*
+      ![The new Mirabeau visual branding](//images.ctfassets.net/w4dg3cjf42ew/36VJWDKG568fiDIAdv9Gpg/39118b835a3f11b5d59c8bcde0ee8d66/B323160D-6A46-4AD2-A48C-1FEF85BBF506-min.png)*The updated branding and visual language*
 
       ### Solving issues with Single Page Applications (SPA)
 
       Every once in awhile I see techniques or frameworks that truly excite me. The foundation of this platform is built on one of those. The platform is built in [React.js](https://reactjs.org/) with the full power of [Next.js](https://nextjs.org/).
 
-      At Mirabeau, there are two main ways of building the front-end for a website. We either use our [front-end boilerplate](https://github.com/mirabeau-nl/frontend-boilerplate) for setting up a component library/design system and static websites or we use React.js to build more interactive heavy web applications. React.js comes with a few big downsides that you need to take into account. The reason Next.js excites me so much is that it solves many of the issues.
+      At Mirabeau, there are two main ways of building the front-end for a website. They either use their [front-end boilerplate](https://github.com/mirabeau-nl/frontend-boilerplate) for setting up a component library/design system and static websites or they use React.js to build more interactive heavy web applications. React.js comes with a few big downsides that you need to take into account. The reason Next.js excites me so much is that it solves many of the issues.
 
       The biggest drawback is the lack of server-side rendering (SSR) capabilities when using React.js or any other SPA. In short, you load a blank page and a JavaScript bundle. After loading the bundle, the page is built in the browser and the user can use the application.
 
@@ -116,9 +117,9 @@ items:
 
       * 1.  __Performance__: The page needs to load a - in most cases large -  JavaScript bundle to be able to render the first view. Often, you then need to get some data - like a blog post - from a server. This then gets retrieved and rendered on the page. By utilising SSR, we can do all of this just on the server.
 
-      * 2.  __Providing SEO__: SEO is an important factor for many types of websites like our blog platform. Firstly, I wanted to provide robots/crawlers from Google to properly index our pages. Secondly, I wanted social media platforms to be able to create links with images, titles and summaries.
+      * 2.  __Providing SEO__: SEO is an important factor for many types of websites like the Mirabeau blog platform. Firstly, I wanted to provide robots/crawlers from Google to properly index our pages. Secondly, I wanted social media platforms to be able to create links with images, titles and summaries.
 
-      * 3.  __Building through progressive enhancement__: At Mirabeau, we build websites through progressive enhancement. Unfortunately, you need JavaScript for a React.js website. We can use SSR to provide the platform without having JavaScript in the browser.
+      * 3.  __Building through progressive enhancement__: At Mirabeau, they build websites through progressive enhancement. Unfortunately, you need JavaScript for a React.js website. We can use SSR to provide the platform without having JavaScript in the browser.
 
       ![React.js and Next.js](//images.ctfassets.net/w4dg3cjf42ew/5JdNrYGW2SBKmIoT38kqz0/80b019ca3d6e00871b3603f842814b0c/CDFEF415-123A-4D0E-85AD-BB3B32A0B3A1-min.png)*React.js and Next.js working together*
 
@@ -128,7 +129,7 @@ items:
 
       ### Increasing engagement with custom SEO
 
-      SEO is an important aspect of any website, but even more for a blog platform. I dove into how we could leverage this for this platform.
+      SEO is an important aspect of any website, but even more for a blog platform. I dove into how I could leverage this for this platform.
 
       * 1.  __Creating dynamic tags__. Fortunately, Next.js provides a Head component to let you dynamically add nodes, like tags for SEO, to the head of the page. I use this to load page-specific tags dynamically per page.
 
@@ -167,30 +168,28 @@ items:
 
       ### CI/CD with pipelines
 
-      Finally, I added CI/CD through pipelines. I do this for a few reasons. I want to ensure that all front-end developers can collaborate on this platform by quickly cloning the repository, make changes and roll out an update through the pipelines. Next to that, I want to ensure that everybody that we allow through the repository rights and access configuration, can deploy without creating their own AWS accounts and keys. This all ensures a nice developer experience.
+      Finally, I added CI/CD through pipelines. I do this for a few reasons. I want to ensure that all front-end developers can collaborate on this platform by quickly cloning the repository, make changes and roll out an update through the pipelines. Next to that, I want to ensure that everybody that I allow through the repository rights and access configuration, can deploy without creating their own AWS accounts and keys. This all ensures a nice developer experience.
 
       ![CI/CD](//images.ctfassets.net/w4dg3cjf42ew/KZlhxIeJqB8y7l954ixcm/04acb40e87638f9dbfed747370ba32aa/diagram-cicd-horizontal-85f50f218b3ff47fd993ab5529b85f0147901b20f18b972fdc48504e4bc3110e-min.png)*Two ways of CI/CD*
 
       ## The new front-end toolbox
-
-      So, that was a lot of work. I’ve set the foundation for the blog platform. The project is still at an early stage though. I’ll keep you posted about further developments! If you have any questions please feel free to <a href="mailto:dbitter@mirabeau.nl">get in touch</a>.
 
       Let’s take a step back and look at what a front-end developer in 2020 can do. It is a great time for front-end developers to experiment with different areas of the process of building a platform. With Next.js I was able to, relatively easy, add SSR through Lamdas. With the Serverless framework and the Serverless Next.js plugin, I was able to configure and deploy the full architecture to AWS. Finally, with pipelines I was able to implement CI/CD.
 
       **Naturally, there are more tools out there, but this platform attests to the fact that we become increasingly more powerful as front-end developers nowadays. We can build great things with the assistance of the mentioned tools. We can, once again, focus on creating!**
     date: 2020-02-03T23:00:00.000Z
     intro: >-
-      Our blog was suffering from technical debt. I decided to rebuild it using
+      The Mirabeau blog was suffering from technical debt. I decided to rebuild it using
       the latest web technologies to make it 2020 ready, which includes boosting
       the overall performance and user-friendliness. This blog post is about the
       journey I went and what the possibilities might be for your next platform.
     slug: mirabeau-blog-latest-web-technologies
     teaserCopy: >-
-      Our blog was suffering from technical debt. I decided to rebuild it using
+      The Mirabeau blog was suffering from technical debt. I decided to rebuild it using
       the latest web technologies to make it 2020 ready, which includes boosting
       the overall performance and user-friendliness.
     teaserImage: /img/dave-behind-laptop.jpg
-    title: Implementing the latest web technologies to boost our blog
+    title: Implementing the latest web technologies to boost the Mirabeau blog
   - body: >-
       ### Progressive enhancement
 
