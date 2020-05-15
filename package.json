@@ -55,11 +55,13 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "@types/react-ga": "^2.3.0",
     "marked": "^1.0.0",
     "next": "9.3.5",
     "next-page-transitions": "^1.0.0-beta.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-ga": "^2.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

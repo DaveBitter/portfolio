@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import { PageTransition } from 'next-page-transitions';
 
 // Utils
-import revealManager from 'static/utils/RevealManager';
+import revealManager from '../src/static/utils/RevealManager';
+import { initGA, logPageView } from '../src/static/utils/googleAnalytics';
 
 // Resources
 import '../src/styles/all.scss';
@@ -59,6 +60,16 @@ const App = ({ Component, pageProps }: IProps) => {
         }
 
         setPrevRoute(router.route)
+
+        if (process.env.NODE_ENV === 'development') { return; }
+
+        // @ts-ignore
+        if (!window.GA_INITIALIZED) {
+            initGA();
+            // @ts-ignore
+            window.GA_INITIALIZED = true;
+        }
+        logPageView();
     }, [router.route]);
 
     const [prevRoute, setPrevRoute] = useState('')
