@@ -1,6 +1,5 @@
 // Libs
 import React, { useEffect, useState } from 'react';
-import Head from 'next/head';
 import { useRouter } from "next/router";
 // @ts-ignore
 import { PageTransition } from 'next-page-transitions';
@@ -14,6 +13,7 @@ import '../src/styles/all.scss';
 // Components
 import SiteHeader from '../src/components/Site/SiteHeader/SiteHeader';
 import SiteNav from '../src/components/Site/SiteNav/SiteNav';
+import SiteMeta from 'components/Site/SiteMeta/SiteMeta';
 
 // Interface
 interface IProps {
@@ -64,10 +64,7 @@ const App = ({ Component, pageProps }: IProps) => {
     const [prevRoute, setPrevRoute] = useState('')
 
     return <>
-        <Head>
-            <meta name='viewport' id='viewporttag' content='width=device-width, user-scalable=no, initial-scale=1' />
-            <meta name='theme-color' content='#222222'></meta>
-        </Head>
+        <SiteMeta />
 
         <PageTransition timeout={pageTransitionDelay} classNames={`page-transition--${pageTransitionDirection} page-transition`} skipInitialTransition={true}>
             <div />
