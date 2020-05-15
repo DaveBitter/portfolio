@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // Utils
-import { getArticles } from '../../../static/utils/getContent';
+import { getArticles } from '../../../../src/static/js/utils/getContent';
 
 // Components
 import ArticleTeasers from './ArticleTeasers';

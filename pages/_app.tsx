@@ -13,8 +13,8 @@ import '../src/styles/all.scss';
 
 // Components
 import SiteHeader from '../src/components/Site/SiteHeader/SiteHeader';
-import SiteNav from '../src/components/Site/SiteNav/SiteNav';
 import SiteMeta from '../src/components/Site/SiteMeta/SiteMeta';
+import SiteNav from '../src/components/Site/SiteNav/SiteNav';
 import SiteOpenGraphTags from '../src/components/Site/SiteOpenGraphTags/SiteOpenGraphTags';
 
 // Interface
