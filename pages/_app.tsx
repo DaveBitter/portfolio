@@ -1,5 +1,5 @@
 // Libs
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from "next/router";
 // @ts-ignore
@@ -27,6 +27,7 @@ const App = ({ Component, pageProps }: IProps) => {
     const { src, alt, showGenericSiteHeader = true, title, copy } = pageProps;
     const router = useRouter();
 
+    const [pageTransitionDirection, setPageTransitionDirection] = useState('up')
     useEffect(() => {
         document.body.dataset.hasJs = 'true';
 
@@ -35,8 +36,32 @@ const App = ({ Component, pageProps }: IProps) => {
         }, pageTransitionDelay);
 
         pageTransitionDelay = 800;
+
+        const prevLevel = prevRoute.split("/").length - 2;
+        const nextLevel = router.route.split("/").length - 2;
+
+        switch (true) {
+            case prevLevel === nextLevel:
+                setPageTransitionDirection('right')
+                break;
+
+            case prevLevel < nextLevel:
+                setPageTransitionDirection('up')
+                break;
+
+            case prevLevel > nextLevel:
+                setPageTransitionDirection('down')
+                break;
+
+            default:
+                setPageTransitionDirection('up')
+                break;
+        }
+
+        setPrevRoute(router.route)
     }, [router.route]);
 
+    const [prevRoute, setPrevRoute] = useState('')
 
     return <>
         <Head>
@@ -44,7 +69,7 @@ const App = ({ Component, pageProps }: IProps) => {
             <meta name='theme-color' content='#222222'></meta>
         </Head>
 
-        <PageTransition timeout={pageTransitionDelay} classNames='page-transition' skipInitialTransition={true}>
+        <PageTransition timeout={pageTransitionDelay} classNames={`page-transition--${pageTransitionDirection} page-transition`} skipInitialTransition={true}>
             <div />
         </PageTransition>
 

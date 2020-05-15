@@ -44,6 +44,75 @@
 
 // Full page transition
 .page-transition {
+    &--down {
+        &.page-transition-enter ~ main::after {
+            transform-origin: bottom !important;
+        }
+
+        &.page-transition-exit ~ main::before,
+        &.page-transition-exit ~ main::after {
+            transform-origin: top !important;
+        }
+    }
+
+    &--right {
+        &.page-transition-enter {
+            ~ main::after {
+                transform-origin: left !important;
+            }
+
+            &-active {
+                ~ main::after {
+                    transform: scaleX(0) scaleY(1);
+                }
+            }
+        }
+
+        &.page-transition-exit {
+            ~ main::before,
+            ~ main::after {
+                transform-origin: right !important;
+                transform: scaleX(0) scaleY(1);
+            }
+
+            &-active {
+                ~ main::before,
+                ~ main::after {
+                    transform: scaleX(1) scaleY(1);
+                }
+            }
+        }
+    }
+
+    &--left {
+        &.page-transition-enter {
+            ~ main::after {
+                transform-origin: right !important;
+            }
+
+            &-active {
+                ~ main::after {
+                    transform: scaleX(0) scaleY(1);
+                }
+            }
+        }
+
+        &.page-transition-exit {
+            ~ main::before,
+            ~ main::after {
+                transform-origin: left !important;
+                transform: scaleX(0) scaleY(1);
+            }
+
+            &-active {
+                ~ main::before,
+                ~ main::after {
+                    transform: scaleX(1) scaleY(1);
+                }
+            }
+        }
+    }
+
     &-enter {
         ~ main::after {
             z-index: 100000000000;
