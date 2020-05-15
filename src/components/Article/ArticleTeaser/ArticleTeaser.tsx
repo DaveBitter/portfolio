@@ -3,9 +3,9 @@ import React from 'react';
 import Link from 'next/link';
 
 // Utils
-import { getDictionary } from '../../../static/utils/getContent';
-import { ArticleInterface } from '../../../static/utils/Interfaces/Interfaces';
-import formatDate from '../../../static/utils/formatDate';
+import { getDictionary } from '../../../static/js/utils/getContent';
+import { ArticleInterface } from '../../../static/js/utils/Interfaces/Interfaces';
+import formatDate from '../../../static/js/utils/formatDate';
 
 // Resources
 

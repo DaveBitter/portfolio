@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Utils
-import { getDictionary } from '../../static/utils/getContent';
+import { getDictionary } from '../../static/js/utils/getContent';
 
 // Resources
 // @ts-ignore

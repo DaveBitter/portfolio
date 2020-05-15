@@ -2,7 +2,7 @@
 import { GetStaticProps } from 'next';
 
 // Uitls
-import { getQuickBits } from 'static/utils/getContent';
+import { getQuickBits } from '../../src/static/js/utils/getContent';
 
 // Components
 import Index from '../articles/[slug]';

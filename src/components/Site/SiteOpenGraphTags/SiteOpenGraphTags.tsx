@@ -3,8 +3,8 @@ import React from 'react';
 import Head from 'next/head';
 
 // Utils
-import { ArticleInterface } from '../../../static/utils/Interfaces/Interfaces';
-import { getHeadings, getCopy } from 'static/utils/getContent';
+import { ArticleInterface } from '../../../static/js/utils/Interfaces/Interfaces';
+import { getHeadings, getCopy } from '../../../static/js/utils/getContent';
 
 // Components
 

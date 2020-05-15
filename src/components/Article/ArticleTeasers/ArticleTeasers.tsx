@@ -3,7 +3,7 @@ import React from 'react';
 import { useRouter } from "next/router";
 
 // Utils
-import { ArticleInterface } from 'static/utils/Interfaces/Interfaces';
+import { ArticleInterface } from '../../../static/js/utils/Interfaces/Interfaces';
 
 // Resources
 

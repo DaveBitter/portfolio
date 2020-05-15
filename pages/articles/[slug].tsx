@@ -3,14 +3,14 @@ import React from 'react';
 import { GetStaticProps } from 'next'
 
 // Utils
-import { getArticles, getHeadings } from '../../src/static/utils/getContent';
-import { ArticleInterface } from 'static/utils/Interfaces/Interfaces';
+import { getArticles, getHeadings } from '../../src/static/js/utils/getContent';
+import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
 // Resources
 
 // Components
 import Article from '../../src/components/Article/Article';
-import ArticleTeasers from 'components/Article/ArticleTeasers/ArticleTeasers';
+import ArticleTeasers from '../../src/components/Article/ArticleTeasers/ArticleTeasers';
 
 // Interface
 interface IProps {

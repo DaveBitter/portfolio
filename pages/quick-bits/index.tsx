@@ -2,7 +2,7 @@
 import { GetStaticProps } from 'next';
 
 // Utils
-import { getHeadings, getCopy, getQuickBits } from '../../src/static/utils/getContent';
+import { getHeadings, getCopy, getQuickBits } from '../../src/static/js/utils/getContent';
 
 // Components
 import Index from '../articles/index';

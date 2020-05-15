@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useRouter } from "next/router";
 
 // Utils
-import { DictionaryInterface } from '../../../static/utils/Interfaces/Interfaces';
+import { DictionaryInterface } from '../../../static/js/utils/Interfaces/Interfaces';
 
 // Content
-import { getDictionary } from '../../../static/utils/getContent';
+import { getDictionary } from '../../../static/js/utils/getContent';
 
 // Resources
 // @ts-ignore

@@ -2,10 +2,10 @@
 import React, { useEffect, useRef } from 'react';
 
 // Utils
-import { ArticleInterface } from '../../../src/static/utils/Interfaces/Interfaces';
-import formatDate from '../../static/utils/formatDate';
-import ArticleElementEnricher from '../../static/utils/ArticleElementEnricher';
-import compileMarkdownToJSX from '../../../src/static/utils/compileMarkdownToJSX';
+import { ArticleInterface } from '../../static/js/utils/Interfaces/Interfaces';
+import formatDate from '../../static/js/utils/formatDate';
+import ArticleElementEnricher from '../../static/js/utils/ArticleElementEnricher';
+import compileMarkdownToJSX from '../../static/js/utils/compileMarkdownToJSX';
 
 // Resources
 

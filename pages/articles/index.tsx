@@ -3,7 +3,7 @@ import React from 'react';
 import { GetStaticProps } from 'next'
 
 // Utils
-import { getArticles, getHeadings, getCopy } from '../../src/static/utils/getContent';
+import { getArticles, getHeadings, getCopy } from '../../src/static/js/utils/getContent';
 
 // Resources
 

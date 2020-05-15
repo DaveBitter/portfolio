@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import { PageTransition } from 'next-page-transitions';
 
 // Utils
-import revealManager from '../src/static/utils/RevealManager';
-import { initGA, logPageView } from '../src/static/utils/googleAnalytics';
+import revealManager from '../src/static/js/utils/RevealManager';
+import { initGA, logPageView } from '../src/static/js/utils/googleAnalytics';
 
 // Resources
 import '../src/styles/all.scss';

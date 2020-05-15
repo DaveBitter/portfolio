@@ -1,13 +1,13 @@
 // @ts-ignore
-import articles from '../../../content/articles/articles.md';
+import articles from '../../../../content/articles/articles.md';
 // @ts-ignore
-import copy from '../../../content/general/copy.md';
+import copy from '../../../../content/general/copy.md';
 // @ts-ignore
-import dictionary from '../../../content/general/dictionary.md';
+import dictionary from '../../../../content/general/dictionary.md';
 // @ts-ignore
-import headings from '../../../content/general/headings.md';
+import headings from '../../../../content/general/headings.md';
 // @ts-ignore
-import quickBits from '../../../content/articles/quickBits.md';
+import quickBits from '../../../../content/articles/quickBits.md';
 
 // Next.js and Storybook json loaders don't seem to work the same. Import could therfor be parsed and unparsed JSON
 const parseJSONMD = (_: string | object) => typeof _ === 'string' ? JSON.parse(_) : _
