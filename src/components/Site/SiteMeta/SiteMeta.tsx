@@ -22,8 +22,8 @@ const SiteMeta = ({ article, pageTitle, pageDescription }: IProps) => {
     const description = article ? article.intro : pageDescription;
 
     return <Head>
-        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-        <meta http-equiv='content-language' content='en' />
+        <meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
+        <meta httpEquiv='content-language' content='en' />
         <meta name='viewport' id='viewporttag' content='width=device-width, user-scalable=no, initial-scale=1' />
 
         <link rel='apple-touch-icon' sizes='57x57' href='/img/favicons/apple-icon-57x57.png' />
