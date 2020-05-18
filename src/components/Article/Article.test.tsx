@@ -2,7 +2,7 @@
 import React from 'react';
 import Article from './Article';
 import { mount } from 'enzyme';
-import { getArticles } from '../../static/utils/getContent';
+import { getArticles } from '../../static/js/utils/getContent';
 
 // Test constants
 const mockArticles = getArticles().items

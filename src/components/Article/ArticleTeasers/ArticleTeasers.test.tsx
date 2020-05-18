@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 
 // Components
 import ArticleTeaser from '../ArticleTeaser/ArticleTeaser';
-import { getArticles } from '../../../static/utils/getContent';
+import { getArticles } from '../../../static/js/utils/getContent';
 
 // Test constants
 const mockArticles = getArticles().items
