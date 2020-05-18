@@ -56,7 +56,6 @@ const SiteOpenGraphTags = ({ article, pageTitle, pageDescription, pageImage }: I
     return (
         <Head>
             {image && <meta property='og:image' content={image} />}
-            {description && <meta name='description' content={description} />}
             {title && <meta property='og:title' content={title} />}
             {description && <meta property='og:description' content={description} />}
             {siteName && <meta property='og:site_name' content={siteName} />}
@@ -66,7 +65,6 @@ const SiteOpenGraphTags = ({ article, pageTitle, pageDescription, pageImage }: I
             {author && <meta property='article:author' content={author} />}
             {publisher && <meta property='article:publisher' content={publisher} />}
             {keywords && <meta name='keywords' content={keywords} />}
-
 
             {description && <meta name='twitter:card' content={description} />}
             {twitterSite && <meta name='twitter:site' content={twitterSite} />}

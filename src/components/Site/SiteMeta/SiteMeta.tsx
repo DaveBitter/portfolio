@@ -3,6 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 
 // Utils
+import { ArticleInterface } from '../../../static/js/utils/Interfaces/Interfaces';
 
 // Resources
 
@@ -10,11 +11,19 @@ import Head from 'next/head';
 
 // Interface
 interface IProps {
+    article?: ArticleInterface,
+    pageTitle: string,
+    pageDescription: string
 }
 
 // Component
-const SiteMeta = ({ }: IProps) => {
+const SiteMeta = ({ article, pageTitle, pageDescription }: IProps) => {
+    const title = `Dave Bitter | ${article ? article.title : pageTitle}`;
+    const description = article ? article.intro : pageDescription;
+
     return <Head>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <meta http-equiv='content-language' content='en' />
         <meta name='viewport' id='viewporttag' content='width=device-width, user-scalable=no, initial-scale=1' />
 
         <link rel='apple-touch-icon' sizes='57x57' href='/img/favicons/apple-icon-57x57.png' />
@@ -36,6 +45,9 @@ const SiteMeta = ({ }: IProps) => {
         <meta name='msapplication-TileImage' content='/img/favicons/ms-icon-144x144.png' />
 
         <meta name='theme-color' content='#222222'></meta>
+
+        <title>{title}</title>
+        <meta name='description' content={description} />
     </Head>
 };
 

@@ -77,7 +77,7 @@ const App = ({ Component, pageProps }: IProps) => {
     const [prevRoute, setPrevRoute] = useState('')
 
     return <>
-        <SiteMeta />
+        <SiteMeta article={article} pageTitle={title} pageDescription={copy} />
         <SiteOpenGraphTags article={article} pageTitle={title} pageDescription={copy} pageImage={src} />
 
         <PageTransition timeout={pageTransitionDelay} classNames={`page-transition--${pageTransitionDirection} page-transition`} skipInitialTransition={true}>
