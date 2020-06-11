@@ -98,6 +98,7 @@ $article-header-height: 60vh;
         a {
             @include colored-text;
             text-decoration: underline;
+            word-break: break-all;
         }
 
         q,
@@ -141,6 +142,8 @@ $article-header-height: 60vh;
         }
 
         img {
+            display: block;
+            margin: $spacing-sml auto;
             border-radius: $border-radius-med;
         }
 
