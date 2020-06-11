@@ -1,5 +1,6 @@
 // Libs
 import React, { useEffect, useRef } from 'react';
+import hljs from 'highlight.js'
 
 // Utils
 import { ArticleInterface } from '../../static/js/utils/Interfaces/Interfaces';
@@ -16,7 +17,8 @@ const Article = ({ body, date, intro, slug, teaserCopy, teaserImage, title, ...a
     const articleContent = useRef<any>(null);
     useEffect(() => {
         new ArticleElementEnricher(articleContent.current, null);
-    }, []);
+        hljs.initHighlighting();
+    }, [title]);
 
     return <article className='article grid' {...attributes}>
         <header className='article__header g0'>

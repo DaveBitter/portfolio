@@ -25,12 +25,12 @@ items:
 
       ![Number Code Input with HTML](/img/articles/number-code-input-html.gif)*Number Code Input with HTML*
 
-      ```html
 
-      ...
+      ```html
 
       <fieldset name='number-code' data-number-code-form>
           <legend>Number Code</legend>
+
           <input type="number" min='0' max='9' name='number-code-0' data-number-code-input='0' required />
           <input type="number" min='0' max='9' name='number-code-1' data-number-code-input='1' required />
           <input type="number" min='0' max='9' name='number-code-2' data-number-code-input='2' required />
@@ -40,8 +40,6 @@ items:
           <input type="number" min='0' max='9' name='number-code-6' data-number-code-input='6' required />
           <input type="number" min='0' max='9' name='number-code-7' data-number-code-input='7' required />
       </fieldset>
-
-      ...
 
       ```
 
@@ -57,27 +55,21 @@ items:
 
       ```css
 
-      ...
-
       legend {
         font-size: 0;
       }
 
-      ...
 
-      /* Chrome, Safari, Edge, Opera */
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
       }
 
-      /* Firefox */
+
       input[type=number] {
         -moz-appearance: textfield;
       }
-
-      ...
 
       ```
 
@@ -95,35 +87,21 @@ items:
 
       I need to add some logic to call focus on the next number input if the case that the current number input is not the last one
 
-      ```jsx
-
-      ...
+      ```js
 
       const numberCodeForm = document.querySelector('[data-number-code-form]');
+
       const numberCodeInputs = [...numberCodeForm.querySelectorAll('[data-number-code-input]')];
 
-      ...
 
       const handleInput = ({target}) => {
-
-        ...
-
         let currentIndex = Number(target.dataset.numberCodeInput);
         const nextIndex = currentIndex + 1;
-
-        ...
-
-        ...
 
         if(nextIndex < numberCodeInputs.length) {
           numberCodeInputs[nextIndex].focus();
         }
-
-        ...
-
       });
-
-      ...
 
       ```
 
@@ -131,14 +109,12 @@ items:
 
       I need to add an event listener that triggers when a key is pressed. I then focus on the next or previous number input if there is one.
 
-      ```jsx
-
-      ...
+      ```js
 
       const numberCodeForm = document.querySelector('[data-number-code-form]');
+
       const numberCodeInputs = [...numberCodeForm.querySelectorAll('[data-number-code-input]')];
 
-      ...
 
       const handleKeyDown = e => {
         const {code, target} = e;
@@ -167,18 +143,13 @@ items:
             e.preventDefault();
             break;
 
-          ...
-
           default:
             break;
         }
       }
 
-      ...
 
       numberCodeForm.addEventListener('keydown', handleKeyDown);
-
-      ...
 
       ```
 
@@ -186,14 +157,12 @@ items:
 
       This functionality is pretty straight forward. I delete the value of the focussed number input and focus the previous number input if present.
 
-      ```jsx
-
-      ...
+      ```js
 
       const numberCodeForm = document.querySelector('[data-number-code-form]');
+
       const numberCodeInputs = [...numberCodeForm.querySelectorAll('[data-number-code-input]')];
 
-      ...
 
       const handleKeyDown = e => {
         const {code, target} = e;
@@ -206,9 +175,6 @@ items:
         const hasNextIndex = nextIndex <= numberCodeInputs.length - 1
 
         switch(code) {
-
-          ...
-
           case 'Backspace':
             if (!e.target.value.length && hasPreviousIndex) {
               numberCodeInputs[previousIndex].value = null;
@@ -220,11 +186,8 @@ items:
         }
       }
 
-      ...
 
       numberCodeForm.addEventListener('keydown', handleKeyDown);
-
-      ...
 
       ```
 
@@ -232,21 +195,14 @@ items:
 
       Finally, when pasting a value of multiple characters I want to automatically fill out the number input based on that value. This is important as this is a common way people fill out these forms.
 
-      [CODE JS - pasting numbers]
-
-      ```jsx
-
-      ...
+      ```js
 
       const numberCodeForm = document.querySelector('[data-number-code-form]');
+
       const numberCodeInputs = [...numberCodeForm.querySelectorAll('[data-number-code-input]')];
 
-      ...
 
       const handleInput = ({target}) => {
-
-        ...
-
         const inputLength = target.value.length;
         let currentIndex = Number(target.dataset.numberCodeInput);
 
@@ -265,12 +221,7 @@ items:
         }
 
         const nextIndex = currentIndex + 1;
-
-        ...
-
       });
-
-      ...
 
       ```
 

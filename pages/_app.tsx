@@ -9,6 +9,7 @@ import revealManager from '../src/static/js/utils/RevealManager';
 import { initGA, logPageView } from '../src/static/js/utils/googleAnalytics';
 
 // Resources
+import 'highlight.js/styles/atom-one-dark.css';
 import '../src/styles/all.scss';
 
 // Components
