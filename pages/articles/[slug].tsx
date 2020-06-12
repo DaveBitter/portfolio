@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     return {
         props: {
             article: getArticles().items.find((article: any) => article.slug === context.params.slug) || null,
-            relatedArticles: getArticles().items.filter((article: any) => article.slug !== context.params.slug),
+            relatedArticles: getArticles().items.filter((article: any) => article.slug !== context.params.slug).splice(0, 3),
             showGenericSiteHeader: false
         }
     }
