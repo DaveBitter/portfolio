@@ -1,8 +1,6 @@
 ---
 items:
   - body: >-
-      I often come across Number Code Inputs on various websites used for security measures, voucher codes and more. These Number Code Inputs often have a bit more functionality behind them then you might think at first. Let's create our own as an exercise.
-
       ![Number Code Input](/img/articles/number-code-input-html-css-js.gif)*Number Code Input*
 
       As you can see, the core functionality of these inputs is to enter one number at a time. The building of that happy flow can be quite easy to do. When playing around we can see that there a quite a few more functionalities. Let's first set the requirements:
