@@ -12,15 +12,16 @@ import ArticleTeasers from '../../src/components/Article/ArticleTeasers/ArticleT
 
 // Interface
 interface IProps {
-    items: any
+    items: any,
+    type: string
 }
 
 // Component
-const Articles = ({ items }: IProps) => {
+const Articles = ({ items, type }: IProps) => {
 
     return <div className='grid'>
         <div className='g2'>
-            <ArticleTeasers articles={items} />
+            <ArticleTeasers type={type} articles={items} />
         </div>
     </div>;
 };
@@ -36,7 +37,8 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
             title: headings.latestArticles || null,
             copy: copy.articlesLead || null,
             src: '/img/articles.jpg',
-            alt: ''
+            alt: '',
+            type: 'articles'
         }
     }
 }

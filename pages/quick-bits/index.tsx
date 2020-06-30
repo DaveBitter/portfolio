@@ -18,7 +18,8 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
             title: headings.latestQuickBits || null,
             copy: copy.quickBitsLead || null,
             src: '/img/articles.jpg',
-            alt: ''
+            alt: '',
+            type: 'quick-bits'
         }
     }
 }

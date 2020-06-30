@@ -1,9 +1,7 @@
 // Libs
 import React from 'react';
-import { useRouter } from "next/router";
 
 // Utils
-import { ArticleInterface } from '../../../static/js/utils/Interfaces/Interfaces';
 
 // Resources
 
@@ -13,34 +11,19 @@ import Card from '../../Card/Card';
 
 // Interface
 interface IProps {
-    articles: any
+    articles: any,
+    type: string
 }
 
 // Helpers
-const getLinkProps = ({ slug }: ArticleInterface) => {
-    const router = useRouter();
-
-    switch (router && router.route) {
-        case '/quick-bits':
-            return {
-                href: `/quick-bits/[slug]?slug=${slug}`,
-                as: `/quick-bits/${slug}`
-            };
-        default:
-            return {
-                href: `/articles/[slug]?slug=${slug}`,
-                as: `/articles/${slug}`
-            };
-    }
-}
 
 // Component
-const ArticleTeasers = ({ articles, ...attributes }: IProps) => {
+const ArticleTeasers = ({ articles, type, ...attributes }: IProps) => {
 
     return <ul className='article-teasers' {...attributes}>
         {articles.map((article: any, index: number) => <li key={index} className='article-teasers__item' data-reveal-in-view>
             <Card>
-                <ArticleTeaser {...article} {...getLinkProps(article)} />
+                <ArticleTeaser {...article} type={type} href={`/${type}/[slug]?slug=${article.slug}`} as={`/${type}/${article.slug}`} />
             </Card>
         </li>)}
     </ul>

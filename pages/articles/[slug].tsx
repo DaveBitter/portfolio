@@ -15,11 +15,12 @@ import ArticleTeasers from '../../src/components/Article/ArticleTeasers/ArticleT
 // Interface
 interface IProps {
     article: ArticleInterface,
-    relatedArticles: any
+    relatedArticles: any,
+    type: string
 }
 
 // Component
-const ArticlePage = ({ article, relatedArticles, }: IProps) => {
+const ArticlePage = ({ article, relatedArticles, type }: IProps) => {
     const headings = getHeadings();
 
     return <>
@@ -28,7 +29,7 @@ const ArticlePage = ({ article, relatedArticles, }: IProps) => {
         {!!relatedArticles.length && <div className='grid'>
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.readOn}</h2>
-                <ArticleTeasers articles={relatedArticles} />
+                <ArticleTeasers type={type} articles={relatedArticles} />
             </div>
         </div>}
     </>;
@@ -49,7 +50,8 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         props: {
             article: getArticles().items.find((article: any) => article.slug === context.params.slug) || null,
             relatedArticles: getArticles().items.filter((article: any) => article.slug !== context.params.slug).splice(0, 3),
-            showGenericSiteHeader: false
+            showGenericSiteHeader: false,
+            type: 'articles'
         }
     }
 }

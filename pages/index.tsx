@@ -3,7 +3,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 
 // Utils
-import { getHeadings, getCopy, getArticles } from '../src/static/js/utils/getContent';
+import { getHeadings, getCopy, getArticles, getQuickBits } from '../src/static/js/utils/getContent';
 
 // Resources
 
@@ -29,7 +29,12 @@ const Home = ({ }: IProps) => {
         <div className='grid'>
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.latestArticles}</h2>
-                <ArticleTeasers articles={getArticles().items.slice(0, 3)} />
+                <ArticleTeasers type='articles' articles={getArticles().items.slice(0, 3)} />
+            </div>
+
+            <div className='g2'>
+                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestQuickBits}</h2>
+                <ArticleTeasers type='quick-bits' articles={getQuickBits().items.slice(0, 3)} />
             </div>
         </div>
     </>;
