@@ -17,6 +17,7 @@ import SiteHeader from '../src/components/Site/SiteHeader/SiteHeader';
 import SiteMeta from '../src/components/Site/SiteMeta/SiteMeta';
 import SiteNav from '../src/components/Site/SiteNav/SiteNav';
 import SiteOpenGraphTags from '../src/components/Site/SiteOpenGraphTags/SiteOpenGraphTags';
+import SiteFooter from 'components/Site/SiteFooter/SiteFooter';
 
 // Interface
 interface IProps {
@@ -93,6 +94,7 @@ const App = ({ Component, pageProps }: IProps) => {
             <Component {...pageProps} />
         </main>
 
+        <SiteFooter />
     </>
 };
 

@@ -1,0 +1,10 @@
+.site-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: $spacing-xxxl;
+    min-height: 50vh;
+    text-align: center;
+    background: $gradient-primary;
+}

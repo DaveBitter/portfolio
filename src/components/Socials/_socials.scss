@@ -1,6 +1,15 @@
 .socials {
     display: flex;
 
+    &[data-theme='dark'] .socials__link {
+        &:hover,
+        &:focus {
+            svg {
+                fill: $color-gray-lightest;
+            }
+        }
+    }
+
     &__link {
         font-size: 0;
         padding: 0 $spacing-xs;

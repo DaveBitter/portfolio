@@ -25,12 +25,13 @@ interface IProps {
         label?: string,
         icon: any,
         href: string
-    }]
+    }],
+    theme: string
 }
 
 // Component
-const Socials = ({ items, ...attributes }: IProps) => {
-    return <ul className='socials' {...attributes}>
+const Socials = ({ items, theme, ...attributes }: IProps) => {
+    return <ul className='socials' data-theme={theme} {...attributes}>
         {items.map(({ key, label, icon, href }) => <li className='socials__item' key={key}>
             <a className='socials__link' href={href} target='_blank' rel='noopener noreferrer'>
                 {label}
@@ -50,7 +51,8 @@ Socials.defaultProps = {
         { key: 'twitter', label: dictionary.twitter, icon: twitterIcon, href: 'https://twitter.com/dave_bitter' },
         { key: 'instagram', label: dictionary.instagram, icon: instagramIcon, href: 'https://www.instagram.com/davebitter/' },
         { key: 'email', label: dictionary.email, icon: emailIcon, href: 'mailto:daveybitter@gmail.com' }
-    ]
+    ],
+    theme: 'light'
 };
 
 export default Socials;

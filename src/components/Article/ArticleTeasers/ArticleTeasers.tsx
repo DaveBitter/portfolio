@@ -31,7 +31,8 @@ const ArticleTeasers = ({ articles, type, ...attributes }: IProps) => {
 
 // Props
 ArticleTeasers.defaultProps = {
-    articles: []
+    articles: [],
+    type: 'articles'
 };
 
 export default ArticleTeasers;

@@ -30,7 +30,7 @@ const SiteHeader = ({ children, title, copy, src, alt, showGenericSiteHeader, ..
 
                     {copy && <p className='copy copy--jumbo' data-reveal-in-view>{copy}</p>}
 
-                    <Socials />
+                    <Socials theme='light' />
                 </div>
 
                 <FancyImageBlock src={src} alt={alt} />
