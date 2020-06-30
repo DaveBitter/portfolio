@@ -61,11 +61,21 @@ $article-header-height: 60vh;
 
     &__title,
     &__date {
+        padding: $spacing-xs;
+        border-radius: $border-radius-lrg;
         color: $color-white;
     }
 
     &__title {
-        margin-bottom: 0;
+        margin-bottom: $spacing-xs;
+        border-bottom-right-radius: 0;
+        background: $gradient-primary;
+    }
+
+    &__date {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        background: $gradient-dark;
     }
 
     &__intro {

@@ -52,8 +52,22 @@
     &__title,
     &__date {
         z-index: 1;
+        padding: $spacing-xs;
+        border-radius: $border-radius-lrg;
         color: $color-white;
         pointer-events: none;
+    }
+
+    &__title {
+        margin-bottom: 0;
+        border-bottom-right-radius: 0;
+        background: $gradient-primary;
+    }
+
+    &__date {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        background: $gradient-dark;
     }
 
     &__link {

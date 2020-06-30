@@ -24,7 +24,7 @@ const Article = ({ body, date, intro, slug, teaserCopy, teaserImage, title, ...a
         <header className='article__header g0'>
             <div className='grid'>
                 <div className='g2'>
-                    <h1 className='article__title text-colored' data-reveal-in-view>{title}</h1>
+                    <h1 className='article__title' data-reveal-in-view>{title}</h1>
                     <time className='article__date' dateTime={date} data-reveal-in-view>{formatDate(date, { day: 'numeric', month: 'long', year: 'numeric' })}</time>
                 </div>
             </div>

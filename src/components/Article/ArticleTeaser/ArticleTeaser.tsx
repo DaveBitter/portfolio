@@ -17,7 +17,7 @@ const ArticleTeaser = ({ body, date, intro, slug, teaserCopy, teaserImage, title
 
     return <div className='article-teaser' {...attributes}>
         <header className='article-teaser__header g0'>
-            <h3 className='article-teaser__title h4 text-colored'>{title}</h3>
+            <h3 className='article-teaser__title h4'>{title}</h3>
             <time className='article-teaser__date' dateTime={date}>{formatDate(date, { day: 'numeric', month: 'long', year: 'numeric' })}</time>
 
             <div className='article-teaser__hero'>
