@@ -10,6 +10,10 @@ items:
     value: articles
   - key: 'read'
     value: read
+  - key: 'viewAllArticles'
+    value: View all articles
+  - key: 'viewAllQuickBits'
+    value: View all Quick Bits
   - key: 'heroImage'
     value: Hero image
   - key: 'linkedIn'

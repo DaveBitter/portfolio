@@ -6,7 +6,7 @@
     margin: 0 auto;
 
     + .grid {
-        margin-top: $spacing-xxl;
+        margin-top: $spacing-xxxl;
     }
 
     .g0 {
@@ -25,9 +25,14 @@
         max-width: $container-med;
     }
 
+    .g8 {
+        max-width: $container-med;
+    }
+
     .g2,
     .g4,
-    .g6 {
+    .g6,
+    .g8 {
         margin: 0 auto;
         grid-column: main-inner-start / main-inner-end;
     }
@@ -35,7 +40,8 @@
     .g0,
     .g2,
     .g4,
-    .g6 {
+    .g6,
+    .g8 {
         @media all and (-ms-high-contrast: none) {
             padding: $spacing-sml;
         }
@@ -46,7 +52,7 @@
     }
 
     @include mq($mq-tab--sml) {
-        grid-template-columns: [main-start] 1fr [main-inner-start] 1fr [content-start] 1fr [body-start] 6fr [body-end] 1fr [content-end] 1fr [main-inner-end] 1fr [main-end];
+        grid-template-columns: [main-start] 1fr [main-inner-start] 1fr [content-start] 1fr [body-start] 1fr [body-inner-start] 4fr [body-inner-end] 1fr [body-end] 1fr [content-end] 1fr [main-inner-end] 1fr [main-end];
 
         .g0 {
             grid-column: main-start / main-end;
@@ -62,6 +68,10 @@
 
         .g6 {
             grid-column: body-start / body-end;
+        }
+
+        .g8 {
+            grid-column: body-inner-start / body-inner-end;
         }
     }
 }

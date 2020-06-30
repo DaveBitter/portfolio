@@ -38,6 +38,14 @@ svg {
     width: $spacing-med;
 }
 
+.button-link {
+    display: block;
+    padding: $spacing-med;
+    border-radius: $border-radius-lrg;
+    text-align: center;
+    background: $gradient-primary;
+}
+
 /*
     This will hide the focus indicator if the element receives focus via the mouse,
     but it will still show up on keyboard focus.

@@ -1,9 +1,11 @@
 // Libs
 import React from 'react';
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
+
 
 // Utils
-import { getHeadings, getCopy, getArticles, getQuickBits } from '../src/static/js/utils/getContent';
+import { getHeadings, getCopy, getArticles, getQuickBits, getDictionary } from '../src/static/js/utils/getContent';
 
 // Resources
 
@@ -17,6 +19,10 @@ interface IProps { }
 const Home = ({ }: IProps) => {
     const copy = getCopy();
     const headings = getHeadings()
+    const dictionary = getDictionary();
+
+    const articleTeaserItems = getArticles().items.slice(0, 3);
+    const quickBitsTeaserItems = getQuickBits().items.slice(0, 3);
 
     return <>
         <div className='grid'>
@@ -29,13 +35,35 @@ const Home = ({ }: IProps) => {
         <div className='grid'>
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.latestArticles}</h2>
-                <ArticleTeasers type='articles' articles={getArticles().items.slice(0, 3)} />
+                <p className='h4' data-reveal-in-view>{copy.articlesLead}</p>
             </div>
 
             <div className='g2'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestQuickBits}</h2>
-                <ArticleTeasers type='quick-bits' articles={getQuickBits().items.slice(0, 3)} />
+                <ArticleTeasers type='articles' articles={articleTeaserItems} />
             </div>
+
+            {getArticles().items.length > 3 && <div className='g8'>
+                <Link href='/articles'>
+                    <a className='button-link' data-reveal-in-view>{dictionary.viewAllArticles}</a>
+                </Link>
+            </div>}
+        </div>
+
+        <div className='grid'>
+            <div className='g2'>
+                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestQuickBits}</h2>
+                <p className='h4' data-reveal-in-view>{copy.quickBitsLead}</p>
+            </div>
+
+            <div className='g2'>
+                <ArticleTeasers type='quick-bits' articles={quickBitsTeaserItems} />
+            </div>
+
+            {getQuickBits().items.length > 3 && <div className='g8'>
+                <Link href='/quick-bits'>
+                    <a className='button-link' data-reveal-in-view>{dictionary.viewAllQuickBits}</a>
+                </Link>
+            </div>}
         </div>
     </>;
 };
