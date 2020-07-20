@@ -28,7 +28,7 @@ interface IProps {
 // Component
 let pageTransitionDelay = 0
 const App = ({ Component, pageProps }: IProps) => {
-    const { article, src, alt, showGenericSiteHeader = true, title, copy } = pageProps;
+    const { article, src, alt, showGenericSiteHeader = true, title, copy, pageDescription, pageImage } = pageProps;
 
     const router = useRouter();
 
@@ -79,8 +79,8 @@ const App = ({ Component, pageProps }: IProps) => {
     const [prevRoute, setPrevRoute] = useState('')
 
     return <>
-        <SiteMeta article={article} pageTitle={title} pageDescription={copy} />
-        <SiteOpenGraphTags article={article} pageTitle={title} pageDescription={copy} pageImage={src} />
+        <SiteMeta article={article} pageTitle={title} pageDescription={pageDescription || copy} />
+        <SiteOpenGraphTags article={article} pageTitle={title} pageDescription={pageDescription || copy} pageImage={pageImage || src} />
 
         <PageTransition timeout={pageTransitionDelay} classNames={`page-transition--${pageTransitionDirection} page-transition`} skipInitialTransition={true}>
             <div />
