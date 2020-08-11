@@ -1,5 +1,13 @@
 {
     "name": "Dave Bitter",
+    "short_name": "Dave Bitter",
+    "description": "A collection of my articles covering a wide range of topics",
+    "scope": "/",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#222222",
+    "theme_color": "#222222",
     "icons": [
         {
             "src": "\/img/favicons/android-icon-36x36.png",
