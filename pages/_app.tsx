@@ -7,6 +7,7 @@ import { PageTransition } from 'next-page-transitions';
 // Utils
 import revealManager from '../src/static/js/utils/RevealManager';
 import { initGA, logPageView } from '../src/static/js/utils/googleAnalytics';
+import useServiceWorker from 'static/js/utils/hooks/useServiceWorker';
 
 // Resources
 import 'highlight.js/styles/atom-one-dark.css';
@@ -31,6 +32,8 @@ const App = ({ Component, pageProps }: IProps) => {
     const { article, src, alt, showGenericSiteHeader = true, title, copy, pageDescription, pageImage } = pageProps;
 
     const router = useRouter();
+
+    useServiceWorker();
 
     const [pageTransitionDirection, setPageTransitionDirection] = useState('up')
     useEffect(() => {
