@@ -48,25 +48,27 @@ const App = ({ Component, pageProps }: IProps) => {
         const prevLevel = prevRoute.split("/").length - 2;
         const nextLevel = router.route.split("/").length - 2;
 
-        switch (true) {
-            case prevLevel === nextLevel:
-                setPageTransitionDirection('right')
-                break;
+        if (router.route !== prevRoute) {
+            switch (true) {
+                case prevLevel === nextLevel:
+                    setPageTransitionDirection('right')
+                    break;
 
-            case prevLevel < nextLevel:
-                setPageTransitionDirection('up')
-                break;
+                case prevLevel < nextLevel:
+                    setPageTransitionDirection('up')
+                    break;
 
-            case prevLevel > nextLevel:
-                setPageTransitionDirection('down')
-                break;
+                case prevLevel > nextLevel:
+                    setPageTransitionDirection('down')
+                    break;
 
-            default:
-                setPageTransitionDirection('up')
-                break;
+                default:
+                    setPageTransitionDirection('up')
+                    break;
+            }
+
+            setPrevRoute(router.route)
         }
-
-        setPrevRoute(router.route)
 
         if (process.env.NODE_ENV === 'development') { return; }
 
@@ -79,7 +81,7 @@ const App = ({ Component, pageProps }: IProps) => {
         logPageView();
     }, [router.route]);
 
-    const [prevRoute, setPrevRoute] = useState('')
+    const [prevRoute, setPrevRoute] = useState(router.route)
 
     return <>
         <SiteMeta article={article} pageTitle={title} pageDescription={pageDescription || copy} />
