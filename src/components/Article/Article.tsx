@@ -29,7 +29,7 @@ const Article = ({ body, date, intro, slug, teaserCopy, teaserImage, title, ...a
                 </div>
             </div>
             <div className='article__hero' data-reveal-in-view>
-                <img className='article__hero-image' src={teaserImage} alt={teaserImage} />
+                <img className='article__hero-image' src={teaserImage} alt={teaserImage} loading='lazy' />
             </div>
         </header>
         <section className='g6'>

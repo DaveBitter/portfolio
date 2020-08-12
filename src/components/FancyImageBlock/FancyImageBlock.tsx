@@ -17,13 +17,13 @@ interface IProps {
 const FancyImageBlock = ({ src, alt, ...attributes }: IProps) => {
     return <div className='fancy-image-block' {...attributes}>
         <div className='fancy-image-block__image-wrapper'>
-            <img className='fancy-image-block__image' src={src} alt={alt} />
+            <img className='fancy-image-block__image' src={src} alt={alt} loading='lazy' />
         </div>
         <div className='fancy-image-block__image-wrapper fancy-image-block__image-wrapper--presentational'>
-            <img className='fancy-image-block__image' src={src} alt={alt} role='presentation' />
+            <img className='fancy-image-block__image' src={src} alt={alt} role='presentation' loading='lazy' />
         </div>
         <div className='fancy-image-block__image-wrapper fancy-image-block__image-wrapper--presentational'>
-            <img className='fancy-image-block__image' src={src} alt={alt} role='presentation' />
+            <img className='fancy-image-block__image' src={src} alt={alt} role='presentation' loading='lazy' />
         </div>
     </div>;
 };

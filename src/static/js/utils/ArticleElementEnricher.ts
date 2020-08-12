@@ -30,6 +30,7 @@ class ArticleElementEnricher {
             const imgClone = img.cloneNode();
             const sibling = img.nextElementSibling;
             const figure = document.createElement('figure');
+            imgClone.setAttribute('loading', 'lazy');
             figure.dataset.figure = '';
 
             img.parentNode.removeChild(img);

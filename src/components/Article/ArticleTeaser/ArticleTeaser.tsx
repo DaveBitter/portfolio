@@ -21,7 +21,7 @@ const ArticleTeaser = ({ body, date, intro, slug, teaserCopy, teaserImage, title
             <time className='article-teaser__date' dateTime={date}>{formatDate(date, { day: 'numeric', month: 'long', year: 'numeric' })}</time>
 
             <div className='article-teaser__hero'>
-                <img className='article-teaser__hero-image' src={teaserImage} alt={teaserImage} />
+                <img className='article-teaser__hero-image' src={teaserImage} alt={teaserImage} loading='lazy' />
             </div>
         </header>
 

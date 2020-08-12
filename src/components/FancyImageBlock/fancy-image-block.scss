@@ -34,7 +34,8 @@
 
     &__image-wrapper {
         mask: url('/img/shapes/blob-1.svg');
-        animation: shape-1 5s $transition-timing-slow $transition-easing-cubic infinite alternate-reverse;
+
+        // animation: shape-1 5s $transition-timing-slow $transition-easing-cubic infinite alternate-reverse;
 
         [class^="page-transition"]:not(.page-transtion-enter-done) ~ * & {
             animation: none !important;
@@ -42,12 +43,14 @@
 
         &:nth-of-type(2) {
             mask: url('/img/shapes/blob-2.svg');
-            animation: shape-2 5s $transition-timing-slow $transition-easing-cubic infinite alternate-reverse;
+
+            // animation: shape-2 5s $transition-timing-slow $transition-easing-cubic infinite alternate-reverse;
         }
 
         &:nth-of-type(3) {
             mask: url('/img/shapes/blob-3.svg');
-            animation: shape-3 5s $transition-timing-slow $transition-easing-cubic infinite alternate-reverse;
+
+            // animation: shape-3 5s $transition-timing-slow $transition-easing-cubic infinite alternate-reverse;
         }
 
         &--presentational {
