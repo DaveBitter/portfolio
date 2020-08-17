@@ -1,5 +1,14 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target" : { "namespace": "android_app", "package_name": "com.davebitter.twa",
-                   "sha256_cert_fingerprints": ["40:CB:41:3B:12:1E:0A:80:35:0C:0E:29:77:EF:0E:3A:B0:F4:8F:FA:51:4A:49:11:CE:CB:05:4B:DA:7B:7D:8B"] }
-    }]
+[
+      {
+            "relation": [
+                  "delegate_permission/common.handle_all_urls"
+            ],
+            "target": {
+                  "namespace": "android_app",
+                  "package_name": "com.davebitter.twa",
+                  "sha256_cert_fingerprints": [
+                        "9D:32:4E:43:C3:60:39:D3:B7:E5:16:13:D5:E1:05:18:67:DE:E9:0B:8C:B7:3A:23:E6:36:37:4E:F5:4F:F7:DD"
+                  ]
+            }
+      }
+]
