@@ -16,7 +16,7 @@ const getGuards = event => ({
 self.addEventListener('install', e =>
     e.waitUntil(
         caches
-            .open('zorg-en-zekerheid-app')
+            .open('dave-bitter')
             .then(cache => cache.addAll(getResourcesToCache())
             )
     )
@@ -28,13 +28,14 @@ self.addEventListener('fetch', e => {
     if (!isGET || !isSameOrigin || !isHTTPRequest) { return; }
 
     e.respondWith(caches
-        .open('zorg-en-zekerheid-app')
+        .open('dave-bitter')
         .then(cache => cache.match(e.request)
             .then(response => {
-                return response || fetch(e.request).then(res => {
-                    cache.put(e.request, res.clone());
-                    return res;
-                });
+                return fetch(e.request)
+                    .then(res => {
+                        cache.put(e.request, res.clone());
+                        return res;
+                    }).catch(() => response);
             })
         ));
 });
