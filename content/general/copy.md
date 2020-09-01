@@ -14,4 +14,11 @@ items:
     value: Hey explorer! You've reached the end!
   - key: 'getInTouch'
     value: Let's get in touch
+  - key: 'ahhh'
+    value: AHHH!
+  - key: 'daveScrewedUp'
+    value: One of us screwed up. It's probably Dave. Please try to navigate to a different page.
+  - key: 'pageNotFound'
+    value: One of us screwed something up. Please try to navigate to a different page.
+
 ---
