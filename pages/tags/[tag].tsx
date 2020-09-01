@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 
 // Utils
-import { getHeadings, getCopy, getArticles, getQuickBits, getDictionary } from '../src/static/js/utils/getContent';
+import { getHeadings, getCopy, getArticles, getQuickBits, getDictionary } from '../../src/static/js/utils/getContent';
 
 // Resources
 
@@ -16,11 +16,10 @@ import ArticleTeasers from 'components/Article/ArticleTeasers/ArticleTeasers';
 interface IProps { }
 
 // Component
-const Home = ({ }: IProps) => {
+const Tags = ({ }: IProps) => {
     const copy = getCopy();
     const headings = getHeadings()
     const dictionary = getDictionary();
-
 
     const articleTeaserItems = getArticles().slice(0, 3);
     const quickBitsTeaserItems = getQuickBits().slice(0, 3);
@@ -69,6 +68,18 @@ const Home = ({ }: IProps) => {
     </>;
 };
 
+export const getStaticPaths = async () => {
+    const tags = [...getArticles(), ...getQuickBits()]
+        .reduce((acc: any, cur: any) => [...acc, ...(cur.tags || [])], [])
+        .filter((v: any, i: any, a: any) => a.indexOf(v) === i)// Remove duplicates
+
+
+    return {
+        tags: tags.map((tag: string) => ({ params: { tag } })),
+        fallback: false
+    };
+}
+
 export const getStaticProps: GetStaticProps = async (context: any) => {
     const headings = getHeadings();
     const copy = getCopy();
@@ -84,6 +95,6 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     }
 }
 // Props
-Home.defaultProps = {};
+Tags.defaultProps = {};
 
-export default Home;
+export default Tags;

@@ -1,11 +1,9 @@
 // Libs
 import React from 'react';
-import Article from './Article';
+import Card from './Card';
 import { mount } from 'enzyme';
-import { getArticles } from '../../static/js/utils/getContent';
 
 // Test constants
-const mockArticles = getArticles()
 
 // Component test setup
 const setup = (props: any) => {
@@ -13,7 +11,7 @@ const setup = (props: any) => {
         ...props
     };
 
-    const wrapper = mount(<Article {..._props} />);
+    const wrapper = mount(<Card {..._props} />);
 
     return {
         _props,
@@ -22,10 +20,9 @@ const setup = (props: any) => {
 };
 
 // Test scenarios
-describe('<Article />', () => {
+describe('<Card />', () => {
     it('should mount', () => {
         const { wrapper } = setup({
-            ...mockArticles[0]
         });
 
         expect(wrapper.childAt(0).exists());

@@ -10,7 +10,7 @@ describe('getContent', () => {
     });
 
     it('should return article in items property array', () => {
-        const [article] = getArticles().items
+        const [article] = getArticles()
 
         expect(article).toBeDefined();
     });
@@ -44,7 +44,7 @@ describe('getContent', () => {
     });
 
     it('should return quick bit in items property array', () => {
-        const [quickBit] = getQuickBits().items
+        const [quickBit] = getQuickBits()
 
         expect(quickBit).toBeDefined();
     });

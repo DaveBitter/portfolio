@@ -14,7 +14,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
 
     return {
         props: {
-            items: quickBits.items,
+            items: quickBits,
             title: headings.latestQuickBits || null,
             copy: copy.quickBitsLead || null,
             src: '/img/articles.jpg',

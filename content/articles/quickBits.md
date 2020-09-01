@@ -86,6 +86,8 @@ items:
 
     date: 2020-06-18T00:00:00.000Z
     slug: github-template-repositories
+    tags:
+      - git-hub
     intro: >-
       I tend to do a lot of side projects. I like to try out and explore instead of just reading about something. This leads to quite a few public and private repositories on my GitHub (at the time of writing ~80). Most of these never see the light of day, but still require a project set up to get started. Next to that, I start quite a few actual projects as well. I like to have a few things like frameworks, linting, testing etc. setup. Let's have a look at making this a breeze with GitHub template repositories.
     teaserCopy: >-
@@ -156,6 +158,9 @@ items:
 
     date: 2019-03-01T00:00:00.000Z
     slug: backdrop-filter
+    tags:
+      - prototype
+      - progressive-enhancement
     intro: >-
       The backdrop-filter property is one of the most useful new, at the time of writing, CSS properties that are landing in major browsers. It will allow you to set a custom backdrop-filter on a div. This is not to be mistaken for the CSS filter property.
     teaserCopy: >-

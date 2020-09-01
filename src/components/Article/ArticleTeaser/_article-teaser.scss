@@ -1,4 +1,5 @@
 .article-teaser {
+    flex: 1;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -27,7 +28,6 @@
         left: 0;
         right: 0;
         bottom: 0;
-        opacity: 0.4;
 
         &::after {
             content: '';
@@ -77,5 +77,10 @@
         bottom: 0;
         left: 0;
         font-size: 0;
+    }
+
+    .tag-wrapper {
+        z-index: 1;
+        margin-top: auto;
     }
 }
