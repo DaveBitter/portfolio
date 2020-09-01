@@ -31,8 +31,9 @@ const getOpenGraphData = ({ article, pageTitle, pageDescription, pageImage }: IP
         image: pageImage || undefined,
         author: 'Dave Bitter',
         publisher: 'Dave Bitter',
-        twitterSite: 'https://twitter.com/dave_bitter',
-        twitterCreator: 'https://twitter.com/dave_bitter'
+        twitterCard: 'summary_large_image',
+        twitterSite: '@dave_bitter',
+        twitterCreator: '@dave_bitter'
     };
 
     if (article) {
@@ -51,7 +52,7 @@ const getOpenGraphData = ({ article, pageTitle, pageDescription, pageImage }: IP
 };
 
 const SiteOpenGraphTags = ({ article, pageTitle, pageDescription, pageImage }: IProps) => {
-    const { title, description, keywords, siteName, locale, type, url, image, author, publisher, twitterSite, twitterCreator } = getOpenGraphData({ article, pageTitle, pageDescription, pageImage });
+    const { title, description, keywords, siteName, locale, type, url, image, author, publisher, twitterCard, twitterSite, twitterCreator } = getOpenGraphData({ article, pageTitle, pageDescription, pageImage });
 
     return (
         <Head>
@@ -66,7 +67,7 @@ const SiteOpenGraphTags = ({ article, pageTitle, pageDescription, pageImage }: I
             {publisher && <meta property='article:publisher' content={publisher} />}
             {keywords && <meta name='keywords' content={keywords} />}
 
-            {description && <meta name='twitter:card' content={description} />}
+            {twitterCard && <meta name='twitter:card' content={twitterCard} />}
             {twitterSite && <meta name='twitter:site' content={twitterSite} />}
             {twitterCreator && <meta name='twitter:creator' content={twitterCreator} />}
         </Head>
