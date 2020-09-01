@@ -24,14 +24,17 @@ interface IProps {
 const ArticlePage = ({ article, relatedArticles, type }: IProps) => {
     const headings = getHeadings();
 
+    // NOTE: TS made me do it :/
+    const tags = [...(article.tags || [])];
+
     return <>
         <Article {...article} />
 
         {!!relatedArticles.length && <div className='grid'>
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.readOn}</h2>
-                {article.tags && !!article.tags.length && <Tag.Wrapper alignment='left'>
-                    {article.tags.map((tag: TagInterface) => <Tag.Item tag={tag} />)}
+                {tags && !!tags.length && <Tag.Wrapper alignment='left'>
+                    {tags.map((tag: TagInterface) => <Tag.Item key={tag.key} tag={tag} />)}
                 </Tag.Wrapper>}
                 <ArticleTeasers type={type} articles={relatedArticles} />
             </div>

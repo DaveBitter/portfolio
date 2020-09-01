@@ -5,41 +5,38 @@ import Link from 'next/link';
 
 
 // Utils
-import { getHeadings, getCopy, getArticles, getQuickBits, getDictionary } from '../../src/static/js/utils/getContent';
+import { getCopy, getArticles, getQuickBits, getDictionary, getTags } from '../../src/static/js/utils/getContent';
 
 // Resources
 
 // Components
 import ArticleTeasers from 'components/Article/ArticleTeasers/ArticleTeasers';
+import { ArticleInterface, TagInterface } from 'static/js/utils/Interfaces/Interfaces';
 
 // Interface
-interface IProps { }
+interface IProps {
+    activeTag: string
+}
 
 // Component
-const Tags = ({ }: IProps) => {
-    const copy = getCopy();
-    const headings = getHeadings()
+const Tags = ({ activeTag }: IProps) => {
     const dictionary = getDictionary();
 
-    const articleTeaserItems = getArticles().slice(0, 3);
-    const quickBitsTeaserItems = getQuickBits().slice(0, 3);
+    const articleItems = getArticles()
+        // @ts-ignore
+        .filter((article: ArticleInterface) => (article.tags || []).find((tag: TagInterface) => tag.key === activeTag))
+    const quickBitsItems = getQuickBits()
+        // @ts-ignore
+        .filter((quickBit: ArticleInterface) => (quickBit.tags || []).find((tag: TagInterface) => tag.key === activeTag))
 
     return <>
-        <div className='grid'>
-            <div className='g6'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.elevatorPitch}</h2>
-                <p className='copy copy--jumbo' data-reveal-in-view>{copy.elevatorPitch}</p>
-            </div>
-        </div>
-
-        <div className='grid'>
+        {articleItems && !!articleItems.length && <div className='grid'>
             <div className='g2'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestArticles}</h2>
-                <p className='h4' data-reveal-in-view>{copy.articlesLead}</p>
+                <h2 className='text-colored h1' data-reveal-in-view>{dictionary.articles}</h2>
             </div>
 
             <div className='g2'>
-                <ArticleTeasers type='articles' articles={articleTeaserItems} />
+                <ArticleTeasers type='articles' articles={articleItems} />
             </div>
 
             {getArticles().length > 3 && <div className='g8'>
@@ -47,16 +44,15 @@ const Tags = ({ }: IProps) => {
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllArticles}</a>
                 </Link>
             </div>}
-        </div>
+        </div>}
 
-        <div className='grid'>
+        {quickBitsItems && !!quickBitsItems.length && <div className='grid'>
             <div className='g2'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestQuickBits}</h2>
-                <p className='h4' data-reveal-in-view>{copy.quickBitsLead}</p>
+                <h2 className='text-colored h1' data-reveal-in-view>{dictionary.quickBits}</h2>
             </div>
 
             <div className='g2'>
-                <ArticleTeasers type='quick-bits' articles={quickBitsTeaserItems} />
+                <ArticleTeasers type='quick-bits' articles={quickBitsItems} />
             </div>
 
             {getQuickBits().length > 3 && <div className='g8'>
@@ -64,33 +60,31 @@ const Tags = ({ }: IProps) => {
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllQuickBits}</a>
                 </Link>
             </div>}
-        </div>
+        </div>}
     </>;
 };
 
 export const getStaticPaths = async () => {
-    const tags = [...getArticles(), ...getQuickBits()]
-        .reduce((acc: any, cur: any) => [...acc, ...(cur.tags || [])], [])
-        .filter((v: any, i: any, a: any) => a.indexOf(v) === i)// Remove duplicates
-
-
     return {
-        tags: tags.map((tag: string) => ({ params: { tag } })),
+        paths: Object.keys(getTags()).map((tag: string) => ({ params: { tag } })),
         fallback: false
     };
 }
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
-    const headings = getHeadings();
     const copy = getCopy();
+    const tags = getTags();
+
+    const tagLabel = tags[context.params.tag];
 
     return {
         props: {
-            title: headings.greeting || null,
-            copy: copy.greetingIntro || null,
+            title: context.params.tag ? tagLabel || context.params.tag : null,
+            copy: '',
+            src: '/img/articles.jpg',
+            alt: '',
             pageDescription: copy.pageDescription || null,
-            pageImage: '/img/dave.jpg',
-            src: '/img/dave-flipped.jpg'
+            activeTag: context.params.tag
         }
     }
 }

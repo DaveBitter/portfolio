@@ -15,7 +15,7 @@ interface IProps {
 }
 
 // Component
-const Wrapper = ({ children, alignment = 'left', ...attributes }: { children: any, alignment: 'left' | 'right' | undefined }) => {
+const Wrapper = ({ children, alignment = 'left', ...attributes }: { children: any, alignment?: 'left' | 'right' | undefined }) => {
     return <div className='tag-wrapper' data-alignment={alignment} {...attributes} data-reveal-in-view>
         {children}
     </div>;

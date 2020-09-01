@@ -6,7 +6,7 @@ export interface ArticleInterface {
     body: string,
     date: string,
     intro: string,
-    tags?: TagInterface[]
+    tags?: TagInterface[] | string[]
     slug: string,
     teaserCopy: string,
     teaserImage: string,
