@@ -8,7 +8,7 @@ import ArticleTeaser from '../ArticleTeaser/ArticleTeaser';
 import { getArticles } from '../../../static/js/utils/getContent';
 
 // Test constants
-const mockArticles = getArticles().items
+const mockArticles = getArticles()
 
 // Component test setup
 const setup = (props: any) => {

@@ -21,8 +21,9 @@ const Home = ({ }: IProps) => {
     const headings = getHeadings()
     const dictionary = getDictionary();
 
-    const articleTeaserItems = getArticles().items.slice(0, 3);
-    const quickBitsTeaserItems = getQuickBits().items.slice(0, 3);
+
+    const articleTeaserItems = getArticles().slice(0, 3);
+    const quickBitsTeaserItems = getQuickBits().slice(0, 3);
 
     return <>
         <div className='grid'>
@@ -42,7 +43,7 @@ const Home = ({ }: IProps) => {
                 <ArticleTeasers type='articles' articles={articleTeaserItems} />
             </div>
 
-            {getArticles().items.length > 3 && <div className='g8'>
+            {getArticles().length > 3 && <div className='g8'>
                 <Link href='/articles'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllArticles}</a>
                 </Link>
@@ -59,7 +60,7 @@ const Home = ({ }: IProps) => {
                 <ArticleTeasers type='quick-bits' articles={quickBitsTeaserItems} />
             </div>
 
-            {getQuickBits().items.length > 3 && <div className='g8'>
+            {getQuickBits().length > 3 && <div className='g8'>
                 <Link href='/quick-bits'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllQuickBits}</a>
                 </Link>

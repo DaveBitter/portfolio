@@ -37,6 +37,16 @@ collections:
             fields:
               - { label: "Key", name: "key", widget: "string" }
               - { label: "Value", name: "value", widget: "text" }
+      - label: "Tags"
+        name: "tags"
+        file: "content/general/tags.md"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Key", name: "key", widget: "string" }
+              - { label: "Value", name: "value", widget: "text" }
   - name: "articles"
     label: "Articles"
     files:
@@ -50,6 +60,15 @@ collections:
             fields:
               - { label: "Slug", name: "slug", widget: "string" }
               - { label: "Date", name: "date", widget: "datetime" }
+              - {
+                  label: "Tags",
+                  name: "tags",
+                  widget: "relation",
+                  collection: "tags",
+                  searchFields: ["key"],
+                  valueField: "key",
+                  multiple: true,
+                }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Teaser Copy", name: "teaserCopy", widget: "text" }
               - { label: "Teaser Image", name: "teaserImage", widget: "image" }
@@ -65,6 +84,15 @@ collections:
             fields:
               - { label: "Slug", name: "slug", widget: "string" }
               - { label: "Date", name: "date", widget: "datetime" }
+              - {
+                  label: "Tags",
+                  name: "tags",
+                  widget: "relation",
+                  collection: "tags",
+                  searchFields: ["key"],
+                  valueField: "key",
+                  multiple: true,
+                }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Teaser Copy", name: "teaserCopy", widget: "text" }
               - { label: "Teaser Image", name: "teaserImage", widget: "image" }

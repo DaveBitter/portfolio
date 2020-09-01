@@ -58,7 +58,7 @@
     "@types/react-ga": "^2.3.0",
     "highlight.js": "^10.0.3",
     "marked": "^1.0.0",
-    "next": "9.3.5",
+    "next": "^9.5.0",
     "next-page-transitions": "^1.0.0-beta.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",

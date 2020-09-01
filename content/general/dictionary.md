@@ -7,7 +7,7 @@ items:
   - key: 'quickBits'
     value: Quick Bits
   - key: 'articles'
-    value: articles
+    value: Articles
   - key: 'read'
     value: read
   - key: 'viewAllArticles'

@@ -5,7 +5,7 @@ import compileMarkdownToJSX from './compileMarkdownToJSX';
 jest.mock('./ArticleElementEnricher');
 
 // Test constants
-const mockArticles = getArticles().items
+const mockArticles = getArticles()
 
 const mockArticleElement = document.createElement('div');
 mockArticleElement.innerHTML = compileMarkdownToJSX(mockArticles[0].body)

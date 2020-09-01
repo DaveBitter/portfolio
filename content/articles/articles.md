@@ -67,12 +67,14 @@ items:
       I've often limited my creativity by stopping at the concept phase due to technical requirements. Using the previously mentioned tools helped me to break through these limitations and start creating. I'm now able to quickly setup a new project with all the requirements I might have. Let's keep creating, we've got the tools available!
     date: 2020-08-17T00:00:00.000Z
     slug: prototype-with-firebase
+    tags:
+      - firebase
+      - spa
+      - react-js
     intro: >-
-      I often come up with new ideas for applications and tools. I usually sketch these ideas in my notebook to build whenever I have spare time. This is where I used to stop because I didn't want to handle with things like databases, authentication and all other requirements that my idea might have.
-
-      Because this limited exploring new concepts and ideas in a great way, I asked myself 'How can I take my idea from sketch to a fully functioning and rapidly built prototype?'.
-    teaserCopy: >-
       I often come up with new ideas for applications and tools. I usually sketch these ideas in my notebook to build whenever I have spare time. This is where I used to stop because I didn't want to handle with things like databases, authentication and all other requirements that my idea might have.I asked myself 'How can I take my idea from sketch to a fully functioning and rapidly built prototype?'.
+    teaserCopy: >-
+      I often come up with new ideas for applications and tools. I used to stop at sketching these ideas in my notebook to build whenever I have spare time. I asked myself 'How can I take my idea from sketch to a fully functioning and rapidly built prototype?'.
     teaserImage: /img/articles/firebase-dave.jpg
     title: How to take an idea from sketch to a fully functioning and rapidly built prototype?
   - body: >-
@@ -160,6 +162,10 @@ items:
       So, looking back, we can now easily create our own secure and scalable API without the hassle of setting up another service. Everything lives nicely together in one package. If you ever wanted to look into building your API or proxy I highly recommend checking this feature out. If you are interested to read more about Next.js, I suggest to read [Implementing the latest web technologies to boost the Mirabeau blog](https://www.davebitter.com/articles/mirabeau-blog-latest-web-technologies).
     date: 2020-08-14T00:00:00.000Z
     slug: next-js-api-routes
+    tags:
+      - api
+      - next-js
+      - react-js
     intro: >-
       Next.js is my framework of choice for any React.js application I develop. One of the big features I haven't covered before is Next.js API routes. Although not as big of a feature as page generation, it is one of the features I'm starting to enjoy more and more. Let's have a look at this feature and how to use it.
     teaserCopy: >-
@@ -292,6 +298,10 @@ items:
       > How can I help the person using this in the best way?
     date: 2020-06-12T00:00:00.000Z
     slug: you-might-not-need-a-native-app
+    tags:
+      - pwa
+      - native
+      - spa
     intro: >-
       "We need a native app for performance, the 'feel', offline functionalities, notifications and...". Native apps have provided fundamental functionalities that serve the purpose of creating a wonderful user experience. But, you might not need that native app and opt for the technology of the wondrous web!
     teaserCopy: >-
@@ -527,6 +537,9 @@ items:
 
     date: 2020-06-11T00:00:00.000Z
     slug: number-code-input
+    tags:
+      - prototype
+      - progressive-enhancement
     intro: >-
       I often come across Number Code Inputs on various websites used for security measures, voucher codes and more. These Number Code Inputs often have a bit more functionality behind them then you might think at first. Let's create our own as an exercise.
     teaserCopy: >-
@@ -619,6 +632,10 @@ items:
 
     date: 2020-03-31T00:00:00.000Z
     slug: spa-seo
+    tags:
+      - seo
+      - spa
+      - next-js
     intro: >-
       One of the biggest drawbacks when building a Single-Page Application (SPA) is to provide solid Search Engine Optimisation, often shortened to SEO. How can we improve SEO with some modern tools and techniques I love the most and use in my daily work as a front-end developer? Read more about it in this blog.
     teaserCopy: >-
@@ -717,6 +734,10 @@ items:
       the overall performance and user-friendliness. This blog post is about the
       journey I went and what the possibilities might be for your next platform.
     slug: mirabeau-blog-latest-web-technologies
+    tags:
+      - next-js
+      - react-js
+      - serverless
     teaserCopy: >-
       The Mirabeau blog was suffering from technical debt. I decided to rebuild it using
       the latest web technologies to make it 2020 ready, which includes boosting
@@ -927,6 +948,9 @@ items:
 
       You can find the demo and all the code of the three-way switch we worked on over at [CodePen](https://codepen.io/davebitter/full/WNeByaW).
     date: 2019-10-01T00:00:00.000Z
+    tags:
+      - progressive-enhancement
+      - prototype
     intro: >-
       As a frontend developer, I often get designs for custom inputs. These inputs improve usability and user experience. The inputs often require JavaScript to make them work like the designer intended. However, this poses a problem. How can we make custom inputs for the web while still offering a working solution without JavaScript?
     slug: custom-inputs-web

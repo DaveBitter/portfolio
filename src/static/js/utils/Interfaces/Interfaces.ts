@@ -6,10 +6,16 @@ export interface ArticleInterface {
     body: string,
     date: string,
     intro: string,
+    tags?: TagInterface[] | string[]
     slug: string,
     teaserCopy: string,
     teaserImage: string,
     title: string,
     as: string,
     href: string,
+}
+
+export interface TagInterface {
+    key: string,
+    value: string
 }

@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
 
     return {
         props: {
-            items: articles.items,
+            items: articles,
             title: headings.latestArticles || null,
             copy: copy.articlesLead || null,
             src: '/img/articles.jpg',

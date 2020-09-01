@@ -1,0 +1,36 @@
+.tag {
+    border-radius: $border-radius-lrg;
+    background: $gradient-primary;
+
+    + .tag {
+        margin-left: $spacing-sml;
+
+        @supports (gap: $spacing-med) {
+            margin-left: 0;
+        }
+    }
+
+    &__link {
+        display: inline-block;
+        padding: $spacing-xs;
+    }
+
+    &-wrapper {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: $spacing-med 0;
+
+        &[data-alignment='left'] {
+            justify-content: flex-start;
+        }
+
+        &[data-alignment='right'] {
+            justify-content: flex-end;
+        }
+
+        @supports (gap: $spacing-sml) {
+            gap: $spacing-sml;
+        }
+    }
+}

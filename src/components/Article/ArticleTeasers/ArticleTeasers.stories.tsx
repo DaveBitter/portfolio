@@ -10,4 +10,4 @@ import ArticleTeasers from './ArticleTeasers';
 
 // Story
 storiesOf('Article', module)
-    .add('ArticleTeasers', () => <ArticleTeasers type='articles' articles={getArticles().items} />);
+    .add('ArticleTeasers', () => <ArticleTeasers type='articles' articles={getArticles()} />);

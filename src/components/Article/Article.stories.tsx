@@ -10,4 +10,4 @@ import Article from './Article';
 
 // Story
 storiesOf('Article', module)
-    .add('Article', () => <Article {...getArticles().items[0]} />);
+    .add('Article', () => <Article {...getArticles()[0]} />);
