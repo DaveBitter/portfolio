@@ -70,6 +70,9 @@ const SiteOpenGraphTags = ({ article, pageTitle, pageDescription, pageImage }: I
             {twitterCard && <meta name='twitter:card' content={twitterCard} />}
             {twitterSite && <meta name='twitter:site' content={twitterSite} />}
             {twitterCreator && <meta name='twitter:creator' content={twitterCreator} />}
+            {title && <meta name="twitter:title" content={title} />}
+            {description && <meta name="twitter:description" content={description} />}
+            {image && <meta name="twitter:image" content={image} />}
         </Head>
     );
 };
