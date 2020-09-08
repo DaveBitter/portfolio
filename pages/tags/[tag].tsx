@@ -6,16 +6,16 @@ import Link from 'next/link';
 
 // Utils
 import { getCopy, getArticles, getQuickBits, getDictionary, getTags } from '../../src/static/js/utils/getContent';
+import { ArticleInterface, TagInterface } from 'static/js/utils/Interfaces/Interfaces';
 
 // Resources
 
 // Components
 import ArticleTeasers from 'components/Article/ArticleTeasers/ArticleTeasers';
-import { ArticleInterface, TagInterface } from 'static/js/utils/Interfaces/Interfaces';
 
 // Interface
 interface IProps {
-    activeTag: string
+    activeTag: TagInterface
 }
 
 // Component
@@ -71,20 +71,23 @@ export const getStaticPaths = async () => {
     };
 }
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async (context) => {
     const copy = getCopy();
     const tags = getTags();
 
-    const tagLabel = tags[context.params.tag];
+    const tag = context.params && context.params.tag;
+
+    //@ts-ignore
+    const tagLabel = context.params && context.params.tag ? tags[context.params.tag] : null;
 
     return {
         props: {
-            title: context.params.tag ? tagLabel || context.params.tag : null,
+            title: tagLabel || tag,
             copy: '',
             src: '/img/articles.jpg',
             alt: '',
             pageDescription: copy.pageDescription || null,
-            activeTag: context.params.tag
+            activeTag: tag
         }
     }
 }

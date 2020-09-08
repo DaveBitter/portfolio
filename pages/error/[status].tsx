@@ -1,9 +1,10 @@
 // Libs
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { getCopy } from 'static/js/utils/getContent';
 
 // Utils
+import { getCopy } from 'static/js/utils/getContent';
+import { HTTPStatusCodeType } from 'static/js/utils/Interfaces/Types';
 
 // Components
 
@@ -23,12 +24,12 @@ const ErrorPage = ({ }: IProps) => {
 
 export const getStaticPaths = async () => {
     return {
-        paths: ['404', '500',].map((status: string) => ({ params: { status } })),
+        paths: ['404', '500',].map((status: HTTPStatusCodeType) => ({ params: { status } })),
         fallback: false
     };
 }
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async () => {
     const copy = getCopy()
     const status = '500';
 

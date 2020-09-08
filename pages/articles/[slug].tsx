@@ -5,6 +5,7 @@ import { GetStaticProps } from 'next'
 // Utils
 import { getArticles, getHeadings } from '../../src/static/js/utils/getContent';
 import { ArticleInterface, TagInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
+import { ArticleTypeType } from 'static/js/utils/Interfaces/Types';
 
 // Resources
 
@@ -16,8 +17,8 @@ import Tag from 'components/Tag/Tag';
 // Interface
 interface IProps {
     article: ArticleInterface,
-    relatedArticles: any,
-    type: string
+    relatedArticles: ArticleInterface[],
+    type: ArticleTypeType
 }
 
 // Component
@@ -47,16 +48,16 @@ Article.defaultProps = {};
 
 export const getStaticPaths = async () => {
     return {
-        paths: getArticles().map((article: any) => ({ params: { slug: article.slug } })),
+        paths: getArticles().map((article: ArticleInterface) => ({ params: { slug: article.slug } })),
         fallback: false
     };
 }
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async (context) => {
     return {
         props: {
-            article: getArticles().find((article: any) => article.slug === context.params.slug) || null,
-            relatedArticles: getArticles().filter((article: any) => article.slug !== context.params.slug).splice(0, 3),
+            article: getArticles().find((article: ArticleInterface) => context && context.params ? article.slug === context.params.slug : false) || null,
+            relatedArticles: getArticles().filter((article: ArticleInterface) => article.slug !== context && context.params ? context.params.slug : false).splice(0, 3),
             showGenericSiteHeader: false,
             type: 'articles'
         }

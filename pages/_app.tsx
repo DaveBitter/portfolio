@@ -1,6 +1,7 @@
 // Libs
 import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
+import { AppProps } from 'next/app';
 // @ts-ignore
 import { PageTransition } from 'next-page-transitions';
 
@@ -20,15 +21,9 @@ import SiteNav from '../src/components/Site/SiteNav/SiteNav';
 import SiteOpenGraphTags from '../src/components/Site/SiteOpenGraphTags/SiteOpenGraphTags';
 import SiteFooter from 'components/Site/SiteFooter/SiteFooter';
 
-// Interface
-interface IProps {
-    Component: any,
-    pageProps: any
-}
-
 // Component
 let pageTransitionDelay = 0
-const App = ({ Component, pageProps }: IProps) => {
+const App = ({ Component, pageProps }: AppProps) => {
     const { article, src, alt, showGenericSiteHeader = true, title, copy, pageDescription, pageImage } = pageProps;
 
     const router = useRouter();
