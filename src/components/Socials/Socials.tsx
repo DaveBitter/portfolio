@@ -23,10 +23,10 @@ interface IProps {
     items: [{
         key: string,
         label?: string,
-        icon: any,
+        icon: () => JSX.Element[] | JSX.Element | string | number,
         href: string
     }],
-    theme: string
+    theme: 'light' | 'dark'
 }
 
 // Component
