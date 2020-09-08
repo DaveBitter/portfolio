@@ -38,7 +38,9 @@
   },
   "include": [
     "pages/**/*",
-    "src/**/*"
+    "src/**/*",
+    "global.d.ts",
+    "custom.d.ts"
   ],
   "exclude": [
     "node_modules",

@@ -15,7 +15,7 @@ import Tag from 'components/Tag/Tag';
 
 // Component
 const Article = ({ body, date, intro, tags: articleTags, slug, teaserCopy, teaserImage, title, ...attributes }: ArticleInterface) => {
-    const articleContent = useRef<any>(null);
+    const articleContent = useRef<null | HTMLDivElement>(null);
     useEffect(() => {
         new ArticleElementEnricher(articleContent.current, null);
         hljs.initHighlighting();

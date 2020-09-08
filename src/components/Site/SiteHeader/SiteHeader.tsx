@@ -12,7 +12,7 @@ import Socials from '../../Socials/Socials';
 
 // Interface
 interface IProps {
-    children?: any,
+    children?: JSX.Element[] | JSX.Element | string | number,
     title: string,
     copy?: string,
     showGenericSiteHeader?: boolean,

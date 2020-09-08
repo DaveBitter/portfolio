@@ -6,12 +6,12 @@ import Link from 'next/link';
 
 // Utils
 import { getCopy, getArticles, getQuickBits, getDictionary, getTags } from '../../src/static/js/utils/getContent';
+import { ArticleInterface, TagInterface } from 'static/js/utils/Interfaces/Interfaces';
 
 // Resources
 
 // Components
 import ArticleTeasers from 'components/Article/ArticleTeasers/ArticleTeasers';
-import { ArticleInterface, TagInterface } from 'static/js/utils/Interfaces/Interfaces';
 
 // Interface
 interface IProps {
@@ -23,11 +23,9 @@ const Tags = ({ activeTag }: IProps) => {
     const dictionary = getDictionary();
 
     const articleItems = getArticles()
-        // @ts-ignore
-        .filter((article: ArticleInterface) => (article.tags || []).find((tag: TagInterface) => tag.key === activeTag))
+        .filter((article: ArticleInterface) => article.tags.find((tag: TagInterface) => tag.key === activeTag))
     const quickBitsItems = getQuickBits()
-        // @ts-ignore
-        .filter((quickBit: ArticleInterface) => (quickBit.tags || []).find((tag: TagInterface) => tag.key === activeTag))
+        .filter((quickBit: ArticleInterface) => quickBit.tags.find((tag: TagInterface) => tag.key === activeTag))
 
     return <>
         {articleItems && !!articleItems.length && <div className='grid'>
@@ -71,20 +69,22 @@ export const getStaticPaths = async () => {
     };
 }
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async (context) => {
     const copy = getCopy();
     const tags = getTags();
 
-    const tagLabel = tags[context.params.tag];
+    const tag = context.params && context.params.tag;
+
+    const tagLabel = context.params && context.params.tag && tag ? tags[Array.isArray(tag) ? tag[0] : tag] : null;
 
     return {
         props: {
-            title: context.params.tag ? tagLabel || context.params.tag : null,
+            title: tagLabel || tag,
             copy: '',
             src: '/img/articles.jpg',
             alt: '',
             pageDescription: copy.pageDescription || null,
-            activeTag: context.params.tag
+            activeTag: tag
         }
     }
 }

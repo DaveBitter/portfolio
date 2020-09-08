@@ -9,7 +9,7 @@ import React from 'react';
 
 // Interface
 interface IProps {
-    children: any
+    children: JSX.Element[] | JSX.Element | string | number
 }
 
 // Component

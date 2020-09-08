@@ -69,7 +69,7 @@ const Home = ({ }: IProps) => {
     </>;
 };
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async () => {
     const headings = getHeadings();
     const copy = getCopy();
 

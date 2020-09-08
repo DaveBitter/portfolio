@@ -15,7 +15,7 @@ interface IProps {
 }
 
 // Component
-const Wrapper = ({ children, alignment = 'left', ...attributes }: { children: any, alignment?: 'left' | 'right' | undefined }) => {
+const Wrapper = ({ children, alignment = 'left', ...attributes }: { children: JSX.Element[] | JSX.Element | string | number, alignment?: 'left' | 'right' | undefined }) => {
     return <div className='tag-wrapper' data-alignment={alignment} {...attributes} data-reveal-in-view>
         {children}
     </div>;
@@ -30,7 +30,7 @@ const Item = ({ tag, ...attributes }: IProps) => {
 };
 
 // Component
-const Tag = ({ children }: { children: any }) => {
+const Tag = ({ children }: { children: JSX.Element[] | JSX.Element | string | number }) => {
     return <>
         {children}
     </>;

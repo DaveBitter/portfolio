@@ -4,6 +4,8 @@ import { GetStaticProps } from 'next'
 
 // Utils
 import { getArticles, getHeadings, getCopy } from '../../src/static/js/utils/getContent';
+import { ArticleInterface } from 'static/js/utils/Interfaces/Interfaces';
+import { ArticleTypeType } from 'static/js/utils/Interfaces/Types';
 
 // Resources
 
@@ -12,8 +14,8 @@ import ArticleTeasers from '../../src/components/Article/ArticleTeasers/ArticleT
 
 // Interface
 interface IProps {
-    items: any,
-    type: string
+    items: ArticleInterface[],
+    type: ArticleTypeType
 }
 
 // Component
@@ -26,7 +28,7 @@ const Articles = ({ items, type }: IProps) => {
     </div>;
 };
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async () => {
     const headings = getHeadings();
     const copy = getCopy();
     const articles = getArticles();

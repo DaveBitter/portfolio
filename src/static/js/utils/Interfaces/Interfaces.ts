@@ -1,3 +1,4 @@
+/*** Interfaces ***/
 export interface DictionaryInterface {
     [key: string]: string
 }
@@ -6,7 +7,7 @@ export interface ArticleInterface {
     body: string,
     date: string,
     intro: string,
-    tags?: TagInterface[] | string[]
+    tags: TagInterface[]
     slug: string,
     teaserCopy: string,
     teaserImage: string,

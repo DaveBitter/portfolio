@@ -10,11 +10,8 @@ import { DictionaryInterface } from '../../../static/js/utils/Interfaces/Interfa
 import { getDictionary } from '../../../static/js/utils/getContent';
 
 // Resources
-// @ts-ignore
 import ArticlesIcon from '../../../static/img/icons/news.svg';
-// @ts-ignore
 import HomeIcon from '../../../static/img/icons/home.svg';
-// @ts-ignore
 import QuickBitsIcon from '../../../static/img/icons/bolt.svg';
 
 // Components

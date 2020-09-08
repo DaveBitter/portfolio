@@ -7,7 +7,7 @@ import { getHeadings, getCopy, getQuickBits } from '../../src/static/js/utils/ge
 // Components
 import Index from '../articles/index';
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async () => {
     const headings = getHeadings();
     const copy = getCopy();
     const quickBits = getQuickBits()

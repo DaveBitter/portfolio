@@ -5,15 +5,10 @@ import React from 'react';
 import { getDictionary } from '../../static/js/utils/getContent';
 
 // Resources
-// @ts-ignore
 import githubIcon from '../../static/img/icons/github.svg';
-// @ts-ignore
 import linkedinIcon from '../../static/img/icons/linkedin.svg';
-// @ts-ignore
 import twitterIcon from '../../static/img/icons/twitter.svg';
-// @ts-ignore
 import instagramIcon from '../../static/img/icons/instagram.svg';
-// @ts-ignore
 import emailIcon from '../../static/img/icons/email.svg';
 
 // Components
@@ -23,10 +18,10 @@ interface IProps {
     items: [{
         key: string,
         label?: string,
-        icon: any,
+        icon: () => JSX.Element[] | JSX.Element | string | number,
         href: string
     }],
-    theme: string
+    theme: 'light' | 'dark'
 }
 
 // Component
