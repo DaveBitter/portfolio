@@ -12,6 +12,8 @@ items:
     value: 'Next.js'
   - key: 'pwa'
     value: 'PWA'
+  - key: 'twa'
+    value: 'TWA'
   - key: 'native'
     value: 'Native'
   - key: 'prototype'
