@@ -30,7 +30,7 @@
         position: relative;
         display: flex;
         justify-content: center;
-        padding: $spacing-med $spacing-xs;
+        padding: $spacing-sml $spacing-xxs;
         transition: background-color $transition-timing-fast $transition-easing-cubic;
 
         &:hover,
@@ -62,15 +62,25 @@
         .site-nav__item[data-is-active='true'] &,
         .site-nav__item:hover &,
         .site-nav__item:focus & {
-            transform: translateY($spacing-xs);
-            font-size: initial;
+            @include text-xs;
+            transform: translateY($spacing-xxxs);
+
+            @include mq($mq-tab--sml) {
+                transform: translateY($spacing-xs);
+                font-size: initial;
+            }
         }
     }
 
     &__icon {
+        width: $spacing-sml;
         fill: $color-white;
         pointer-events: none;
         transition: transform $transition-timing-fast $transition-easing-cubic;
+
+        @include mq($mq-tab--sml) {
+            width: $spacing-med;
+        }
 
         .site-nav__item[data-is-active='true'] &,
         .site-nav__item:hover &,
