@@ -1,0 +1,55 @@
+.share {
+    z-index: 100;
+    position: fixed;
+    bottom: $spacing-xl;
+    right: $spacing-med;
+    transform: translateY($spacing-med);
+    opacity: 0;
+    transition:
+        opacity $transition-timing-fast $transition-easing-cubic,
+        transform $transition-timing-fast $transition-easing-cubic;
+
+    &[data-is-active='true'] {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    @include mq($mq-tab--sml) {
+        display: none;
+    }
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        padding: $spacing-xs;
+        border-radius: $border-radius-lrg;
+        font-weight: $font-weight-bold;
+        box-shadow: $box-shadow-default--soft;
+        border: none;
+        background: $gradient-primary;
+
+        svg {
+            width: $spacing-sml;
+            margin-left: $spacing-sml;
+            fill: $color-white;
+        }
+    }
+
+    &__copied-feedback {
+        @include text-xs;
+        position: absolute;
+        top: -$spacing-xs;
+        left: 50%;
+        transform: translate(-50%, -100%) scale(0);
+        padding: $spacing-xs $spacing-sml;
+        white-space: nowrap;
+        border-radius: $border-radius-med;
+        color: $color-white;
+        background-color: $color-gray-darkest;
+        transition: transform $transition-timing-fast $transition-easing-cubic;
+
+        &[data-active='true'] {
+            transform: translate(-50%, -100%) scale(1);
+        }
+    }
+}

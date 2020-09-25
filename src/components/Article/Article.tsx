@@ -12,6 +12,7 @@ import compileMarkdownToJSX from '../../static/js/utils/compileMarkdownToJSX';
 
 // Components
 import Tag from 'components/Tag/Tag';
+import Share from 'components/Share/Share';
 
 // Component
 const Article = ({ body, date, intro, tags: articleTags, slug, teaserCopy, teaserImage, title, ...attributes }: ArticleInterface) => {
@@ -43,6 +44,7 @@ const Article = ({ body, date, intro, tags: articleTags, slug, teaserCopy, tease
             <p className='article__intro' data-reveal-in-view><strong>{intro}</strong></p>
             {body && <div className='article__body' dangerouslySetInnerHTML={{ __html: compileMarkdownToJSX(body) }} ref={articleContent} data-reveal-in-view />}
         </section>
+        <Share />
     </article>;
 };
 

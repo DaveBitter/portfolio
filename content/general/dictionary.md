@@ -26,4 +26,6 @@ items:
     value: Email
   - key: 'github'
     value: GitHub
+  - key: 'share'
+    value: Share
 ---

@@ -20,5 +20,6 @@ items:
     value: One of us screwed up. It's probably Dave. Please try to navigate to a different page.
   - key: 'pageNotFound'
     value: One of us screwed something up. Please try to navigate to a different page.
-
+  - key: 'copiedToClipboard'
+    value: Copied to clipboard!
 ---
