@@ -2,38 +2,47 @@
 import React from 'react';
 
 // Utils
-import { ArticleInterface } from 'static/js/utils/Interfaces/Interfaces';
+import { ArticleInterface, TagInterface } from '../../../static/js/utils/Interfaces/Interfaces';
+import { ArticleTypeType } from '../../../static/js/utils/Interfaces/Types';
+import { getTags } from '../../../static/js/utils/getContent';
 
 // Resources
 
 // Components
 import ArticleTeaser from '../ArticleTeaser/ArticleTeaser';
 import Card from '../../Card/Card';
-import { ArticleTypeType } from 'static/js/utils/Interfaces/Types';
+import Tag from '../../Tag/Tag';
 
 // Interface
 interface IProps {
     articles: ArticleInterface[],
+    tags: TagInterface[],
     type: ArticleTypeType
 }
 
 // Helpers
 
 // Component
-const ArticleTeasers = ({ articles, type, ...attributes }: IProps) => {
+const ArticleTeasers = ({ articles, tags, type, ...attributes }: IProps) => {
+    return <>
+        {tags && !!tags.length && <Tag.Wrapper scrollable={true}>
+            {tags.map((tag: TagInterface) => <Tag.Item key={tag.key} tag={tag} />)}
+        </Tag.Wrapper>}
 
-    return <ul className='article-teasers' {...attributes}>
-        {articles.map((article: ArticleInterface, index: number) => <li key={index} className='article-teasers__item' data-reveal-in-view>
-            <Card>
-                <ArticleTeaser {...article} href={`/${type}/[slug]?slug=${article.slug}`} as={`/${type}/${article.slug}`} />
-            </Card>
-        </li>)}
-    </ul>
+        <ul className='article-teasers' {...attributes}>
+            {articles.map((article: ArticleInterface, index: number) => <li key={index} className='article-teasers__item' data-reveal-in-view>
+                <Card>
+                    <ArticleTeaser {...article} href={`/${type}/[slug]?slug=${article.slug}`} as={`/${type}/${article.slug}`} />
+                </Card>
+            </li>)}
+        </ul>
+    </>
 };
 
 // Props
 ArticleTeasers.defaultProps = {
     articles: [],
+    tags: Object.entries(getTags()).map(([key, value]) => ({ key, value })),
     type: 'articles'
 };
 

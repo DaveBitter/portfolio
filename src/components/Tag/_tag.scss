@@ -1,4 +1,5 @@
 .tag {
+    white-space: nowrap;
     border-radius: $border-radius-lrg;
     background: $gradient-primary;
 
@@ -19,7 +20,19 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        margin: $spacing-med 0;
+        margin: $spacing-lrg 0;
+
+        &[data-scrollable='true'] {
+            flex-wrap: nowrap;
+            max-width: 100%;
+            overflow: auto;
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+
+            &::-webkit-scrollbar {
+                display: none;  /* Safari and Chrome */
+            }
+        }
 
         &[data-alignment='left'] {
             justify-content: flex-start;

@@ -10,7 +10,7 @@ import formatDate from '../../../static/js/utils/formatDate';
 // Resources
 
 // Components
-import Tag from 'components/Tag/Tag';
+import Tag from '../../Tag/Tag';
 
 // Component
 const ArticleTeaser = ({ body, date, intro, tags: articleTags, slug, teaserCopy, teaserImage, title, as, href, ...attributes }: ArticleInterface) => {

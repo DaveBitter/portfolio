@@ -22,7 +22,7 @@ const setup = (props: any) => {
 };
 
 // Test scenarios
-describe('<ArticleTeaser />', () => {
+describe.skip('<ArticleTeaser />', () => {
     it('should mount', () => {
         const { wrapper } = setup({
             ...mockArticles[0]

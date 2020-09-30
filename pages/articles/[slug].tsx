@@ -4,7 +4,7 @@ import { GetStaticProps } from 'next'
 
 // Utils
 import { getArticles, getHeadings } from '../../src/static/js/utils/getContent';
-import { ArticleInterface, TagInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
+import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 import { ArticleTypeType } from 'static/js/utils/Interfaces/Types';
 
 // Resources
@@ -12,7 +12,6 @@ import { ArticleTypeType } from 'static/js/utils/Interfaces/Types';
 // Components
 import Article from '../../src/components/Article/Article';
 import ArticleTeasers from '../../src/components/Article/ArticleTeasers/ArticleTeasers';
-import Tag from 'components/Tag/Tag';
 
 // Interface
 interface IProps {
@@ -25,18 +24,12 @@ interface IProps {
 const ArticlePage = ({ article, relatedArticles, type }: IProps) => {
     const headings = getHeadings();
 
-    // NOTE: TS made me do it :/
-    const tags = [...(article.tags || [])];
-
     return <>
         <Article {...article} />
 
         {!!relatedArticles.length && <div className='grid'>
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.readOn}</h2>
-                {tags && !!tags.length && <Tag.Wrapper alignment='left'>
-                    {tags.map((tag: TagInterface) => <Tag.Item key={tag.key} tag={tag} />)}
-                </Tag.Wrapper>}
                 <ArticleTeasers type={type} articles={relatedArticles} />
             </div>
         </div>}

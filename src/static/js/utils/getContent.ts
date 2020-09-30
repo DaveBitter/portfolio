@@ -9,7 +9,7 @@ import { ArticleInterface, TagInterface } from './Interfaces/Interfaces';
 // Next.js and Storybook json loaders don't seem to work the same. Import could therfor be parsed and unparsed JSON
 const parseJSONMD = (_: string | object) => typeof _ === 'string' ? JSON.parse(_) : _
 const convertToKeyValue = (arr: any) => arr.reduce((acc: any, cur: any) => ({ ...acc, [cur.key]: cur.value }), {});
-const populateTags = (tagsToPopulate: TagInterface[]) => tagsToPopulate
+const populateTags = (tagsToPopulate: TagInterface[] = []) => tagsToPopulate
     .map((tagToPopulate: TagInterface | string) =>
         parseJSONMD(tags).attributes.items
             .find((tag: TagInterface) => tag.key === tagToPopulate) || null)

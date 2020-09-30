@@ -37,9 +37,6 @@ const Home = ({ }: IProps) => {
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.latestArticles}</h2>
                 <p className='h4' data-reveal-in-view>{copy.articlesLead}</p>
-            </div>
-
-            <div className='g2'>
                 <ArticleTeasers type='articles' articles={articleTeaserItems} />
             </div>
 
@@ -54,9 +51,6 @@ const Home = ({ }: IProps) => {
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.latestQuickBits}</h2>
                 <p className='h4' data-reveal-in-view>{copy.quickBitsLead}</p>
-            </div>
-
-            <div className='g2'>
                 <ArticleTeasers type='quick-bits' articles={quickBitsTeaserItems} />
             </div>
 

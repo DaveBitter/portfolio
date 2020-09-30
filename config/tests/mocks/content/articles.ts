@@ -9,6 +9,7 @@ export default {
                 teaserImage: 'This is a mock article',
                 intro: 'This is a mock article',
                 body: 'This is a mock article',
+                tags: []
             }
         ]
     }

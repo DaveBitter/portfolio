@@ -11,8 +11,8 @@ import compileMarkdownToJSX from '../../static/js/utils/compileMarkdownToJSX';
 // Resources
 
 // Components
-import Tag from 'components/Tag/Tag';
-import Share from 'components/Share/Share';
+import Tag from '../Tag/Tag';
+import Share from '../Share/Share';
 
 // Component
 const Article = ({ body, date, intro, tags: articleTags, slug, teaserCopy, teaserImage, title, ...attributes }: ArticleInterface) => {

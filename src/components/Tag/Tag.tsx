@@ -11,12 +11,12 @@ import { TagInterface } from 'static/js/utils/Interfaces/Interfaces';
 
 // Interface
 interface IProps {
-    tag: TagInterface
+    tag: TagInterface,
 }
 
 // Component
-const Wrapper = ({ children, alignment = 'left', ...attributes }: { children: JSX.Element[] | JSX.Element | string | number, alignment?: 'left' | 'right' | undefined }) => {
-    return <div className='tag-wrapper' data-alignment={alignment} {...attributes} data-reveal-in-view>
+const Wrapper = ({ children, alignment = 'left', scrollable = false, ...attributes }: { children: JSX.Element[] | JSX.Element | string | number, alignment?: 'left' | 'right' | undefined, scrollable?: boolean }) => {
+    return <div className='tag-wrapper' data-alignment={alignment} data-scrollable={scrollable} {...attributes} data-reveal-in-view>
         {children}
     </div>;
 };

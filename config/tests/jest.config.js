@@ -11,7 +11,7 @@ module.exports = {
     setupFilesAfterEnv: ["./config/tests/setup/setupTests.ts"],
     transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx|mjs)$"],
     moduleNameMapper: {
-        "(copy|dictionary|headings)+(.md)$": "<rootDir>/config/tests/mocks/content/general.ts",
+        "(copy|dictionary|headings|tags)+(.md)$": "<rootDir>/config/tests/mocks/content/general.ts",
         "(articles)+(.md)$": "<rootDir>/config/tests/mocks/content/articles.ts",
         "\\.svg": "<rootDir>/config/tests/mocks/components/Svg.tsx"
     },
