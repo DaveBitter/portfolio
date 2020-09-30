@@ -1,9 +1,10 @@
 // Libs
 import React, { useEffect, useState } from 'react';
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import { AppProps } from 'next/app';
 // @ts-ignore
 import { PageTransition } from 'next-page-transitions';
+import NProgress from 'nprogress';
 
 // Utils
 import revealManager from '../src/static/js/utils/RevealManager';
@@ -22,6 +23,25 @@ import SiteOpenGraphTags from '../src/components/Site/SiteOpenGraphTags/SiteOpen
 import SiteFooter from 'components/Site/SiteFooter/SiteFooter';
 
 // Component
+NProgress.configure({
+    minimum: 0.3,
+    trickleSpeed: 0.06,
+    easing: 'ease',
+    speed: 600
+});
+
+Router.events.on('routeChangeStart', () => {
+    NProgress.start();
+});
+
+Router.events.on('routeChangeComplete', () => {
+    NProgress.done();
+});
+
+Router.events.on('routeChangeError', () => {
+    NProgress.done();
+});
+
 let pageTransitionDelay = 0
 const App = ({ Component, pageProps }: AppProps) => {
     const { article, src, alt, showGenericSiteHeader = true, title, copy, pageDescription, pageImage } = pageProps;

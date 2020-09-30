@@ -1,0 +1,27 @@
+/* Make clicks pass-through */
+#nprogress {
+    pointer-events: none;
+
+    .bar {
+        background: $gradient-primary;
+        position: fixed;
+        z-index: 99999999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: $spacing-xxs;
+    }
+
+    .peg {
+        display: block;
+        position: absolute;
+        right: 0;
+        width: $spacing-xxl;
+        height: 100%;
+        box-shadow: 0 0 $spacing-xs $color-primary, 0 0 $spacing-xxs $color-primary;
+        opacity: 1;
+        -webkit-transform: rotate(3deg) translate(0, $spacing-xxs);
+        -ms-transform: rotate(3deg) translate(0, $spacing-xxs);
+        transform: rotate(3deg) translate(0, $spacing-xxs);
+    }
+}
