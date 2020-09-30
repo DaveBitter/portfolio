@@ -23,6 +23,12 @@ import SiteOpenGraphTags from '../src/components/Site/SiteOpenGraphTags/SiteOpen
 import SiteFooter from 'components/Site/SiteFooter/SiteFooter';
 
 // Component
+if (process.env.NODE_ENV !== 'development') {
+    console.info('%cHey fellow dev!', 'color: #ff5420; font-size: 2rem')
+    console.info('%cMake sure to take have a look at https://github.com/davebitter', 'color: #8d9297; font-size: 1rem')
+}
+
+
 NProgress.configure({
     minimum: 0.3,
     trickleSpeed: 0.06,
@@ -86,6 +92,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         }
 
         if (process.env.NODE_ENV === 'development') { return; }
+
 
         if (!window.GA_INITIALIZED) {
             initGA();
