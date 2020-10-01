@@ -10,7 +10,7 @@ import { getHeadings, getCopy, getArticles, getQuickBits, getDictionary } from '
 // Resources
 
 // Components
-import ArticleTeasers from 'components/Article/ArticleTeasers/ArticleTeasers';
+import ArticleTeasers from '../src/components/Article/ArticleTeasers/ArticleTeasers';
 
 // Interface
 interface IProps { }

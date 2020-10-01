@@ -3,8 +3,8 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 
 // Utils
-import { getCopy } from 'static/js/utils/getContent';
-import { HTTPStatusCodeType } from 'static/js/utils/Interfaces/Types';
+import { getCopy } from '../../src/static/js/utils/getContent';
+import { HTTPStatusCodeType } from '../../src/static/js/utils/Interfaces/Types';
 
 // Components
 

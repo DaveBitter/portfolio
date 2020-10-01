@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 
 // Uitls
 import { getQuickBits } from '../../src/static/js/utils/getContent';
-import { ArticleInterface } from 'static/js/utils/Interfaces/Interfaces';
+import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
 // Components
 import Index from '../articles/[slug]';

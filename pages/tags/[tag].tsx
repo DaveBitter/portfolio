@@ -6,12 +6,12 @@ import Link from 'next/link';
 
 // Utils
 import { getCopy, getArticles, getQuickBits, getDictionary, getTags } from '../../src/static/js/utils/getContent';
-import { ArticleInterface, TagInterface } from 'static/js/utils/Interfaces/Interfaces';
+import { ArticleInterface, TagInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
 // Resources
 
 // Components
-import ArticleTeasers from 'components/Article/ArticleTeasers/ArticleTeasers';
+import ArticleTeasers from '../../src/components/Article/ArticleTeasers/ArticleTeasers';
 
 // Interface
 interface IProps {

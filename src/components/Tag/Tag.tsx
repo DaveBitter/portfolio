@@ -1,7 +1,7 @@
 // Libs
 import React from 'react';
 import Link from 'next/link';
-import { TagInterface } from 'static/js/utils/Interfaces/Interfaces';
+import { TagInterface } from '../../static/js/utils/Interfaces/Interfaces';
 
 // Utils
 

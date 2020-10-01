@@ -9,7 +9,7 @@ import NProgress from 'nprogress';
 // Utils
 import revealManager from '../src/static/js/utils/RevealManager';
 import { initGA, logPageView } from '../src/static/js/utils/googleAnalytics';
-import useServiceWorker from 'static/js/utils/hooks/useServiceWorker';
+import useServiceWorker from '../src/static/js/utils/hooks/useServiceWorker';
 
 // Resources
 import 'highlight.js/styles/atom-one-dark.css';
@@ -20,14 +20,14 @@ import SiteHeader from '../src/components/Site/SiteHeader/SiteHeader';
 import SiteMeta from '../src/components/Site/SiteMeta/SiteMeta';
 import SiteNav from '../src/components/Site/SiteNav/SiteNav';
 import SiteOpenGraphTags from '../src/components/Site/SiteOpenGraphTags/SiteOpenGraphTags';
-import SiteFooter from 'components/Site/SiteFooter/SiteFooter';
+import SiteFooter from '../src/components/Site/SiteFooter/SiteFooter';
+import SiteBreadCrumbs from '../src/components/Site/SiteBreadCrumbs/SiteBreadCrumbs';
 
 // Component
 if (process.env.NODE_ENV !== 'development') {
     console.info('%cHey fellow dev!', 'color: #ff5420; font-size: 2rem')
     console.info('%cMake sure to take have a look at https://github.com/davebitter', 'color: #8d9297; font-size: 1rem')
 }
-
 
 NProgress.configure({
     minimum: 0.3,
@@ -113,6 +113,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
         <SiteHeader title={title} copy={copy} src={src} alt={alt} showGenericSiteHeader={showGenericSiteHeader} key={router.route}>
             <SiteNav />
+            <SiteBreadCrumbs />
         </SiteHeader>
 
         <main>

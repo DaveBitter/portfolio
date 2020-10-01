@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next'
 // Utils
 import { getArticles, getHeadings } from '../../src/static/js/utils/getContent';
 import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
-import { ArticleTypeType } from 'static/js/utils/Interfaces/Types';
+import { ArticleTypeType } from '../../src/static/js/utils/Interfaces/Types';
 
 // Resources
 

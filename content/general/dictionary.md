@@ -8,6 +8,8 @@ items:
     value: Quick Bits
   - key: 'articles'
     value: Articles
+  - key: 'tags'
+    value: Tags
   - key: 'read'
     value: read
   - key: 'viewAllArticles'

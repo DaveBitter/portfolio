@@ -2,8 +2,8 @@
 import React, { useRef } from 'react';
 
 // Utils
-import { getCopy, getDictionary } from 'static/js/utils/getContent';
-import useScrollDirection from 'static/js/utils/hooks/useScrollDirection';
+import { getCopy, getDictionary } from '../../static/js/utils/getContent';
+import useScrollDirection from '../../static/js/utils/hooks/useScrollDirection';
 
 // Resources
 import ShareIcon from '../../static/img/icons/share.svg';

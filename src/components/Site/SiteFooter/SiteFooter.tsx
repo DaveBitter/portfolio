@@ -2,8 +2,8 @@
 import React from 'react';
 
 // Utils
-import { getCopy } from 'static/js/utils/getContent';
-import Socials from 'components/Socials/Socials';
+import { getCopy } from '../../../static/js/utils/getContent';
+import Socials from '../../Socials/Socials';
 
 // Resources
 
