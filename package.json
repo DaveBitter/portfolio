@@ -33,12 +33,13 @@
     "storybook:build": "build-storybook -c .storybook -o .storybook-build",
     "test": "jest --config config/tests/jest.config.js --verbose",
     "test:watch": "jest --config config/tests/jest.config.js --watch --verbose",
+    "test:precommit": "jest --config config/tests/jest.config.js --verbose --findRelatedTests --bail",
     "test:coverage": "jest --config config/tests/jest.config.js --coverage --verbose",
     "eslint": "eslint --fix",
     "stylelint": "stylelint **/*.scss --syntax=scss"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "yarn test && yarn eslint",
+    "*.{ts,tsx}": "yarn test:precommit && yarn eslint",
     "*.scss": "yarn stylelint"
   },
   "husky": {

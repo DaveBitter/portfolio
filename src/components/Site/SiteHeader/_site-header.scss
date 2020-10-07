@@ -27,5 +27,11 @@
         z-index: -1;
         transform-origin: center left;
         transform: scale3d(2, 2, 2) translateY($spacing-xl);
+
+        &__image {
+            @include mq($mq-desk--sml) {
+                height: 50vh;
+            }
+        }
     }
 }

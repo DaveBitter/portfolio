@@ -10,6 +10,8 @@ items:
     value: A collection of my articles covering a wide range of topics
   - key: 'quickBitsLead'
     value: A collection of my Quick Bits covering a wide range of topics
+  - key: 'tagLead'
+    value: A collection of articles covering {{tag}}
   - key: 'reachedEnd'
     value: Hey explorer! You've reached the end!
   - key: 'getInTouch'

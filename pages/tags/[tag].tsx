@@ -80,8 +80,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return {
         props: {
             title: tagLabel || tag,
-            copy: '',
-            src: '/img/articles.jpg',
+            copy: copy.tagLead.replace('{{tag}}', tagLabel || tag),
+            src: `/img/tags/${tag}.jpg`,
             alt: '',
             pageDescription: copy.pageDescription || null,
             activeTag: tag
