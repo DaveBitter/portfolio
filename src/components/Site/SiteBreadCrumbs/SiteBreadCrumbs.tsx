@@ -58,7 +58,7 @@ const SiteBreadCrumbs = ({ ...attributes }: IProps) => {
         <nav className='site-bread-crumbs' data-reveal-in-view data-reveal-animation='fade-down' {...attributes} >
             <span className='site-bread-crumbs__logo'>
                 <Logo />
-                <Link href='/'>{dictionary.home}</Link>
+                <Link href='/'><a>{dictionary.home}</a></Link>
             </span>
             <ul className='site-bread-crumbs__items'>
                 {!!breadCrumbs.length && breadCrumbs.map(({ label, href }: { label: string, href: string }, index: number) => <li className='site-bread-crumbs__item' key={index}>

@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import Card from './Card';
+import Tag from './Tag';
 import { mount } from 'enzyme';
 
 // Test constants
@@ -11,7 +11,7 @@ const setup = (props: any) => {
         ...props
     };
 
-    const wrapper = mount(<Card {..._props} />);
+    const wrapper = mount(<Tag {..._props} />);
 
     return {
         _props,
@@ -20,7 +20,7 @@ const setup = (props: any) => {
 };
 
 // Test scenarios
-describe('<Card />', () => {
+describe('<Tag />', () => {
     it('should mount', () => {
         const { wrapper } = setup({
         });

@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import Share from './Share';
+import Share from '../Share/Share';
 import { mount } from 'enzyme';
 
 // Test constants

@@ -13,6 +13,7 @@ module.exports = {
     moduleNameMapper: {
         "(copy|dictionary|headings|tags)+(.md)$": "<rootDir>/config/tests/mocks/content/general.ts",
         "(articles)+(.md)$": "<rootDir>/config/tests/mocks/content/articles.ts",
+        "(quickBits)+(.md)$": "<rootDir>/config/tests/mocks/content/articles.ts",
         "\\.svg": "<rootDir>/config/tests/mocks/components/Svg.tsx"
     },
     globals: {
