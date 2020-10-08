@@ -135,6 +135,10 @@ $article-header-height: 60vh;
 
             @include mq($mq-mob--lrg) {
                 padding-left: 0;
+
+                ul {
+                    padding-left: $spacing-med;
+                }
             }
         }
 

@@ -54,6 +54,8 @@ const getOpenGraphData = ({ article, pageTitle, pageDescription, pageImage }: IP
 const SiteOpenGraphTags = ({ article, pageTitle, pageDescription, pageImage }: IProps) => {
     const { title, description, keywords, siteName, locale, type, url, image, author, publisher, twitterCard, twitterSite, twitterCreator } = getOpenGraphData({ article, pageTitle, pageDescription, pageImage });
 
+
+    console.log(`https://www.davebitter.com${image}`);
     return (
         <Head>
             {image && <meta property='og:image' content={image} />}
@@ -72,7 +74,7 @@ const SiteOpenGraphTags = ({ article, pageTitle, pageDescription, pageImage }: I
             {twitterCreator && <meta name='twitter:creator' content={twitterCreator} />}
             {title && <meta name="twitter:title" content={title} />}
             {description && <meta name="twitter:description" content={description} />}
-            {image && <meta name="twitter:image" content={image} />}
+            {image && <meta name="twitter:image" content={`https://www.davebitter.com${image}`} />}
         </Head>
     );
 };

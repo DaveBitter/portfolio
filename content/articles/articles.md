@@ -1,6 +1,123 @@
 ---
 items:
   - body: >-
+      ## What can a PWA offer?
+
+      Before covering design, it does make sense to go over the technical possibilities. Let's focus on the most important features, in my opinion, of a PWA or web features that a PWA can leverage. I'll try to keep it as short as possible while still giving you an idea of what a PWA might look like.
+
+      ### Add to home-screen (A2H)
+
+      A2H is a basic, but incredibly useful. We can trigger a button to add the PWA to the user's home screen right from the website. This is possible after meeting the requirements for installability:
+
+      * The website needs to be served over `https`
+
+      * The website needs to register a Service Worker
+
+      * The web app manifest needs to meet installability requirements
+
+          * Icons for various sizes
+
+          * A `short_name` or `name` property (e.g 'Dave Bitter')
+
+          * A `start_url` property to start the PWA from (e.g. '/')
+
+          * A `display` property (e.g. 'fullscreen', 'standalone' or 'minimal-ui')
+
+
+      ![PWA install trigger](/img/articles/pwa-install-trigger.jpg)*PWA install trigger*
+
+
+      After meeting these requirements, developers can trigger the button. A good thing to note is that even though we'd like to trigger this on phones and tablets, this will also work on a desktop.
+
+      ### Offline capabilities through a Service Worker
+
+      As mentioned, the PWA needs to register a [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers) (SW). Although registering a SW that does nothing will work, it would be a shame not to use this tool. A SW is a script that your browser runs in the background, separate from a web page, opening the door to features that don't need a web page or user interaction. We can use this, for instance, to cache pages when they are loaded for a user. When internet connectivity is lost, we can serve the offline cached version with a small message notifying the user what is going on. This way, like native, we can always offer a working solution.
+
+      ## Web API's to offer native-like capabilities
+
+      Now we have the base of our PWA we can take it to the next level. The web offers many features through Web API's that we can leverage to further increase UX, improve reach and retain users. Let's go over a Web API that might be useful for your PWA.
+
+
+      Notifications are a vital tool to ensure retention. The web supports this through the [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/notification). Great, we can start sending notifications like native apps. Well yes, but it's not that straightforward. Two things will hold you back.
+
+
+      Firstly, we need to request permission to send notifications. You might have seen those annoying popups on news websites. Users often deny this as they're just trying to read an article. This is why it's important to trigger this request for permission on the right moment. The bigger reason this might hold you back is not being able to ask permission again next time the user visits.
+
+
+      Secondly, there is one major player that doesn't offer support for this. As you can see below, at the time of writing, iOS Safari does not offer support for the Notification API. This is often a dealbreaker as this is often a large part of the user base.
+
+
+      ![Notification API support](/img/articles/notification-api-support.jpg)*Notification API support*
+
+
+      So, does this mean that you have to switch completely to native? Well, not necessarily. The way I see it, you have two routes you can take. You either go for progressive enhancement. For devices that support the Notification API, we use it. For devices that don't, we omit this feature or implement it in another way (e.g. email notification). The other route is wrapping your PWA in a native shell. This way, you can make use of the native notification possibilities while loading your PWA in the native wrapper itself. Next to that, these native wrappers cater for the often expressed need to have a presence in the Apple Appstore and Google Playstore. To get a clearer picture of this, please read my article ["Wrapping your Progressive Web App for Android with Trusted Web Activity"](/articles/wrapping-your-progressive-web-app-for-android-with-trusted-web-activities).
+
+      ## Why do we need to address the design part?
+
+      Great, the technical part is out of the way. So why do we need to talk about design? I mean, we have a mobile version of the website right? Correct! And that's great to ensure that users get the best user experience on their mobile device. There is however one vital difference between a mobile website and a native app-like experience through a PWA. Over the course of time interface and interaction, patterns have been crafted for native apps. When trying to mimic a native app with a PWA we need to take this into account. If we don't, the PWA will feel like a website with a PWA slapped around it.
+
+      ## How can we improve the design part?
+
+      ### Interface patterns
+
+      Let's look at a quick example. An interface pattern for a website is having a header, body with sections and finally a footer. This is great to use for the web, but you never see this in a native app. In a native app, you will see something called an 'app shell' that has a main part or view to load content in. This content is, for instance, something like a list. You can see this in social media applications. You often have a top navigation bar and a bottom tab navigation. These parts always remain on the screen. In the content section, you might see a list of posts by other users.
+
+
+      ![App shell](/img/articles/app-shell.jpg)*App shell*
+
+
+      This, amongst other patterns, gives the native app feeling. It's important to remember this when designing for a PWA. You can still design and build a mobile website next to the PWA. Developers can detect whether the website is loaded in a PWA and load the UI accordingly.
+
+      ### Interaction patterns
+
+      On an interaction level, we should have a look at interaction patterns. As a simple example, let's take a look at the bottom tab navigation. Every tab is like a separate browser tab. Open your Instagram app. Now scroll the feed, go over to notifications and click on one of them. If you go back to feed using the bottom tab navigation, you will see that it's still where you left it off. Now go back to the notification using the bottom navigation tab again. That's right, exactly where you left off. This is one of the numerous examples of how native apps work. We can replicate this behaviour on the web, but it does require designers and developers working together to account for this.
+
+      Another example is the way the top navigation bar is used to show the user where they are and how to get back. By loading a fullscreen PWA you lose the browser bar. It can therefore be hard to see where you are and how you can go back to the previous page.
+
+
+      ![Instagram bottom tab navigation](/img/articles/instagram-feed.png)*Instagram bottom tab navigation*
+
+
+      ### Ubiquitous features
+
+      Besides interaction patterns, we can have a look at ubiquitous features in native apps. Previously, we mentioned offline support. We can have a version of our PWA with limited features when offline. On native apps, however, I expect more as a user. Let's say I add a task to my todo list in a PWA. On a native app, I expect it to add it without internet connectivity and store it in the actual database once connectivity is restored. We can and should implement this in a PWA through a SW. It might be good to let the user know that it will store it after connectivity is restored. It will however already be added in the todo list.
+
+      ## When should you go for a PWA?
+
+      Great, so we can do a vast amount with PWA to replicate native apps. Should we now always go for PWA or still for native apps? Personally, I don't believe in this polarization. As we saw, the line between these two ways of building an application is getting more blurry by the minute.
+
+
+      > "If a PWA offers you the capabilities you need, go for that. If not and native apps do, go for that"
+
+
+      Sure, this oversimplifies the decision-making process. Every technique has its pros and cons. In the end, it’s our job to make the decision that not just benefits the client, but will help the user of the application with their problem the best. If you can go for PWA, great! If you can’t, that’s also fine. It’s just another tool that we leverage to create the best possible user experience.
+
+      ### My decision-making process
+
+      Generally, I first create a list of features that we will need. In case the web can offer all of those I tend to go for a PWA. We can ensure that all users, as it is the nature of the web, have access with whatever their device is. We then progressively enhance the user experience. If we need features like notifications we can either chose to offer it for supported devices of wrap the PWA in a native wrapper to ensure that all users have it. One of the strong points to go for this is having one application that runs on the web (with all its devices) and native.
+
+
+      The moment I tend to go for native is on two occasions. Firstly, I tend to draw a line when I feel like I'm forcing the web for an app. This usually happens when the list of native features that should work for all devices is rather large and it starts to feel cumbersome to do all of that in a native wrapper around a PWA. Secondly, I advise you to go for native when performance is an issue. Despite all the work that is being done on the web, native apps still get one over on the web in terms of performance. This is fine, and it might be a wise decision to move over to native to ensure the best user experience.
+
+      ## Closing thoughts
+
+      The rise of the PWA (an awesome movie name by the way) poses new design questions. If we go for a native-like web experience, we need to change our entire approach. Slapping a PWA around a website doesn't cut it. On a variety of development and design levels, we need to have a good look at how to build the best possible solution. This can mean you'd want to go for native and that's absolutely fine.
+
+
+      We have a great range of (new) tools to our disposal as developers and designers. This is exciting for the future for both. We need to work together to make tough decisions, follow proven patterns and create innovative new features. Thanks for reading!
+    date: 2020-10-08T00:00:00.000Z
+    slug: how-can-we-develop-and-design-for-a-pwa-to-deliver-the-best-native-user-experience
+    tags:
+      - pwa
+      - twa
+      - native
+    intro: >-
+      Progressive Web App (PWA) is often written about. These articles, including mine, mostly only cover the technical parts. Although vital, one aspect of building a successful PWA is design. How can we develop and design for PWA to deliver the best native user experience (UX)?
+    teaserCopy: >-
+      Progressive Web App (PWA) is often written about. These articles, including mine, mostly only cover the technical parts. Although vital, one aspect of building a successful PWA is design. How can we develop and design for PWA to deliver the best native user experience (UX)?
+    teaserImage: /img/articles/design-and-develop-for-pwa.jpg
+    title: How can we develop and design for a PWA to deliver the best native user experience?
+  - body: >-
       [Trusted Web Activity (TWA)](https://developers.google.com/web/android/trusted-web-activity) is a technique to wrap your PWA in a native shell for Android. Make sure to notice the difference between PWA and TWA as this article wouldn't make much sense otherwise. If you are unfamiliar on want to learn more about PWA please refer to my article ["You might not need a native app"](/articles/you-might-not-need-a-native-app).
 
 
@@ -827,7 +944,9 @@ items:
   - body: >-
       Back in 2018, Mirabeau updated their main website [mirabeau.nl](https://mirabeau.nl). However, the old blogging platform became the sibling that was left behind. The branding and visual style got severely updated and as you might know, the world of (front-end) development moves at a rapid pace. Projects that are about five years old become outdated both in tooling and functionality. I want to rethink the way we build web platforms and construct a stack that stays up-to-date and is resilient for the coming years.
 
+
       ![The old blog](//images.ctfassets.net/w4dg3cjf42ew/5vXCgxn6BTCy8jqrjMiLXf/2db1ca51a38df55e69951346ab28abbc/49D97C22-25AD-4F85-862D-E6C93A006EE6-min.png)*Our aged blog platform*
+
 
       ## The new blog platform
 
@@ -835,7 +954,9 @@ items:
 
       The second major improvement is the overall ease of use. For example, you are now able to scan more quickly over the page to find an article of your interest. I implemented this by proving a teaser image and a summary of the blog. This gives authors more room to make a scannable summary of their post.
 
+
       ![The new Mirabeau visual branding](//images.ctfassets.net/w4dg3cjf42ew/36VJWDKG568fiDIAdv9Gpg/39118b835a3f11b5d59c8bcde0ee8d66/B323160D-6A46-4AD2-A48C-1FEF85BBF506-min.png)*The updated branding and visual language*
+
 
       ### Solving issues with Single Page Applications (SPA)
 
@@ -857,7 +978,9 @@ items:
 
       * 3.  __Building through progressive enhancement__: At Mirabeau, they build websites through progressive enhancement. Unfortunately, you need JavaScript for a React.js website. We can use SSR to provide the platform without having JavaScript in the browser.
 
+
       ![React.js and Next.js](//images.ctfassets.net/w4dg3cjf42ew/5JdNrYGW2SBKmIoT38kqz0/80b019ca3d6e00871b3603f842814b0c/CDFEF415-123A-4D0E-85AD-BB3B32A0B3A1-min.png)*React.js and Next.js working together*
+
 
       ### Serverless architecture
 
@@ -879,7 +1002,9 @@ items:
 
       I want to dive a bit deeper in the serverless architecture that is used for this blog platform. This is the biggest difference, technology-wise next to React.js, compared to the old platform.
 
+
       ![The Serverless Framework with Next.js](//images.ctfassets.net/w4dg3cjf42ew/6m51INzwmzmJr4Z25pfInu/52550162034fa24e94687be53e931e2c/serverless_nextjs_blog_header-min.png)*The Serverless Framework with Next.js*
+
 
       * 1.   __‘Zero’ configuration__. Configuring and deploying a fully serverless architecture can become quite difficult. For this reason, I decide to make use of the [Serverless Framework](https://serverless.com/). This allows me to get up and running relatively quickly. It simplified the configuration and deployment aspect.
 
@@ -887,7 +1012,9 @@ items:
 
       * 3.  __Cloud services__. I decided to use AWS, where we host many services, to deploy the serverless platform on. Below you can see the architecture that I use.
 
+
       ![New Mirabeau blog platform architecture on AWS](//images.ctfassets.net/w4dg3cjf42ew/1C35P7AAsdhPyE87h90fEi/269e6dc99c0c03cc79adbed078f7e240/serverless_nextjs_lambda_edge_aws_architecture-min.png)*The new Mirabeau blog platform architecture running on AWS*
+
 
       ### Cloud Services
 
@@ -900,19 +1027,24 @@ items:
 
       * 3.  __Lambda@Edge__ lets you run Node.js and Python Lambda functions to customize content that CloudFront delivers by executing the functions in AWS locations near the user. This results in a faster page load, in general, for every user all over the world.
 
+
       ![Lamda](//images.ctfassets.net/w4dg3cjf42ew/7uRaMDjuA7iS9kjLEau6Bm/48ef2eb84b38b9fc1314b427a523713d/cloudfront-events-that-trigger-lambda-functions-min.png)*A typical request going through AWS CloudFront*
+
 
       ### CI/CD with pipelines
 
       Finally, I added CI/CD through pipelines. I do this for a few reasons. I want to ensure that all front-end developers can collaborate on this platform by quickly cloning the repository, make changes and roll out an update through the pipelines. Next to that, I want to ensure that everybody that I allow through the repository rights and access configuration, can deploy without creating their own AWS accounts and keys. This all ensures a nice developer experience.
 
+
       ![CI/CD](//images.ctfassets.net/w4dg3cjf42ew/KZlhxIeJqB8y7l954ixcm/04acb40e87638f9dbfed747370ba32aa/diagram-cicd-horizontal-85f50f218b3ff47fd993ab5529b85f0147901b20f18b972fdc48504e4bc3110e-min.png)*Two ways of CI/CD*
+
 
       ## The new front-end toolbox
 
       Let’s take a step back and look at what a front-end developer in 2020 can do. It is a great time for front-end developers to experiment with different areas of the process of building a platform. With Next.js I was able to, relatively easy, add SSR through Lamdas. With the Serverless framework and the Serverless Next.js plugin, I was able to configure and deploy the full architecture to AWS. Finally, with pipelines I was able to implement CI/CD.
 
-      **Naturally, there are more tools out there, but this platform attests to the fact that we become increasingly more powerful as front-end developers nowadays. We can build great things with the assistance of the mentioned tools. We can, once again, focus on creating!**
+
+      Naturally, there are more tools out there, but this platform attests to the fact that we become increasingly more powerful as front-end developers nowadays. We can build great things with the assistance of the mentioned tools. We can, once again, focus on creating!
     date: 2020-02-03T00:00:00.000Z
     intro: >-
       The Mirabeau blog was suffering from technical debt. I decided to rebuild it using
