@@ -1,7 +1,7 @@
 ---
 items:
   - key: 'pageDescription'
-    value: I am a full-stack front-end engineer and designer. Here, you can find a collection of my articles covering a wide range of topics and get in contact.
+    value: I am a full-stack front-end engineer and designer. Here, you can find my resume, a collection of my articles covering a wide range of topics and get in contact.
   - key: 'greetingIntro'
     value: I am a full-stack front-end engineer and designer.
   - key: 'elevatorPitch'

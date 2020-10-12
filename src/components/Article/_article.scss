@@ -106,7 +106,7 @@ $article-header-height: 60vh;
         }
 
         a {
-            @include colored-text;
+            @include text-coloured;
             text-decoration: underline;
             word-break: break-all;
         }

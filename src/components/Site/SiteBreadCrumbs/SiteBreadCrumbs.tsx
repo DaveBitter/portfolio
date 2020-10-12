@@ -21,13 +21,14 @@ const quickBits = getQuickBits();
 const tags = getTags();
 const getLabelFromParam = (value: string, subPath: string) => {
     switch (subPath) {
-        case 'quick-bits': {
+        case 'quick-bits':
             return dictionary.quickBits
-        }
         case '[tag]':
             return tags[value] || value;
         case '[slug]':
             return ([...articles, ...quickBits].find(({ slug }) => slug === value) || {}).title || value;
+        case '_error':
+            return dictionary.error;
         default:
             return dictionary[subPath] || subPath;
     }

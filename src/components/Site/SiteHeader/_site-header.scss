@@ -15,7 +15,7 @@
 
     &__heading {
         @include text-xxl;
-        @include colored-text;
+        @include text-coloured;
 
         @include mq($mq-tab--lrg) {
             @include text-jumbo;

@@ -12,4 +12,8 @@ items:
     value: Latest Quick Bits
   - key: 'readOn'
     value: Read on
+  - key: 'workExperience'
+    value: Work Experience
+  - key: 'education'
+    value: Education
 ---

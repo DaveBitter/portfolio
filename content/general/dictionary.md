@@ -12,6 +12,8 @@ items:
     value: Tags
   - key: 'read'
     value: read
+  - key: 'viewResume'
+    value: View my resume
   - key: 'viewAllArticles'
     value: View all articles
   - key: 'viewAllQuickBits'
@@ -30,4 +32,10 @@ items:
     value: GitHub
   - key: 'share'
     value: Share
+  - key: 'error'
+    value: Error
+  - key: 'present'
+    value: Present
+  - key: 'resume'
+    value: Resume
 ---

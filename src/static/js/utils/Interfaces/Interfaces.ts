@@ -16,6 +16,31 @@ export interface ArticleInterface {
     href: string,
 }
 
+export interface WorkExperienceInterface {
+    company: string
+    companyWebsite: string
+    role: string
+    startDate: Date
+    endDate: Date
+    present: boolean
+    city: string
+    countryCode: string
+    body: string
+}
+
+export interface EducationInterface {
+    institute: string
+    instituteWebsite: string
+    study: string
+    grade?: string
+    startDate: Date
+    endDate: Date
+    present: boolean
+    city: string
+    countryCode: string
+    body: string
+}
+
 export interface TagInterface {
     key: string,
     value: string

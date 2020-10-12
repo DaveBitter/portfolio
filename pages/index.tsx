@@ -30,6 +30,9 @@ const Home = ({ }: IProps) => {
             <div className='g6'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.elevatorPitch}</h2>
                 <p className='copy copy--jumbo' data-reveal-in-view>{copy.elevatorPitch}</p>
+                <Link href='/resume#elevator-pitch'>
+                    <a className='button-link' data-reveal-in-view>{dictionary.viewResume}</a>
+                </Link>
             </div>
         </div>
 

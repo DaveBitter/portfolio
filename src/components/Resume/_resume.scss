@@ -1,0 +1,5 @@
+.resume {
+    &__section + &__section {
+        margin-top: $spacing-xxxl;
+    }
+}

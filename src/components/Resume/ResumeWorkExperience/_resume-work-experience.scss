@@ -1,0 +1,45 @@
+.resume-work-experience {
+    &__item {
+        + .resume-work-experience__item {
+            margin-top: $spacing-xl;
+            padding-top: $spacing-xl;
+            border-top: 1px solid $color-gray-darker;
+        }
+
+        &-heading {
+            @include text-coloured;
+            display: flex;
+            align-items: center;
+            margin-bottom: $spacing-xs;
+
+            svg {
+                width: $spacing-sml;
+                fill: rgba($color-primary, 0.5);
+            }
+        }
+
+        &-role {
+            margin: 0 0 0 $spacing-xxs;
+        }
+
+        &-date,
+        &-location {
+            color: $color-gray;
+        }
+
+        &-date {
+            &[data-is-present='true'] {
+                color: $color-white;
+            }
+        }
+
+        &-body {
+            @extend .article__body;
+
+            ul,
+            ol {
+                list-style-type: disc;
+            }
+        }
+    }
+}

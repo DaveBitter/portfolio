@@ -3,7 +3,7 @@
     font-family: 'Public Sans', 'Open Sans', sans-serif;
 }
 
-@mixin colored-text {
+@mixin text-coloured {
     background: $gradient-primary;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -190,7 +190,7 @@ p,
 }
 
 .text-colored {
-    @include colored-text;
+    @include text-coloured;
 }
 
 a {
