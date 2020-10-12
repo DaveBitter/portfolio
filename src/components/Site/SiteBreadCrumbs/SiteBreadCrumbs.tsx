@@ -28,6 +28,8 @@ const getLabelFromParam = (value: string, subPath: string) => {
             return tags[value] || value;
         case '[slug]':
             return ([...articles, ...quickBits].find(({ slug }) => slug === value) || {}).title || value;
+        case '_error':
+            return dictionary.error;
         default:
             return dictionary[subPath] || subPath;
     }
