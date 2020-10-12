@@ -14,4 +14,6 @@ items:
     value: Read on
   - key: 'workExperience'
     value: Work Experience
+  - key: 'education'
+    value: Education
 ---

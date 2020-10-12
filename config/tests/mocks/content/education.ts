@@ -2,12 +2,13 @@ export default {
     attributes: {
         items: [
             {
-                company: 'Mock Company',
-                companyWebsite: 'https://mock-company.com',
-                role: 'Mock Role',
+                institute: 'Mock institute',
+                instituteWebsite: 'https://mock-institute.com',
+                study: 'Mock study',
                 startDate: new Date('1 January 1970'),
                 endDate: new Date(),
                 present: true,
+                grade: 'Mock Grade',
                 city: 'Amsterdam',
                 countryCode: 'NL',
                 body: `

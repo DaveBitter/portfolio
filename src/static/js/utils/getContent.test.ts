@@ -1,5 +1,5 @@
 // Libs
-import { getArticles, getCopy, getDictionary, getHeadings, getQuickBits, getWorkExperience } from './getContent';
+import { getArticles, getCopy, getDictionary, getEducation, getHeadings, getQuickBits, getWorkExperience } from './getContent';
 
 // Test constants
 
@@ -53,5 +53,11 @@ describe('getContent', () => {
         const [workExperience] = getWorkExperience()
 
         expect(workExperience).toBeDefined();
+    });
+
+    it('should return education in items property array', () => {
+        const [education] = getEducation()
+
+        expect(education).toBeDefined();
     });
 });

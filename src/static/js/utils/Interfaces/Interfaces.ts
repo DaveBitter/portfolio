@@ -28,6 +28,19 @@ export interface WorkExperienceInterface {
     body: string
 }
 
+export interface EducationInterface {
+    institute: string
+    instituteWebsite: string
+    study: string
+    grade?: string
+    startDate: Date
+    endDate: Date
+    present: boolean
+    city: string
+    countryCode: string
+    body: string
+}
+
 export interface TagInterface {
     key: string,
     value: string

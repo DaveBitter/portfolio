@@ -1,3 +1,5 @@
 .resume {
-    user-select: all;
+    &__section + &__section {
+        margin-top: $spacing-xxxl;
+    }
 }

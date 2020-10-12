@@ -3,7 +3,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 
 // Utils
-import { getHeadings, getCopy, getWorkExperience } from '../../src/static/js/utils/getContent';
+import { getHeadings, getCopy, getWorkExperience, getEducation } from '../../src/static/js/utils/getContent';
 
 // Resources
 
@@ -18,6 +18,7 @@ const ResumePage = ({ }: IProps) => {
     const copy = getCopy();
     const headings = getHeadings();
     const workExperience = getWorkExperience();
+    const education = getEducation();
 
     return <>
         <div className='grid'>
@@ -27,7 +28,10 @@ const ResumePage = ({ }: IProps) => {
             </div>
 
             <div className='g6'>
-                <Resume workExperience={workExperience} />
+                <Resume workExperience={workExperience} education={education} />
+            </div>
+
+            <div className='g6'>
             </div>
         </div>
     </>;

@@ -56,7 +56,7 @@ items:
 
       * writing tests and documentation
     company: ViriCiti
-    companyWebsite: https://viriciti.com
+    companyWebsite: https://www.viriciti.com
     role: Front-end developer
     startDate: 2016-08-01T00:00:00.000Z
     endDate: 2018-07-01T00:00:00.000Z
@@ -66,7 +66,7 @@ items:
   - body: >-
       I worked for Wallscope during a short-term project in the form of a code sprint as part of my studies. I worked for a project for the NHS regarding the visualisation of linked data. I got to work with the SPARQL Query Language, RDF and natural language processing.
     company: Wallscope
-    companyWebsite: https://wallscope.co.uk
+    companyWebsite: https://www.wallscope.co.uk
     role: Front-end developer
     startDate: 2017-05-01T00:00:00.000Z
     endDate: 2017-06-01T00:00:00.000Z
@@ -90,7 +90,7 @@ items:
 
       * writing tests and documentation
     company: Cohere
-    companyWebsite: https://maxem.io
+    companyWebsite: https://www.maxem.io
     role: Front-end developer
     startDate: 2016-05-01T00:00:00.000Z
     endDate: 2016-08-01T00:00:00.000Z
