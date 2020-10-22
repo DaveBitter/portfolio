@@ -1,0 +1,38 @@
+.resume-pitch {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    @include mq($mq-desk--med) {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__copy {
+        @include mq($mq-desk--med) {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @include mq($mq-desk--lrg) {
+            width: 60%;
+        }
+    }
+
+    &__chart {
+        width: 100%;
+        margin-bottom: $spacing-med;
+
+        @include mq($mq-desk--med) {
+            width: 50%;
+            margin-bottom: 0;
+        }
+
+        @include mq($mq-desk--lrg) {
+            width: 40%;
+            padding-left: $spacing-xl;
+        }
+    }
+}

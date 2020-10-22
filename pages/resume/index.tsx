@@ -9,22 +9,22 @@ import { getHeadings, getCopy, getWorkExperience, getEducation } from '../../src
 
 // Components
 import Resume from '../../src/components/Resume/Resume'
+import ResumePitch from 'components/Resume/ResumePitch/ResumePitch';
 
 // Interface
 interface IProps { }
 
 // Component
 const ResumePage = ({ }: IProps) => {
-    const copy = getCopy();
     const headings = getHeadings();
     const workExperience = getWorkExperience();
     const education = getEducation();
 
     return <>
         <div className='grid'>
-            <div id='elevator-pitch' className='g6'>
+            <div id='elevator-pitch' className='g4'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.elevatorPitch}</h2>
-                <p className='copy copy--jumbo' data-reveal-in-view>{copy.elevatorPitch}</p>
+                <ResumePitch />
             </div>
 
             <div className='g6'>

@@ -23,7 +23,7 @@ interface IProps {
 // Component
 const SiteHeader = ({ children, title, copy, src, alt, showGenericSiteHeader, ...attributes }: IProps) => {
     return <header className='site-header grid' {...attributes} data-has-generic-site-header={showGenericSiteHeader}>
-        <div className='site-header__content g2' >
+        <div className='site-header__content g4' >
             {showGenericSiteHeader && <div className='site-header__heading-wrapper' data-reveal-in-view>
                 <div>
                     {title && <h1 className='site-header__heading' data-reveal-in-view>{title}</h1>}

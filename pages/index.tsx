@@ -11,6 +11,7 @@ import { getHeadings, getCopy, getArticles, getQuickBits, getDictionary } from '
 
 // Components
 import ArticleTeasers from '../src/components/Article/ArticleTeasers/ArticleTeasers';
+import ResumePitch from '../src/components/Resume/ResumePitch/ResumePitch';
 
 // Interface
 interface IProps { }
@@ -27,12 +28,9 @@ const Home = ({ }: IProps) => {
 
     return <>
         <div className='grid'>
-            <div className='g6'>
+            <div className='g4'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.elevatorPitch}</h2>
-                <p className='copy copy--jumbo' data-reveal-in-view>{copy.elevatorPitch}</p>
-                <Link href='/resume#elevator-pitch'>
-                    <a className='button-link' data-reveal-in-view>{dictionary.viewResume}</a>
-                </Link>
+                <ResumePitch />
             </div>
         </div>
 

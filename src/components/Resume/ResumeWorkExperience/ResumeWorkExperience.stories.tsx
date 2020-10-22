@@ -9,5 +9,5 @@ import { getWorkExperience } from '../../../static/js/utils/getContent';
 import ResumeWorkExperience from './ResumeWorkExperience';
 
 // Story
-storiesOf('General', module)
+storiesOf('Resume', module)
     .add('ResumeWorkExperience', () => <ResumeWorkExperience workExperience={getWorkExperience()[0]} />);

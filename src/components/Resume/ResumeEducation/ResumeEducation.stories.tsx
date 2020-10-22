@@ -9,5 +9,5 @@ import { getEducation } from '../../../static/js/utils/getContent';
 import ResumeEducation from './ResumeEducation';
 
 // Story
-storiesOf('General', module)
+storiesOf('Resume', module)
     .add('ResumeEducation', () => <ResumeEducation education={getEducation()[0]} />);

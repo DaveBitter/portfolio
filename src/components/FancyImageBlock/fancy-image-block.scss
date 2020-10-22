@@ -34,7 +34,7 @@
 
     &__image-wrapper {
         mask: url('/img/shapes/blob-1.svg');
-        mask-repeat: no-repeat;
+        mask-repeat: no-repeat !important;
 
         // animation: shape-1 5s $transition-timing-slow $transition-easing-cubic infinite alternate-reverse;
 

@@ -38,4 +38,18 @@ items:
     value: Present
   - key: 'resume'
     value: Resume
+  - key: 'frontEndEngineer'
+    value: Front-end Engineer
+  - key: 'frontEndDesign'
+    value: Front-end Design
+  - key: 'accessibility'
+    value: Accessibility
+  - key: 'performance'
+    value: Performance
+  - key: 'uXDesign'
+    value: UX Design
+  - key: 'devOps'
+    value: DevOps
+  - key: 'backEndJSEngineer'
+    value: Back-end JS Engineer
 ---
