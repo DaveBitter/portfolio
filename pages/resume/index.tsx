@@ -24,7 +24,7 @@ const ResumePage = ({ }: IProps) => {
         <div className='grid'>
             <div id='elevator-pitch' className='g4'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.elevatorPitch}</h2>
-                <ResumePitch />
+                <ResumePitch hasResumeLink={false} />
             </div>
 
             <div className='g6'>

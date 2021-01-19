@@ -20,7 +20,7 @@ const ResumePitch = ({ hasResumeLink, ...attributes }: IProps) => {
     const copy = getCopy();
     const dictionary = getDictionary();
 
-    return <div className='resume-pitch'>
+    return <div className='resume-pitch' {...attributes}>
         <div className='resume-pitch__copy'>
             <p className='h4' data-reveal-in-view>{copy.elevatorPitch}</p>
             {hasResumeLink && <Link href='/resume#elevator-pitch'>
