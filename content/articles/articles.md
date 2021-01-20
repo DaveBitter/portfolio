@@ -57,7 +57,7 @@ items:
 
       ### Demo
 
-      If you made it this far, you probably want to try it out. You can do so by visiting [pomodoro.davebitter.com](https://pomodoro.davebitter.com/). You can view the individual components through Storybook at [pomodoro.davebitter.com/components](https://pomodoro.davebitter.com/components). Finally, developers can head over to [github.com/DaveBitter/pomodoro](https:s//github.com/DaveBitter/pomodoro) to look at the source code.
+      If you made it this far, you probably want to try it out. You can do so by visiting [pomodoro.davebitter.com](https://pomodoro.davebitter.com/). You can view the individual components through Storybook at [pomodoro.davebitter.com/components](https://pomodoro.davebitter.com/components). Finally, developers can head over to [github.com/DaveBitter/pomodoro](https://github.com/DaveBitter/pomodoro) to look at the source code.
 
       ## Wrapping up
 
