@@ -23,7 +23,7 @@ const getOpenGraphData = ({ article, pageTitle, pageDescription, pageImage }: IP
     let openGraphData = {
         title: pageTitle,
         description: pageDescription,
-        keywords: 'dave, bitter, dave bitter, front-end, frontend, developer, engineer, designer, front-end developer, front-end engineer, front-end-designer',
+        keywords: 'dave, bitter, dave bitter, front-end, frontend, developer, engineer, designer, front-end developer, senior front-end developer, front-end engineer, front-end designer',
         siteName: 'Dave Bitter',
         locale: 'en',
         type: 'website',

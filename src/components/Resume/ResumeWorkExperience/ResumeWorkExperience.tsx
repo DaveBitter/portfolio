@@ -22,15 +22,20 @@ const ResumeWorkExperience = ({ workExperience = [], ...attributes }: IProps) =>
     const dictionary = getDictionary();
 
     return <ul className='resume-work-experience' {...attributes}>
-        {workExperience.map(({ company, companyWebsite, role, startDate, endDate, present, city, countryCode, body }: WorkExperienceInterface) => <li className='resume-work-experience__item' key={`${company}-${startDate}`}>
+        {workExperience.map(({ company, companyWebsite, roles, city, countryCode, body }: WorkExperienceInterface) => <li className='resume-work-experience__item' key={company}>
             <h3 className='resume-work-experience__item-heading h4' data-reveal-in-view>
-                <a href={companyWebsite} target='_blank' rel='noopener noreferrer'>{company} <ExternalIcon /></a> <span className='resume-work-experience__item-role h6'>| {role}</span>
+                <a href={companyWebsite} target='_blank' rel='noopener noreferrer'>{company} <ExternalIcon /></a>
             </h3>
-            <div data-reveal-in-view>
-                <time className='resume-work-experience__item-date' dateTime={`${startDate}`}>{formatDate(`${startDate}`, { month: 'long', year: 'numeric' })} - </time>
-                <time className='resume-work-experience__item-date' dateTime={`${endDate}`} data-is-present={present}>{present ? dictionary.present : formatDate(`${endDate}`, { month: 'long', year: 'numeric' })}</time>
-                <span className='resume-work-experience__item-location'> | {city}, {countryCode}</span>
-            </div>
+            <ul className='resume-work-experience__item-roles'>
+                {roles.map(({ role, startDate, endDate, present }, index: number) => <li className='resume-work-experience__item-roles-item' data-is-latest={index === 0} data-reveal-in-view key={`${role}-${startDate}`}>
+                    <p className='resume-work-experience__item-role'>{role}</p>
+                    <div>
+                        <time className='resume-work-experience__item-date' dateTime={`${startDate}`}>{formatDate(`${startDate}`, { month: 'long', year: 'numeric' })} - </time>
+                        <time className='resume-work-experience__item-date' dateTime={`${endDate}`} data-is-present={present}>{present ? dictionary.present : formatDate(`${endDate}`, { month: 'long', year: 'numeric' })}</time>
+                        <span className='resume-work-experience__item-location'> | {city}, {countryCode}</span>
+                    </div>
+                </li>)}
+            </ul>
             <div className='resume-work-experience__item-body' dangerouslySetInnerHTML={{ __html: compileMarkdownToJSX(body) }} data-reveal-in-view />
         </li>)}
     </ul>;

@@ -64,7 +64,11 @@ collections:
                   name: "companyWebsite",
                   widget: "string",
                 }
-              - { label: "Role", name: "role", widget: "string" }
+              - label: "Roles"
+                name: "roles"
+                widget: "list"
+                fields:
+                  - { label: "Role", name: "role", widget: "string" }
               - { label: "Date", name: "startDate", widget: "datetime" }
               - { label: "Date", name: "endDate", widget: "datetime" }
               - { label: "Present", name: "present", widget: "boolean" }

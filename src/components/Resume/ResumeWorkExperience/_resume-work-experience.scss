@@ -18,13 +18,32 @@
             }
         }
 
+        &-roles {
+            margin-bottom: $spacing-med;
+        }
+
+        &-roles-item {
+            margin-bottom: $spacing-sml;
+        }
+
         &-role {
-            margin: 0 0 0 $spacing-xxs;
+            margin: 0;
+            font-weight: $font-weight-bold;
+
+            .resume-work-experience__item-roles-item[data-is-latest='false'] & {
+                @include text-xs;
+                color: $color-gray-dark;
+            }
         }
 
         &-date,
         &-location {
             color: $color-gray;
+
+            .resume-work-experience__item-roles-item[data-is-latest='false'] & {
+                @include text-xs;
+                color: $color-gray-darker;
+            }
         }
 
         &-date {

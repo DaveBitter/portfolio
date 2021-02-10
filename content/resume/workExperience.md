@@ -26,10 +26,15 @@ items:
       Next to that, I work on building component libraries with HTML, CSS (SASS) and vanilla JS. This can result in just a component library to be used by a development team or in a standalone website. Finally, I am an avid supporter of sharing knowledge. I do this regularly through giving code reviews, giving presentations, writing articles, giving guest lectures, giving workshops and speaking at meetups.
     company: Mirabeau
     companyWebsite: https://www.mirabeau.nl
-    role: Front-end developer
-    startDate: 2018-07-02T00:00:00.000Z
-    endDate: 2018-07-02T00:00:00.000Z
-    present: true
+    roles:
+      - role: Senior Front-end developer
+        startDate: 2021-01-01T00:00:00.000Z
+        endDate: 2021-01-01T00:00:00.000Z
+        present: true
+      - role: Medior Front-end developer
+        startDate: 2018-07-02T00:00:00.000Z
+        endDate: 2021-01-01T00:00:00.000Z
+        present: false
     city: Amsterdam
     countryCode: NL
   - body: >-
@@ -57,20 +62,22 @@ items:
       * writing tests and documentation
     company: ViriCiti
     companyWebsite: https://www.viriciti.com
-    role: Front-end developer
-    startDate: 2016-08-01T00:00:00.000Z
-    endDate: 2018-07-01T00:00:00.000Z
-    present: false
+    roles:
+      - role: Front-end developer
+        startDate: 2016-08-01T00:00:00.000Z
+        endDate: 2018-07-01T00:00:00.000Z
+        present: false
     city: Amsterdam
     countryCode: NL
   - body: >-
       I worked for Wallscope during a short-term project in the form of a code sprint as part of my studies. I worked for a project for the NHS regarding the visualisation of linked data. I got to work with the SPARQL Query Language, RDF and natural language processing.
     company: Wallscope
     companyWebsite: https://www.wallscope.co.uk
-    role: Front-end developer
-    startDate: 2017-05-01T00:00:00.000Z
-    endDate: 2017-06-01T00:00:00.000Z
-    present: false
+    roles:
+      - role: Front-end developer
+        startDate: 2017-05-01T00:00:00.000Z
+        endDate: 2017-06-01T00:00:00.000Z
+        present: false
     city: Edinburgh
     countryCode: UK
   - body: >-
@@ -91,10 +98,11 @@ items:
       * writing tests and documentation
     company: Cohere
     companyWebsite: https://www.maxem.io
-    role: Front-end developer
-    startDate: 2016-05-01T00:00:00.000Z
-    endDate: 2016-08-01T00:00:00.000Z
-    present: false
+    roles:
+      - role: Front-end developer
+        startDate: 2016-05-01T00:00:00.000Z
+        endDate: 2016-08-01T00:00:00.000Z
+        present: false
     city: Amsterdam
     countryCode: NL
 ---

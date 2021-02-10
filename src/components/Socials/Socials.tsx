@@ -26,7 +26,7 @@ interface IProps {
 
 // Component
 const Socials = ({ items, theme, ...attributes }: IProps) => {
-    return <ul className='socials' data-theme={theme} {...attributes}>
+    return <ul className='socials' data-theme={theme} {...attributes} data-reveal-in-view>
         {items.map(({ key, label, icon, href }) => <li className='socials__item' key={key}>
             <a className='socials__link' href={href} target='_blank' rel='noopener noreferrer'>
                 {label}
