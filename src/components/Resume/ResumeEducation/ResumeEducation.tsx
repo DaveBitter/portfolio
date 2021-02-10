@@ -2,10 +2,11 @@
 import React from 'react';
 
 // Utils
-import { EducationInterface } from '../../../static/js/utils/Interfaces/Interfaces'
+import { EducationInterface } from '../../../static/js/utils/Interfaces/Interfaces';
 import { getDictionary } from '../../../static/js/utils/getContent';
 import formatDate from '../../../static/js/utils/formatDate';
 import compileMarkdownToJSX from '../../../static/js/utils/compileMarkdownToJSX';
+import getDurationString from '../../../static/js/utils/getDurationString';
 
 // Resources
 import ExternalIcon from '../../../static/img/icons/external.svg';
@@ -26,6 +27,7 @@ const ResumeEducation = ({ education = [], ...attributes }: IProps) => {
             <h3 className='resume-education__item-heading h4' data-reveal-in-view>
                 <a href={instituteWebsite} target='_blank' rel='noopener noreferrer'>{institute} <ExternalIcon /></a>
             </h3>
+            <p className='resume-education__item-duration' data-reveal-in-view>{getDurationString(startDate, endDate, present)}</p>
             <h4 className='resume-education__item-study h6' data-reveal-in-view>{study} {grade && <span>({grade})</span>}</h4>
             <div data-reveal-in-view>
                 <time className='resume-education__item-date' dateTime={`${startDate}`}>{formatDate(`${startDate}`, { month: 'long', year: 'numeric' })} - </time>

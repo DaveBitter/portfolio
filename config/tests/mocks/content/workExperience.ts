@@ -12,6 +12,9 @@ export default {
                         present: true,
                     }
                 ],
+                startDate: new Date('1 January 1970'),
+                endDate: new Date(),
+                present: true,
                 city: 'Amsterdam',
                 countryCode: 'NL',
                 body: `

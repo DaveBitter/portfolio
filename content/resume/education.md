@@ -7,7 +7,7 @@ items:
     study: BASc Communication and multimediadesign
     grade: Cum Laude
     startDate: 2014-09-01T00:00:00.000Z
-    endDate: 2018-07-01T00:00:00.000Z
+    endDate: 2018-08-01T00:00:00.000Z
     present: false
     city: Amsterdam
     countryCode: NL

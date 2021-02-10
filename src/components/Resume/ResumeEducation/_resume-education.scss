@@ -10,12 +10,19 @@
             @include text-coloured;
             display: inline-flex;
             align-items: center;
-            margin-bottom: $spacing-xs;
+            margin: 0;
 
             svg {
                 width: $spacing-sml;
                 fill: rgba($color-primary, 0.5);
             }
+        }
+
+        &-duration {
+            @include text-xs;
+            margin: 0;
+            margin-bottom: $spacing-sml;
+            color: $color-gray-dark;
         }
 
         &-study {

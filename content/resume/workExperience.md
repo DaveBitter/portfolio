@@ -35,6 +35,9 @@ items:
         startDate: 2018-07-02T00:00:00.000Z
         endDate: 2021-01-01T00:00:00.000Z
         present: false
+    startDate: 2018-07-02T00:00:00.000Z
+    endDate: 2021-01-01T00:00:00.000Z
+    present: true
     city: Amsterdam
     countryCode: NL
   - body: >-
@@ -67,6 +70,9 @@ items:
         startDate: 2016-08-01T00:00:00.000Z
         endDate: 2018-07-01T00:00:00.000Z
         present: false
+    startDate: 2016-08-01T00:00:00.000Z
+    endDate: 2018-07-01T00:00:00.000Z
+    present: false
     city: Amsterdam
     countryCode: NL
   - body: >-
@@ -78,6 +84,9 @@ items:
         startDate: 2017-05-01T00:00:00.000Z
         endDate: 2017-06-01T00:00:00.000Z
         present: false
+    startDate: 2017-05-01T00:00:00.000Z
+    endDate: 2017-06-01T00:00:00.000Z
+    present: false
     city: Edinburgh
     countryCode: UK
   - body: >-
@@ -103,6 +112,9 @@ items:
         startDate: 2016-05-01T00:00:00.000Z
         endDate: 2016-08-01T00:00:00.000Z
         present: false
+    startDate: 2016-05-01T00:00:00.000Z
+    endDate: 2016-08-01T00:00:00.000Z
+    present: false
     city: Amsterdam
     countryCode: NL
 ---
