@@ -26,4 +26,8 @@ items:
     value: 'Serverless'
   - key: 'git-hub'
     value: 'GitHub'
+  - key: 'front-end'
+    value: 'Front-end'
+  - key: 'design'
+    value: 'Design'
 ---
