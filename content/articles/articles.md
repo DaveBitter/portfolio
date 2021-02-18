@@ -24,7 +24,7 @@ items:
       ![Interaction design (ID), visual design (VD) and front-end development (FED) working together in different stages of producing components](/img/articles/design-front-end-development-fluid.png)*Interaction design (ID), visual design (VD) and front-end development (FED) working together in different stages of producing components*
 
 
-      Front-end development at Mirabeau, a Cognizant Digital Business, is in the same unit as visual design and interaction design. This structure has been set up for tight collaboration between these disciplines. In projects as a front-end developer, I've identified six major stages where design and front-end development can take advantage of each other's view, experience and skillset.
+      Front-end development at my company Mirabeau, a Cognizant Digital Business, is in the same unit as visual design and interaction design. This structure has been set up for tight collaboration between these disciplines. In projects as a front-end developer, I've identified six major stages where design and front-end development can take advantage of each other's view, experience and skillset.
 
 
       ### 1. Concepting
