@@ -23,7 +23,14 @@ items:
       * writing tests and documentation
 
 
-      Next to that, I work on building component libraries with HTML, CSS (SASS) and vanilla JS. This can result in just a component library to be used by a development team or in a standalone website. Finally, I am an avid supporter of sharing knowledge. I do this regularly through giving code reviews, giving presentations, writing articles, giving guest lectures, giving workshops and speaking at meetups.
+      Next to this, I work on building component libraries with HTML, CSS (SASS) and vanilla JS. This can result in just a component library to be used by a development team or in a standalone website. Finally, I am an avid supporter of sharing knowledge. I do this regularly through giving code reviews, giving presentations, writing articles, giving guest lectures, giving workshops and speaking at meetups.
+
+
+      Next to that, I utilize my broad skill set to be the bridge between the design, front-end and back-end teams. I get
+      a lot of energy out of helping my team in this role. I speak both the design and the technical language which makes me a great fit for this role. Naturally, this results in me being a great point of contact for a variety of stakeholders. I have the natural confidence and communicative abilities to successfully take the lead through this role. This makes me a great asset to any team.
+
+
+      Finally, I am an avid supporter of sharing knowledge. I do this regularly through giving code reviews, giving presentations, writing articles, giving guest lectures, giving workshops and speaking at meetups. Next to that, I coach a wide range of front-end developers. This range consists of every level of seniority. It brings me great joy and fills me with energy to help others grow in a meaningful way.
     company: Mirabeau
     companyWebsite: https://www.mirabeau.nl
     roles:
