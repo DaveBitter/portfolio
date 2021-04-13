@@ -30,4 +30,6 @@ items:
     value: 'Front-end'
   - key: 'design'
     value: 'Design'
+  - key: 'es6'
+    value: 'ES6+'
 ---
