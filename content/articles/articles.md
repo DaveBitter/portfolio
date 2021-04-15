@@ -300,7 +300,7 @@ items:
     teaserCopy: >-
       Many of my articles regarding Next.js are intermediate to advanced. Even though there are many articles out there for starting with Next.js, I want to share my point of view and perhaps help you on your way to creating your first kick-ass Next.js application.
     teaserImage: /img/articles/create-next-app-hero.jpg
-    title: A simple, yet detailled introduction to Next.js
+    title: A simple, yet detailed introduction to Next.js
   - body: >-
       ## What can a PWA offer?
 
