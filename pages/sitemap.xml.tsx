@@ -1,4 +1,5 @@
 // Libs
+import { GetServerSideProps } from 'next';
 import { readdirSync, statSync } from 'fs';
 import path from 'path';
 
@@ -55,11 +56,11 @@ const SiteMapXML = () => {
 };
 
 // Response
-SiteMapXML.getInitialProps = ({ res }: any) => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     res.setHeader('Content-Type', 'text/xml');
     res.write(SiteMapXML());
     res.end();
-    return {};
+    return { props: {} };
 };
 
 export default SiteMapXML;
