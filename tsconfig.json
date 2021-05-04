@@ -6,6 +6,7 @@
       "es6",
       "es7",
       "es2017",
+      "es2019",
       "dom"
     ],
     "sourceMap": true,
