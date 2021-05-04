@@ -54,7 +54,6 @@ const SiteMapXML = () => {
 </urlset>`;
 };
 
-
 // Response
 SiteMapXML.getInitialProps = ({ res }: any) => {
     res.setHeader('Content-Type', 'text/xml');

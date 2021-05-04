@@ -27,10 +27,10 @@ export const getStaticPaths = async () => {
         paths: ['404', '500',].map((status: HTTPStatusCodeType) => ({ params: { status } })),
         fallback: false
     };
-}
+};
 
 export const getStaticProps: GetStaticProps = async () => {
-    const copy = getCopy()
+    const copy = getCopy();
     const status = '500';
 
     return {
@@ -42,7 +42,7 @@ export const getStaticProps: GetStaticProps = async () => {
             pageDescription: copy.daveScrewedUp,
             status
         }
-    }
-}
+    };
+};
 
 export default ErrorPage;

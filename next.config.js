@@ -1,7 +1,7 @@
 module.exports = {
     /* config options here */
     // target: 'serverless',
-    webpack(config) {
+    webpack(config, { isServer }) {
         config.module.rules.push({
             test: /\.svg$/,
             use: ['@svgr/webpack'],
@@ -9,16 +9,19 @@ module.exports = {
 
         config.module.rules.push({
             test: /\.md$/,
-            loaders: [
+            use: [
                 'json-loader',
                 'front-matter-loader',
             ],
         });
 
-        config.node = {
-            fs: 'empty'
-        };
+        if (!isServer) {
+            config.resolve.fallback.fs = false;
+        }
 
         return config;
+    },
+    future: {
+        webpack5: true
     }
 };

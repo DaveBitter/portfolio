@@ -1,5 +1,5 @@
-import ErrorPage, { getStaticPaths, getStaticProps } from './error/[status]';
+import ErrorPage, { getStaticProps } from './error/[status]';
 
-export { getStaticPaths, getStaticProps };
+export { getStaticProps };
 
 export default ErrorPage;

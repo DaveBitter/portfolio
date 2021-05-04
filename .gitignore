@@ -6,6 +6,7 @@ lerna-debug
 # Build and test tools
 *.zip
 dist/*
+out
 build/*
 .next
 coverage
