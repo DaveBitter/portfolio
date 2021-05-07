@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 // Utils
 import { getCopy, getArticles, getQuickBits, getDictionary, getTags } from '../../src/static/js/utils/getContent';
-import { ArticleInterface, TagInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
+import { ArticleInterface, ContentObjectInterface, TagInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
 // Resources
 
@@ -15,18 +15,13 @@ import ArticleTeasers from '../../src/components/Article/ArticleTeasers/ArticleT
 
 // Interface
 interface IProps {
-    activeTag: string
+    dictionary: ContentObjectInterface,
+    articleItems: ArticleInterface[],
+    quickBitItems: ArticleInterface[],
 }
 
 // Component
-const Tags = ({ activeTag }: IProps) => {
-    const dictionary = getDictionary();
-
-    const articleItems = getArticles()
-        .filter((article: ArticleInterface) => article.tags.find((tag: TagInterface) => tag.key === activeTag))
-    const quickBitsItems = getQuickBits()
-        .filter((quickBit: ArticleInterface) => quickBit.tags.find((tag: TagInterface) => tag.key === activeTag))
-
+const Tags = ({ dictionary, articleItems, quickBitItems }: IProps) => {
     return <>
         {articleItems && !!articleItems.length && <div className='grid'>
             <div className='g2'>
@@ -44,13 +39,13 @@ const Tags = ({ activeTag }: IProps) => {
             </div>}
         </div>}
 
-        {quickBitsItems && !!quickBitsItems.length && <div className='grid'>
+        {quickBitItems && !!quickBitItems.length && <div className='grid'>
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{dictionary.quickBits}</h2>
             </div>
 
             <div className='g2'>
-                <ArticleTeasers type='quick-bits' articles={quickBitsItems} />
+                <ArticleTeasers type='quick-bits' articles={quickBitItems} />
             </div>
 
             {getQuickBits().length > 3 && <div className='g8'>
@@ -67,27 +62,39 @@ export const getStaticPaths = async () => {
         paths: Object.keys(getTags()).map((tag: string) => ({ params: { tag } })),
         fallback: false
     };
-}
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
+    const activeTag = context.params && context.params.tag;
+
+    const dictionary = getDictionary();
     const copy = getCopy();
     const tags = getTags();
 
-    const tag = context.params && context.params.tag;
+    const articleItems = getArticles()
+        .filter((article: ArticleInterface) => article.tags.find((tag: TagInterface) => tag.key === activeTag));
+    const quickBitItems = getQuickBits()
+        .filter((quickBit: ArticleInterface) => quickBit.tags.find((tag: TagInterface) => tag.key === activeTag));
 
-    const tagLabel = context.params && context.params.tag && tag ? tags[Array.isArray(tag) ? tag[0] : tag] : null;
+
+    const tagLabel = context.params && context.params.tag && activeTag ? tags[Array.isArray(activeTag) ? activeTag[0] : activeTag] : null;
 
     return {
         props: {
-            title: tagLabel || tag,
-            copy: copy.tagLead.replace('{{tag}}', tagLabel || tag),
-            src: `/img/tags/${tag}.jpg`,
+            pageTitle: tagLabel || activeTag,
+            pageCopy: copy.tagLead.replace('{{tag}}', tagLabel || activeTag),
+            src: `/img/tags/${activeTag}.jpg`,
             alt: '',
             pageDescription: copy.pageDescription || null,
-            activeTag: tag
+            dictionary,
+            copy,
+            tags,
+            articleItems,
+            quickBitItems,
         }
-    }
-}
+    };
+};
+
 // Props
 Tags.defaultProps = {};
 

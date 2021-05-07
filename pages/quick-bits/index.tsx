@@ -10,18 +10,18 @@ import Index from '../articles/index';
 export const getStaticProps: GetStaticProps = async () => {
     const headings = getHeadings();
     const copy = getCopy();
-    const quickBits = getQuickBits()
+    const quickBits = getQuickBits();
 
     return {
         props: {
             items: quickBits,
-            title: headings.latestQuickBits || null,
-            copy: copy.quickBitsLead || null,
+            pageTitle: headings.latestQuickBits || null,
+            pageCopy: copy.quickBitsLead || null,
             src: '/img/articles.jpg',
             alt: '',
             type: 'quick-bits'
         }
-    }
-}
+    };
+};
 
-export default Index
+export default Index;

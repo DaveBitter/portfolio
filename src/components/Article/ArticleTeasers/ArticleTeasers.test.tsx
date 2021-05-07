@@ -16,7 +16,7 @@ const setup = (props: any) => {
         ...props
     };
 
-    const wrapper = mount(<ArticleTeasers type='articles' {..._props} />);
+    const wrapper = mount(<ArticleTeasers type='articles' tags={[]}  {..._props} />);
 
     return {
         _props,

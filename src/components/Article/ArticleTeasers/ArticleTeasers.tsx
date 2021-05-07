@@ -36,7 +36,7 @@ const ArticleTeasers = ({ articles, tags, type, ...attributes }: IProps) => {
                 </Card>
             </li>)}
         </ul>
-    </>
+    </>;
 };
 
 // Props

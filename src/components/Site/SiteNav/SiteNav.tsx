@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from "next/router";
 
 // Utils
-import { DictionaryInterface } from '../../../static/js/utils/Interfaces/Interfaces';
+import { ContentObjectInterface } from '../../../static/js/utils/Interfaces/Interfaces';
 
 // Content
 import { getDictionary } from '../../../static/js/utils/getContent';
@@ -20,7 +20,7 @@ import QuickBitsIcon from '../../../static/img/icons/bolt.svg';
 interface IProps { }
 
 // Helpers
-const getNavigationItems = (dictionary: DictionaryInterface) => [
+const getNavigationItems = (dictionary: ContentObjectInterface) => [
     { label: dictionary.articles, href: '/articles', Icon: ArticlesIcon },
     { label: dictionary.home, href: '/', Icon: HomeIcon },
     { label: dictionary.quickBits, href: '/quick-bits', Icon: QuickBitsIcon }

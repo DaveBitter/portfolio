@@ -8,18 +8,19 @@ import { getHeadings, getCopy, getWorkExperience, getEducation } from '../../src
 // Resources
 
 // Components
-import Resume from '../../src/components/Resume/Resume'
+import Resume from '../../src/components/Resume/Resume';
 import ResumePitch from 'components/Resume/ResumePitch/ResumePitch';
+import { ContentObjectInterface, EducationInterface, WorkExperienceInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
 // Interface
-interface IProps { }
+interface IProps {
+    headings: ContentObjectInterface,
+    workExperience: WorkExperienceInterface[],
+    education: EducationInterface[]
+}
 
 // Component
-const ResumePage = ({ }: IProps) => {
-    const headings = getHeadings();
-    const workExperience = getWorkExperience();
-    const education = getEducation();
-
+const ResumePage = ({ headings, workExperience, education }: IProps) => {
     return <>
         <div className='grid'>
             <div id='elevator-pitch' className='g4'>
@@ -38,19 +39,27 @@ const ResumePage = ({ }: IProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const headings = getHeadings();
     const copy = getCopy();
+    const headings = getHeadings();
+
+    const workExperience = getWorkExperience();
+    const education = getEducation();
 
     return {
         props: {
-            title: headings.greeting || null,
-            copy: copy.greetingIntro || null,
+            pageTitle: headings.greeting || null,
+            pageCopy: copy.greetingIntro || null,
             pageDescription: copy.pageDescription || null,
             pageImage: '/img/dave.jpg',
-            src: '/img/dave-flipped.jpg'
+            src: '/img/dave-flipped.jpg',
+            copy,
+            headings,
+            workExperience,
+            education
         }
-    }
-}
+    };
+};
+
 // Props
 ResumePage.defaultProps = {};
 

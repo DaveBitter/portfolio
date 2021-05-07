@@ -20,7 +20,6 @@ interface IProps {
 
 // Component
 const Tags = ({ items, type }: IProps) => {
-
     return <div className='grid'>
         <div className='g2'>
             <ArticleTeasers type={type} articles={items} />
@@ -36,14 +35,14 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
         props: {
             items: articles,
-            title: headings.latestArticlesAndTags || null,
-            copy: copy.articlesAndTagsLead || null,
+            pageTitle: headings.latestArticlesAndTags || null,
+            pageCopy: copy.articlesAndTagsLead || null,
             src: '/img/articles.jpg',
             alt: '',
             type: 'articles'
         }
-    }
-}
+    };
+};
 
 // Props
 Tags.defaultProps = {};

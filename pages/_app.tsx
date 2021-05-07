@@ -50,7 +50,7 @@ Router.events.on('routeChangeError', () => {
 
 let pageTransitionDelay = 0
 const App = ({ Component, pageProps }: AppProps) => {
-    const { article, src, alt, showGenericSiteHeader = true, title, copy, pageDescription, pageImage } = pageProps;
+    const { article, src, alt, showGenericSiteHeader = true, pageTitle, pageCopy, pageDescription, pageImage } = pageProps;
 
     const router = useRouter();
 
@@ -72,23 +72,23 @@ const App = ({ Component, pageProps }: AppProps) => {
         if (router.route !== prevRoute) {
             switch (true) {
                 case prevLevel === nextLevel:
-                    setPageTransitionDirection('right')
+                    setPageTransitionDirection('right');
                     break;
 
                 case prevLevel < nextLevel:
-                    setPageTransitionDirection('up')
+                    setPageTransitionDirection('up');
                     break;
 
                 case prevLevel > nextLevel:
-                    setPageTransitionDirection('down')
+                    setPageTransitionDirection('down');
                     break;
 
                 default:
-                    setPageTransitionDirection('up')
+                    setPageTransitionDirection('up');
                     break;
             }
 
-            setPrevRoute(router.route)
+            setPrevRoute(router.route);
         }
 
         if (process.env.NODE_ENV === 'development') { return; }
@@ -104,14 +104,14 @@ const App = ({ Component, pageProps }: AppProps) => {
     const [prevRoute, setPrevRoute] = useState(router.route)
 
     return <>
-        <SiteMeta article={article} pageTitle={title} pageDescription={pageDescription || copy} />
-        <SiteOpenGraphTags article={article} pageTitle={title} pageDescription={pageDescription || copy} pageImage={pageImage || src} />
+        <SiteMeta article={article} pageTitle={pageTitle} pageDescription={pageDescription || pageCopy} />
+        <SiteOpenGraphTags article={article} pageTitle={pageTitle} pageDescription={pageDescription || pageCopy} pageImage={pageImage || src} />
 
         <PageTransition timeout={pageTransitionDelay} classNames={`page-transition--${pageTransitionDirection} page-transition`} skipInitialTransition={true}>
             <div />
         </PageTransition>
 
-        <SiteHeader title={title} copy={copy} src={src} alt={alt} showGenericSiteHeader={showGenericSiteHeader} key={router.route}>
+        <SiteHeader title={pageTitle} copy={pageCopy} src={src} alt={alt} showGenericSiteHeader={showGenericSiteHeader} key={router.route}>
             <SiteNav />
             <SiteBreadCrumbs />
         </SiteHeader>
@@ -121,7 +121,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         </main>
 
         <SiteFooter />
-    </>
+    </>;
 };
 
 // Props

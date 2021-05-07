@@ -1,5 +1,5 @@
 /*** Interfaces ***/
-export interface DictionaryInterface {
+export interface ContentObjectInterface {
     [key: string]: string
 }
 

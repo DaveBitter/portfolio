@@ -12,20 +12,19 @@ import { getHeadings, getCopy, getArticles, getQuickBits, getDictionary } from '
 // Components
 import ArticleTeasers from '../src/components/Article/ArticleTeasers/ArticleTeasers';
 import ResumePitch from '../src/components/Resume/ResumePitch/ResumePitch';
+import { ArticleInterface, ContentObjectInterface } from '../src/static/js/utils/Interfaces/Interfaces';
 
 // Interface
-interface IProps { }
+interface IProps {
+    dictionary: ContentObjectInterface,
+    copy: ContentObjectInterface,
+    headings: ContentObjectInterface,
+    articleTeaserItems: ArticleInterface[],
+    quickBitTeaserItems: ArticleInterface[],
+}
 
 // Component
-const Home = ({ }: IProps) => {
-    const copy = getCopy();
-    const headings = getHeadings()
-    const dictionary = getDictionary();
-
-
-    const articleTeaserItems = getArticles().slice(0, 3);
-    const quickBitsTeaserItems = getQuickBits().slice(0, 3);
-
+const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserItems }: IProps) => {
     return <>
         <div className='grid'>
             <div className='g4'>
@@ -52,7 +51,7 @@ const Home = ({ }: IProps) => {
             <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.latestQuickBits}</h2>
                 <p className='h4' data-reveal-in-view>{copy.quickBitsLead}</p>
-                <ArticleTeasers type='quick-bits' articles={quickBitsTeaserItems} />
+                <ArticleTeasers type='quick-bits' articles={quickBitTeaserItems} />
             </div>
 
             {getQuickBits().length > 3 && <div className='g8'>
@@ -65,19 +64,29 @@ const Home = ({ }: IProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const headings = getHeadings();
     const copy = getCopy();
+    const headings = getHeadings();
+    const dictionary = getDictionary();
+
+    const articleTeaserItems = getArticles().slice(0, 3);
+    const quickBitTeaserItems = getQuickBits().slice(0, 3);
 
     return {
         props: {
-            title: headings.greeting || null,
-            copy: copy.greetingIntro || null,
+            pageTitle: headings.greeting || null,
+            pageCopy: copy.greetingIntro || null,
             pageDescription: copy.pageDescription || null,
             pageImage: '/img/dave.jpg',
-            src: '/img/dave-flipped.jpg'
+            src: '/img/dave-flipped.jpg',
+            copy,
+            headings,
+            dictionary,
+            articleTeaserItems,
+            quickBitTeaserItems
         }
-    }
-}
+    };
+};
+
 // Props
 Home.defaultProps = {};
 

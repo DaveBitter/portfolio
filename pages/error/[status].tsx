@@ -11,11 +11,11 @@ import { HTTPStatusCodeType } from '../../src/static/js/utils/Interfaces/Types';
 // Resources
 
 // Interface
-interface IProps {
-}
+// interface IProps {
+// }
 
 // Component
-const ErrorPage = ({ }: IProps) => {
+const ErrorPage = () => {
     return (
         <>
         </>
@@ -35,8 +35,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
         props: {
-            title: `${copy.ahhh} ${status}`,
-            copy: copy.daveScrewedUp,
+            pageTitle: `${copy.ahhh} ${status}`,
+            pageCopy: copy.daveScrewedUp,
             src: '/img/articles.jpg',
             alt: '',
             pageDescription: copy.daveScrewedUp,
