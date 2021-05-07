@@ -2,7 +2,6 @@
 import { GetStaticProps } from 'next';
 
 // Utils
-import { getQuickBits } from '../../src/static/js/utils/getContent';
 import query from '../../src/static/js/utils/api/query';
 
 // Components
@@ -10,7 +9,7 @@ import Index from '../articles/index';
 
 export const getStaticProps: GetStaticProps = async () => {
     const { copy, headings } = await query('/content/ui');
-    const quickBits = getQuickBits();
+    const { quickBits } = await query('/content/quick-bits');
 
     return {
         props: {

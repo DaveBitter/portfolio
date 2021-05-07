@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 
 // Utils
-import { getArticles, getQuickBits } from '../src/static/js/utils/getContent';
 import query from '../src/static/js/utils/api/query';
 
 // Resources
@@ -22,10 +21,12 @@ interface IProps {
     headings: ContentObjectInterface,
     articleTeaserItems: ArticleInterface[],
     quickBitTeaserItems: ArticleInterface[],
+    hasMoreArticles: boolean,
+    hasMoreQuickBits: boolean
 }
 
 // Component
-const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserItems }: IProps) => {
+const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserItems, hasMoreArticles, hasMoreQuickBits }: IProps) => {
     return <>
         <div className='grid'>
             <div className='g4'>
@@ -41,7 +42,7 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
                 <ArticleTeasers type='articles' articles={articleTeaserItems} />
             </div>
 
-            {getArticles().length > 3 && <div className='g8'>
+            {hasMoreArticles && <div className='g8'>
                 <Link href='/articles'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllArticles}</a>
                 </Link>
@@ -55,7 +56,7 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
                 <ArticleTeasers type='quick-bits' articles={quickBitTeaserItems} />
             </div>
 
-            {getQuickBits().length > 3 && <div className='g8'>
+            {hasMoreQuickBits && <div className='g8'>
                 <Link href='/quick-bits'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllQuickBits}</a>
                 </Link>
@@ -66,9 +67,15 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
 
 export const getStaticProps: GetStaticProps = async () => {
     const { copy, headings, dictionary } = await query('/content/ui');
+    const { articles } = await query('/content/articles');
+    const { quickBits } = await query('/content/quick-bits');
 
-    const articleTeaserItems = getArticles().slice(0, 3);
-    const quickBitTeaserItems = getQuickBits().slice(0, 3);
+    const hasMoreArticles = articles.length > 3;
+    const hasMoreQuickBits = quickBits.length > 3;
+
+    const articleTeaserItems = articles.slice(0, 3);
+    const quickBitTeaserItems = quickBits.slice(0, 3);
+
 
     return {
         props: {
@@ -81,7 +88,9 @@ export const getStaticProps: GetStaticProps = async () => {
             headings,
             dictionary,
             articleTeaserItems,
-            quickBitTeaserItems
+            quickBitTeaserItems,
+            hasMoreArticles,
+            hasMoreQuickBits,
         }
     };
 };

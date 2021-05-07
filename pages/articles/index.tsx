@@ -3,7 +3,6 @@ import React from 'react';
 import { GetStaticProps } from 'next'
 
 // Utils
-import { getArticles } from '../../src/static/js/utils/getContent';
 import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 import { ArticleTypeType } from '../../src/static/js/utils/Interfaces/Types';
@@ -30,7 +29,7 @@ const Articles = ({ items, type }: IProps) => {
 
 export const getStaticProps: GetStaticProps = async () => {
     const { copy, headings } = await query('/content/ui');
-    const articles = getArticles();
+    const { articles } = await query('/content/articles');
 
     return {
         props: {
