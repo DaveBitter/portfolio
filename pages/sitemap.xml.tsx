@@ -22,7 +22,7 @@ const getDirectoriesRecursive = (src: string): any => [
 
 const getEntries = (src: string) => {
     const items = [...getDirectoriesRecursive(src)]
-        .filter(path => !['pages/error'].includes(path))
+        .filter(path => !['pages/error', 'src'].includes(path) && !path.startsWith('src/') && path.length)
         .map(path => path.replace('pages/', ''))
         .map(path => path.replace('./', ''))
         .map(path => getItemFromPath(path));
@@ -41,7 +41,7 @@ const getEntries = (src: string) => {
 };
 
 const SiteMapXML = () => {
-    const pages = getEntries('./pages/');
+    const pages = getEntries(process.env.NODE_ENV === 'development' ? './pages/' : './');
 
     return `<?xml version='1.0' encoding='UTF-8'?>
     <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
