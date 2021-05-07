@@ -35,10 +35,10 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
         props: {
             pageTitle: `${copy.ahhh} ${status}`,
-            pageCopy: copy.daveScrewedUp,
+            pageCopy: copy.daveScrewedUp || null,
             src: '/img/articles.jpg',
             alt: '',
-            pageDescription: copy.daveScrewedUp,
+            pageDescription: copy.daveScrewedUp || null,
             status
         }
     };
