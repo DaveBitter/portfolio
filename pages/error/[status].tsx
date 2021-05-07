@@ -3,7 +3,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 
 // Utils
-import { getCopy } from '../../src/static/js/utils/getContent';
+import query from '../../src/static/js/utils/api/query';
 import { HTTPStatusCodeType } from '../../src/static/js/utils/Interfaces/Types';
 
 // Components
@@ -30,8 +30,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const copy = getCopy();
-    const status = '500';
+    const { copy } = await query('/content'); const status = '500';
 
     return {
         props: {

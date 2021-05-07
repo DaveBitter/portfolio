@@ -5,7 +5,8 @@ import Link from 'next/link';
 
 
 // Utils
-import { getHeadings, getCopy, getArticles, getQuickBits, getDictionary } from '../src/static/js/utils/getContent';
+import { getArticles, getQuickBits } from '../src/static/js/utils/getContent';
+import query from '../src/static/js/utils/api/query';
 
 // Resources
 
@@ -64,9 +65,7 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const copy = getCopy();
-    const headings = getHeadings();
-    const dictionary = getDictionary();
+    const { copy, headings, dictionary } = await query('/content');
 
     const articleTeaserItems = getArticles().slice(0, 3);
     const quickBitTeaserItems = getQuickBits().slice(0, 3);

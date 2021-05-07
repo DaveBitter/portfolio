@@ -3,7 +3,8 @@ import React from 'react';
 import { GetStaticProps } from 'next'
 
 // Utils
-import { getArticles, getHeadings } from '../../src/static/js/utils/getContent';
+import { getArticles } from '../../src/static/js/utils/getContent';
+import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface, ContentObjectInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 import { ArticleTypeType } from '../../src/static/js/utils/Interfaces/Types';
 
@@ -46,8 +47,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const headings = getHeadings();
-
+    const { headings } = await query('/content');
     return {
         props: {
             article: getArticles().find((article: ArticleInterface) => context && context.params ? article.slug === context.params.slug : false) || null,

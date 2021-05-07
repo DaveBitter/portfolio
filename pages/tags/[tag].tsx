@@ -5,7 +5,8 @@ import Link from 'next/link';
 
 
 // Utils
-import { getCopy, getArticles, getQuickBits, getDictionary, getTags } from '../../src/static/js/utils/getContent';
+import { getArticles, getQuickBits, getTags } from '../../src/static/js/utils/getContent';
+import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface, ContentObjectInterface, TagInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
 // Resources
@@ -67,8 +68,8 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
     const activeTag = context.params && context.params.tag;
 
-    const dictionary = getDictionary();
-    const copy = getCopy();
+    const { copy, dictionary } = await query('/content');
+
     const tags = getTags();
 
     const articleItems = getArticles()

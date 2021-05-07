@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next';
-import { getCopy } from '../src/static/js/utils/getContent';
+import query from '../src/static/js/utils/api/query';
 import ErrorPage from './error/[status]';
 
 export const getStaticProps: GetStaticProps = async () => {
-    const copy = getCopy();
+    const { copy } = await query('/content');
     const status = '404';
 
     return {

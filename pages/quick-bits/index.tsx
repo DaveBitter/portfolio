@@ -2,14 +2,14 @@
 import { GetStaticProps } from 'next';
 
 // Utils
-import { getHeadings, getCopy, getQuickBits } from '../../src/static/js/utils/getContent';
+import { getQuickBits } from '../../src/static/js/utils/getContent';
+import query from '../../src/static/js/utils/api/query';
 
 // Components
 import Index from '../articles/index';
 
 export const getStaticProps: GetStaticProps = async () => {
-    const headings = getHeadings();
-    const copy = getCopy();
+    const { copy, headings } = await query('/content');
     const quickBits = getQuickBits();
 
     return {

@@ -2,7 +2,8 @@
 import { GetStaticProps } from 'next';
 
 // Uitls
-import { getHeadings, getQuickBits } from '../../src/static/js/utils/getContent';
+import { getQuickBits } from '../../src/static/js/utils/getContent';
+import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
 // Components
@@ -16,7 +17,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const headings = getHeadings();
+    const { headings } = await query('/content');
 
     return {
         props: {

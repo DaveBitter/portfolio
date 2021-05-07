@@ -3,7 +3,8 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 
 // Utils
-import { getHeadings, getCopy, getWorkExperience, getEducation } from '../../src/static/js/utils/getContent';
+import { getWorkExperience, getEducation } from '../../src/static/js/utils/getContent';
+import query from '../../src/static/js/utils/api/query';
 
 // Resources
 
@@ -39,8 +40,7 @@ const ResumePage = ({ headings, workExperience, education }: IProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const copy = getCopy();
-    const headings = getHeadings();
+    const { copy, headings } = await query('/content');
 
     const workExperience = getWorkExperience();
     const education = getEducation();
