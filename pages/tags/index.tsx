@@ -29,7 +29,7 @@ const Tags = ({ items, type }: IProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const { copy, headings } = await query('/content');
+    const { copy, headings } = await query('/content/ui');
 
     const articles = getArticles();
 

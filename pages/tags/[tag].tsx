@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 
 // Utils
-import { getArticles, getQuickBits, getTags } from '../../src/static/js/utils/getContent';
+import { getArticles, getQuickBits } from '../../src/static/js/utils/getContent';
 import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface, ContentObjectInterface, TagInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
@@ -59,8 +59,10 @@ const Tags = ({ dictionary, articleItems, quickBitItems }: IProps) => {
 };
 
 export const getStaticPaths = async () => {
+    const { tags } = await query('/content/tags');
+
     return {
-        paths: Object.keys(getTags()).map((tag: string) => ({ params: { tag } })),
+        paths: Object.keys(tags).map((tag: string) => ({ params: { tag } })),
         fallback: false
     };
 };
@@ -68,9 +70,8 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
     const activeTag = context.params && context.params.tag;
 
-    const { copy, dictionary } = await query('/content');
-
-    const tags = getTags();
+    const { copy, dictionary } = await query('/content/ui');
+    const { tags } = await query('/content/tags');
 
     const articleItems = getArticles()
         .filter((article: ArticleInterface) => article.tags.find((tag: TagInterface) => tag.key === activeTag));

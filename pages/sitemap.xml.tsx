@@ -5,8 +5,9 @@ import path from 'path';
 
 // Utils
 import formatDate from '../src/static/js/utils/formatDate';
-import { ArticleInterface } from '../src/static/js/utils/Interfaces/Interfaces';
-import { getArticles, getQuickBits, getTags } from '../src/static/js/utils/getContent';
+import { ArticleInterface, TagInterface } from '../src/static/js/utils/Interfaces/Interfaces';
+import { getArticles, getQuickBits } from '../src/static/js/utils/getContent';
+import query from '../src/static/js/utils/api/query';
 
 // Helpers
 const getItemFromPath = (path: string, pathPrefix = '') => ({ loc: `${pathPrefix}${path}`, updatedAt: new Date() });
@@ -20,7 +21,7 @@ const getDirectoriesRecursive = (src: string): any => [
     ...getDirectories(src).map(getDirectoriesRecursive).flat(Infinity)
 ];
 
-const getEntries = (src: string) => {
+const getEntries = (src: string, { tags }: { tags: TagInterface[] }) => {
     const items = [...getDirectoriesRecursive(src)]
         .filter(path => !['pages/error', 'src'].includes(path) && !path.startsWith('src/') && path.length)
         .map(path => path.replace('pages/', ''))
@@ -35,13 +36,13 @@ const getEntries = (src: string) => {
         items.push(getItemFromPath(quickBit.slug, 'quick-bits/'));
     });
 
-    Object.keys(getTags()).forEach((tag: string) => items.push(getItemFromPath(tag, 'tags/')));
+    Object.keys(tags).forEach((tag: string) => items.push(getItemFromPath(tag, 'tags/')));
 
     return items;
 };
 
-const SiteMapXML = () => {
-    const pages = getEntries(process.env.NODE_ENV === 'development' ? './pages/' : './');
+const SiteMapXML = ({ tags }: { tags: TagInterface[] }) => {
+    const pages = getEntries(process.env.NODE_ENV === 'development' ? './pages/' : './', { tags });
 
     return `<?xml version='1.0' encoding='UTF-8'?>
     <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
@@ -57,8 +58,10 @@ const SiteMapXML = () => {
 
 // Response
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+    const { tags } = await query('/content/tags');
+
     res.setHeader('Content-Type', 'text/xml');
-    res.write(SiteMapXML());
+    res.write(SiteMapXML({ tags }));
     res.end();
     return { props: {} };
 };

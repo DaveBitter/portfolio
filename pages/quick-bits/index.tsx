@@ -9,7 +9,7 @@ import query from '../../src/static/js/utils/api/query';
 import Index from '../articles/index';
 
 export const getStaticProps: GetStaticProps = async () => {
-    const { copy, headings } = await query('/content');
+    const { copy, headings } = await query('/content/ui');
     const quickBits = getQuickBits();
 
     return {

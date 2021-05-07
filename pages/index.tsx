@@ -65,7 +65,7 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const { copy, headings, dictionary } = await query('/content');
+    const { copy, headings, dictionary } = await query('/content/ui');
 
     const articleTeaserItems = getArticles().slice(0, 3);
     const quickBitTeaserItems = getQuickBits().slice(0, 3);

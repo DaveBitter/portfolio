@@ -47,7 +47,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const { headings } = await query('/content');
+    const { headings } = await query('/content/ui');
     return {
         props: {
             article: getArticles().find((article: ArticleInterface) => context && context.params ? article.slug === context.params.slug : false) || null,

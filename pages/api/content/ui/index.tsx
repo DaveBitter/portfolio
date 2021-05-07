@@ -1,5 +1,5 @@
 // Utils
-import { getDictionary, getCopy, getHeadings } from '../../../src/static/js/utils/getContent';
+import { getDictionary, getCopy, getHeadings } from '../../../../src/static/js/utils/getContent';
 
 export default async (req, res) => {
     const dictionary = getDictionary();

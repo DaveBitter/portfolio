@@ -30,7 +30,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const { copy } = await query('/content'); const status = '500';
+    const { copy } = await query('/content/ui'); const status = '500';
 
     return {
         props: {
