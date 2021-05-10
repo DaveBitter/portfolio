@@ -1,11 +1,33 @@
 .resume-pitch {
     display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
 
     @include mq($mq-desk--med) {
         flex-direction: row;
-        align-items: center;
+        align-items: flex-end;
+    }
+
+    &__intro {
+        border-radius: $border-radius-xxl;
+    }
+
+    &__intro-wrapper {
+        position: relative;
+        margin-bottom: $spacing-med;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: $gradient-primary;
+            opacity: 0.2;
+            border-radius: $border-radius-xxl;
+            pointer-events: none;
+        }
     }
 
     &__copy {
@@ -27,12 +49,23 @@
 
         @include mq($mq-desk--med) {
             width: 50%;
-            margin-bottom: 0;
+            margin-bottom: -$spacing-lrg;
         }
 
         @include mq($mq-desk--lrg) {
             width: 40%;
             padding-left: $spacing-xl;
+            margin-bottom: -$spacing-xxl;
+        }
+    }
+
+    &__link {
+        @include mq($mq-desk--med) {
+            max-width: 45%;
+        }
+
+        @include mq($mq-desk--lrg) {
+            max-width: 50%;
         }
     }
 }

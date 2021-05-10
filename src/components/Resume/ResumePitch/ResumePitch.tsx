@@ -20,15 +20,20 @@ const ResumePitch = ({ hasResumeLink, ...attributes }: IProps) => {
     const copy = getCopy();
     const dictionary = getDictionary();
 
-    return <div className='resume-pitch' {...attributes}>
-        <div className='resume-pitch__copy'>
-            <p className='h4' data-reveal-in-view>{copy.elevatorPitch}</p>
-            {hasResumeLink && <Link href='/resume#elevator-pitch'>
-                <a className='button-link' data-reveal-in-view>{dictionary.viewResume}</a>
-            </Link>}
+    return <>
+        <div className='resume-pitch' {...attributes}>
+            <div className='resume-pitch__copy'>
+                <div className='resume-pitch__intro-wrapper' data-reveal-in-view>
+                    <video className='resume-pitch__intro' src='/video/dave-bitter-intro.mp4' poster='/img/dave-bitter-intro.jpg' controls />
+                </div>
+                <p className='h4' data-reveal-in-view>{copy.elevatorPitch}</p>
+            </div>
+            <div className='resume-pitch__chart'><ResumeProfileChart /></div>
         </div>
-        <div className='resume-pitch__chart'><ResumeProfileChart /></div>
-    </div>
+        {hasResumeLink && <Link href='/resume#elevator-pitch'>
+            <a className='resume-pitch__link button-link' data-reveal-in-view>{dictionary.viewResume}</a>
+        </Link>}
+    </>;
 };
 
 // Props
