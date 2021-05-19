@@ -1,12 +1,10 @@
 // Libs
 import React from 'react';
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
-
 
 // Utils
 import query from '../../src/static/js/utils/api/query';
-import { ArticleInterface, ContentObjectInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
+import { ArticleInterface, ContentObjectInterface, TagInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
 // Resources
 
@@ -18,12 +16,10 @@ interface IProps {
     dictionary: ContentObjectInterface,
     articleTeaserItems: ArticleInterface[],
     quickBitTeaserItems: ArticleInterface[],
-    hasMoreArticles: boolean,
-    hasMoreQuickBits: boolean
 }
 
 // Component
-const Tags = ({ dictionary, articleTeaserItems, quickBitTeaserItems, hasMoreArticles, hasMoreQuickBits }: IProps) => {
+const Tags = ({ dictionary, articleTeaserItems, quickBitTeaserItems }: IProps) => {
     return <>
         {articleTeaserItems && !!articleTeaserItems.length && <div className='grid'>
             <div className='g2'>
@@ -33,12 +29,6 @@ const Tags = ({ dictionary, articleTeaserItems, quickBitTeaserItems, hasMoreArti
             <div className='g2'>
                 <ArticleTeasers type='articles' articles={articleTeaserItems} />
             </div>
-
-            {hasMoreArticles && <div className='g8'>
-                <Link href='/articles'>
-                    <a className='button-link' data-reveal-in-view>{dictionary.viewAllArticles}</a>
-                </Link>
-            </div>}
         </div>}
 
         {quickBitTeaserItems && !!quickBitTeaserItems.length && <div className='grid'>
@@ -49,12 +39,6 @@ const Tags = ({ dictionary, articleTeaserItems, quickBitTeaserItems, hasMoreArti
             <div className='g2'>
                 <ArticleTeasers type='quick-bits' articles={quickBitTeaserItems} />
             </div>
-
-            {hasMoreQuickBits && <div className='g8'>
-                <Link href='/quick-bits'>
-                    <a className='button-link' data-reveal-in-view>{dictionary.viewAllQuickBits}</a>
-                </Link>
-            </div>}
         </div>}
     </>;
 };
@@ -77,11 +61,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { articles } = await query('/content/articles');
     const { quickBits } = await query('/content/quick-bits');
 
-    const hasMoreArticles = articles.length > 3;
-    const hasMoreQuickBits = quickBits.length > 3;
-
-    const articleTeaserItems = articles.slice(0, 3);
-    const quickBitTeaserItems = quickBits.slice(0, 3);
+    const articleTeaserItems = articles
+        .filter((article: ArticleInterface) => article.tags.find((tag: TagInterface) => tag.key === activeTag));
+    const quickBitTeaserItems = quickBits
+        .filter((quickBit: ArticleInterface) => quickBit.tags.find((tag: TagInterface) => tag.key === activeTag));
     const tagLabel = context.params && context.params.tag && activeTag ? tags[Array.isArray(activeTag) ? activeTag[0] : activeTag] : null;
 
     return {
@@ -95,9 +78,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
             copy,
             tags,
             articleTeaserItems,
-            quickBitTeaserItems,
-            hasMoreArticles,
-            hasMoreQuickBits
+            quickBitTeaserItems
         }
     };
 };

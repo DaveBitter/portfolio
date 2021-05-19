@@ -30,10 +30,11 @@ const Tags = ({ items, type }: IProps) => {
 export const getStaticProps: GetStaticProps = async () => {
     const { copy, headings } = await query('/content/ui');
     const { articles } = await query('/content/articles');
+    const { quickBits } = await query('/content/quick-bits');
 
     return {
         props: {
-            items: articles,
+            items: [...articles, ...quickBits],
             pageTitle: headings.latestArticlesAndTags || null,
             pageCopy: copy.articlesAndTagsLead || null,
             src: '/img/articles.jpg',
