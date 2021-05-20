@@ -9,7 +9,7 @@ import React from 'react';
 
 // Interface
 interface IProps {
-    alt: string
+    alt: string,
     src: string,
 }
 
