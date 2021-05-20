@@ -1,6 +1,7 @@
 // Libs
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Utils
 import { getDictionary } from '../../../static/js/utils/getContent';
@@ -25,7 +26,7 @@ const ArticleTeaser = ({ body, date, intro, tags: articleTags, slug, teaserCopy,
             <time className='article-teaser__date' dateTime={date}>{formatDate(date, { day: 'numeric', month: 'long', year: 'numeric' })}</time>
 
             <div className='article-teaser__hero'>
-                <img className='article-teaser__hero-image' src={teaserImage} alt={teaserImage} loading='lazy' />
+                <Image className='article-teaser__hero-image' src={teaserImage} alt={teaserImage} layout='fill' loading='lazy' />
             </div>
         </header>
 
