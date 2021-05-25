@@ -1,7 +1,36 @@
 ---
 items:
   - body: >-
+      At Frontmen, I am responsible for building interactive web applications and front-end component libraries. I touch the roles of front-end developer, visual designer, interaction designer, back-end developer and DevOps engineer with a focus on front-end development. My main focus is building interactive (React.js and Next.js) web applications while being involved in the design and development process from front to back. This includes, but is not limited to:
 
+
+      * crafting components together with visual and interaction designers
+
+      * setting up front-end architectures
+
+      * handling global states
+
+      * handling data between front-end and back-end
+
+      * ensuring accessibility
+
+      * (consulting about) performance optimisations
+
+      * search engine optimisation
+
+      * setting up CI/CD
+
+      * writing tests and documentation
+
+
+      Next to this, I work on building component libraries with HTML, CSS (SASS) and vanilla JS. This can result in just a component library to be used by a development team or in a standalone website.
+
+
+      Next to that, I utilize my broad skill set to be the bridge between the design, front-end and back-end teams. I get
+      a lot of energy out of helping my team in this role. I speak both the design and the technical language which makes me a great fit for this role. Naturally, this results in me being a great point of contact for a variety of stakeholders. I have the natural confidence and communicative abilities to successfully take the lead through this role. This makes me a great asset to any team.
+
+
+      Finally, I am an avid supporter of sharing knowledge. I do this regularly through giving code reviews, giving presentations, writing articles, giving guest lectures, giving workshops and speaking at meetups. It brings me great joy and fills me with energy to help others grow in a meaningful way.
     company: Frontmen
     companyWebsite: https://frontmen.nl
     roles:
