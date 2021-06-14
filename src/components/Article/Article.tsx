@@ -1,5 +1,4 @@
 // Libs
-import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
 import hljs from 'highlight.js'
 
@@ -38,7 +37,7 @@ const Article = ({ body, date, intro, tags: articleTags, slug, teaserCopy, tease
                 </div>
             </div>
             <div className='article__hero' data-reveal-in-view>
-                <Image className='article__hero-image' src={teaserImage} alt={teaserImage} layout='fill' loading='lazy' />
+                <img className='article__hero-image' src={teaserImage} alt={teaserImage} loading='lazy' />
             </div>
         </header>
         <section className='g6'>
