@@ -1,0 +1,30 @@
+// Libs
+import React from 'react';
+import {{pascalCase name}} from './{{pascalCase name}}';
+import { mount } from 'enzyme';
+
+// Test constants
+
+// Component test setup
+const setup = (props: any) => {
+    const _props = {
+        ...props
+    };
+
+    const wrapper = mount(<{{pascalCase name}} {..._props} />);
+
+    return {
+        _props,
+        wrapper
+    };
+};
+
+// Test scenarios
+describe('<{{pascalCase name}} />', () => {
+    it('should mount', () => {
+        const { wrapper } = setup({
+        });
+
+        expect(wrapper.childAt(0).exists());
+    });
+});
