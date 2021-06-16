@@ -14,6 +14,7 @@ Besides the development script, there are many more scripts set up:
 * `build` - Creates build
 * `export` - Creates export
 * `deploy` - Creates build and export
+* `generate` - Starts interactive CLI tool to generate a component or utility with everything that is needed
 * `storybook` - Starts the development environment for storybook
 * `storybook:build` - Builds the storybook for production to be hosted by you
 * `test` - Runs the Jest and Enzyme test suite
