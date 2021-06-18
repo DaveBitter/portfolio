@@ -22,7 +22,7 @@ const getDirectoriesRecursive = (src: string): any => [
 
 const getEntries = (src: string, { articles, quickBits, tags }: { articles: ArticleInterface[], quickBits: ArticleInterface[], tags: TagInterface[] }) => {
     const items = [...getDirectoriesRecursive(src)]
-        .filter(path => !['pages/error', 'src'].includes(path) && !path.startsWith('src/') && path.length)
+        .filter(path => !['pages/error', 'src'].includes(path) && !path.startsWith('src/') && !path.startsWith('pages/api/') && path.length)
         .map(path => path.replace('pages/', ''))
         .map(path => path.replace('./', ''))
         .map(path => getItemFromPath(path));
