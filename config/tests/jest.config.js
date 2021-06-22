@@ -14,6 +14,7 @@ module.exports = {
         "(copy|dictionary|headings|tags)+(.md)$": "<rootDir>/config/tests/mocks/content/general.ts",
         "(articles)+(.md)$": "<rootDir>/config/tests/mocks/content/articles.ts",
         "(quickBits)+(.md)$": "<rootDir>/config/tests/mocks/content/articles.ts",
+        "(fridayTips)+(.md)$": "<rootDir>/config/tests/mocks/content/articles.ts",
         "(workExperience)+(.md)$": "<rootDir>/config/tests/mocks/content/workExperience.ts",
         "(education)+(.md)$": "<rootDir>/config/tests/mocks/content/education.ts",
         "\\.svg": "<rootDir>/config/tests/mocks/components/Svg.tsx"

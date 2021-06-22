@@ -14,6 +14,7 @@ class ArticleElementEnricher {
     _options: any = null
     _links: any = []
     _images: any = []
+    _videos: any = []
 
     _enrichLinks() {
         this._links.forEach((link: any) => {
@@ -48,14 +49,30 @@ class ArticleElementEnricher {
         });
     }
 
+    _enrichVideos() {
+        this._videos.forEach((video: any) => {
+            const parentNode = video.parentNode;
+            const videoClone = video.cloneNode();
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('article__video-wrapper')
+            videoClone.classList.add('article__video')
+
+            video.parentNode.removeChild(video);
+            wrapper.appendChild(videoClone);
+            parentNode.appendChild(wrapper);
+        });
+    }
+
     _cacheSelectors() {
         this._images = [...this._element.querySelectorAll('img')].filter(img => !img.classList.length);
         this._links = [...this._element.querySelectorAll('a')].filter(img => !img.classList.length);
+        this._videos = [...this._element.querySelectorAll('iframe[src^="https://www.youtube.com/embed"]')].filter(video => !video.classList.length);
     }
 
     _init() {
         this._cacheSelectors();
         this._enrichImages();
+        this._enrichVideos();
         this._enrichLinks();
     }
 }

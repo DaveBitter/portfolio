@@ -6,6 +6,8 @@ items:
     value: Home
   - key: 'quickBits'
     value: Quick Bits
+  - key: 'fridayTips'
+    value: Friday Tips
   - key: 'articles'
     value: Articles
   - key: 'tags'

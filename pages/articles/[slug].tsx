@@ -28,7 +28,7 @@ const ArticlePage = ({ headings, article, relatedArticles, type }: IProps) => {
 
         {!!relatedArticles.length && <div className='grid'>
             <div className='g2'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.readOn}</h2>
+                <h2 className='text-colored h1' data-reveal-in-view>{type === 'friday-tips' ? headings.watchMore : headings.readOn}</h2>
                 <ArticleTeasers type={type} articles={relatedArticles} />
             </div>
         </div>}

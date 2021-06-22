@@ -25,7 +25,7 @@ interface IProps {
 // Component
 const ArticleTeasers = ({ articles, tags, type, ...attributes }: IProps) => {
     return <>
-        {tags && !!tags.length && <Tag.Wrapper scrollable={true}>
+        {type !== 'friday-tips' && tags && !!tags.length && <Tag.Wrapper scrollable={true}>
             {tags.map((tag: TagInterface) => <Tag.Item key={tag.key} tag={tag} />)}
         </Tag.Wrapper>}
 
