@@ -13,6 +13,8 @@ import { getDictionary } from '../../../static/js/utils/getContent';
 import ArticlesIcon from '../../../static/img/icons/news.svg';
 import HomeIcon from '../../../static/img/icons/home.svg';
 import QuickBitsIcon from '../../../static/img/icons/bolt.svg';
+import ResumeIcon from '../../../static/img/icons/resume.svg';
+import VideoIcon from '../../../static/img/icons/video.svg';
 
 // Components
 
@@ -22,8 +24,10 @@ interface IProps { }
 // Helpers
 const getNavigationItems = (dictionary: ContentObjectInterface) => [
     { label: dictionary.articles, href: '/articles', Icon: ArticlesIcon },
+    { label: dictionary.quickBits, href: '/quick-bits', Icon: QuickBitsIcon },
     { label: dictionary.home, href: '/', Icon: HomeIcon },
-    { label: dictionary.quickBits, href: '/quick-bits', Icon: QuickBitsIcon }
+    { label: dictionary.fridayTips, href: '/friday-tips', Icon: VideoIcon },
+    { label: dictionary.resume, href: '/resume', Icon: ResumeIcon },
 ];
 
 // Component

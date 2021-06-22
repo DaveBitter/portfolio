@@ -6,6 +6,8 @@ items:
     value: Home
   - key: 'quickBits'
     value: Quick Bits
+  - key: 'fridayTips'
+    value: Friday Tips
   - key: 'articles'
     value: Articles
   - key: 'tags'
@@ -18,6 +20,8 @@ items:
     value: View all articles
   - key: 'viewAllQuickBits'
     value: View all Quick Bits
+  - key: 'viewAllFridayTips'
+    value: View all Friday Tips
   - key: 'heroImage'
     value: Hero image
   - key: 'linkedIn'

@@ -63,12 +63,11 @@
         .site-nav__item[data-is-active='true'] &,
         .site-nav__item:hover &,
         .site-nav__item:focus & {
-            @include text-xs;
-            transform: translateY($spacing-xxxs);
+            @include text-xxs;
+            transform: translateY($spacing-xs);
 
             @include mq($mq-tab--sml) {
-                transform: translateY($spacing-xs);
-                font-size: initial;
+                @include text-xs;
             }
         }
     }

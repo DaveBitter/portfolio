@@ -1,4 +1,4 @@
-import { getArticles, getCopy, getDictionary, getEducation, getHeadings, getQuickBits, getTags, getWorkExperience } from "../getContent";
+import { getArticles, getCopy, getDictionary, getEducation, getFridayTips, getHeadings, getQuickBits, getTags, getWorkExperience } from "../getContent";
 
 const fetchFromLocalMarkdown = (path: string) => {
     switch (path) {
@@ -6,6 +6,8 @@ const fetchFromLocalMarkdown = (path: string) => {
             return { articles: getArticles() };
         case '/content/quick-bits':
             return { quickBits: getQuickBits() };
+        case '/content/friday-tips':
+            return { fridayTips: getFridayTips() };
         case '/content/tags':
             return { tags: getTags() };
         case '/content/ui':
