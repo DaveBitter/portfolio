@@ -1,9 +1,9 @@
 ---
 items:
   - key: 'pageDescription'
-    value: I am a Senior full-stack Front-end Engineer and Designer. Here, you can find my resume, a collection of my articles covering a wide range of topics and get in contact.
+    value: I am a Senior Front-end Engineer and Designer. Here, you can find my resume, a collection of my articles covering a wide range of topics and get in contact.
   - key: 'greetingIntro'
-    value: I am a Senior full-stack Front-end Engineer and Designer.
+    value: I am a Senior Front-end Engineer and Designer.
   - key: 'elevatorPitch'
     value: I strive while utilising both the logical and creative part of the brain. I feel most in my place while continuously operating in these roles as a front-end developer within a team. I stand for quality, innovation and building useful products with a focus on the human using the product. I am a proactive, confident and communicatively strong person always looking ahead in the future.
   - key: 'articlesLead'

@@ -20,6 +20,8 @@ items:
     value: View all articles
   - key: 'viewAllQuickBits'
     value: View all Quick Bits
+  - key: 'viewAllFridayTips'
+    value: View all Friday Tips
   - key: 'heroImage'
     value: Hero image
   - key: 'linkedIn'

@@ -21,12 +21,14 @@ interface IProps {
     headings: ContentObjectInterface,
     articleTeaserItems: ArticleInterface[],
     quickBitTeaserItems: ArticleInterface[],
+    fridayTipTeaserItems: ArticleInterface[],
     hasMoreArticles: boolean,
-    hasMoreQuickBits: boolean
+    hasMoreQuickBits: boolean,
+    hasMoreFridayTips: boolean
 }
 
 // Component
-const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserItems, hasMoreArticles, hasMoreQuickBits }: IProps) => {
+const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserItems, fridayTipTeaserItems, hasMoreArticles, hasMoreQuickBits, hasMoreFridayTips }: IProps) => {
     return <>
         <div className='grid'>
             <div className='g4'>
@@ -62,6 +64,20 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
                 </Link>
             </div>}
         </div>
+
+        <div className='grid'>
+            <div className='g2'>
+                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestFridayTips}</h2>
+                <p className='h4' data-reveal-in-view>{copy.fridayTipsLead}</p>
+                <ArticleTeasers type='friday-tips' articles={fridayTipTeaserItems} />
+            </div>
+
+            {hasMoreFridayTips && <div className='g8'>
+                <Link href='/quick-bits'>
+                    <a className='button-link' data-reveal-in-view>{dictionary.viewAllFridayTips}</a>
+                </Link>
+            </div>}
+        </div>
     </>;
 };
 
@@ -69,12 +85,15 @@ export const getStaticProps: GetStaticProps = async () => {
     const { copy, headings, dictionary } = await query('/content/ui');
     const { articles } = await query('/content/articles');
     const { quickBits } = await query('/content/quick-bits');
+    const { fridayTips } = await query('/content/friday-tips');
 
     const hasMoreArticles = articles.length > 3;
     const hasMoreQuickBits = quickBits.length > 3;
+    const hasMoreFridayTips = fridayTips.length > 3;
 
     const articleTeaserItems = articles.slice(0, 3);
     const quickBitTeaserItems = quickBits.slice(0, 3);
+    const fridayTipTeaserItems = fridayTips.slice(0, 3);
 
 
     return {
@@ -89,8 +108,10 @@ export const getStaticProps: GetStaticProps = async () => {
             dictionary,
             articleTeaserItems,
             quickBitTeaserItems,
+            fridayTipTeaserItems,
             hasMoreArticles,
             hasMoreQuickBits,
+            hasMoreFridayTips
         }
     };
 };
