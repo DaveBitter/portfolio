@@ -20,7 +20,7 @@ const getDirectoriesRecursive = (src: string): any => [
     ...getDirectories(src).map(getDirectoriesRecursive).flat(Infinity)
 ];
 
-const getEntries = (src: string, { articles, quickBits, tags }: { articles: ArticleInterface[], quickBits: ArticleInterface[], tags: TagInterface[] }) => {
+const getEntries = (src: string, { articles, quickBits, fridayTips, tags }: { articles: ArticleInterface[], quickBits: ArticleInterface[], fridayTips: ArticleInterface[], tags: TagInterface[] }) => {
     const items = [...getDirectoriesRecursive(src)]
         .filter(path => !['pages/error', 'src'].includes(path) && !path.startsWith('src/') && !path.startsWith('pages/api/') && path.length)
         .map(path => path.replace('pages/', ''))
@@ -35,13 +35,17 @@ const getEntries = (src: string, { articles, quickBits, tags }: { articles: Arti
         items.push(getItemFromPath(quickBit.slug, 'quick-bits/'));
     });
 
+    fridayTips.forEach((fridayTip: ArticleInterface) => {
+        items.push(getItemFromPath(fridayTip.slug, 'friday-tips/'));
+    });
+
     Object.keys(tags).forEach((tag: string) => items.push(getItemFromPath(tag, 'tags/')));
 
     return items;
 };
 
-const SiteMapXML = ({ articles, quickBits, tags }: { articles: ArticleInterface[], quickBits: ArticleInterface[], tags: TagInterface[] }) => {
-    const pages = getEntries(process.env.NODE_ENV === 'development' ? './pages/' : './', { articles, quickBits, tags });
+const SiteMapXML = ({ articles, quickBits, fridayTips, tags }: { articles: ArticleInterface[], quickBits: ArticleInterface[], fridayTips: ArticleInterface[], tags: TagInterface[] }) => {
+    const pages = getEntries(process.env.NODE_ENV === 'development' ? './pages/' : './', { articles, quickBits, fridayTips, tags });
 
     return `<?xml version='1.0' encoding='UTF-8'?>
     <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
@@ -59,10 +63,11 @@ const SiteMapXML = ({ articles, quickBits, tags }: { articles: ArticleInterface[
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     const { articles } = await query('/content/articles');
     const { quickBits } = await query('/content/quick-bits');
+    const { fridayTips } = await query('/content/friday-tips');
     const { tags } = await query('/content/tags');
 
     res.setHeader('Content-Type', 'text/xml');
-    res.write(SiteMapXML({ articles, quickBits, tags }));
+    res.write(SiteMapXML({ articles, quickBits, fridayTips, tags }));
     res.end();
     return { props: {} };
 };
