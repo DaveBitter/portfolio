@@ -3,7 +3,6 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 
-
 // Utils
 import query from '../src/static/js/utils/api/query';
 
@@ -13,6 +12,7 @@ import query from '../src/static/js/utils/api/query';
 import ArticleTeasers from '../src/components/Article/ArticleTeasers/ArticleTeasers';
 import ResumePitch from '../src/components/Resume/ResumePitch/ResumePitch';
 import { ArticleInterface, ContentObjectInterface } from '../src/static/js/utils/Interfaces/Interfaces';
+import generateOGImage from 'static/js/utils/generateOGImage';
 
 // Interface
 interface IProps {
@@ -95,13 +95,14 @@ export const getStaticProps: GetStaticProps = async () => {
     const quickBitTeaserItems = quickBits.slice(0, 3);
     const fridayTipTeaserItems = fridayTips.slice(0, 3);
 
+    const ogImage = await generateOGImage('/index', {});
 
     return {
         props: {
             pageTitle: headings.greeting || null,
             pageCopy: copy.greetingIntro || null,
             pageDescription: copy.pageDescription || null,
-            pageImage: '/img/dave.jpg',
+            pageImage: ogImage || null,
             src: '/img/dave-flipped.jpg',
             copy,
             headings,

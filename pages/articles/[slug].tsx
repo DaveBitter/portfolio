@@ -6,6 +6,7 @@ import { GetStaticProps } from 'next'
 import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface, ContentObjectInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 import { ArticleTypeType } from '../../src/static/js/utils/Interfaces/Types';
+import generateOGImage from '../../src/static/js/utils/generateOGImage';
 
 // Resources
 
@@ -51,9 +52,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { headings } = await query('/content/ui');
     const { articles } = await query('/content/articles');
 
+    const articleData = articles.find((article: ArticleInterface) => context && context.params ? article.slug === context.params.slug : false);
+
+    const ogImage = await generateOGImage(`/articles_${articleData.slug}`, { title: articleData.title, image: articleData.teaserImage, date: articleData.date });
+
     return {
         props: {
-            article: articles.find((article: ArticleInterface) => context && context.params ? article.slug === context.params.slug : false) || null,
+            pageImage: ogImage || null,
+            article: articleData || null,
             relatedArticles: articles.filter((article: ArticleInterface) => article.slug !== context && context.params ? context.params.slug : false).splice(0, 3),
             showGenericSiteHeader: false,
             type: 'articles',

@@ -5,6 +5,7 @@ import { GetStaticProps } from 'next';
 // Utils
 import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface, ContentObjectInterface, TagInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
+import generateOGImage from '../../src/static/js/utils/generateOGImage';
 
 // Resources
 
@@ -67,10 +68,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
         .filter((quickBit: ArticleInterface) => quickBit.tags.find((tag: TagInterface) => tag.key === activeTag));
     const tagLabel = context.params && context.params.tag && activeTag ? tags[Array.isArray(activeTag) ? activeTag[0] : activeTag] : null;
 
+    const ogImage = await generateOGImage(`/tags_${activeTag}`, { title: tagLabel || activeTag, image: `/img/tags/${activeTag}.jpg` });
+
     return {
         props: {
             pageTitle: tagLabel || activeTag,
             pageCopy: copy.tagLead.replace('{{tag}}', tagLabel || activeTag),
+            pageImage: ogImage || null,
             src: `/img/tags/${activeTag}.jpg`,
             alt: '',
             pageDescription: copy.pageDescription || null,
