@@ -4,6 +4,7 @@ import { GetStaticProps } from 'next';
 
 // Utils
 import query from '../../src/static/js/utils/api/query';
+import generateOGImage from '../../src/static/js/utils/generateOGImage';
 
 // Resources
 
@@ -42,12 +43,14 @@ export const getStaticProps: GetStaticProps = async () => {
     const { copy, headings } = await query('/content/ui');
     const { workExperience, education } = await query('/content/work-and-education');
 
+    const ogImage = await generateOGImage('/resume', { title: headings.greeting });
+
     return {
         props: {
             pageTitle: headings.greeting || null,
             pageCopy: copy.greetingIntro || null,
+            pageImage: ogImage || null,
             pageDescription: copy.pageDescription || null,
-            pageImage: '/img/dave.jpg',
             src: '/img/dave-flipped.jpg',
             copy,
             headings,

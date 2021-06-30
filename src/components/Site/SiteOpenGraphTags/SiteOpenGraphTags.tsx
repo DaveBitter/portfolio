@@ -37,14 +37,13 @@ const getOpenGraphData = ({ article, pageTitle, pageDescription, pageImage }: IP
     };
 
     if (article) {
-        const { title, intro, teaserImage } = article;
+        const { title, intro } = article;
 
         openGraphData = {
             ...openGraphData,
             title: title,
             description: intro,
-            type: 'article',
-            ...(teaserImage ? { image: teaserImage } : {}),
+            type: 'article'
         };
     }
 
@@ -56,7 +55,7 @@ const SiteOpenGraphTags = ({ article, pageTitle, pageDescription, pageImage }: I
 
     return (
         <Head>
-            {image && <meta property='og:image' content={image} />}
+            {image && <meta property='og:image' content={`https://www.davebitter.com${image}`} />}
             {title && <meta property='og:title' content={title} />}
             {description && <meta property='og:description' content={description} />}
             {siteName && <meta property='og:site_name' content={siteName} />}

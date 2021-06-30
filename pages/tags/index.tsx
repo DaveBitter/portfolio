@@ -6,6 +6,7 @@ import { GetStaticProps } from 'next'
 import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 import { ArticleTypeType } from '../../src/static/js/utils/Interfaces/Types';
+import generateOGImage from '../../src/static/js/utils/generateOGImage';
 
 // Resources
 
@@ -32,11 +33,14 @@ export const getStaticProps: GetStaticProps = async () => {
     const { articles } = await query('/content/articles');
     const { quickBits } = await query('/content/quick-bits');
 
+    const ogImage = await generateOGImage('/tags_index', { title: headings.latestArticlesAndTags, image: '/img/articles.jpg' });
+
     return {
         props: {
             items: [...articles, ...quickBits],
             pageTitle: headings.latestArticlesAndTags || null,
             pageCopy: copy.articlesAndTagsLead || null,
+            pageImage: ogImage || null,
             src: '/img/articles.jpg',
             alt: '',
             type: 'articles'

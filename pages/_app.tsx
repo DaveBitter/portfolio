@@ -50,7 +50,7 @@ Router.events.on('routeChangeError', () => {
 
 let pageTransitionDelay = 0
 const App = ({ Component, pageProps }: AppProps) => {
-    const { article, src, alt, showGenericSiteHeader = true, pageTitle, pageCopy, pageDescription, pageImage } = pageProps;
+    const { article, src, alt, showGenericSiteHeader = true, pageTitle, pageCopy, pageDescription, pageImage, isStandAlone } = pageProps;
 
     const router = useRouter();
 
@@ -101,7 +101,13 @@ const App = ({ Component, pageProps }: AppProps) => {
         logPageView();
     }, [router.route]);
 
-    const [prevRoute, setPrevRoute] = useState(router.route)
+    const [prevRoute, setPrevRoute] = useState(router.route);
+
+    if (isStandAlone) {
+        return <main>
+            <Component {...pageProps} />
+        </main>;
+    }
 
     return <>
         <SiteMeta article={article} pageTitle={pageTitle} pageDescription={pageDescription || pageCopy} />

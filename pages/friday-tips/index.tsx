@@ -2,7 +2,8 @@
 import { GetStaticProps } from 'next';
 
 // Utils
-import query from 'static/js/utils/api/query';
+import query from '../../src/static/js/utils/api/query';
+import generateOGImage from '../../src/static/js/utils/generateOGImage';
 
 // Components
 import Index from '../articles/index';
@@ -11,10 +12,13 @@ export const getStaticProps: GetStaticProps = async () => {
     const { copy, headings } = await query('/content/ui');
     const { fridayTips } = await query('/content/friday-tips');
 
+    const ogImage = await generateOGImage('/friday-tips', { title: headings.latestFridayTips, image: '/img/friday-tips.jpg' });
+
     return {
         props: {
             items: fridayTips,
             pageTitle: headings.latestFridayTips || null,
+            pageImage: ogImage || null,
             pageCopy: copy.fridayTipsLead || null,
             src: '/img/friday-tips.jpg',
             alt: '',

@@ -2,8 +2,9 @@
 import { GetStaticProps } from 'next';
 
 // Uitls
-import query from 'static/js/utils/api/query';
-import { ArticleInterface } from 'static/js/utils/Interfaces/Interfaces';
+import query from '../../src/static/js/utils/api/query';
+import generateOGImage from '../../src/static/js/utils/generateOGImage';
+import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 
 // Components
 import Index from '../articles/[slug]';
@@ -21,9 +22,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { headings } = await query('/content/ui');
     const { fridayTips } = await query('/content/friday-tips');
 
+    const articleData = fridayTips.find((fridayTip: ArticleInterface) => context && context.params ? fridayTip.slug === context.params.slug : false);
+
+    const ogImage = await generateOGImage(`/friday-tips_${articleData.slug}`, { title: articleData.title, image: articleData.teaserImage, date: articleData.date });
+
     return {
         props: {
-            article: fridayTips.find((fridayTip: ArticleInterface) => context && context.params ? fridayTip.slug === context.params.slug : false) || null,
+            pageImage: ogImage || null,
+            article: articleData || null,
             relatedArticles: fridayTips.filter((fridayTip: ArticleInterface) => context && context.params ? fridayTip.slug !== context.params.slug : false),
             showGenericSiteHeader: false,
             type: 'friday-tips',

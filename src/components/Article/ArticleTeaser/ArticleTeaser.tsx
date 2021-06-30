@@ -13,7 +13,7 @@ import formatDate from '../../../static/js/utils/formatDate';
 import Tag from '../../Tag/Tag';
 
 // Component
-const ArticleTeaser = ({ body, date, intro, tags: articleTags, slug, teaserCopy, teaserImage, title, as, href, ...attributes }: ArticleInterface) => {
+const ArticleTeaser = ({ date, tags: articleTags, teaserCopy, teaserImage, title, as, href, ...attributes }: ArticleInterface) => {
     const dictionary = getDictionary();
 
     // NOTE: TS made me do it :/

@@ -14,6 +14,8 @@ const fetchFromLocalMarkdown = (path: string) => {
             return { dictionary: getDictionary(), copy: getCopy(), headings: getHeadings() };
         case '/content/work-and-education':
             return { workExperience: getWorkExperience(), education: getEducation() };
+        case '/og/image':
+            return { buffer: '' };
         default:
             return {};
     }

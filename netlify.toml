@@ -1,0 +1,5 @@
+[build]
+  command = "NODE_ENV=production npm run build"
+[functions]
+  directory = "my_functions"
+  external_node_modules = ["chrome-aws-lambda", "puppeteer", "puppeteer-core"]

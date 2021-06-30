@@ -45,3 +45,9 @@ export interface TagInterface {
     key: string,
     value: string
 }
+
+export interface OGImageRequestInterface {
+    title?: string | string[],
+    date?: string | string[],
+    image?: string | string[]
+}
