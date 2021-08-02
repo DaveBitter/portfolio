@@ -14,7 +14,7 @@ export const getStaticPaths = async () => {
 
     return {
         paths: fridayTips.map((fridayTip: ArticleInterface) => ({ params: { slug: fridayTip.slug } })),
-        fallback: false
+        fallback: 'blocking'
     };
 };
 
