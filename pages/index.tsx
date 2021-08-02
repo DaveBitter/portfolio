@@ -73,7 +73,7 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
             </div>
 
             {hasMoreFridayTips && <div className='g8'>
-                <Link href='/quick-bits'>
+                <Link href='/friday-tips'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllFridayTips}</a>
                 </Link>
             </div>}
