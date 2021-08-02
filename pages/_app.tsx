@@ -24,7 +24,7 @@ import SiteFooter from '../src/components/Site/SiteFooter/SiteFooter';
 import SiteBreadCrumbs from '../src/components/Site/SiteBreadCrumbs/SiteBreadCrumbs';
 
 // Component
-if (process.env.NODE_ENV !== 'development') {
+if (process.env.NODE_ENV !== 'development' && !process.env.CI) {
     console.info('%cHey fellow dev!', 'color: #ff5420; font-size: 2rem')
     console.info('%cMake sure to take have a look at https://github.com/davebitter', 'color: #8d9297; font-size: 1rem')
 }

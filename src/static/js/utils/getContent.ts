@@ -4,7 +4,6 @@ import dictionary from '../../../../content/general/dictionary.md';
 import headings from '../../../../content/general/headings.md';
 import tags from '../../../../content/general/tags.md';
 import quickBits from '../../../../content/articles/quickBits.md';
-import fridayTips from '../../../../content/videos/fridayTips.md';
 import workExperience from '../../../../content/resume/workExperience.md';
 import education from '../../../../content/resume/education.md';
 import { ArticleInterface, TagInterface } from './Interfaces/Interfaces';
@@ -30,7 +29,7 @@ export const getTags = () => convertToKeyValue(parseJSONMD(tags).attributes.item
 
 export const getQuickBits = () => parseJSONMD(quickBits).attributes.items.map((quickBit: ArticleInterface) => ({ ...quickBit, tags: populateTags(quickBit.tags) }));
 
-export const getFridayTips = () => parseJSONMD(fridayTips).attributes.items.map((fridayTip: ArticleInterface) => ({ ...fridayTip, tags: populateTags(fridayTip.tags) }));
+export const getFridayTips = () => [];
 
 export const getWorkExperience = () => parseJSONMD(workExperience).attributes.items;
 
