@@ -23,4 +23,4 @@ const fetchFromLocalMarkdown = (path: string) => {
 
 let baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000" : `https://davebitter.com`;
 
-export default async (path: string) => process.env.CI && path !== '/content/friday-tips' ? fetchFromLocalMarkdown(path) : await fetch(`${baseUrl}/api${path}`).then((res) => res.json()).catch(() => fetchFromLocalMarkdown(path));
+export default async (path: string) => await fetch(`${baseUrl}/api${path}`).then((res) => res.json()).catch(() => fetchFromLocalMarkdown(path));
