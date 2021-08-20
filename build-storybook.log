@@ -1,0 +1,15 @@
+info @storybook/react v6.2.9
+info 
+info => Cleaning outputDir: /var/folders/gp/4pvtpd6x23scn4t5rkkd8g_h0000gn/T/chromatic--18474-1QNR0T1LGovi
+ERR! Error: You have both a "main" and a "config". Please remove the "config" file from your configDir (/Users/davebitter/code/portfolio/.storybook/config)
+ERR!     at validateConfigurationFiles (/Users/davebitter/code/portfolio/node_modules/@storybook/core-common/dist/cjs/utils/validate-configuration-files.js:57:11)
+ERR!     at loadCustomPresets (/Users/davebitter/code/portfolio/node_modules/@storybook/core-common/dist/cjs/utils/load-custom-presets.js:19:62)
+ERR!     at loadAllPresets (/Users/davebitter/code/portfolio/node_modules/@storybook/core-common/dist/cjs/presets.js:310:105)
+ERR!     at buildStaticStandalone (/Users/davebitter/code/portfolio/node_modules/@storybook/core-server/dist/cjs/build-static.js:95:48)
+ERR!     at buildStatic (/Users/davebitter/code/portfolio/node_modules/@storybook/core-server/dist/cjs/build-static.js:142:5)
+ERR!  Error: You have both a "main" and a "config". Please remove the "config" file from your configDir (/Users/davebitter/code/portfolio/.storybook/config)
+ERR!     at validateConfigurationFiles (/Users/davebitter/code/portfolio/node_modules/@storybook/core-common/dist/cjs/utils/validate-configuration-files.js:57:11)
+ERR!     at loadCustomPresets (/Users/davebitter/code/portfolio/node_modules/@storybook/core-common/dist/cjs/utils/load-custom-presets.js:19:62)
+ERR!     at loadAllPresets (/Users/davebitter/code/portfolio/node_modules/@storybook/core-common/dist/cjs/presets.js:310:105)
+ERR!     at buildStaticStandalone (/Users/davebitter/code/portfolio/node_modules/@storybook/core-server/dist/cjs/build-static.js:95:48)
+ERR!     at buildStatic (/Users/davebitter/code/portfolio/node_modules/@storybook/core-server/dist/cjs/build-static.js:142:5)

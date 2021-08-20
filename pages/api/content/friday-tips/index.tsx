@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const fridayTips = items
         .filter(({ snippet }: any) => snippet.title !== 'Private video')
-        .map(convertYoutubeDataToFridayTip).reverse();
+        .map(convertYoutubeDataToFridayTip);
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
