@@ -41,6 +41,10 @@
         @include mq($mq-desk--lrg) {
             width: 60%;
         }
+
+        .h5 p {
+            @extend .h5;
+        }
     }
 
     &__chart {

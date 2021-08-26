@@ -1,41 +1,22 @@
 ---
 items:
   - body: >-
-      At Frontmen, I am responsible for building interactive web applications and front-end component libraries. I touch the roles of front-end developer, visual designer, interaction designer, back-end developer and DevOps engineer with a focus on front-end development. My main focus is building interactive (React.js and Next.js) web applications while being involved in the design and development process from front to back. This includes, but is not limited to:
+      At Frontmen, I work as a Front-end Developer and Consultant for projects that involve building state of the art human-centred web applications using Next.js, React.js and the power of the web. I help teams achieve great results from this expertise. I work as a point of contact for all people working in development, design and more.
 
 
-      * crafting components together with visual and interaction designers
-
-      * setting up front-end architectures
-
-      * handling global states
-
-      * handling data between front-end and back-end
-
-      * ensuring accessibility
-
-      * (consulting about) performance optimisations
-
-      * search engine optimisation
-
-      * setting up CI/CD
-
-      * writing tests and documentation
+      Next to this, I work on setting up, maintaining and scaling design systems and component libraries for large teams to work with. I evaluate current processes and improve them together with teams to ensure the best possible way of working. I'm a great communicator and am always available to help anybody who needs assistance.
 
 
-      Next to this, I work on building component libraries with HTML, CSS (SASS) and vanilla JS. This can result in just a component library to be used by a development team or in a standalone website.
-
-
-      Next to that, I utilize my broad skill set to be the bridge between the design, front-end and back-end teams. I get
-      a lot of energy out of helping my team in this role. I speak both the design and the technical language which makes me a great fit for this role. Naturally, this results in me being a great point of contact for a variety of stakeholders. I have the natural confidence and communicative abilities to successfully take the lead through this role. This makes me a great asset to any team.
-
-
-      Finally, I am an avid supporter of sharing knowledge. I do this regularly through giving code reviews, giving presentations, writing articles, giving guest lectures, giving workshops and speaking at meetups. It brings me great joy and fills me with energy to help others grow in a meaningful way.
+      Finally, I work as a Developer Advocate. As a Developer Advocate, I'm continuously on the hunt to learn new techniques, tools and possibilities and share them. I share the wonderful world of the web in the form of speaking at meetups, speaking at conferences, creating video content, writing articles and more.
     company: Frontmen
     companyWebsite: https://frontmen.nl
     roles:
-      - role: Senior Front-end developer
+      - role: Senior Front-end Developer/Consultant
         startDate: 2021-06-01T00:00:00.000Z
+        endDate: 2021-01-01T00:00:00.000Z
+        present: true
+      - role: Developer Advocate
+        startDate: 2021-08-01T00:00:00.000Z
         endDate: 2021-01-01T00:00:00.000Z
         present: true
     startDate: 2021-06-01T00:00:00.000Z

@@ -1,9 +1,10 @@
 // Libs
 import Link from 'next/link';
 import React from 'react';
-import { getCopy, getDictionary } from '../../../static/js/utils/getContent';
 
 // Utils
+import { getCopy, getDictionary } from '../../../static/js/utils/getContent';
+import compileMarkdownToJSX from '../../../static/js/utils/compileMarkdownToJSX';
 
 // Resources
 
@@ -26,7 +27,7 @@ const ResumePitch = ({ hasResumeLink, ...attributes }: IProps) => {
                 <div className='resume-pitch__intro-wrapper' data-reveal-in-view>
                     <video className='resume-pitch__intro' src='/video/dave-bitter-intro.mp4' poster='/img/dave-bitter-intro.jpg' controls />
                 </div>
-                <p className='h4' data-reveal-in-view>{copy.elevatorPitch}</p>
+                <div className='h5' dangerouslySetInnerHTML={{ __html: compileMarkdownToJSX(copy.elevatorPitch) }} data-reveal-in-view />
             </div>
             <div className='resume-pitch__chart'><ResumeProfileChart /></div>
         </div>

@@ -37,7 +37,7 @@
             margin: 0;
             font-weight: $font-weight-bold;
 
-            .resume-work-experience__item-roles-item[data-is-latest='false'] & {
+            .resume-work-experience__item-roles-item[data-is-finished='true'] & {
                 @include text-xs;
                 color: $color-gray-dark;
             }
@@ -47,7 +47,7 @@
         &-location {
             color: $color-gray;
 
-            .resume-work-experience__item-roles-item[data-is-latest='false'] & {
+            .resume-work-experience__item-roles-item[data-is-finished='true'] & {
                 @include text-xs;
                 color: $color-gray-darker;
             }

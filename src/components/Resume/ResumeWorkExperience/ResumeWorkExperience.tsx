@@ -29,7 +29,7 @@ const ResumeWorkExperience = ({ workExperience = [], ...attributes }: IProps) =>
             </h3>
             <p className='resume-work-experience__item-duration' data-reveal-in-view>{getDurationString(startDate, endDate, present)}</p>
             <ul className='resume-work-experience__item-roles'>
-                {roles.map(({ role, startDate, endDate, present }, index: number) => <li className='resume-work-experience__item-roles-item' data-is-latest={index === 0} data-reveal-in-view key={`${role}-${startDate}`}>
+                {roles.map(({ role, startDate, endDate, present }, index: number) => <li className='resume-work-experience__item-roles-item' data-is-finished={index !== 0 && !present} data-reveal-in-view key={`${role}-${startDate}`}>
                     <p className='resume-work-experience__item-role'>{role}</p>
                     <div>
                         <time className='resume-work-experience__item-date' dateTime={`${startDate}`}>{formatDate(`${startDate}`, { month: 'long', year: 'numeric' })} - </time>
