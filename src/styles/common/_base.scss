@@ -11,6 +11,7 @@ body,
 body {
     padding-top: $spacing-med;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 
     &::before {
         z-index: -1;

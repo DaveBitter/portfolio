@@ -53,13 +53,11 @@
 
         @include mq($mq-desk--med) {
             width: 50%;
-            margin-bottom: -$spacing-lrg;
         }
 
         @include mq($mq-desk--lrg) {
             width: 40%;
             padding-left: $spacing-xl;
-            margin-bottom: -$spacing-xxl;
         }
     }
 
