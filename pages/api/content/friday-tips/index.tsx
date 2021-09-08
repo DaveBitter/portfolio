@@ -4,7 +4,7 @@ import convertYoutubeDataToFridayTip from 'static/js/utils/convertYoutubeDataToF
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const baseURL = "https://www.googleapis.com/youtube/v3/";
-    const playlistId = "PLsES66lgcKHD9oRnyN3PEvyTjWXJF4IgT";
+    const playlistId = "AIzaSyA2cTY2EnBIr4iSGrIkCZAqzL85UDwhnqI";
 
     const { items } = await fetch(`${baseURL}playlistItems?maxResults=50&part=snippet,contentDetails&playlistId=${playlistId}&key=${process.env.YOUTUBE_API_KEY}`)
         .then(res => res.json())
