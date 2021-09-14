@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next'
 import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 import { ArticleTypeType } from '../../src/static/js/utils/Interfaces/Types';
-import generateOGImage from '../../src/static/js/utils/generateOGImage';
+import getOGImage from '../../src/static/js/utils/getOGImage';
 
 // Resources
 
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const { copy, headings } = await query('/content/ui');
     const { articles } = await query('/content/articles');
 
-    const ogImage = await generateOGImage('/articles', { title: headings.latestArticles, image: '/img/articles.jpg' });
+    const ogImage = await getOGImage('/articles', { title: headings.latestArticles, image: '/img/articles.jpg' });
 
     return {
         props: {

@@ -4,7 +4,7 @@ import { GetStaticProps } from 'next';
 // Uitls
 import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
-import generateOGImage from '../../src/static/js/utils/generateOGImage';
+import getOGImage from '../../src/static/js/utils/getOGImage';
 
 // Components
 import Index from '../articles/[slug]';
@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const articleData = quickBits.find((quickBit: ArticleInterface) => context && context.params ? quickBit.slug === context.params.slug : false);
 
-    const ogImage = await generateOGImage(`/quick-bits_${articleData.slug}`, { title: articleData.title, image: articleData.teaserImage, date: articleData.date });
+    const ogImage = await getOGImage(`/quick-bits_${articleData.slug}`, { title: articleData.title, image: articleData.teaserImage, date: articleData.date });
 
     return {
         props: {

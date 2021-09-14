@@ -4,7 +4,7 @@ import query from './api/query';
 import generateQueryString from './generateQueryString';
 import { OGImageRequestInterface } from "./Interfaces/Interfaces";
 
-const generateOGImage = async (path: string, { title = 'davebitter.com', date, image }: OGImageRequestInterface) => {
+const getOGImage = async (path: string, { title = 'davebitter.com', date, image }: OGImageRequestInterface) => {
     if (process.env.NODE_ENV === 'development') {
         return path;
     }
@@ -35,4 +35,4 @@ const generateOGImage = async (path: string, { title = 'davebitter.com', date, i
     }
 };
 
-export default generateOGImage;
+export default getOGImage;

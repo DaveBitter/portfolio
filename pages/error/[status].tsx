@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next';
 // Utils
 import query from '../../src/static/js/utils/api/query';
 import { HTTPStatusCodeType } from '../../src/static/js/utils/Interfaces/Types';
-import generateOGImage from '../../src/static/js/utils/generateOGImage';
+import getOGImage from '../../src/static/js/utils/getOGImage';
 
 // Components
 
@@ -33,7 +33,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async () => {
     const { copy } = await query('/content/ui'); const status = '500';
 
-    const ogImage = await generateOGImage('/error', {});
+    const ogImage = await getOGImage('/error', {});
 
     return {
         props: {

@@ -12,7 +12,7 @@ import query from '../src/static/js/utils/api/query';
 import ArticleTeasers from '../src/components/Article/ArticleTeasers/ArticleTeasers';
 import ResumePitch from '../src/components/Resume/ResumePitch/ResumePitch';
 import { ArticleInterface, ContentObjectInterface } from '../src/static/js/utils/Interfaces/Interfaces';
-import generateOGImage from 'static/js/utils/generateOGImage';
+import getOGImage from 'static/js/utils/getOGImage';
 
 // Interface
 interface IProps {
@@ -95,7 +95,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const quickBitTeaserItems = quickBits.slice(0, 3);
     const fridayTipTeaserItems = fridayTips.slice(0, 3);
 
-    const ogImage = await generateOGImage('/index', {});
+    const ogImage = await getOGImage('/index', {});
 
     return {
         props: {

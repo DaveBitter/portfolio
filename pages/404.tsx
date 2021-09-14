@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import generateOGImage from '../src/static/js/utils/generateOGImage';
+import getOGImage from '../src/static/js/utils/getOGImage';
 import query from '../src/static/js/utils/api/query';
 import ErrorPage from './error/[status]';
 
@@ -7,7 +7,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const { copy } = await query('/content/ui');
     const status = '404';
 
-    const ogImage = await generateOGImage('/error', {});
+    const ogImage = await getOGImage('/error', {});
 
     return {
         props: {

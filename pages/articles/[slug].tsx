@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next'
 import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface, ContentObjectInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 import { ArticleTypeType } from '../../src/static/js/utils/Interfaces/Types';
-import generateOGImage from '../../src/static/js/utils/generateOGImage';
+import getOGImage from '../../src/static/js/utils/getOGImage';
 
 // Resources
 
@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const articleData = articles.find((article: ArticleInterface) => context && context.params ? article.slug === context.params.slug : false);
 
-    const ogImage = await generateOGImage(`/articles_${articleData.slug}`, { title: articleData.title, image: articleData.teaserImage, date: articleData.date });
+    const ogImage = await getOGImage(`/articles_${articleData.slug}`, { title: articleData.title, image: articleData.teaserImage, date: articleData.date });
 
     return {
         props: {
