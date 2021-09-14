@@ -21,6 +21,8 @@ items:
     value: A collection of my Quick Bits covering a wide range of topics
   - key: 'fridayTipsLead'
     value: A collection of my Friday Tips covering a wide range of topics
+  - key: 'talksLead'
+    value: A collection of my talks covering a wide range of topics
   - key: 'tagLead'
     value: A collection of articles covering {{tag}}
   - key: 'reachedEnd'

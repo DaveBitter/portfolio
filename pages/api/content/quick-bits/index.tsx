@@ -1,6 +1,6 @@
 // Utils
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getQuickBits } from 'static/js/utils/getContent';
+import { getQuickBits } from '../../../../src/static/js/utils/getContent';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const quickBits = getQuickBits();

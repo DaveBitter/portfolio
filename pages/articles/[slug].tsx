@@ -25,7 +25,7 @@ interface IProps {
 // Component
 const ArticlePage = ({ headings, article, relatedArticles, type }: IProps) => {
     return <>
-        <Article {...article} />
+        <Article {...article} articleType={type} />
 
         {!!relatedArticles.length && <div className='grid'>
             <div className='g2'>

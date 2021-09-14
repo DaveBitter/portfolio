@@ -32,12 +32,13 @@ export const getStaticProps: GetStaticProps = async () => {
     const { copy, headings } = await query('/content/ui');
     const { articles } = await query('/content/articles');
     const { quickBits } = await query('/content/quick-bits');
+    const { talks } = await query('/content/talks');
 
     const ogImage = await getOGImage('/tags_index', { title: headings.latestArticlesAndTags, image: '/img/articles.jpg' });
 
     return {
         props: {
-            items: [...articles, ...quickBits],
+            items: [...articles, ...quickBits, talks],
             pageTitle: headings.latestArticlesAndTags || null,
             pageCopy: copy.articlesAndTagsLead || null,
             pageImage: ogImage || null,

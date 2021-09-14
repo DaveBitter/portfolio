@@ -6,7 +6,8 @@ import tags from '../../../../content/general/tags.md';
 import quickBits from '../../../../content/articles/quickBits.md';
 import workExperience from '../../../../content/resume/workExperience.md';
 import education from '../../../../content/resume/education.md';
-import { ArticleInterface, TagInterface } from './Interfaces/Interfaces';
+import talks from '../../../../content/speaking/talks.md';
+import { ArticleInterface, TagInterface, TalkInterface } from './Interfaces/Interfaces';
 
 // Next.js and Storybook json loaders don't seem to work the same. Import could therfor be parsed and unparsed JSON
 const parseJSONMD = (_: string | object) => typeof _ === 'string' ? JSON.parse(_) : _
@@ -34,3 +35,5 @@ export const getFridayTips = () => [];
 export const getWorkExperience = () => parseJSONMD(workExperience).attributes.items;
 
 export const getEducation = () => parseJSONMD(education).attributes.items;
+
+export const getTalks = () => parseJSONMD(talks).attributes.items.map((talk: TalkInterface) => ({ ...talk, tags: populateTags(talk.tags) }));

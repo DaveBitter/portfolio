@@ -1,6 +1,6 @@
 // Utils
 import { NextApiRequest, NextApiResponse } from 'next';
-import convertYoutubeDataToFridayTip from 'static/js/utils/convertYoutubeDataToFridayTip';
+import convertYoutubeDataToFridayTip from '../../../../src/static/js/utils/convertYoutubeDataToFridayTip';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const baseURL = "https://www.googleapis.com/youtube/v3/";

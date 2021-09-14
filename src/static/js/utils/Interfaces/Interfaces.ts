@@ -14,6 +14,9 @@ export interface ArticleInterface {
     title: string,
     as: string,
     href: string,
+    city?: string,
+    countryCode?: string,
+    type?: string;
 }
 
 export interface WorkExperienceInterface {
@@ -39,6 +42,20 @@ export interface EducationInterface {
     city: string,
     countryCode: string,
     body: string
+}
+
+export interface TalkInterface {
+    summary: string;
+    title: string;
+    teaserCopy: string,
+    teaserImage: string,
+    slug: string;
+    tags: TagInterface[];
+    eventVideo?: string;
+    date: string;
+    type: 'meetup' | 'conference';
+    city: string;
+    countryCode: string;
 }
 
 export interface TagInterface {

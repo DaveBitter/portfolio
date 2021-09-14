@@ -16,6 +16,7 @@ module.exports = {
         "(quickBits)+(.md)$": "<rootDir>/config/tests/mocks/content/articles.ts",
         "(fridayTips)+(.md)$": "<rootDir>/config/tests/mocks/content/articles.ts",
         "(workExperience)+(.md)$": "<rootDir>/config/tests/mocks/content/workExperience.ts",
+        "(talks)+(.md)$": "<rootDir>/config/tests/mocks/content/talks.ts",
         "(education)+(.md)$": "<rootDir>/config/tests/mocks/content/education.ts",
         "\\.svg": "<rootDir>/config/tests/mocks/components/Svg.tsx"
     },

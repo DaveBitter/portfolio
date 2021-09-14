@@ -13,8 +13,10 @@ $article-header-height: 60vh;
         padding-bottom: $spacing-lrg;
         text-align: right;
 
-        @supports (mask: url('/img/shapes/blob-1.svg')) {
-            padding: $spacing-lrg;
+        @include mq($mq-tab--sml) {
+            @supports (mask: url('/img/shapes/blob-1.svg')) {
+                padding: $spacing-lrg;
+            }
         }
     }
 
