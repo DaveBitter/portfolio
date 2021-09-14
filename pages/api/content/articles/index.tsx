@@ -1,6 +1,6 @@
 // Utils
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getArticles } from 'static/js/utils/getContent';
+import { getArticles } from '../../../../src/static/js/utils/getContent';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const articles = getArticles();

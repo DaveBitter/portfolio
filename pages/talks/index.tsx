@@ -2,9 +2,9 @@
 import { GetStaticProps } from 'next';
 
 // Utils
-import query from 'static/js/utils/api/query';
-import convertTalkToArticleTeaser from 'static/js/utils/convertTalkToArticleTeaser';
-import getOGImage from 'static/js/utils/getOGImage';
+import query from '../../src/static/js/utils/api/query';
+import convertTalkToArticleTeaser from '../../src/static/js/utils/convertTalkToArticleTeaser';
+import getOGImage from '../../src/static/js/utils/getOGImage';
 
 // Component
 import Index from '../articles/index';

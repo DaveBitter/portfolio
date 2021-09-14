@@ -26,6 +26,12 @@ items:
     value: View all Friday Tips
   - key: 'viewAllTalks'
     value: View all talks
+  - key: 'guest-lecture'
+    value: Guest lecture
+  - key: 'meetup'
+    value: Meetup
+  - key: 'conference'
+    value: Conference
   - key: 'heroImage'
     value: Hero image
   - key: 'linkedIn'

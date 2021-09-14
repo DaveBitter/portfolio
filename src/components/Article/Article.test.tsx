@@ -13,7 +13,7 @@ const setup = (props: any) => {
         ...props
     };
 
-    const wrapper = mount(<Article {..._props} type='articles' />);
+    const wrapper = mount(<Article {..._props} articleType='articles' />);
 
     return {
         _props,

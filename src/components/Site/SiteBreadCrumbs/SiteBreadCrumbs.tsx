@@ -4,7 +4,7 @@ import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 
 // Utils
-import { getArticles, getDictionary, getFridayTips, getQuickBits, getTags } from '../../../static/js/utils/getContent';
+import { getArticles, getDictionary, getFridayTips, getQuickBits, getTags, getTalks } from '../../../static/js/utils/getContent';
 
 // Resources
 import Logo from '../../../static/img/logo.svg'
@@ -19,17 +19,18 @@ const dictionary = getDictionary();
 const articles = getArticles();
 const quickBits = getQuickBits();
 const fridayTips = getFridayTips();
+const talks = getTalks();
 const tags = getTags();
 const getLabelFromParam = (value: string, subPath: string) => {
     switch (subPath) {
         case 'quick-bits':
-            return dictionary.quickBits
+            return dictionary.quickBits;
         case 'friday-tips':
-            return dictionary.fridayTips
+            return dictionary.fridayTips;
         case '[tag]':
             return tags[value] || value;
         case '[slug]':
-            return ([...articles, ...quickBits, ...fridayTips].find(({ slug }) => slug === value) || {}).title || value;
+            return ([...articles, ...quickBits, ...fridayTips, ...talks].find(({ slug }) => slug === value) || {}).title || value;
         case '_error':
             return dictionary.error;
         default:

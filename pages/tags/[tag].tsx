@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next';
 import query from '../../src/static/js/utils/api/query';
 import { ArticleInterface, ContentObjectInterface, TagInterface, TalkInterface } from '../../src/static/js/utils/Interfaces/Interfaces';
 import getOGImage from '../../src/static/js/utils/getOGImage';
-import convertTalkToArticleTeaser from 'static/js/utils/convertTalkToArticleTeaser';
+import convertTalkToArticleTeaser from '../../src/static/js/utils/convertTalkToArticleTeaser';
 
 // Resources
 

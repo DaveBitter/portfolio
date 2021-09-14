@@ -14,6 +14,9 @@ export interface ArticleInterface {
     title: string,
     as: string,
     href: string,
+    city?: string,
+    countryCode?: string,
+    type?: string;
 }
 
 export interface WorkExperienceInterface {

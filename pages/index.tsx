@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 // Utils
 import query from '../src/static/js/utils/api/query';
-import convertTalkToArticleTeaser from 'static/js/utils/convertTalkToArticleTeaser';
+import convertTalkToArticleTeaser from '../src/static/js/utils/convertTalkToArticleTeaser';
 import { ArticleInterface, ContentObjectInterface } from '../src/static/js/utils/Interfaces/Interfaces';
-import getOGImage from 'static/js/utils/getOGImage';
+import getOGImage from '../src/static/js/utils/getOGImage';
 
 // Resources
 
@@ -42,6 +42,20 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
 
         <div className='grid'>
             <div className='g2'>
+                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestTalks}</h2>
+                <p className='h4' data-reveal-in-view>{copy.talksLead}</p>
+                <ArticleTeasers type='talks' articles={talkTeaserItems} />
+            </div>
+
+            {hasMoreTalks && <div className='g8'>
+                <Link href='/talks'>
+                    <a className='button-link' data-reveal-in-view>{dictionary.viewAllTalks}</a>
+                </Link>
+            </div>}
+        </div>
+
+        <div className='grid'>
+            <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.latestArticles}</h2>
                 <p className='h4' data-reveal-in-view>{copy.articlesLead}</p>
                 <ArticleTeasers type='articles' articles={articleTeaserItems} />
@@ -64,20 +78,6 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
             {hasMoreQuickBits && <div className='g8'>
                 <Link href='/quick-bits'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllQuickBits}</a>
-                </Link>
-            </div>}
-        </div>
-
-        <div className='grid'>
-            <div className='g2'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestTalks}</h2>
-                <p className='h4' data-reveal-in-view>{copy.talksLead}</p>
-                <ArticleTeasers type='talks' articles={talkTeaserItems} />
-            </div>
-
-            {hasMoreTalks && <div className='g8'>
-                <Link href='/talks'>
-                    <a className='button-link' data-reveal-in-view>{dictionary.viewAllTalks}</a>
                 </Link>
             </div>}
         </div>

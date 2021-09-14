@@ -1,6 +1,6 @@
 // Libs
 import { GetStaticProps } from 'next';
-import convertTalkToArticleTeaser from 'static/js/utils/convertTalkToArticleTeaser';
+import convertTalkToArticleTeaser from '../../src/static/js/utils/convertTalkToArticleTeaser';
 
 // Uitls
 import query from '../../src/static/js/utils/api/query';
