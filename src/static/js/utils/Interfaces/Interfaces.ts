@@ -41,6 +41,20 @@ export interface EducationInterface {
     body: string
 }
 
+export interface TalkInterface {
+    summary: string;
+    title: string;
+    teaserCopy: string,
+    teaserImage: string,
+    slug: string;
+    tags: TagInterface[];
+    eventVideo?: string;
+    date: string;
+    type: 'meetup' | 'conference';
+    city: string;
+    countryCode: string;
+}
+
 export interface TagInterface {
     key: string,
     value: string

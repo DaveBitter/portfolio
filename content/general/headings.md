@@ -12,6 +12,8 @@ items:
     value: Latest Quick Bits
   - key: 'latestFridayTips'
     value: Latest Friday Tips
+  - key: 'latestTalks'
+    value: Latest talks
   - key: 'readOn'
     value: Read on
   - key: 'watchMore'

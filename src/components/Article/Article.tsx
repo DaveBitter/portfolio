@@ -7,6 +7,7 @@ import { ArticleInterface, TagInterface } from '../../static/js/utils/Interfaces
 import formatDate from '../../static/js/utils/formatDate';
 import ArticleElementEnricher from '../../static/js/utils/ArticleElementEnricher';
 import compileMarkdownToJSX from '../../static/js/utils/compileMarkdownToJSX';
+import { ArticleTypeType } from 'static/js/utils/Interfaces/Types';
 
 // Resources
 
@@ -14,8 +15,13 @@ import compileMarkdownToJSX from '../../static/js/utils/compileMarkdownToJSX';
 import Tag from '../Tag/Tag';
 import Share from '../Share/Share';
 
+// Interface
+interface IProps {
+    type: ArticleTypeType
+}
+
 // Component
-const Article = ({ body, date, intro, tags: articleTags, slug, teaserCopy, teaserImage, title, ...attributes }: ArticleInterface) => {
+const Article = ({ type, body, date, intro, tags: articleTags, teaserImage, title, ...attributes }: ArticleInterface & IProps) => {
     const articleContent = useRef<null | HTMLDivElement>(null);
     useEffect(() => {
         new ArticleElementEnricher(articleContent.current, null);
@@ -41,7 +47,7 @@ const Article = ({ body, date, intro, tags: articleTags, slug, teaserCopy, tease
             </div>
         </header>
         <section className='g6'>
-            <p className='article__intro' data-reveal-in-view><strong>{intro}</strong></p>
+            {type !== 'talks' && <p className='article__intro' data-reveal-in-view><strong>{intro}</strong></p>}
             {body && <div className='article__body' dangerouslySetInnerHTML={{ __html: compileMarkdownToJSX(body) }} ref={articleContent} data-reveal-in-view />}
         </section>
         <Share />

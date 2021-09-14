@@ -1,4 +1,4 @@
-import { getArticles, getCopy, getDictionary, getEducation, getFridayTips, getHeadings, getQuickBits, getTags, getWorkExperience } from "../getContent";
+import { getArticles, getCopy, getDictionary, getEducation, getFridayTips, getHeadings, getQuickBits, getTags, getTalks, getWorkExperience } from "../getContent";
 
 const fetchFromLocalMarkdown = (path: string) => {
     switch (path) {
@@ -14,6 +14,8 @@ const fetchFromLocalMarkdown = (path: string) => {
             return { dictionary: getDictionary(), copy: getCopy(), headings: getHeadings() };
         case '/content/work-and-education':
             return { workExperience: getWorkExperience(), education: getEducation() };
+        case '/content/talks':
+            return { talks: getTalks() };
         case '/og/image':
             return { buffer: '' };
         default:

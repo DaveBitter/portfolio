@@ -10,6 +10,8 @@ items:
     value: Friday Tips
   - key: 'articles'
     value: Articles
+  - key: 'talks'
+    value: Talks
   - key: 'tags'
     value: Tags
   - key: 'read'
@@ -22,6 +24,8 @@ items:
     value: View all Quick Bits
   - key: 'viewAllFridayTips'
     value: View all Friday Tips
+  - key: 'viewAllTalks'
+    value: View all talks
   - key: 'heroImage'
     value: Hero image
   - key: 'linkedIn'

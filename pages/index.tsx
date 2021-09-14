@@ -5,14 +5,15 @@ import Link from 'next/link';
 
 // Utils
 import query from '../src/static/js/utils/api/query';
+import convertTalkToArticleTeaser from 'static/js/utils/convertTalkToArticleTeaser';
+import { ArticleInterface, ContentObjectInterface } from '../src/static/js/utils/Interfaces/Interfaces';
+import getOGImage from 'static/js/utils/getOGImage';
 
 // Resources
 
 // Components
 import ArticleTeasers from '../src/components/Article/ArticleTeasers/ArticleTeasers';
 import ResumePitch from '../src/components/Resume/ResumePitch/ResumePitch';
-import { ArticleInterface, ContentObjectInterface } from '../src/static/js/utils/Interfaces/Interfaces';
-import getOGImage from 'static/js/utils/getOGImage';
 
 // Interface
 interface IProps {
@@ -21,14 +22,16 @@ interface IProps {
     headings: ContentObjectInterface,
     articleTeaserItems: ArticleInterface[],
     quickBitTeaserItems: ArticleInterface[],
+    talkTeaserItems: ArticleInterface[],
     fridayTipTeaserItems: ArticleInterface[],
     hasMoreArticles: boolean,
     hasMoreQuickBits: boolean,
+    hasMoreTalks: boolean,
     hasMoreFridayTips: boolean
 }
 
 // Component
-const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserItems, fridayTipTeaserItems, hasMoreArticles, hasMoreQuickBits, hasMoreFridayTips }: IProps) => {
+const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserItems, talkTeaserItems, fridayTipTeaserItems, hasMoreArticles, hasMoreQuickBits, hasMoreTalks, hasMoreFridayTips }: IProps) => {
     return <>
         <div className='grid'>
             <div className='g4'>
@@ -67,6 +70,20 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
 
         <div className='grid'>
             <div className='g2'>
+                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestTalks}</h2>
+                <p className='h4' data-reveal-in-view>{copy.talksLead}</p>
+                <ArticleTeasers type='talks' articles={talkTeaserItems} />
+            </div>
+
+            {hasMoreTalks && <div className='g8'>
+                <Link href='/talks'>
+                    <a className='button-link' data-reveal-in-view>{dictionary.viewAllTalks}</a>
+                </Link>
+            </div>}
+        </div>
+
+        <div className='grid'>
+            <div className='g2'>
                 <h2 className='text-colored h1' data-reveal-in-view>{headings.latestFridayTips}</h2>
                 <p className='h4' data-reveal-in-view>{copy.fridayTipsLead}</p>
                 <ArticleTeasers type='friday-tips' articles={fridayTipTeaserItems} />
@@ -86,13 +103,16 @@ export const getStaticProps: GetStaticProps = async () => {
     const { articles } = await query('/content/articles');
     const { quickBits } = await query('/content/quick-bits');
     const { fridayTips } = await query('/content/friday-tips');
+    const { talks } = await query('/content/talks');
 
     const hasMoreArticles = articles.length > 3;
     const hasMoreQuickBits = quickBits.length > 3;
+    const hasMoreTalks = talks.length > 3;
     const hasMoreFridayTips = fridayTips.length > 3;
 
     const articleTeaserItems = articles.slice(0, 3);
     const quickBitTeaserItems = quickBits.slice(0, 3);
+    const talkTeaserItems = talks.map(convertTalkToArticleTeaser).slice(0, 3);
     const fridayTipTeaserItems = fridayTips.slice(0, 3);
 
     const ogImage = await getOGImage('/index', {});
@@ -109,9 +129,11 @@ export const getStaticProps: GetStaticProps = async () => {
             dictionary,
             articleTeaserItems,
             quickBitTeaserItems,
+            talkTeaserItems,
             fridayTipTeaserItems,
             hasMoreArticles,
             hasMoreQuickBits,
+            hasMoreTalks,
             hasMoreFridayTips
         }
     };

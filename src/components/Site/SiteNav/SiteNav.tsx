@@ -26,7 +26,7 @@ const getNavigationItems = (dictionary: ContentObjectInterface) => [
     { label: dictionary.articles, href: '/articles', Icon: ArticlesIcon },
     { label: dictionary.quickBits, href: '/quick-bits', Icon: QuickBitsIcon },
     { label: dictionary.home, href: '/', Icon: HomeIcon },
-    { label: dictionary.fridayTips, href: '/friday-tips', Icon: VideoIcon },
+    { label: dictionary.talks, href: '/talks', Icon: VideoIcon },
     { label: dictionary.resume, href: '/resume', Icon: ResumeIcon },
 ];
 
