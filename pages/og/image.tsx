@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
     return {
         props: {
-            isStandAlone: true,
+            isStandAlone: true, // Strip all generic partials
             ...(title && { title }),
             ...(date && { date }),
             ...(image && { image })

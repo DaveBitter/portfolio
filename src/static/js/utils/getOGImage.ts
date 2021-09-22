@@ -6,7 +6,7 @@ import { OGImageRequestInterface } from "./Interfaces/Interfaces";
 
 const getOGImage = async (path: string, { title = 'davebitter.com', date, image }: OGImageRequestInterface) => {
     if (process.env.NODE_ENV === 'development') {
-        return path;
+        return image;
     }
 
     const ogImageDir = './public/img/_generated';
