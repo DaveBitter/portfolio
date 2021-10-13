@@ -2,7 +2,7 @@ export default {
     attributes: {
         items: [
             {
-                summary: 'This is a mock talk',
+                body: 'This is a mock talk',
                 title: 'Mock talk',
                 teaserCopy: 'This is a mock talk',
                 teaserImage: 'This is a mock talk',
