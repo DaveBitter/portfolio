@@ -56,9 +56,9 @@ items:
       ```jsx
 
       const foo = async () => {
-        const a = await bar().catch(error => handle(error)); // or .catch(error)
-        const b = await bar(a).catch(error => handle(error)); // or .catch(error)
-        const c = await bar(b).catch(error => handle(error)); // or .catch(error)
+        const a = await bar().catch(error => handle(error)); // or .catch(handle)
+        const b = await bar(a).catch(error => handle(error)); // or .catch(handle)
+        const c = await bar(b).catch(error => handle(error)); // or .catch(handle)
 
         return a + b + c;
       };
@@ -89,7 +89,7 @@ items:
         const [dataB, errorB] = await helper(dataA);
         const [dataC, errorC] = await helper(dataB);
 
-        return a + b + c;
+        return dataA + dataB + dataC;
       }
 
       ```
@@ -107,7 +107,7 @@ items:
         const [dataB, errorB] = await helper(dataA);
         const [dataC, errorC] = await helper(dataB);
 
-        return a + b + c;
+        return dataA + dataB + dataC;
       }
 
       ```

@@ -45,7 +45,7 @@ export interface EducationInterface {
 }
 
 export interface TalkInterface {
-    body: string;
+    summary: string;
     title: string;
     teaserCopy: string,
     teaserImage: string,

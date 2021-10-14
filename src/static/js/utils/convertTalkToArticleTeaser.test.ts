@@ -4,7 +4,7 @@ import { TalkInterface } from "./Interfaces/Interfaces";
 
 // Test constants
 const mockTalk: TalkInterface = {
-    body: 'This is a mock talk',
+    summary: 'This is a mock talk',
     title: 'Mock talk',
     teaserCopy: 'This is a mock talk',
     teaserImage: 'This is a mock talk',

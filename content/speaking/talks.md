@@ -1,10 +1,7 @@
 ---
 items:
-  - body: >-
+  - summary: >-
       We all know how you can add an OG image to your website. But did you know it is quite easy to generate custom, freshly designed and stateful images which make you stand out from the crowd? You might have seen this before. GitHub leverages this to create awesome images which show general info about your PR's. Curious, like me, how they did this? In this talk I will leverage the power of Next.js serverless function to generate these images on the fly!
-
-
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/mTksuRErwG8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     title: Dynamically generate Open Graph images using Next.js serverless
     teaserCopy: >-
       Did you know it is quite easy to generate custom, freshly designed and stateful images which make you stand out from the crowd?
@@ -18,7 +15,7 @@ items:
     type: meetup
     city: Amsterdam
     countryCode: NL
-  - body: >-
+  - summary: >-
       Going for React.js can introduce quite a few new challenges like server-side render support, performance, SEO and more. In this talk, I go over how I solve those challenges by using Next.js, "The React Framework for Production".
     title: How I leveraged Next.js to solve my issues with React.js
     teaserCopy: >-
@@ -33,7 +30,7 @@ items:
     type: meetup
     city: Utrecht
     countryCode: NL
-  - body: >-
+  - summary: >-
       The range of different type of front-end developers is vast. A t-shaped front-end designer can be the person connecting multiple disciplines in a project team. How does this work in practice and what benefits are seen?
     title: The front-end designer in the wild
     teaserCopy: >-
@@ -48,7 +45,7 @@ items:
     type: guest-lecture
     city: Amsterdam
     countryCode: NL
-  - body: >-
+  - summary: >-
       Going for React.js can introduce quite a few new challenges like server-side render support, performance, SEO and more. In this talk, I go over how I solve those challenges by using Next.js, "The React Framework for Production" to progressively enhance your SPA.
     title: Building SPA the responsible way
     teaserCopy: >-
@@ -64,7 +61,7 @@ items:
     type: guest-lecture
     city: Amsterdam
     countryCode: NL
-  - body: >-
+  - summary: >-
       Writing (React.js) components can be very difficult. There are a lot of things to consider whil writing components for a project of any size. In this talk we take a look at some best practices for you and your team to follow. We do all of this while looking at code examples of an NPM drinking game!
     title: N ways to write better React components for your next Nerdy Party Machine
     teaserCopy: >-
