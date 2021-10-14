@@ -2,6 +2,7 @@ export default {
     attributes: {
         items: [
             {
+                type: 'talks',
                 summary: 'This is a mock talk',
                 title: 'Mock talk',
                 teaserCopy: 'This is a mock talk',
@@ -9,7 +10,7 @@ export default {
                 slug: 'mock-talk',
                 tags: [],
                 date: '2020-01-20T00:00:00.000Z',
-                type: 'meetup',
+                event: 'meetup',
                 city: 'Amsterdam',
                 countryCode: 'NL'
             }

@@ -1,6 +1,7 @@
 ---
 items:
-  - body: >-
+  - type: articles
+    body: >-
       ## Why should I use this at all?
 
       Internationalisation is hard. There are many ways different countries handle the formatting of numbers, currencies and dates. In Dutch, we write `DD/MM/YYYY` while in English you’d write `MM/DD/YYYY`. That’s a pretty well-known one, but do you know how we format large numbers with decimals in Dutch compared to English? In Dutch we use `100.000,11` while in English you’d write `100,000.11`. These might be familiar to you but what about French? In French, you’d write `100 000,11`. There are even more differences if we look at currencies. In Dutch, you’d write `€ 100.000,11` while in German you’d write `100.000,11 €` This is where it becomes difficult to write your own formatting functions. You’d not only have to know about these differences but would have to extend your formatting functions for every language that you’re going to support.
@@ -127,7 +128,8 @@ items:
       If you have worked with internationalisation in a project you know what a hassle it can be. Besides the regular content, you have to worry about the formatting of numbers, currencies and dates. In this article, we’ll go over how we can make this easier with Intl.
     teaserImage: /img/articles/internationalisation.jpg
     title: You should use the Intl browser API
-  - body: >-
+  - type: articles
+    body: >-
       ## Next.js ❤️ DX
 
       Next.js is already an amazing experience for developers. It was by no means a sluggish experience. With Next.js 10, startup times were improved up to 24% and processing times were decreased by 40%.
@@ -201,7 +203,8 @@ items:
       The team over at Vercel just announced Next.js 11. These are the important new updates to Next.js you need to know about.
     teaserImage: /img/articles/next-js-11-hero.jpg
     title: What's new in Next.js 11?
-  - body: >-
+  - type: articles
+    body: >-
       ## But!
 
       Before we start, let's debunk a few reasons why not to start writing that you probably told yourself.
@@ -249,7 +252,8 @@ items:
           Writing articles is one of the things I started doing fairly regularly over the past year. It took quite a while for me to get into it so I want to share why I write and why you should start.
     teaserImage: /img/articles/why-i-write-hero.jpg
     title: Why I write and you should too
-  - body: >-
+  - type: articles
+    body: >-
       ## The problem with waterfall
 
 
@@ -348,7 +352,8 @@ items:
        I strongly believe in the concept of leveraging design handoff in the browser. I noticed many benefits for me as a front-end developer and the designers I work with using this approach. In this blog post, you will find out why you should design in the browser, how it works and how to start
     teaserImage: /img/articles/design-handoff-browser.jpg
     title: Design handoff in the browser
-  - body: >-
+  - type: articles
+    body: >-
       ## Why did I need this?
 
       I'm a fairly social (read easily distracted) guy. In an office setting, this causes some self-inflicted issues for me. On the one hand, it's great to interact with all my colleagues, on the other hand, I lack the prolonged focus to be productive. It's easy to blame others for this, but why does it get even worse while working at home?
@@ -422,7 +427,8 @@ items:
       There is this view many developers share of having a productive coding session by crawling behind your laptop, put on your fancy noise-cancelling headphones and grinding out a few hours of work. I often fall for this novelty of hyper-productive work state in development. Since working full-time from home I noticed a serious decline in my productivity and focus. How is this possible and how can I resolve this?
     teaserImage: /img/articles/pomodoro-hero.jpg
     title: I build a neumorphic Pomodoro to stay sane
-  - body: >-
+  - type: articles
+    body: >-
       ## Ultra quick setup
 
       Many of the people I speak to regarding [React.js](https://reactjs.org/) use [Create React App](https://github.com/facebook/create-react-app) (CRA) to quickly bootstrap applications. It would be great if [Next.js](https://nextjs.org/) had something similar. Let's call it Create Next App (CNA). Well, it exists! [Vercel](https://vercel.com/), the company behind Next.js has created [CNA](https://nextjs.org/docs/api-reference/create-next-app). Let's have a look.
@@ -550,7 +556,8 @@ items:
       Many of my articles regarding Next.js are intermediate to advanced. Even though there are many articles out there for starting with Next.js, I want to share my point of view and perhaps help you on your way to creating your first kick-ass Next.js application.
     teaserImage: /img/articles/create-next-app-hero.jpg
     title: A simple, yet detailed introduction to Next.js
-  - body: >-
+  - type: articles
+    body: >-
       ## What can a PWA offer?
 
       Before covering design, it does make sense to go over the technical possibilities. Let's focus on the most important features, in my opinion, of a PWA or web features that a PWA can leverage. I'll try to keep it as short as possible while still giving you an idea of what a PWA might look like.
@@ -667,7 +674,8 @@ items:
       Progressive Web App (PWA) is often written about. These articles, including mine, mostly only cover the technical parts. Although vital, one aspect of building a successful PWA is design. How can we develop and design for PWA to deliver the best native user experience (UX)?
     teaserImage: /img/articles/design-and-develop-for-pwa.jpg
     title: How can we develop and design for a PWA to deliver the best native user experience?
-  - body: >-
+  - type: articles
+    body: >-
       [Trusted Web Activity (TWA)](https://developers.google.com/web/android/trusted-web-activity) is a technique to wrap your PWA in a native shell for Android. Make sure to notice the difference between PWA and TWA as this article wouldn't make much sense otherwise. If you are unfamiliar on want to learn more about PWA please refer to my article ["You might not need a native app"](/articles/you-might-not-need-a-native-app).
 
 
@@ -717,7 +725,8 @@ items:
       One of the first things people mention when proposing Progressive Web Apps (PWA) is the need for native store presence. Fair enough, let's make that work.
     teaserImage: /img/articles/wrapping-your-progressive-web-app-for-android-with-trusted-web-activities.jpg
     title: Wrapping your Progressive Web App for Android with Trusted Web Activity
-  - body: >-
+  - type: articles
+    body: >-
       As a heads-up, I won't be going over how to build things like pages in [Next.js](https://nextjs.org/), but rather focus on the generation techniques. If you're unfamiliar with Next.js, please refer to their documentation.
 
       ## SSR/SSG versus CSR
@@ -849,7 +858,8 @@ items:
       I often write about Next.js as it is my go-to framework when developing interactive React.js web applications. One of the core features of Next.js is the ability to generate pages on the server. Let's have a look at what is possible, how this works and how can leverage this when building web applications.
     teaserImage: /img/articles/next-page-generation.jpg
     title: Next.js page generation
-  - body: >-
+  - type: articles
+    body: >-
       ![Every great concept starts with a sketch](/img/articles/firebase-sketch.jpg)*Every great concept starts with a sketch*
 
       ## Weapons of choice
@@ -926,7 +936,8 @@ items:
       I often come up with new ideas for applications and tools. I used to stop at sketching these ideas in my notebook to build whenever I have spare time. I asked myself 'How can I take my idea from sketch to a fully functioning and rapidly built prototype?'.
     teaserImage: /img/articles/firebase-dave.jpg
     title: How to take an idea from sketch to a fully functioning and rapidly built prototype?
-  - body: >-
+  - type: articles
+    body: >-
       ## What do they do?
 
       You might have guessed it. [Next.js](https://nextjs.org/) API routes provide an easy to use way of building an API within your Next.js project. Most modern web applications need data whether it is articles, like this blog, or data about the weather. We want to separate data from our applications as much as possible. Let's say you build a blog. You don't want to bundle all the articles with your JavaScript bundle. You want to load your bundle, which loads your UI and utilities, which renders your full article. This makes sense, but how can you do this?
@@ -1021,7 +1032,8 @@ items:
       Next.js is my framework of choice for any React.js application I develop. One of the big features I haven't covered before is Next.js API routes. Although not as big of a feature as page generation, it is one of the features I'm starting to enjoy more and more. Let's have a look at this feature and how to use it.
     teaserImage: /img/articles/next-js-api-routes.jpg
     title: Next.js API routes
-  - body: >-
+  - type: articles
+    body: >-
       ## Disclaimer: I love native apps
 
       This is not an "I develop for the web, so the web is the best" type of article. I love native apps. The user experience is often better than their web counterparts. This becomes apparent in, for instance, eCommerce websites. Often, they feel bloated, sluggish and don't provide the same 'feel' and functionalities as the native variant.
@@ -1157,7 +1169,8 @@ items:
       "We need a native app for performance, the 'feel', offline functionalities, notifications and...". Native apps have provided fundamental functionalities that serve the purpose of creating a wonderful user experience. But, you might not need that native app and opt for the technology of the wondrous web!
     teaserImage: /img/articles/pwa-vs-native.png
     title: You might not need a native app
-  - body: >-
+  - type: articles
+    body: >-
       ![Number Code Input](/img/articles/number-code-input-html-css-js.gif)*Number Code Input*
 
       As you can see, the core functionality of these inputs is to enter one number at a time. The building of that happy flow can be quite easy to do. When playing around we can see that there a quite a few more functionalities. Let's first set the requirements:
@@ -1395,7 +1408,8 @@ items:
       I often come across Number Code Inputs on various websites used for security measures, voucher codes and more. These Number Code Inputs often have a bit more functionality behind them then you might think at first. Let's create our own as an exercise.
     teaserImage: /img/articles/number-code-input.jpg
     title: Building a Number Code Input
-  - body: >-
+  - type: articles
+    body: >-
       ## The issue with SEO in SPAs
 
       The issue with SEO in SPAs has to do with where the page gets built or rendered. The rise of client-side SPA frameworks like [React.js](https://reactjs.org/), [Vue.js](https://vuejs.org/) and others caused an issue I didn't encounter before with server-side frameworks.
@@ -1491,7 +1505,8 @@ items:
       One of the biggest drawbacks when building a Single-Page Application (SPA) is to provide solid Search Engine Optimisation, often shortened to SEO. How can we improve SEO with some modern tools and techniques I love the most?
     teaserImage: /img/articles/dave-seo.jpg
     title: How can I handle SEO in my Single-page application?
-  - body: >-
+  - type: articles
+    body: >-
       Back in 2018, Mirabeau updated their main website [mirabeau.nl](https://mirabeau.nl). However, the old blogging platform became the sibling that was left behind. The branding and visual style got severely updated and as you might know, the world of (front-end) development moves at a rapid pace. Projects that are about five years old become outdated both in tooling and functionality. I want to rethink the way we build web platforms and construct a stack that stays up-to-date and is resilient for the coming years.
 
 
@@ -1612,7 +1627,8 @@ items:
       the overall performance and user-friendliness.
     teaserImage: /img/articles/dave-behind-laptop.jpg
     title: Implementing the latest web technologies to boost the Mirabeau blog
-  - body: >-
+  - type: articles
+    body: >-
       ### Progressive enhancement
 
       Progressive enhancement is a technique we use to enhance an element when the user’s browser has certain functionalities. By far, the biggest part of progressive enhancement is enhancing elements when CSS and JavaScript are available.

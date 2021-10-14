@@ -3,7 +3,12 @@ export interface ContentObjectInterface {
     [key: string]: string
 }
 
+export type ContentType = 'articles' | 'quick-bits' | 'talks' | 'friday-tips';
+
+export type EventType = 'meetup' | 'conference' | 'guest-lecture';
+
 export interface ArticleInterface {
+    type: ContentType;
     body: string,
     date: string,
     intro: string,
@@ -16,7 +21,7 @@ export interface ArticleInterface {
     href: string,
     city?: string,
     countryCode?: string,
-    type?: string;
+    event?: string;
 }
 
 export interface WorkExperienceInterface {
@@ -45,6 +50,7 @@ export interface EducationInterface {
 }
 
 export interface TalkInterface {
+    type: ContentType;
     summary: string;
     title: string;
     teaserCopy: string,
@@ -53,7 +59,7 @@ export interface TalkInterface {
     tags: TagInterface[];
     eventVideo?: string;
     date: string;
-    type: 'meetup' | 'conference';
+    event: EventType;
     city: string;
     countryCode: string;
 }

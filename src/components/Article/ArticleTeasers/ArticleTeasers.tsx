@@ -32,7 +32,7 @@ const ArticleTeasers = ({ articles, tags, type, ...attributes }: IProps) => {
         <ul className='article-teasers' {...attributes}>
             {articles.map((article: ArticleInterface, index: number) => <li key={index} className='article-teasers__item' data-reveal-in-view>
                 <Card>
-                    <ArticleTeaser {...article} href={`/${type}/[slug]?slug=${article.slug}`} as={`/${type}/${article.slug}`} />
+                    <ArticleTeaser {...article} href={`/${article.type}/[slug]?slug=${article.slug}`} as={`/${article.type}/${article.slug}`} />
                 </Card>
             </li>)}
         </ul>

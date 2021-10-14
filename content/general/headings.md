@@ -4,6 +4,8 @@ items:
     value: Hi, I'm Dave
   - key: 'elevatorPitch'
     value: Elevator Pitch
+  - key: 'latestItems'
+    value: Latest
   - key: 'latestArticles'
     value: Latest articles
   - key: 'latestArticlesAndTags'
