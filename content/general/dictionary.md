@@ -6,12 +6,20 @@ items:
     value: Home
   - key: 'quickBits'
     value: Quick Bits
+  - key: 'quickBit'
+    value: Quick Bit
   - key: 'fridayTips'
     value: Friday Tips
+  - key: 'fridayTip'
+    value: Friday Tip
   - key: 'articles'
     value: Articles
+  - key: 'article'
+    value: Article
   - key: 'talks'
     value: Talks
+  - key: 'talk'
+    value: Talk
   - key: 'tags'
     value: Tags
   - key: 'read'

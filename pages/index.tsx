@@ -1,5 +1,5 @@
 // Libs
-import React from 'react';
+import React, { useMemo } from 'react';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 
@@ -32,11 +32,10 @@ interface IProps {
 
 // Component
 const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserItems, talkTeaserItems, fridayTipTeaserItems, hasMoreArticles, hasMoreQuickBits, hasMoreTalks, hasMoreFridayTips }: IProps) => {
-
-    const items = [...articleTeaserItems, ...quickBitTeaserItems, ...talkTeaserItems, ...fridayTipTeaserItems]
+    const items = useMemo(() => [...articleTeaserItems, ...quickBitTeaserItems, ...talkTeaserItems, ...fridayTipTeaserItems]
         .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime())
-        .reverse();
-
+        .reverse()
+        .splice(0, 9), [articleTeaserItems, quickBitTeaserItems, talkTeaserItems, fridayTipTeaserItems]);
 
     return <>
         <div className='grid'>

@@ -1,0 +1,34 @@
+.article-type-badge {
+    position: relative;
+    padding: $spacing-xs;
+    background: rgba($color-black, 0.5);
+    backdrop-filter: blur($spacing-sml);
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: $spacing-xxs;
+        transform: translateY(-100%);
+        border-top-left-radius: $border-radius-lrg;
+        border-top-right-radius: $border-radius-lrg;
+    }
+
+    &[data-content-type="articles"]::after {
+        background-color: $color-yellow;
+    }
+
+    &[data-content-type="quick-bits"]::after {
+        background-color: $color-pumpkin;
+    }
+
+    &[data-content-type="talks"]::after {
+        background-color: $color-teal;
+    }
+
+    &[data-content-type="friday-tips"]::after {
+        background-color: $color-red;
+    }
+}
