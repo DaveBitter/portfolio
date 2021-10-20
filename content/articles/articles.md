@@ -1713,9 +1713,9 @@ items:
           }
         }
 
-          [data-has-js='true'] & {
-              background-color: transparent;
-          }
+        [data-has-js='true'] & {
+            background-color: transparent;
+        }
       }
 
       ...
@@ -1775,17 +1775,17 @@ items:
 
       ```js
 
-      // Set indicator for CSS that JS is available
-      document.body.setAttribute('data-has-js', true);
-
       // Needed DOM nodes
+
       const elements = {
         switchWrapper: document.querySelector('[data-switch-wrapper]'),
         inputs: Array.from(document.querySelectorAll('[data-switch-input]')),
         pill: document.querySelector('[data-switch-pill]')
       };
 
+
       // Place pill over passed node
+
       const updatePillPosition = ({target}, animate = true) => {
         const inputIndex = elements.inputs.findIndex(input => input === target);
         const inputState = target.getAttribute('data-state');
@@ -1795,11 +1795,18 @@ items:
         elements.switchWrapper.dataset.state = inputState || 'default';
       };
 
+
       // Check for default checked node
+
+
       const defaultActiveInput = elements.inputs.find(input => input.checked)
+
+
       if (defaultActiveInput) { updatePillPosition({target: defaultActiveInput}, false); }
 
+
       // Listen for input events on the nodes
+
       elements.inputs.forEach(input => input.addEventListener('input', updatePillPosition));
 
       ```
