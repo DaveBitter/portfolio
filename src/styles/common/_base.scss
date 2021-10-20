@@ -48,6 +48,12 @@ svg {
     background: $gradient-primary;
 }
 
+.button-link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: $spacing-med;
+}
+
 /*
     This will hide the focus indicator if the element receives focus via the mouse,
     but it will still show up on keyboard focus.

@@ -63,6 +63,7 @@ $article-header-height: 60vh;
 
     &__title,
     &__date {
+        z-index: 1;
         padding: $spacing-xs;
         border-radius: $border-radius-lrg;
         color: $color-white;
@@ -70,6 +71,7 @@ $article-header-height: 60vh;
 
     &__title {
         margin-bottom: $spacing-xs;
+        border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         background: $gradient-primary;
     }
@@ -206,5 +208,9 @@ $article-header-height: 60vh;
     &__video-wrapper {
         width: 100%;
         aspect-ratio: 16 / 9;
+    }
+
+    .article-type-badge {
+        display: inline-block;
     }
 }

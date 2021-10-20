@@ -14,6 +14,7 @@ import { getDictionary } from '../../static/js/utils/getContent';
 // Components
 import Tag from '../Tag/Tag';
 import Share from '../Share/Share';
+import ArticleTypeBadge from './ArticleTypeBadge/ArticleTypeBadge';
 
 // Interface
 interface IProps {
@@ -21,7 +22,7 @@ interface IProps {
 }
 
 // Component
-const Article = ({ articleType, body, date, intro, city, countryCode, type, tags: articleTags, teaserImage, title, ...attributes }: ArticleInterface & IProps) => {
+const Article = ({ articleType, body, date, intro, city, countryCode, event, type, tags: articleTags, teaserImage, title, ...attributes }: ArticleInterface & IProps) => {
     const dictionary = getDictionary();
 
     const articleContent = useRef<null | HTMLDivElement>(null);
@@ -37,8 +38,9 @@ const Article = ({ articleType, body, date, intro, city, countryCode, type, tags
         <header className='article__header g0'>
             <div className='grid'>
                 <div className='g2'>
+                    <ArticleTypeBadge contentType={type} data-reveal-in-view />
                     <h1 className='article__title' data-reveal-in-view>{title}</h1>
-                    <time className='article__date' dateTime={date} data-reveal-in-view>{formatDate(date, { day: 'numeric', month: 'long', year: 'numeric' })} {type && city && countryCode && <small>{`, ${dictionary[type]} | ${city} (${countryCode})`}</small>}</time>
+                    <time className='article__date' dateTime={date} data-reveal-in-view>{formatDate(date, { day: 'numeric', month: 'long', year: 'numeric' })} {event && city && countryCode && <small>{`, ${dictionary[event]} | ${city} (${countryCode})`}</small>}</time>
                     {tags && !!tags.length && <Tag.Wrapper alignment='right'>
                         {tags.map((tag: TagInterface) => <Tag.Item key={tag.key} tag={tag} />)}
                     </Tag.Wrapper>}

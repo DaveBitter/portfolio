@@ -2,6 +2,7 @@ export default {
     attributes: {
         items: [
             {
+                type: 'articles',
                 slug: 'mock-article',
                 date: '2020-01-20T00:00:00.000Z',
                 title: 'Mock article',

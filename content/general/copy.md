@@ -13,6 +13,8 @@ items:
 
 
       I get to enjoy my passion every day as a Developer Advocate & Front-end developer/Consultant and am excited about what the future will bring!
+  - key: 'latestLead'
+    value: A collection of my talks, articles, Quick Bits and Friday Tips covering a wide range of topics
   - key: 'articlesLead'
     value: A collection of my articles covering a wide range of topics
   - key: 'articlesAndTagsLead'

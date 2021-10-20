@@ -1,6 +1,7 @@
 ---
 items:
-  - body: >-
+  - type: quick-bits
+    body: >-
       Full disclaimer, I came across this solution watching a 45-second video by Fireship on Youtube which you can watch [here]([https://www.youtube.com/watch?v=ITogH7lJTyE](https://www.youtube.com/watch?v=ITogH7lJTyE)). All credits to them. I'm a fan of reading these at my own pace, how impressive 45 seconds is though, so here it is in writing.
 
       ## The problem
@@ -123,7 +124,8 @@ items:
       Remember the old callback hell we used to deal with? Luckily, we can circumvent this nowadays with the use of Async Await. Unfortunately, this can introduce a new Async Await try-catch hell. Here's the solution on how to fix this.
     teaserImage: /img/quick-bits/js.png
     title: Avoid the Async Await try-catch hell
-  - body: >-
+  - type: quick-bits
+    body: >-
       ## My problem with classes
 
       We've all written/seen classes for adding some different states to an HTML element. A generic example with pseudo-code is the something like this:
@@ -266,7 +268,8 @@ items:
       I always use data attributes over classes to query declarative elements in my JS code for a few reasons. Here's why.
     teaserImage: /img/quick-bits/js.png
     title: Why I use data attributes over classes for declarative element states
-  - body: >-
+  - type: quick-bits
+    body: >-
       The nullish coalescing operator is a short-circuiting operator you can use to provide an alternative for a left-hand side operand by writing `??`. You might already have used `&&` or `||` before. So how is this different?  Let's take the following examples:
 
       ```jsx
@@ -352,7 +355,8 @@ items:
       One of my favourite features which were added in ES2020 is nullish coalescing. Despite its difficult pronunciation, this feature is a simple way of checking for falsey values. Let's have a look.
     teaserImage: /img/quick-bits/js.png
     title: Nullish Coalescing (try to say it quickly ten times)
-  - body: >-
+  - type: quick-bits
+    body: >-
       ## A real-world use case
 
       For one of the [Next.js]([https://nextjs.org/](https://nextjs.org/)) projects I was working on, I needed to add an asset prefix to the configuration if the [Node]([https://nodejs.org/en/](https://nodejs.org/en/)) environment wasn't "development". The first thing you might think of is to create a configuration object, write an if-statement and add a key to the configuration object if the statement is true. This would look something like this:
@@ -429,7 +433,8 @@ items:
       I sometimes need to optionally add a key to an object based on a statement. This can easily be done with a few lines of code, but where's the fun in that? How can I do this as clean as possible?
     teaserImage: /img/quick-bits/js.png
     title: Optionally add a key to an object in one line
-  - body: >-
+  - type: quick-bits
+    body: >-
       You start by creating a public repository with the same name as your GitHub username. In my case, I create a repository called "DaveBitter". In that repository, you add a `README.md`. That's it. From here on you can use MarkDown to tell more about yourself, highlight skills, share social media links and anything you can think of. The README will now be used to display this content on your GitHub profile.
 
 
@@ -453,7 +458,8 @@ items:
       GitHub profiles always seemed a bit impersonal to me. Generally, you would pin some repositories and give some information like employer, location and website. To give developers more control, GitHub released the possibility for a profile README. Let's have a quick look.
     teaserImage: /img/articles/github-profile-readme.jpg
     title: GitHub profile README
-  - body: >-
+  - type: quick-bits
+    body: >-
         ## The old way
 
         I used to start new projects in three different ways:
@@ -548,7 +554,8 @@ items:
     teaserImage: /img/articles/next-boilerplate-repository.png
     title: Using template repositories with GitHub
 
-  - body: >-
+  - type: quick-bits
+    body: >-
         The backdrop-filter property lets you apply graphical effects such as blurring or colour shifting to the area behind an element. Because it applies to everything behind the element, to see the effect you must make the element or its background at least partially transparent.
 
         This introduces a new tool to progressively enhance your website or web -application.  [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter) has a list of all the values you can set. Today, we will take a look at one that my co-worker and CSS wizard [Syb Wartna](https://waarissyb.nl/) and I recently used in a project. This value is blur-filter.

@@ -1,5 +1,5 @@
 // Libs
-import React from 'react';
+import React, { useMemo } from 'react';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 
@@ -32,6 +32,11 @@ interface IProps {
 
 // Component
 const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserItems, talkTeaserItems, fridayTipTeaserItems, hasMoreArticles, hasMoreQuickBits, hasMoreTalks, hasMoreFridayTips }: IProps) => {
+    const items = useMemo(() => [...articleTeaserItems, ...quickBitTeaserItems, ...talkTeaserItems, ...fridayTipTeaserItems]
+        .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime())
+        .reverse()
+        .splice(0, 9), [articleTeaserItems, quickBitTeaserItems, talkTeaserItems, fridayTipTeaserItems]);
+
     return <>
         <div className='grid'>
             <div className='g4'>
@@ -42,58 +47,28 @@ const Home = ({ dictionary, copy, headings, articleTeaserItems, quickBitTeaserIt
 
         <div className='grid'>
             <div className='g2'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestTalks}</h2>
-                <p className='h4' data-reveal-in-view>{copy.talksLead}</p>
-                <ArticleTeasers type='talks' articles={talkTeaserItems} />
+                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestItems}</h2>
+                <p className='h4' data-reveal-in-view>{copy.latestLead}</p>
+                <ArticleTeasers type='articles' articles={items} />
             </div>
 
-            {hasMoreTalks && <div className='g8'>
-                <Link href='/talks'>
+            <div className='g2 button-link-grid'>
+                {hasMoreTalks && <Link href='/talks'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllTalks}</a>
-                </Link>
-            </div>}
-        </div>
+                </Link>}
 
-        <div className='grid'>
-            <div className='g2'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestArticles}</h2>
-                <p className='h4' data-reveal-in-view>{copy.articlesLead}</p>
-                <ArticleTeasers type='articles' articles={articleTeaserItems} />
-            </div>
-
-            {hasMoreArticles && <div className='g8'>
-                <Link href='/articles'>
+                {hasMoreArticles && <Link href='/articles'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllArticles}</a>
-                </Link>
-            </div>}
-        </div>
+                </Link>}
 
-        <div className='grid'>
-            <div className='g2'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestQuickBits}</h2>
-                <p className='h4' data-reveal-in-view>{copy.quickBitsLead}</p>
-                <ArticleTeasers type='quick-bits' articles={quickBitTeaserItems} />
-            </div>
-
-            {hasMoreQuickBits && <div className='g8'>
-                <Link href='/quick-bits'>
+                {hasMoreQuickBits && <Link href='/quick-bits'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllQuickBits}</a>
-                </Link>
-            </div>}
-        </div>
+                </Link>}
 
-        <div className='grid'>
-            <div className='g2'>
-                <h2 className='text-colored h1' data-reveal-in-view>{headings.latestFridayTips}</h2>
-                <p className='h4' data-reveal-in-view>{copy.fridayTipsLead}</p>
-                <ArticleTeasers type='friday-tips' articles={fridayTipTeaserItems} />
-            </div>
-
-            {hasMoreFridayTips && <div className='g8'>
-                <Link href='/friday-tips'>
+                {hasMoreFridayTips && <Link href='/friday-tips'>
                     <a className='button-link' data-reveal-in-view>{dictionary.viewAllFridayTips}</a>
-                </Link>
-            </div>}
+                </Link>}
+            </div>
         </div>
     </>;
 };

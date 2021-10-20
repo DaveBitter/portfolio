@@ -60,6 +60,7 @@
 
     &__title {
         margin-bottom: 0;
+        border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         background: $gradient-primary;
     }
@@ -82,5 +83,9 @@
     .tag-wrapper {
         z-index: 1;
         margin-top: auto;
+    }
+
+    .article-type-badge {
+        z-index: 1;
     }
 }
