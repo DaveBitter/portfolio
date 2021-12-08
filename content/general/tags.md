@@ -8,6 +8,8 @@ items:
     value: 'React.js'
   - key: 'next-js'
     value: 'Next.js'
+  - key: 'remix'
+    value: 'Remix'
   - key: 'api'
     value: 'API'
   - key: 'pwa'
