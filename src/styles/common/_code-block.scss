@@ -8,8 +8,10 @@ p,
 li {
     > code {
         margin: 0 $spacing-xxs;
+        padding: 0 $spacing-xxs;
         opacity: 0.8;
         border-radius: $border-radius-sml;
-        background: $color-gray-darker;
+        color: $color-primary-dark;
+        background: $color-gray-darkest;
     }
 }
