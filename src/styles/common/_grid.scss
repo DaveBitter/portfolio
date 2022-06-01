@@ -45,10 +45,6 @@
         @media all and (-ms-high-contrast: none) {
             padding: $spacing-sml;
         }
-
-        @supports (display: grid) {
-            margin: 0;
-        }
     }
 
     @include mq($mq-tab--sml) {

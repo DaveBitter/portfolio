@@ -2,6 +2,67 @@
 items:
   - type: quick-bits
     body: >-
+      As a reference, the mono-repo might look something like this:
+
+      ```
+
+      packages/
+
+      ├── foo-pkg
+
+      │   └── package.json
+
+      ├── bar-pkg
+
+      │   └── package.json
+
+      ├── baz-pkg
+
+      │   └── package.json
+
+      └── qux-pkg
+          └── package.json
+
+
+      ```
+
+      In its essence, [Manypkg](https://github.com/Thinkmill/manypkg) is a linter for `package.json` files in Yarn, Bolt or pnpm mono-repos. You can use it to automate these chores. Simply run `yarn add @manypkg/cli` and you can run the following commands in your pre-commit hooks and pipelines:
+
+      ## `manypkg check`
+
+      I use this to check whether all `package.json` files are alphabetically sorted, there are internal and external mismatches between packages, there are invalid dev and peer dependency relationships, invalid package names and more. You can have a look at the checks [here](https://github.com/Thinkmill/manypkg#checks).
+
+      ## `manypkg fix`
+
+      This will run the check and try to automatically resolve the issues it finds. Usually, it’s a wise idea to run this command in your pre-commit hook. That way, your pipeline won’t fail mid-way because of a minor issue.
+
+      ## `manypkg run <partial package name or directory> <script>`
+
+      With this command, you can run a script in a `package.json` file of a particular package in the mono-repo. Let’s say you have a package that has a script that runs a test for that package. You can then run `manypkg run your-package some-tests`.
+
+      ## `manypkg exec <cli command>`
+
+      This will let you run a CLI command in each of the packages. For example, you can run `yarn manypkg exec rm -rf dist` to remove the dist folder in every package in the mono-repo.
+
+      ## Verdict
+
+      Although the latter two are nice to have, the check and fix commands are vital in any mono-repo to me. It not only helps me but gives me peace of mind that a large group of developers can work on the mono-repo and we have checks and tools in place to make sure that dependencies are properly checked and fixed.
+
+      Since introducing this into a project I work on, we managed to easily keep everything up-to-date across the mono-repo.
+
+      Try it out in your project! You’ll see that it makes your life way easier.
+    date: 2022-06-01T00:00:00.000Z
+    slug: manypkg
+    tags:
+      - front-end
+    intro: >-
+      When building a component library as a mono-repo, you need to keep internal and external dependencies up-to-date between packages. You could do this manually once in a while, but there is a better way. Let’s have a look at Manypkg!
+    teaserCopy: >-
+      When building a component library as a mono-repo, you need to keep internal and external dependencies up-to-date between packages. You could do this manually once in a while, but there is a better way. Let’s have a look at Manypkg!
+    teaserImage: /img/quick-bits/mono-repo.jpg
+    title: Keeping dependencies in sync in your mono-repo
+  - type: quick-bits
+    body: >-
       The idea is simple; the user scrolls. As soon as the user is over a certain threshold, you snap to the next item. We used to do this with Javascript to calculate when the user is over this threshold. We would then manually scroll to a certain position with a neat animation.
 
 
@@ -519,88 +580,88 @@ items:
     title: GitHub profile README
   - type: quick-bits
     body: >-
-        ## The old way
+      ## The old way
 
-        I used to start new projects in three different ways:
+      I used to start new projects in three different ways:
 
-        * Fork another repository that fits the needs and remove what is not needed
+      * Fork another repository that fits the needs and remove what is not needed
 
-        * Fork a boilerplate repository
+      * Fork a boilerplate repository
 
-        * Create a new repository and copy files from another local repository
-
-
-        These three do the trick but come with issues. Firstly, I don't want to fork or copy files from another repository to then remove what is not needed. Secondly, I don't want to for another repository and then squash the entire history and/or remove all branches besides the main one.
-
-        ## The new way
-
-        Luckily, the folks over at GitHub recognize these issues and provide a solution: GitHub template repositories. So, how is this different from having a boilerplate repository? Well, they offer:
-
-        * A new fork includes the entire commit history of the parent repository, while a repository created from a template starts with a single commit.
-
-        * Commits to a fork don't appear in your contributions graph, while commits to a repository created from a template do appear in your contribution graph.
-
-        * A fork can be a temporary way to contribute code to an existing project while creating a repository from a template starts a new project quickly.
+      * Create a new repository and copy files from another local repository
 
 
-        ## This is how I use it
+      These three do the trick but come with issues. Firstly, I don't want to fork or copy files from another repository to then remove what is not needed. Secondly, I don't want to for another repository and then squash the entire history and/or remove all branches besides the main one.
 
-        I started off with creating a boilerplate repository. My boilerplate repository, among other things, consists of:
+      ## The new way
 
+      Luckily, the folks over at GitHub recognize these issues and provide a solution: GitHub template repositories. So, how is this different from having a boilerplate repository? Well, they offer:
 
-        * React.js
+      * A new fork includes the entire commit history of the parent repository, while a repository created from a template starts with a single commit.
 
-        * Next.js
+      * Commits to a fork don't appear in your contributions graph, while commits to a repository created from a template do appear in your contribution graph.
 
-        * TypeScript
-
-        * Jest
-
-        * Enzyme
-
-        * Storybook
-
-        * Husky
-
-        * ESLint
-
-        * StyleLint
-
-        * LintStaged
-
-        * Basic styles
-
-        * Basic utilities
+      * A fork can be a temporary way to contribute code to an existing project while creating a repository from a template starts a new project quickly.
 
 
-        You see why I want to have all of this quickly for a project.
+      ## This is how I use it
 
-        ![The Next Boilerplate repository](/img/articles/next-boilerplate-repository.png)*The Next Boilerplate repository*
-
-
-        Next, I went over to the settings of this repository and enabled 'Template repository'.
-
-        ![The Next Boilerplate settings](/img/articles/next-boilerplate-settings.png)*The Next Boilerplate settings*
-
-        That was all the setup that is required. Whenever I want to start a new project with this repository I go to the Next Boilerplate and click the green button saying 'Use this template'.
-
-        I then have the option to:
-
-        * Create a new repository and name it
-
-        * Give a description
-
-        * Make it public or private
-
-        * Include all branches
+      I started off with creating a boilerplate repository. My boilerplate repository, among other things, consists of:
 
 
-        ![The Next Boilerplate template](/img/articles/next-boilerplate-template.png)*The Next Boilerplate template*
+      * React.js
+
+      * Next.js
+
+      * TypeScript
+
+      * Jest
+
+      * Enzyme
+
+      * Storybook
+
+      * Husky
+
+      * ESLint
+
+      * StyleLint
+
+      * LintStaged
+
+      * Basic styles
+
+      * Basic utilities
 
 
-        After clicking 'Create repository from template' I have a new repository with all the files, non of the history or branches and start creating right away.
+      You see why I want to have all of this quickly for a project.
 
-        Please head over to [GitHub](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) to learn more.
+      ![The Next Boilerplate repository](/img/articles/next-boilerplate-repository.png)*The Next Boilerplate repository*
+
+
+      Next, I went over to the settings of this repository and enabled 'Template repository'.
+
+      ![The Next Boilerplate settings](/img/articles/next-boilerplate-settings.png)*The Next Boilerplate settings*
+
+      That was all the setup that is required. Whenever I want to start a new project with this repository I go to the Next Boilerplate and click the green button saying 'Use this template'.
+
+      I then have the option to:
+
+      * Create a new repository and name it
+
+      * Give a description
+
+      * Make it public or private
+
+      * Include all branches
+
+
+      ![The Next Boilerplate template](/img/articles/next-boilerplate-template.png)*The Next Boilerplate template*
+
+
+      After clicking 'Create repository from template' I have a new repository with all the files, non of the history or branches and start creating right away.
+
+      Please head over to [GitHub](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) to learn more.
 
     date: 2020-06-18T00:00:00.000Z
     slug: github-template-repositories
@@ -615,65 +676,65 @@ items:
 
   - type: quick-bits
     body: >-
-        The backdrop-filter property lets you apply graphical effects such as blurring or colour shifting to the area behind an element. Because it applies to everything behind the element, to see the effect you must make the element or its background at least partially transparent.
+      The backdrop-filter property lets you apply graphical effects such as blurring or colour shifting to the area behind an element. Because it applies to everything behind the element, to see the effect you must make the element or its background at least partially transparent.
 
-        This introduces a new tool to progressively enhance your website or web -application.  [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter) has a list of all the values you can set. Today, we will take a look at one that my co-worker and CSS wizard [Syb Wartna](https://waarissyb.nl/) and I recently used in a project. This value is blur-filter.
+      This introduces a new tool to progressively enhance your website or web -application.  [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter) has a list of all the values you can set. Today, we will take a look at one that my co-worker and CSS wizard [Syb Wartna](https://waarissyb.nl/) and I recently used in a project. This value is blur-filter.
 
-        We made a sidebar that would reveal more information after clicking on an item. It was sort of like a modal. For the past few years, there has been one technique that everybody would use. The backdrop, or overlay, would have a slightly transparent, solid, grey colour. Let’s enhance this using the new backdrop-filter!
+      We made a sidebar that would reveal more information after clicking on an item. It was sort of like a modal. For the past few years, there has been one technique that everybody would use. The backdrop, or overlay, would have a slightly transparent, solid, grey colour. Let’s enhance this using the new backdrop-filter!
 
-        For this example, we are going to build a simple modal. First, we’ll create the version that just displays a backdrop:
+      For this example, we are going to build a simple modal. First, we’ll create the version that just displays a backdrop:
 
-        ```scss
+      ```scss
 
-            ...
+          ...
 
-            &[data-overlay='true'] {
-                &:after {
-                    content: '';
-                    z-index: 101;
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    background-color: rgba($navy, 0.4);
-                }
-            }
+          &[data-overlay='true'] {
+              &:after {
+                  content: '';
+                  z-index: 101;
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  background-color: rgba($navy, 0.4);
+              }
+          }
 
-            ...
+          ...
 
-        ```
+      ```
 
-        ![default backdrop](/img/quick-bits/backdrop-default.jpg)*Default backdrop*
+      ![default backdrop](/img/quick-bits/backdrop-default.jpg)*Default backdrop*
 
-        Then we add one simple CSS property.
+      Then we add one simple CSS property.
 
-        ```scss
+      ```scss
 
-            ...
+          ...
 
-            &[data-overlay='true'] {
-                &:after {
-                    content: '';
-                    z-index: 101;
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    background-color: rgba($navy, 0.4);
-                    backdrop-filter: blur(2px);
-                }
-            }
+          &[data-overlay='true'] {
+              &:after {
+                  content: '';
+                  z-index: 101;
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  background-color: rgba($navy, 0.4);
+                  backdrop-filter: blur(2px);
+              }
+          }
 
-            ...
+          ...
 
-        ```
+      ```
 
-        ![blurry backdrop](/img/quick-bits/backdrop-blur.jpg)*Blurry backdrop*
+      ![blurry backdrop](/img/quick-bits/backdrop-blur.jpg)*Blurry backdrop*
 
 
-        And there we have it. It’s a simple way to quickly enhance the feel of your website or web-application. Just add this property below your default slightly transparent backdrop and you will offer this style as soon as it hits in the browser your user is using. Obviously, this effect is more dramatic with a less empty page. [View the demo here](/examples/backdrop-filter/modal/modal.html). This demo was built with the [Mirabeau boilerplate](https://github.com/mirabeau-nl/frontend-boilerplate). The source code for this demo can be found at [this Gist](https://gist.github.com/DaveBitter/dd0cc612ce87bd6f69fc379b101b9265) if you would like to have a look at the final working code.
+      And there we have it. It’s a simple way to quickly enhance the feel of your website or web-application. Just add this property below your default slightly transparent backdrop and you will offer this style as soon as it hits in the browser your user is using. Obviously, this effect is more dramatic with a less empty page. [View the demo here](/examples/backdrop-filter/modal/modal.html). This demo was built with the [Mirabeau boilerplate](https://github.com/mirabeau-nl/frontend-boilerplate). The source code for this demo can be found at [this Gist](https://gist.github.com/DaveBitter/dd0cc612ce87bd6f69fc379b101b9265) if you would like to have a look at the final working code.
 
     date: 2019-03-01T00:00:00.000Z
     slug: backdrop-filter
