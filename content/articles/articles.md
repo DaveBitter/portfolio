@@ -112,7 +112,7 @@ items:
 
       There is no magic way to prevent your applications to become "legacy”. There are however things you can do to mitigate this as much as possible. This is a joint effort between developers and business. Front-end applications are incredibly complex. We need to recognize this and put checks in place to prevent getting stuck in this cycle.
 
-    date: 2022-06-02T00:00:00.000Z
+    date: 2022-06-08T00:00:00.000Z
     slug: the-infinite-legacy-cycle-in-front-end
     tags:
       - front-end
