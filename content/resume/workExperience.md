@@ -19,6 +19,10 @@ items:
         startDate: 2021-08-01T00:00:00.000Z
         endDate: 2021-01-01T00:00:00.000Z
         present: true
+      - role: Team Captain
+        startDate: 2022-08-01T00:00:00.000Z
+        endDate: 2021-01-01T00:00:00.000Z
+        present: true
     startDate: 2021-06-01T00:00:00.000Z
     endDate: 2021-01-01T00:00:00.000Z
     present: true
