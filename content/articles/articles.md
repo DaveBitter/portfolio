@@ -2,6 +2,1281 @@
 items:
   - type: articles
     body: >-
+      This article is part 4 of the series _How do I build a Component Library?_. You can find the demo repository for this series on [GitHub](https://github.com/DaveBitter/fe-monorepo) and the component library itself hosted [here](https://fe-monorepo.davebitter.com/).
+
+
+      Now that we have our complete setup for our component library, let’s have a look at how we can automate the linting, testing, formatting and publishing of the packages to the private package registry. Next to that, we can host our Storybook for the world to visit.
+
+      ## How do I use GitHub actions to lint pull requests?
+
+      Where you configure your CI/CD is up to where you host your repository or even in a tool like Jenkins. As we are using GitHub for the demo repository and private package registry, it only makes sense to add our CI/CD here as well. To do this, we are going to make use of [GitHub Actions](https://github.com/features/actions). If you are new to GitHub actions, watch my [Friday Tip](https://www.youtube.com/watch?v=qhq0PkxkplE&list=PLsES66lgcKHD9oRnyN3PEvyTjWXJF4IgT) on how to _[update your GitHub README with GitHub actions](https://www.youtube.com/watch?v=jVg-qkQ01lI&list=PLsES66lgcKHD9oRnyN3PEvyTjWXJF4IgT&index=9)._
+
+
+      At its core, GitHub actions allow you to compose a [YAML](https://yaml.org/) file that consists of various actions and steps. I’ve added a file called `pull-request.yml` in `.github/workflows` that looks like this:
+
+
+      ```
+
+      name: Pull Request
+      on:
+        push:
+        pull_request:
+      jobs:
+        pull-request:
+          runs-on: ubuntu-18.04
+          steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Use Node.js 16.x
+              uses: actions/setup-node@v1
+              with:
+                node-version: 16.x
+            - name: Install dependencies
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: install
+            - name: Lint packages
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: lint
+            - name: Format packages check
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: format:check
+            - name: Check package.json files
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: manypkg:check
+            - name: Run unit tests
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: test
+
+      ```
+
+
+      First, give your workflow a sensible name. In this case, as you are going to create a workflow that will run on every pull request, you call it that. Next, you say that on `push` or `pull-request` you want a job to run. Finally, you specify the steps for this job. Here you can checkout the code, install the dependencies and run the linting tasks.
+
+
+      Now if you make a pull request and push it to the demo repository, it will run these steps:
+
+
+      ![Screenshot of all steps being executed on GitHub](/img/articles/ci-cd-hosting-pull-request-action.png)
+
+
+      In the pull request overview, you can see the action being executed as well as a mandatory step before you can merge:
+
+
+      ![Screenshot of pull request overview where you can see the actions being required to merge](/img/articles/ci-cd-hosting-pull-request.png)
+
+
+      ## How do I publish to a private package registry?
+
+      Naturally, you want to add another workflow once the pull request is merged to the `master` branch that actually deploys the packages to the private package registry and hosts your Storybook. Let’s add another file in `.github/workflows` that’s called `master-deploy.yml`. First, you give it a sensible name and specify that we just want the workflow to run on a push to the `master` branch and run the same linting tasks as for a pull request:
+
+
+      ```
+
+      name: Master Deploy
+      on:
+        push:
+          branches:
+            - master
+      jobs:
+        master-deploy:
+          runs-on: ubuntu-18.04
+          steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Use Node.js 16.x
+              uses: actions/setup-node@v1
+              with:
+                node-version: 16.x
+            - name: Install dependencies
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: install
+            - name: Lint packages
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: lint
+            - name: Format packages
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: format
+            - name: Check package.json files
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: manypkg:fix
+            - name: Run unit tests
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: test
+            ...
+
+      ```
+
+
+      ### Consuming Changesets
+
+      Next, You want to consume any Changesets in the `.changeset` folder:
+
+
+      ```
+
+            ...
+            - name: Version changeset
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: changeset:version
+            ...
+
+      ```
+
+
+      This will update the versions specified in each package’s `package.json` to the correct new one. You are now ready to start publishing these changes to the private registry
+
+      ### Authenticating
+
+      First, you need to authenticate. As you learned in the first article while setting up the private package registry, you need an `npmrc` file. Naturally, you don’t want to have the actual contents with the token to be commited to your repository. First, add the token you used in the first article as a secret for the repository. Go to the repository settings and navigate to “secrets” and then “actions”. Here you can add a new secret. Add a secret called `ACCESS_TOKEN` and use the token from the first article.
+
+
+      Next, you can add a step to create a temporary `.npmrc` file that uses that token:
+
+
+      ```
+
+            ...
+            - name: Authenticate with private NPM package
+              run: |
+                echo @davebitter:registry=https://npm.pkg.github.com/davebitter >> ./.npmrc
+                echo //npm.pkg.github.com/:_authToken=${ACCESS_TOKEN} >> ./.npmrc
+                echo registry=https://registry.npmjs.org >> ./.npmrc
+              env:
+                ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+            ...
+
+      ```
+
+
+      ### Publishing to the private package registry
+
+      Now you can finally publish the updated packages:
+
+
+      ```
+
+            ...
+            - name: Publish changeset
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: changeset:publish
+            ...
+
+      ```
+
+
+      ## How do I host Storybook?
+
+      Naturally, you want to deploy your updated Storybook build as well. There are many different services you can use for this. For the demo repository, I will host the build on [Netlify](https://www.netlify.com/). Remember, it’s all opinionated.
+
+      ### Netlify
+
+      First, create an account and a new site on Netlify. There are [great guides on how to do this](https://docs.netlify.com/welcome/add-new-site/). You can let Netlify connect to your GitHub and automatically configure pipelines, but where’s the fun in that? Let’s manually deploy to Netlify. First, you create a new build of your Storybook:
+
+
+      ```
+
+            ...
+            - name: Create build
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: build
+            ...
+
+      ```
+
+
+      Next, use [nwtgck/actions-netlify@v1.2](https://github.com/nwtgck/actions-netlify) to publish the build:
+
+
+      ```
+
+            ...
+            - name: Deploy to Netlify
+              uses: nwtgck/actions-netlify@v1.2
+              with:
+                publish-dir: './dist'
+                production-branch: master
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                deploy-message: 'Deploy from GitHub Actions'
+                enable-pull-request-comment: false
+                enable-commit-comment: true
+                overwrites-pull-request-comment: true
+              env:
+                NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+                NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+              timeout-minutes: 1
+            ...
+
+      ```
+
+
+      Finally, you tell the action where to find the build and under `env` you pass the `NETLIFY_SIDE_ID` of your newly created site on Netlify and pass it the `NETLIFY_AUTH_TOKEN` . You can find more information on how to create that token [here](https://docs.netlify.com/cli/get-started/#obtain-a-token-in-the-netlify-ui). Naturally, you add the tokens as secrets in your repository just like the `ACCESS_TOKEN` to publish to the private package registry.
+
+      ## Committing any updated files
+
+      During the linting process, there might have been changes made to comply with the configurations set. Next to that, the Changeset files are consumed and need to be removed from the repository. For this, you need to commit at the end of the workflow. Luckily, this is rather easy using the _[stefanzweifel/git-auto-commit-action@v4](https://github.com/stefanzweifel/git-auto-commit-action)_ action:
+
+
+      ```
+
+            ...
+            - name: Create commit
+              uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                file_pattern: packages .changeset
+                commit_message: 'chore(ci): commit updated files in workflow'
+                commit_options: '--no-verify --signoff'
+                branch: master
+
+      ```
+
+
+      As you can see, any changes in the `package` or `.changeset` folder are commited with a custom commit message.
+
+      ## Putting it all together
+
+      Once all these parts are put together, you end up with a workflow that looks a bit like this:
+
+
+      ```
+
+      name: Master Deploy
+      on:
+        push:
+          branches:
+            - master
+      jobs:
+        master-deploy:
+          runs-on: ubuntu-18.04
+          steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Use Node.js 16.x
+              uses: actions/setup-node@v1
+              with:
+                node-version: 16.x
+            - name: Install dependencies
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: install
+            - name: Lint packages
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: lint
+            - name: Format packages
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: format:fix
+            - name: Check package.json files
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: manypkg:fix
+            - name: Run unit tests
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: test
+            - name: Version changeset
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: changeset:version
+            - name: Authenticate with private NPM package
+              run: |
+                echo @davebitter:registry=https://npm.pkg.github.com/davebitter >> ./.npmrc
+                echo //npm.pkg.github.com/:_authToken=${ACCESS_TOKEN} >> ./.npmrc
+                echo registry=https://registry.npmjs.org >> ./.npmrc
+              env:
+                ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+            - name: Publish changeset
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: changeset:publish
+            - name: Create build
+              uses: borales/actions-yarn@v3.0.0
+              with:
+                cmd: build
+            - name: Deploy to Netlify
+              uses: nwtgck/actions-netlify@v1.2
+              with:
+                publish-dir: './dist'
+                production-branch: master
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                deploy-message: 'Deploy from GitHub Actions'
+                enable-pull-request-comment: false
+                enable-commit-comment: true
+                overwrites-pull-request-comment: true
+              env:
+                NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+                NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+              timeout-minutes: 1
+            - name: Create commit
+              uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                file_pattern: packages .changeset
+                commit_message: 'chore(ci): commit updated files in workflow'
+                commit_options: '--no-verify --signoff'
+                branch: master
+
+      ```
+
+
+      Now, for every pull request there is automated linting and testing. After all checks have passed and the pull request is merged, the CI/CD publishes all updated packages and the updated Storybook.
+
+      ## Looking back
+
+      This was the final step for setting up a component library from start to finish. Naturally, there are many more requirements you might run into. A component library is a never-ending living organism. Hopefully, you’ve learned a bit more about how you can approach requirements and can create an awesome component library! Thanks for following along and good luck with your own!
+
+    date: 2022-09-07T00:00:00.000Z
+    slug: ci-cd-hosting
+    tags:
+      - front-end
+    intro: >-
+      How to build a component library Part 4: Setting up CI/CD & hosting.
+    teaserCopy: >-
+      How to build a component library Part 4: Setting up CI/CD & hosting.
+    teaserImage: /img/articles/ci-cd-hosting-hero.png
+    title: How do I setup CI/CD & hosting?
+  - type: articles
+    body: >-
+      This article is part 3 of the series _How do I build a Component Library?_. You can find the demo repository for this series on [GitHub](https://github.com/DaveBitter/fe-monorepo) and the component library itself hosted [here](https://fe-monorepo.davebitter.com/).
+
+
+      Before adding new components to your component library, you might want to set up some linting and testing tools. This ensures that no unexpected mistakes, inconsistencies and manual labour are required. Let’s have a look at a few tools I think you should always add to your component library. This will not just consist of the the actual tools to run the testing and linting, but surrounding tools to help automate the chores even more and take work off your hands.
+
+      ## How do I set up linting?
+
+      Generally, there are a few must-have linting tools for me in any (front-end) project. Let’s have a look at a few of my favourite ones:
+
+      ### ESLint
+
+      Front-end projects are JavaScript-heavy nowadays. Usually, a better part of the codebase is written in JavaScript (or TypeScript). By far, the most popular tool to lint JavaScript is [ESLint](https://eslint.org/). Setting up ESLint is usually pretty straightforward. Head over to [the docs](https://eslint.org/docs/latest/user-guide/getting-started) to run the setup provided.
+
+
+      We do however want to add a few things. As we are using TypeScript in this project, we want to update the generated `eslintrc.js` to handle this:
+
+      ```js
+
+      module.exports = {
+        env: {
+          browser: true,
+          es2021: true,
+        },
+        extends: ['airbnb-base', 'airbnb-typescript/base', 'prettier'],
+        parser: '@typescript-eslint/parser',
+        parserOptions: {
+          ecmaVersion: 12,
+          sourceType: 'module',
+          project: './tsconfig.json',
+        },
+        plugins: ['prettier'],
+        rules: {
+          'prettier/prettier': 'error',
+        },
+        root: true,
+      }
+
+      ```
+
+
+      As you can see, I added the `airbnb-typescipt/base` to the extends array. This will give us some basic linting rules for our project. Next to that, I added the `@typescript-eslint/parser` as the parser value. Finally, in the parser options, I pointed the project to the `tsconfig.json` file. This `tsconfig.json` file looks like this:
+
+
+      ```json
+
+      {
+        "compilerOptions": {
+          "target": "ES2022",
+          "module": "ES2022",
+          "lib": ["ES2022", "dom", "dom.iterable"],
+          "outDir": "build",
+          "sourceMap": true,
+          "strict": true,
+          "noUnusedLocals": true,
+          "noUnusedParameters": true,
+          "noImplicitReturns": true,
+          "noFallthroughCasesInSwitch": true,
+          "moduleResolution": "node",
+          "forceConsistentCasingInFileNames": true,
+          "esModuleInterop": true
+        },
+        "exclude": [],
+        "overrides": [
+          {
+            "files": ["*.ts", "*.tsx"],
+            "extends": [
+              "plugin:@typescript-eslint/recommended",
+              "plugin:@typescript-eslint/recommended-requiring-type-checking"
+            ],
+
+            "parserOptions": {
+              "project": ["./tsconfig.json"] // Specify it only for TypeScript files
+            }
+          }
+        ]
+      }
+
+      ```
+
+
+      This is a fairly basic `tsconfig.json`. Do note that in the overrides array, I added an entry that points to two plugins for ESLint from the `@typescript-eslint` package. For now, this is the main configuration I added to start linting the TypeScript files. I’ve added the following NPM script to the root `package.json`:
+
+      ```
+
+      "lint:ts": "eslint --fix packages/**/*.ts",
+
+      ```
+
+
+      ### Stylelint
+
+      Naturally, as this project is a component library, we’ll write quite some styling. As you have ESLint for JavaScript, you have Stylelint for CSS/LESS/SASS/Styled Components/[insert framework here]. In our demo repository, we use CSS for now, but the setup is pretty similar across the different frameworks. I’ve added a `.stylelintrc.json` file in the root with the following contents after following the [setup docs](https://stylelint.io/user-guide/get-started):
+
+      ```js
+
+      {
+        "extends": "stylelint-config-standard",
+        "rules": {
+          "selector-class-pattern": null
+        }
+      }
+
+      ```
+
+
+      This config is fine for now. I’ve added the following NPM script to the root `package.json`:
+
+
+      ```
+
+      "lint:css": "stylelint --fix 'packages/**/*.css'"
+
+      ```
+
+
+      ### Prettier
+
+      Now, we have this linting that will warn us in our IDE. As you may have noticed, I passed for both the `lint:ts` and `lint:css` NPM script the `--fix` parameter. This will try to fix any rules that are breaking. So why not do this and more when you save the file? Luckily, we can use [Prettier](https://prettier.io/) for just that. Prettier can take your existing ESLint and Stylelint configuration to format your code for you. Next to that, you can use Prettier to configure additional automated formatting chores for you. Installing Prettier is pretty straightforward as well. Head over to [the docs](https://prettier.io/docs/en/install.html) to get you started. For the autoformatting on saving, you might need to configure your IDE. For VScode for instance, you can [go here](https://github.com/prettier/prettier-vscode) to see how.
+
+
+      I’ve added the following NPM script to the root `package.json`:
+
+      ```
+      "format:check": "prettier --write \"**/*.{css,ts,js}\"",
+
+      "format:fix": "prettier --write \"**/*.{css,ts,js}\""
+
+      ```
+
+
+      ### Import sorts
+
+      Another neat automation I like to add to projects is sorting and grouping imports at the top of files. You can use `@trivago/prettier-plugin-sort-imports` to do this for you. Simply install the package and update the `.prettierrc` with your desired configuration:
+
+
+      ```js
+
+      {
+        "useTabs": true,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "proseWrap": "preserve",
+        "printWidth": 100,
+        "importOrder": [
+          "^lit/?(.*)$",
+          "<THIRD_PARTY_MODULES>",
+          "^@davebitter/(.*)$",
+          "^../(.*)$",
+          "^./(?!styles/(.*)$)",
+          "^\\./styles/(.*)$"
+        ],
+        "importOrderSeparation": true,
+        "importOrderSortSpecifiers": true
+      }
+
+      ```
+
+
+      As you can see, for the demo repository, I want to have all imports related to Lit be at the top, then have a group with all other third-party modules. After that, I want all the private `node_modules` under the `@davebitter` scope grouped. Next, I want to have all relative imports in a group. Finally, all imports regarding styling should be grouped. After adding this configuration, you never have to worry about your imports again.
+
+      ### Manypkg
+
+      When building a component library as a monorepo, you need to keep internal and external dependencies up-to-date between packages. You could do this manually once in a while, but there is a better way. You can use Manypkg to help you out. In its essence, [Manypkg](https://github.com/Thinkmill/manypkg) is a linter for `package.json` files in Yarn, Bolt or pnpm mono-repos. You can use it to automate these chores. Simply run `yarn add @manypkg/cli` and you can run the following commands in your pre-commit hooks and pipelines:
+
+
+      `manypkg check` to check whether all `package.json` files are alphabetically sorted, there are internal and external mismatches between packages, there are invalid dev and peer dependency relationships, invalid package names and more. You can have a look at the checks [here](https://github.com/Thinkmill/manypkg#checks).
+
+
+      `manypkg fix` will run the check and try to automatically resolve the issues it finds. Usually, it’s a wise idea to run this command in your pre-commit hook. That way, your pipeline won’t fail mid-way because of a minor issue.
+
+
+      I’ve added the following NPM scripts to the root `package.json`:
+
+      ```
+
+      "manypkg:check": "manypkg check",
+
+      "manypkg:fix": "manypkg fix"
+
+      ```
+
+
+      ## How do I set up unit tests?
+
+      This section can be an article on its own. Setting up testing in your project can get quite complex. Let’s go over a few basic things I set up for the demo repository.
+
+      ### Jest
+
+      Firstly, we need a test runner. By far, one of the most popular ones for JavaScript-based projects is [Jest](https://jestjs.io/). Head over to [their docs to get started](https://jestjs.io/docs/getting-started). I did however add some custom configuration. Firstly, I updated the `jest.config.js` to
+
+
+      * support our TypeScript-based project
+
+      * use jsdom
+
+      * ignore Lit packages as I had some issues
+
+      * setup another configuration file for `@testing-library` for jsdom
+
+      * stub our CSS imports.
+
+
+      You can have a look at the configuration file here:
+
+
+      ```js
+
+      module.exports = {
+        preset: 'ts-jest/presets/js-with-babel',
+        testEnvironment: 'jsdom',
+        transformIgnorePatterns: [
+          'node_modules/(?!(testing-library__dom|@open-wc|lit-html|@lit|lit|lit-element|pure-lit|lit-element-state-decoupler)/)',
+        ],
+        setupFilesAfterEnv: ['<rootDir>/config/tests/testSetup.ts'],
+        moduleNameMapper: {
+          '^.+\\.(css|less)$': '<rootDir>/config/tests/cssImportStub.ts',
+        },
+      }
+
+      ```
+
+
+      Head over to the demo repository to see the contents of the referenced files.
+
+
+      I then added the following NPM scripts to the root `package.json`:
+
+      ```
+
+      "test": "jest ./packages",
+
+      "test:watch": "yarn test --watch"
+
+      ```
+
+
+      ### Support for Web Components
+
+      Great, I can run basic tests which are useful for my utility packages, but now we need to add support for the Web Components. Even though Open Web Components has a [specific test runner for this](https://open-wc.org/guides/developing-components/testing/), I want to be able to test my components in Jest using [Testing Library](https://testing-library.com/). Luckily, Open Web Components offers [testing helpers](https://open-wc.org/docs/testing/helpers/) to test your Web Components as well. Simply add the `@open-wc/testing-helpers` package and test your component:
+
+
+      ```js
+
+      import { fixture } from '@open-wc/testing-helpers'
+      import { screen } from 'testing-library__dom'
+
+
+      import Button from '../Button'
+
+
+      describe('Button', () => {
+        beforeEach(async () => {
+          await fixture(Button({ label: 'test', testId: 'test-button' }))
+        })
+
+
+        it('renders passed label in as text in button', () => {
+          expect(screen.getByTestId('test-button')).toHaveTextContent('test')
+        })
+      })
+
+      ```
+
+
+      ## How do I set up snapshot and visual regression testing?
+
+      As components in a component library often use other components from the same library, you might change something in one component and have it affect multiple other components. It is wise to set up tests to ensure that all changes are spotted and intended. You can do this with snapshot and visual regression testing. Luckily, as we are using Storybook and already documenting many different combinations and configurations of components, we can make use of two great tools for just this.
+
+      ### Storyshots
+
+      Firstly, we can make snapshots of the DOM for every story using [Storyshots](https://storybook.js.org/addons/@storybook/addon-storyshots). With this Storybook addon, we can create a test file called, for example, `storyshots.spec.ts` which looks like this:
+
+      ```js
+
+      import initStoryshots, { multiSnapshotWithOptions } from '@storybook/addon-storyshots'
+
+      import path from 'path'
+
+
+      initStoryshots({
+        suite: 'Storyshots',
+        framework: 'web-components',
+        test: (story) => {
+          const fileName = path.resolve(__dirname, story.story.id)
+          return multiSnapshotWithOptions()({
+            ...story,
+            context: { ...story.context, fileName },
+          })
+        },
+      })
+
+      ```
+
+
+      When running this test, it will go over all Storybook stories and create a snapshot of the DOM. If something changes, the test will fail. If you pass the flag `-u` when running this test, it will update the locally checked-in snapshots and pass. You can then review these changes (in a merge request). I’ve added the following NPM script to the root `package.json`:
+
+
+      ```
+
+      "test:regression": "jest /.storybook/storyshots.spec.ts"
+
+      ```
+
+
+      ### Storyshots
+
+      Its visual counterpart is called [Storyshots](https://storybook.js.org/addons/@storybook/addon-storyshots). Like before, I’ve created a test tile called `imageshots.spec.ts` with the following content:
+
+
+      ```js
+
+      import initStoryshots from '@storybook/addon-storyshots'
+
+      import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer'
+
+      import path from 'path'
+
+
+      initStoryshots({
+        suite: 'Imageshots',
+        framework: 'web-components',
+        test: imageSnapshot({
+          storybookUrl: `file://${path.resolve(__dirname, '../storybook-static')}`,
+        }),
+      })
+
+      ```
+
+
+      This will do the same as the code snapshots, but using images. This way, you can make sure that any visual changes are correct. I added the following NPM script to the root `package.json`:
+
+      ```
+
+      "test:visual-regression": "jest ./.storybook/imageshots.spec.ts"
+
+      ```
+
+
+      ## How do I automate the linting and testing?
+
+      Even though you can manually run all these linting and testing scripts, you want to automate this part to help out developers on the project and ensure that the code standard is met. In the next article, we are going to have a look at how to do this in a pipeline, but you don’t want to wait on a pipeline to inform the developer that there is something that needs to be looked at. Much rather, you run your linting and testing before a commit is made. We can do this in a pre-commit hook. To make this easier and smarter, we’ll use [Husky](https://github.com/typicode/husky).
+
+
+      After installing husky, we update `.hsuky/pre-commit` to run the lint-staged command:
+
+
+      ```
+
+      #!/usr/bin/env sh
+      . "$(dirname -- "$0")/_/husky.sh"
+
+
+      npx lint-staged
+
+      ```
+
+
+      ### lint-staged
+
+      Naturally, we only want to lint needed files and not the entire repository if that’s not needed. Using [lint-staged](https://github.com/okonet/lint-staged) in combination with Husky allows you to, for instance, just lint TypeScript files if there are any TypeScript files staged. After installing lint-staged, I updated the `.lintstagedrc` file to the following content:
+
+
+      ```js
+
+      {
+        "packages/**/*.{js,ts}": [
+          "eslint --cache",
+          "jest ./packages"
+        ],
+        "packages/**/*.css}": "stylelint --fix",
+        "packages/**/*.{js,ts,css,json,md}": "prettier --write",
+        "**/package.json": "manypkg check"
+      }
+
+      ```
+
+
+      Now, when we commit, the linting and testing scripts will run.
+
+      ## How do I set a convention for commit messages?
+
+      While we are on the topic of committing, let’s have a quick look at setting a convention for commit messages. Not every developer writes the same way and standards of commit messages.
+
+      ### Commitizen
+
+      You can help developers with this process using [Commitizen](https://github.com/commitizen/cz-cli). In it’s essence, before committing, it will help you construct a commit message with the [Karma commit style](https://karma-runner.github.io/0.8/dev/git-commit-msg.html). After installing, I’ve added the following NPM script to the root `package.json`:
+
+
+      ```
+
+      "cz": "git cz"
+
+      ```
+
+
+      This will then guide you through an interactive CLI:
+
+
+      ![Screenshot of questions the interactive CLI prompts with](/img/articles/linting-testing-commitizen.png)
+
+
+      ## Looking back
+
+      You've set up quite a bit of tooling for the component library. Linting and testing are done automatically and more automations are added.
+
+      ## Next steps
+
+      That’s already starting to look like a proper setup for the component library repository. In the next article, we’re going to have a look at how we can automate some linting, testing and publishing tasks in a pipeline.
+
+    date: 2022-08-31T00:00:00.000Z
+    slug: linting-testing
+    tags:
+      - front-end
+    intro: >-
+      How to build a component library Part 3: Setting up linting, unit, snapshot and visual regression testing.
+    teaserCopy: >-
+      How to build a component library Part 3: Setting up linting, unit, snapshot and visual regression testing.
+    teaserImage: /img/articles/linting-testing-hero.png
+    title: How do I set up linting, unit, snapshot and visual regression testing?
+  - type: articles
+    body: >-
+      This article is part 2 of the series _How do I build a Component Library?_. You can find the demo repository for this series on [GitHub](https://github.com/DaveBitter/fe-monorepo) and the component library itself hosted [here](https://fe-monorepo.davebitter.com/).
+
+
+      I’ve already stated that this series would be opinionated. Now, it doesn’t get more opinionated than picking a front-end framework. Which one did I pick and why?
+
+      ## Picking a framework
+
+      There is a plethora of front-end frameworks available to use. Some swear by [React.js](https://reactjs.org/), some put their money on [Vue.js](https://vuejs.org/) while others don’t want to use a framework at all. The internet is full of opinions, comparisons and advice on which to pick. For this series, it doesn’t really matter which one I pick as the setup will most likely be the same. I do however have a strong recommendation based on the past few years working on large projects at large companies.
+
+      ### Why not support all?
+
+      My personal preference for building robust web applications is React.js. React.js has the features, backing and support I’m looking for in a front-end framework. You might, however, be surprised to learn that I don’t actually like React.js to build component libraries.
+
+
+      The downside with picking a framework like React.js/Vue.js/[Svelte](https://svelte.dev/)/[insert framework here] for a component library is that it’s hard to introduce it in a large company. While a company might use React.js for their newly chosen tech stack, they most likely still have a few [AngularJS](https://angularjs.org/) or vanilla applications that you want to support too. Even if they don’t, in a few years the company might decide to move to the new latest and greatest framework. Migrating your component library to this new framework is very costly and will most likely not happen. Because of this, your component library will most likely be labelled as ‘legacy’. I go more in-depth into this phenomenon in my article [The infinite legacy cycle in front-end](/articles/the-infinite-legacy-cycle-in-front-end).
+
+
+      So how do you best prevent this from happening? For me, the perfect solutions are [Web Components](https://www.webcomponents.org/). Web Components is a suite of different technologies allowing you to create reusable custom elements — with their functionality encapsulated away from the rest of your code — and utilize them in your web apps. At least, that’s what [MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components) says. Simplified, Web Components are browser-native components that offer similar functionality as many front-end framewors. An interesting concept, however, is the usage of the Shadow DOM. To learn more, head over to the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
+
+      ### So native Web Components?
+
+      I mean, you could! It might, however, be wise to look for a bit of an abstraction. There are quite a few front-end frameworks built on Web Components. Go figure, right? Some notable ones are:
+
+
+      * [Lit](https://github.com/lit/lit)
+
+      * [Stencil](https://stenciljs.com/)
+
+
+      Like any set of frameworks, they both have their up- and downsides. There are many comparison articles online comparing them. Feel free to look it up after you finish this article. So which one did I choose? I decided to go for Lit. I told you this was going to be an opinionated series. The reason is that I’ve got experience using Lit already. Next to that, I like that it seems to be a bit more low-level and closer to the core which I always look out for. If you want to learn a bit more about Lit, head over to the article [Why lit is 🔥](https://techhub.iodigital.com/articles/why-lit-is-%F0%9F%94%A5) by my colleague Lucien Immink. To be fair, going with any of the mentioned options would be good.
+
+      ### How do Web Components help me?
+
+      As Lit compiles to browser-native Web Components, you can load them in any front-end framework or even vanilla web application. Let’s say you have a button component written as a Web Component. You can now use this button in your React.js application, while also using it in a legacy AngularJS project from years ago. In a year you’re migrating to a fancy new framework? You guessed it, you can load your Web Component in that project.
+
+
+      This is such an incredibly needed feature for any component library. It ensures that you can roll out your component library company-wide and offers future-proof support.
+
+      ## How do I set up Lit?
+
+      To get started with Lit, head over to their [getting started guide](https://lit.dev/docs/getting-started/) which will help you set it up. To quickly glance over it, however, this is what I did for the demo repository:
+
+
+      * Install lit: `yarn add lit`
+
+      * Add a Typescript file in one of the packages
+
+      * Start building
+
+
+      This low footprint is exactly the reason I like Lit so much. Let’s have a look at a standard component from the docs:
+
+
+      ```js
+
+      import {LitElement, css, html} from 'lit';
+
+      import {customElement, property} from 'lit/decorators.js';
+
+
+      @customElement('simple-greeting')
+
+      export class SimpleGreeting extends LitElement {
+        // Define scoped styles right with your component, in plain CSS
+        static styles = css`
+          :host {
+            color: blue;
+          }
+        `;
+
+        // Declare reactive properties
+        @property()
+        name?: string = 'World';
+
+        // Render the UI as a function of component state
+        render() {
+          return html`<p>Hello, ${this.name}!</p>`;
+        }
+      }
+
+      ```
+
+      This gives you a basic idea of how to make a simple component. Naturally, you are going to need more functionality (e.g. event handling, lifecycle methods etc.). Please refer to the docs on how to do that with Lit.
+
+      ## Why should I showcase my components (with Storybook)?
+
+      Once you have chosen your front-end framework, you want to be able to view each component during and after development. During development, you need a place to see the actual component you are working on and document different configurations. After development, you want to showcase all the components in different configurations for consumers of your component library. By far, one of the most popular tools to do this is [Storybook](https://storybook.js.org/). Storybook makes it easy to create multiple “stories” for all your components where you can view the result in the browser. Next to that, you can make any properties you can pass to a component editable from the Storybook UI. Finally, there is a vast number of [addons](https://storybook.js.org/addons/) to add to Storybook. Here are a few to give you an idea:
+
+
+      * [addon-a11y](https://storybook.js.org/addons/@storybook/addon-a11y) to test for accessibility
+
+      * [storybook-addon-pseudo-states](https://storybook.js.org/addons/storybook-addon-pseudo-states) to show different states like hover, hover and active
+
+      * [storybook-dark-mode](https://storybook.js.org/addons/storybook-dark-mode) to toggle dark-mode for your UI
+
+
+      There are many more addons so you can pick and choose for your perfect setup.
+
+      ## How do I set up Storybook?
+
+      Storybook has great docs to help you get started. Please head over to [the docs](https://storybook.js.org/docs/react/get-started/introduction) when setting it up for your component library. For the demo repository, I ran `npx storybook init` . This starts an interactive CLI that will take care of most things for you. It asks you for the framework you want to use. As we are using Web Components, I selected that option. This option uses Lit which is a nice bonus.
+
+
+      Storybook then sets up everything you need to start developing. There are some things I updated, however. Firstly, as we are using a mono-repo setup, you have to tell Storybook where to find the `.stories` files. In `.storybook/main.js` I’ve updated the stories array to look for `.stories` files in the packages folders:
+
+
+      ```js
+
+      module.exports = {
+        stories: [
+          './Introduction.stories.mdx',
+          '../packages/**/*.stories.mdx',
+          '../packages/**/*.stories.@(js|jsx|ts|tsx)',
+        ],
+        addons: [
+          '@storybook/addon-links',
+          '@storybook/addon-essentials',
+          {
+            name: '@storybook/addon-docs',
+            options: { transcludeMarkdown: true },
+          },
+        ],
+        staticDirs: ['../public'],
+        framework: '@storybook/web-components',
+      }
+
+      ```
+
+      Secondly, I’ve updated the root `package.json` with two scripts:
+
+      ```js
+
+      "dev": "start-storybook -p 6006",
+
+      "build": "build-storybook --quiet -o dist",
+
+      ```
+
+      You can now run `yarn dev` to start the development environment of Storybook. You can run `yarn build` to have a production build outputted to the `dist` folder.
+
+
+      Finally, I like to show the project README file as a separate story which is shown when someone visits the Storybook. Luckily, we can do this quite easily due to the [MDX](https://mdxjs.com/) support. I created `.storybook/Introduction.stories.mdx` and added the following content:
+
+      ```js
+
+      import { Meta } from "@storybook/addon-docs";
+
+      import README from "../README.md";
+
+
+      <Meta title="README" />
+
+
+      <README />
+
+      ```
+
+      Now, when we open Storybook, we are greeted with the contents of the README file.
+
+      ## Looking back
+
+      You've set up a front-end framwork to work with and Storybook to develop and showcase your components with.
+
+      ## Next steps
+
+      In the next article, we’re going to use Storybook for quite a bit more. We’re going to use the stories we create to use snapshot and visual regression testing.
+    date: 2022-08-24T00:00:00.000Z
+    slug: front-end-framework-storybook
+    tags:
+      - front-end
+    intro: >-
+      How to build a component library Part 2: Picking a front-end framework and setting up Storybook.
+    teaserCopy: >-
+      How to build a component library Part 2: Picking a front-end framework and setting up Storybook.
+    teaserImage: /img/articles/front-end-framework-storybook-hero.png
+    title: How do I pick a front-end framework & showcase it with Storybook?
+  - type: articles
+    body: >-
+      This article is part 1 of the series _How do I build a Component Library?_. You can find the demo repository for this series on [GitHub](https://github.com/DaveBitter/fe-monorepo) and the component library itself hosted [here](https://fe-monorepo.davebitter.com/).
+
+
+      When building a component library, it is wise to have a solid setup to be able to offer your components to your consumers. Now, this naturally is heavily opinionated. Let’s have a look at how you might do it.
+
+      ## How do I set up a monorepo with Yarn Workspaces?
+
+      My favourite way to separate the code for each component is using a monorepo. This way, you can create separate standalone packages for each of your components. These packages can then be used between one another and it keeps the code nicely scoped.
+
+
+      There are a variety of packages that can help you with this. I used to use [Lerna](https://github.com/lerna/lerna) a lot, but its future became uncertain a while back. [This issue](https://github.com/lerna/lerna/issues/2703) is an interesting read on that. It has since been taken over by [Nrwl](https://github.com/lerna/lerna/issues/3121), but I have made the shift to [Yarn Workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/).
+
+
+      Yarn Workspaces allow you to set up multiple packages in such a way that you only need to run `yarn install` once to install all of them in a single pass. So, each package has its own `package.json` and `node_modules`. Yarn Workspaces will then make sure to install the dependencies in each package in your workspace, but also hoist duplicate packages up.
+
+      ### Adding it to your repository
+
+      To turn your repository into a monorepo with Yarn Workspaces, you first have to update the `package.json` file in the root of your repository. First, add `"private": true`. This is a requirement from Yarn. Workspaces are not meant to be published, so they’ve added this safety measure to make sure that nothing can accidentally expose them.
+
+
+      Next, you need to tell Yarn where your packages will live. For now, let’s set it up so we can have component and utility packages. Add the following to the root `package.json`:
+
+      ```json
+
+      "workspaces": [
+          "packages/components/*",
+          "packages/utilities/*"
+      ],
+
+      ```
+
+
+      This will tell Yarn that we have our packages in these two folders. Next, let’s add some placeholder packages. Your project structure might look something like this:
+
+
+      ```
+
+      packages/
+
+      ├── components/
+
+      │   ├── button/
+
+      │   │   ├── src/
+
+      │   │   │   └── index.ts
+
+      │   │   └── package.json
+
+      │   └── text/
+
+      │       ├── src/
+
+      │       │   └── index.ts
+
+      │       └── package.json
+
+      └── utilities/
+          └── format-date/
+              ├── src/
+              │   └── index.ts
+              └── package.json
+      package.json
+
+      ```
+
+
+      Each package has its own `package.json` file where it can install its needed dependencies, run custom scripts and more. We’ve also added a temporary source folder with an empty `index.ts` file.
+
+
+      That’s it! From now on, you can run `yarn install` at the root of the project and Yarn Workspaces will take care of all your dependencies.
+
+
+      As an extra tip, you might want to take care of keeping all the dependencies in sync. In its essence, [Manypkg](https://github.com/Thinkmill/manypkg) is a linter for `package.json` files in Yarn, Bolt or pnpm mono-repos. You can use it to automate these chores. Simply run `yarn add @manypkg/cli` and you can run commands to help you with keeping your dependencies in sync. Read more about Manypk in my article _[Keeping dependencies in sync in your mono-repo](https://www.davebitter.com/quick-bits/manypkg)._
+
+      ## How do I set up a SemVer strategy?
+
+      As we have all these separate packages that can install each other or be installed in another project, we want to make sure that we version each package correctly. We do this using [SemVer](https://semver.org/). In essence, whenever we make an update to a component, we want to make sure to update the version number in the corresponding package.json with either a patch, minor or major bump.
+
+
+      This process can be painstaking if you have a large number of package updates. You’d have to:
+
+      * keep track of which packages changed
+
+      * manually bump the version in the package.json correctly
+
+      * write a [changelog](https://www.freecodecamp.org/news/a-beginners-guide-to-git-what-is-a-changelog-and-how-to-generate-it/) file
+
+      * publish the package to a registry
+
+
+      How can we automate parts of this?
+
+      ### Changesets
+
+      We can make use of [changeset](https://github.com/changesets/changesets) to help us. It provides a CLI tool and a few scripts to do the above. Firstly, add changesets with the following command:
+
+
+      ```markdown
+
+      yarn add @changesets/cli
+
+      ```
+
+
+      Next, run the init command:
+
+      ```markdown
+
+      yarn changeset init
+
+      ```
+
+
+      This creates a `.changeset` folder in the root of your project that looks a bit like this:
+
+
+      ```
+
+      .changeset/
+
+      ├── config.json
+
+      └── README.md
+
+      ```
+
+      Let’s jump into the `config.json` file. Generally, you can leave it as is. One thing you might want to update is the `baseBranch` value. By default, this is set to “main”. Please update this to whatever your main branch is.
+
+
+      Great, we can now run a few commands.
+
+      #### Generate a changeset
+
+      `yarn changeset` will open up an interactive CLI tool that assists you in creating a changeset file that can be consumed. First, you select which packages you want to create a changeset for:
+
+
+      ![CLI interface to make a selection of which package to make a changeset for](/img/articles/monorepo-semver-package-registry-changeset-select-packages.png)
+
+
+      Next, you have to select the correct SemVer bump:
+
+
+      ![CLI interface to make a selection of which SemVer to use](/img/articles/monorepo-semver-package-registry-changeset-select-semver.png)
+
+
+      After that, you can add a summary of the change that will be used in the changelog. Note that it prompts you for a large summary as well if you are doing a major bump:
+
+
+      ![CLI interface to add a summary for the changes](/img/articles/monorepo-semver-package-registry-changeset-add-summary.png)
+
+
+      Finally, it gives us a summary of the changeset:
+
+
+      ![CLI interface with summary of choices](/img/articles/monorepo-semver-package-registry-changeset-summary.png)
+
+
+      We can now go back to the `.changeset` folder in the root of the project. A new file called `eleven-hounds-prove.md` is automatically generated. Note that the name will change for every generated changeset.
+
+
+      ```
+
+      ---
+
+      "@davebitter/button": minor
+
+      "@davebitter/text": minor
+
+      "@davebitter/format-date": minor
+
+      ---
+
+      add some info on your changes
+
+      ```
+
+
+      There is a major benefit of having the markdown file. Firstly, you can review this file in a pull request. Next to that, you can always edit the markdown file later. Finally, you may have noticed that the values are “minor” and not the new version number at the time of generating. This is great for when your changeset will be consumed a while later than generating. You might open a pull request that takes a week to merge. If in the meanwhile somebody updated one of these packages as well, you might run into issues. Changeset makes sure that it will take the version in the package.json of the package and perform the patch, minor or major on that.
+
+      #### Consume a changeset
+
+      Next, we want to consume this changeset file. You can run `yarn changeset version` to execute all changeset files in the `.changeset` folder. After running this, the version property in the package.json of each mentioned package is updated with the correct bump. The changeset file is then removed.
+
+      #### Publish a changeset
+
+      Finally, we want to actually publish the updated packages. You can run `yarn changeset publish` to publish the separate packages to the registry we are setting up next.
+
+
+      ![CLI interface with publish logs](/img/articles/monorepo-semver-package-registry-changeset-publish.png)
+
+
+      As you may notice in the image above is that Changeset creates tags for you as well.
+
+      ## How do I publish to a private package registry?
+
+      Next, we want to publish these separate packages to a package registry. This does not have to be a private package registry, but more often than not you want to set this up for the project you work on. There are a variety of package registries to which you can publish. NPM, GitLab, GitHub and more. It depends a bit on your requirements. As this demo repository is hosted on GitHub, let’s set it up for that. Note that the setup for different package registry providers is mostly the same. Just look up a guide for your choice.
+
+      ### Getting access
+
+      Firstly, you need to generate a token on your GitHub. You can do this by going to [https://github.com/settings/tokens](https://github.com/settings/tokens). After hitting generate, make sure to tick the`write:packages`-box
+
+
+      ![GitHub settings page to create a new access token](/img/articles/monorepo-semver-package-registry-github-token.png)
+
+
+      Then click “generate token” at the bottom of the page and copy the generated token.
+
+      ### Creating an .npmrc file
+
+      Next, you need to add a `.npmrc` file to the root of your project. Add the following content:
+
+
+      ```
+
+      @YOUR_GITHUB_USERNAME:registry=https://npm.pkg.github.com/YOUR_GITHUB_USERNAME
+
+      //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+
+      registry=https://registry.npmjs.org
+
+      ```
+
+
+      Make sure to replace `YOUR_GITHUB_USERNAME` and `YOUR_GITHUB_TOKEN` with your username and token respectively.
+
+
+      **Don’t commit this file. Update your `.gitignore`**:
+
+
+      ```
+
+      .npmrc
+
+      ```
+
+      ### Updating the package.json file for each package
+
+      Now, for every package that you want to publish, make sure to add this:
+
+
+      ```
+
+      "name": "@YOUR_GITHUB_USERNAME/PACKAGE_NAME",
+
+      "repository": "git://github.com/YOUR_GITHUB_USERNAME/REPO_NAME.git",
+
+      ```
+
+
+      For example, in my setup, this would be:
+
+      ```
+
+      "name": "@davebitter/button",
+
+      "repository": "git://github.com/davebitter/fe-monorepo.git",
+
+      ```
+
+
+      ### Log in to NPM for your private scope
+
+      Next, as these packages are private, we need to log in to NPM from the terminal with the scope of your GitHub. You can do this by running:
+
+      ```
+
+      npm login --scope=@YOUR_GITHUB_USERNAME --registry=https://npm.pkg.github.com
+
+      ```
+
+
+      Then, log in to with these credentials:
+
+      ```
+
+      Username: YOUR_GITHUB_USERNAME
+
+      Password: YOUR_GITHUB_TOKEN
+
+      Email (this IS public): YOUR_EMAIL
+
+      ```
+
+
+      You should see the following message after logging in:
+
+      ```
+
+      Logged in as YOUR_GITHUB_USERNAME on https://registry.npmjs.org/.
+
+      ```
+
+
+      That’s it, you can now run `yarn changeset publish` and the packages will be published to your private GitHub package registry.
+
+      ## How do I use my packages?
+
+      You can now use the published packages in the monorepo itself. If you want to use your private packages in a different repository, you first have to add a `.npmrc` file in the root of that project that looks like this:
+
+      ```
+
+      //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+
+      registry=https://npm.pkg.github.com
+
+      ```
+
+
+      ## Looking back
+
+      You’ve set up a monorepo that uses Yarn Workspaces to handle dependency management. Next, you use Changeset to help with the versioning of components. Finally, you’ve published the separate packages to your private package registry.
+
+      ## Next steps
+
+      That’s already starting to look like a nice setup. The packages have no real code in there yet. In the next article, we are going to set up our front-end framework and Storybook.
+
+    date: 2022-08-17T00:00:00.000Z
+    slug: monorepo-semver-package-registry
+    tags:
+      - front-end
+    intro: >-
+      How to build a component library Part 1: Setting up a Monorepo, Semver strategy and Private package registry.
+    teaserCopy: >-
+      How to build a component library Part 1: Setting up a Monorepo, Semver strategy and Private package registry.
+    teaserImage: /img/articles/monorepo-semver-package-registry-hero.png
+    title: How do I set up a Monorepo, SemVer strategy and Private package registry?
+  - type: articles
+    body: >-
       ## The problem
 
       Let’s imagine that we need want to display an image on our webpage in an aspect ratio of 16 by 9. Now, this would be easy if we have a source image that has the same aspect ratio. But as a developer, you don’t always have control over this. You’ve received the following image:
