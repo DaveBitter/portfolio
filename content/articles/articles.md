@@ -38,7 +38,7 @@ items:
 
       ```
 
-      This allows for communication between the main thread and the worker thread, allowing for coordination and coordination of tasks.
+      This allows for communication between the main thread and the worker thread, allowing for coordination of tasks.
 
 
       One key limitation of Web Workers is that they do not have access to the DOM, meaning they cannot directly manipulate the page or access page elements. This means that Web Workers are best suited for tasks that do not require direct interaction with the page, such as data processing or network requests.
@@ -88,7 +88,7 @@ items:
 
       ```
 
-      In this example, the script.js file creates a new Web Worker and passes it the path to the `worker.js` file, which contains the code for the worker. The main thread then listens for messages from the worker and logs the result when it is received.
+      In this example, the `script.js` file creates a new Web Worker and passes it the path to the `worker.js` file, which contains the code for the worker. The main thread then listens for messages from the worker and logs the result when it is received.
 
 
       The main thread also sends a message to the worker with some data (an array of numbers) to perform a computation on. In this case, the worker performs a simple calculation (squaring each number in the array and adding them together) and then sends the result back to the main thread.
