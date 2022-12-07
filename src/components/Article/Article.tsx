@@ -37,7 +37,6 @@ const Article = ({
   tags: articleTags,
   teaserImage,
   title,
-  ...attributes
 }: ArticleInterface & IProps) => {
   const dictionary = getDictionary();
 
@@ -51,7 +50,7 @@ const Article = ({
   const tags = [...(articleTags || [])];
 
   return (
-    <article className="article grid" {...attributes}>
+    <article className="article grid">
       <header className="article__header g0">
         <div className="grid">
           <div className="g2">

@@ -16,6 +16,7 @@
         border-radius: $border-radius-lrg;
         overflow: hidden;
         text-align: right;
+        max-width: unset !important;
 
         @include mq($mq-tab--sml) {
             margin: (-$spacing-med) (-$spacing-lrg) $spacing-sml (-$spacing-lrg) !important;
