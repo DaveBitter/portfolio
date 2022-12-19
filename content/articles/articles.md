@@ -225,7 +225,7 @@ items:
     slug: i-want-to-react-use-this
     tags:
       - front-end
-      - react
+      - react-js
     intro: >-
       A big part of working with React.js is fetching data and displaying the results. Let’s see how the new React.use() hook can can help you!
     teaserCopy: >-
