@@ -1,13 +1,13 @@
 ---
 items:
   - body: >-
-      At Frontmen, I work as a Front-end Developer and Consultant for projects that involve building state of the art human-centred web applications using Next.js, React.js and the power of the web. I help teams achieve great results from this expertise. I work as a point of contact for all people working in development, design and more.
+      At ANWB, I play a crucial role as a member of the Design System team, contributing to the development of the ANWB Design System - Poncho. This system is widely used by over 60 developers and 40 designers, supporting over a hundred web applications.
 
 
-      Next to this, I work on setting up, maintaining and scaling design systems and component libraries for large teams to work with. I evaluate current processes and improve them together with teams to ensure the best possible way of working. I'm a great communicator and am always available to help anybody who needs assistance.
+      My work involves two primary areas of focus. Firstly, I am responsible for providing major architectural solutions for the organization. This includes establishing a new way of working between development and design for design tokens through the Design System. I skillfully utilize my soft skills to get all stakeholders on board while also utilizing my technical expertise to develop solutions. I am essential in any major change in the ANWB's way of working, as it all starts with Poncho. This requires me to be versatile in various roles, including technical, business-focused, and other related areas.
 
 
-      Finally, I work as a Developer Advocate. As a Developer Advocate, I'm continuously on the hunt to learn new techniques, tools and possibilities and share them. I share the wonderful world of the web in the form of speaking at meetups, speaking at conferences, creating video content, writing articles and more.
+      Secondly, I serve as a dependable support system to all front-end developers at ANWB. This includes providing assistance with questions regarding Poncho and providing input on development decisions in general.
     company: Frontmen
     companyWebsite: https://frontmen.nl
     roles:
@@ -29,36 +29,13 @@ items:
     city: Amsterdam
     countryCode: NL
   - body: >-
-      At Mirabeau, I was responsible for building interactive web applications and front-end component libraries. I touched the roles of front-end developer, visual designer, interaction designer, back-end developer and DevOps engineer daily. My main focus was building interactive (React.js and Next.js) web applications while being involved in the design and development process from front to back. This included, but was not limited to:
+      My experience at Mirabeau involved building interactive web applications and front-end component libraries while taking on various roles such as front-end developer, visual designer, interaction designer, back-end developer, and DevOps engineer. I primarily focused on building interactive web applications using React.js and Next.js while actively participating in the design and development process from start to finish.
 
 
-      * crafting components together with visual and interaction designers
-
-      * setting up front-end architectures
-
-      * handling global states
-
-      * handling data between front-end and back-end
-
-      * ensuring accessibility
-
-      * (consulting about) performance optimisations
-
-      * search engine optimisation
-
-      * setting up CI/CD
-
-      * writing tests and documentation
+      In addition to building web applications, I also worked on component libraries using HTML, CSS (SASS), and vanilla JS, which were used by development teams or standalone websites. I acted as a bridge between the design, front-end, and back-end teams, and became a valuable point of contact for a variety of stakeholders, using my natural confidence and communication abilities to take the lead successfully.
 
 
-      Next to this, I worked on building component libraries with HTML, CSS (SASS) and vanilla JS. This could result in just a component library to be used by a development team or in a standalone website.
-
-
-      Next to that, I utilized my broad skill set to be the bridge between the design, front-end and back-end teams. I got
-      a lot of energy out of helping my team in this role. I speak both the design and the technical language which makes me a great fit for this role. Naturally, this resulted in me being a great point of contact for a variety of stakeholders. I have the natural confidence and communicative abilities to successfully take the lead through this role. This made me a great asset to any team.
-
-
-      Finally, I am an avid supporter of sharing knowledge. I did this regularly through giving code reviews, giving presentations, writing articles, giving guest lectures, giving workshops and speaking at meetups. Next to that, I coached a wide range of front-end developers. This range consisted of every level of seniority. It brought me great joy and filled me with energy to help others grow in a meaningful way.
+      Finally, my passion for knowledge sharing manifested in activities such as code reviews, presentations, articles, guest lectures, workshops, and meetups. I also coached front-end developers of all seniority levels, finding joy in helping others grow in a meaningful way.
     company: Mirabeau
     companyWebsite: https://www.mirabeau.nl
     roles:
@@ -76,28 +53,13 @@ items:
     city: Amsterdam
     countryCode: NL
   - body: >-
-      At ViriCiti I was responsible for creating user experience and visual designs as well as building interactive real-time front-end data visualization and monitoring applications for electric vehicles and charging stations. As at Mirabeau, I touched the roles of front-end developer, visual designer, interaction designer, back-end developer and DevOps engineer daily.
+      At ViriCiti, I was responsible for creating user experience and visual designs, as well as building interactive real-time front-end data visualization and monitoring applications for electric vehicles and charging stations. Similar to my role at Mirabeau, I handled the roles of front-end developer, visual designer, interaction designer, back-end developer, and DevOps engineer daily.
 
 
-      My main focus was building interactive (React.js and Node. js) web applications while being solely responsible for the design and process. I conducted user interviews, conducted user tests, worked on visual explorations, and designed components and defined an overall visual style for all products.
+      My main focus was building interactive web applications (React.js and Node.js), while being solely responsible for the design and development process. I conducted user interviews and tests, worked on visual explorations, designed components, and defined an overall visual style for all products.
 
 
-      I worked a good portion of the time in and with the back- end team as well. These tasks included, but were not limited to:
-
-
-      * crafting components in the role of a visual designer, interaction designer and front-end developer
-
-      * setting up front-end architectures
-
-      * handling global states
-
-      * handling data between front-end and back-end
-
-      * handling data streams on both the front-end and back- end side
-
-      * setting up CI/CD
-
-      * writing tests and documentation
+      Additionally, I worked closely with the back-end team for a significant portion of my time in this role.
     company: ViriCiti
     companyWebsite: https://www.viriciti.com
     roles:
@@ -111,7 +73,7 @@ items:
     city: Amsterdam
     countryCode: NL
   - body: >-
-      I worked for Wallscope during a short-term project in the form of a code sprint as part of my studies. I worked for a project for the NHS regarding the visualisation of linked data. I got to work with the SPARQL Query Language, RDF and natural language processing.
+      During a short-term project as part of my studies, I worked for Wallscope on a project for the NHS regarding the visualization of linked data. In this role, I gained experience working with the SPARQL Query Language, RDF, and natural language processing.
     company: Wallscope
     companyWebsite: https://www.wallscope.co.uk
     roles:
@@ -125,21 +87,10 @@ items:
     city: Edinburgh
     countryCode: UK
   - body: >-
-      During my internship at Cohere, I build an interactive front-end application to view real-time data on the energy use and generation combined with the charging data of electric cars. As at ViriCiti and Mirabeau, I touched the roles of front-end developer, visual designer, interaction designer and back-end developer daily.
+      During my internship at Cohere, I built an interactive front-end application to view real-time data on the energy use and generation combined with the charging data of electric cars. Similar to my roles at ViriCiti and Mirabeau, I handled the roles of front-end developer, visual designer, interaction designer, and back-end developer daily.
 
 
-      I worked mostly on building components and functionalities for the platform. This included, but was not limited to:
-
-
-      * crafting components in the role of a visual designer, interaction designer and front-end developer
-
-      * handling global states
-
-      * handling data between front-end and back-end
-
-      * handling data streams on both the front-end and back- end side
-
-      * writing tests and documentation
+      In this role, I mainly focused on building components and functionalities for the platform.
     company: Cohere
     companyWebsite: https://www.maxem.io
     roles:
