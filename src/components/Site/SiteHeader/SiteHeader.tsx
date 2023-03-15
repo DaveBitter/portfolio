@@ -18,6 +18,7 @@ interface IProps {
   showGenericSiteHeader?: boolean;
   src: string;
   alt: string;
+  useFancyImageBlock?: boolean;
 }
 
 // Component
@@ -28,6 +29,7 @@ const SiteHeader = ({
   src,
   alt,
   showGenericSiteHeader,
+  useFancyImageBlock = true,
   ...attributes
 }: IProps) => {
   return (
@@ -55,7 +57,11 @@ const SiteHeader = ({
               <Socials theme="light" />
             </div>
 
-            <FancyImageBlock src={src} alt={alt} />
+            {useFancyImageBlock ? (
+              <FancyImageBlock src={src} alt={alt} />
+            ) : (
+              <img className="site-header__image" src={src} alt={alt} />
+            )}
           </div>
         )}
         {children}

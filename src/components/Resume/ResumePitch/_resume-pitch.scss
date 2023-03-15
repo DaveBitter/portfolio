@@ -1,73 +1,73 @@
 .resume-pitch {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  @include mq($mq-desk--med) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__intro {
+    border-radius: $border-radius-xxl;
+  }
+
+  &__intro-wrapper {
+    position: relative;
+    margin-bottom: $spacing-med;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: $gradient-primary;
+      opacity: 0.2;
+      border-radius: $border-radius-xxl;
+      pointer-events: none;
+    }
+  }
+
+  &__copy {
+    @include mq($mq-desk--med) {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @include mq($mq-desk--lrg) {
+      width: 60%;
+    }
+
+    .h5 p {
+      @extend .h5;
+    }
+  }
+
+  &__chart {
+    width: 100%;
+    margin-bottom: $spacing-med;
 
     @include mq($mq-desk--med) {
-        flex-direction: row;
-        align-items: flex-end;
+      width: 50%;
     }
 
-    &__intro {
-        border-radius: $border-radius-xxl;
+    @include mq($mq-desk--lrg) {
+      width: 40%;
+      padding-left: $spacing-xl;
+    }
+  }
+
+  &__link {
+    @include mq($mq-desk--med) {
+      max-width: 45%;
     }
 
-    &__intro-wrapper {
-        position: relative;
-        margin-bottom: $spacing-med;
-
-        &::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: $gradient-primary;
-            opacity: 0.2;
-            border-radius: $border-radius-xxl;
-            pointer-events: none;
-        }
+    @include mq($mq-desk--lrg) {
+      max-width: 50%;
     }
-
-    &__copy {
-        @include mq($mq-desk--med) {
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        @include mq($mq-desk--lrg) {
-            width: 60%;
-        }
-
-        .h5 p {
-            @extend .h5;
-        }
-    }
-
-    &__chart {
-        width: 100%;
-        margin-bottom: $spacing-med;
-
-        @include mq($mq-desk--med) {
-            width: 50%;
-        }
-
-        @include mq($mq-desk--lrg) {
-            width: 40%;
-            padding-left: $spacing-xl;
-        }
-    }
-
-    &__link {
-        @include mq($mq-desk--med) {
-            max-width: 45%;
-        }
-
-        @include mq($mq-desk--lrg) {
-            max-width: 50%;
-        }
-    }
+  }
 }
