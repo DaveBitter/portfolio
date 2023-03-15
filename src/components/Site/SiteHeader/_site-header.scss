@@ -22,7 +22,13 @@
   }
 
   &__image {
+    margin-top: $spacing-xl;
     border-radius: 100%;
+
+    @include mq($mq-desk--sml) {
+      margin-top: 0;
+      margin-left: $spacing-xl;
+    }
   }
 
   .fancy-image-block {
