@@ -74,7 +74,7 @@ const SiteHeader = ({
 const dictionary = getDictionary();
 
 SiteHeader.defaultProps = {
-  src: "/img/dave.jpg",
+  src: "/img/dave.png",
   alt: dictionary.daveBitter,
   showGenericSiteHeader: true,
 };

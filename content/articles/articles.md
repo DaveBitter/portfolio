@@ -5053,7 +5053,7 @@ items:
       I often come up with new ideas for applications and tools. I usually sketch these ideas in my notebook to build whenever I have spare time. This is where I used to stop because I didn't want to handle with things like databases, authentication and all other requirements that my idea might have.I asked myself 'How can I take my idea from sketch to a fully functioning and rapidly built prototype?'.
     teaserCopy: >-
       I often come up with new ideas for applications and tools. I used to stop at sketching these ideas in my notebook to build whenever I have spare time. I asked myself 'How can I take my idea from sketch to a fully functioning and rapidly built prototype?'.
-    teaserImage: /img/articles/firebase-dave.jpg
+    teaserImage: /img/articles/firebase-dave.png
     title: How to take an idea from sketch to a fully functioning and rapidly built prototype?
   - type: articles
     body: >-

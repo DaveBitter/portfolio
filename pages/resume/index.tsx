@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps = async () => {
       pageCopy: copy.greetingIntro || null,
       pageImage: ogImage || null,
       pageDescription: copy.pageDescription || null,
-      src: "/img/dave.jpg",
+      src: "/img/dave.png",
       useFancyImageBlock: false,
       copy,
       headings,
