@@ -9,6 +9,7 @@
     @include mq($mq-tab--lrg) {
       display: flex;
       align-items: center;
+      gap: $spacing-med;
     }
   }
 
@@ -24,6 +25,7 @@
   &__image {
     margin-top: $spacing-xl;
     border-radius: 100%;
+    max-width: 40rem;
 
     @include mq($mq-desk--sml) {
       margin-top: 0;

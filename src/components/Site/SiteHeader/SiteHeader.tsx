@@ -38,7 +38,7 @@ const SiteHeader = ({
       {...attributes}
       data-has-generic-site-header={showGenericSiteHeader}
     >
-      <div className="site-header__content g4">
+      <div className="site-header__content g2">
         {showGenericSiteHeader && (
           <div className="site-header__heading-wrapper" data-reveal-in-view>
             <div>
