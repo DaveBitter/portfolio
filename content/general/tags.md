@@ -1,37 +1,41 @@
 ---
 items:
-  - key: 'firebase'
-    value: 'Firebase'
-  - key: 'spa'
-    value: 'SPA'
-  - key: 'react-js'
-    value: 'React.js'
-  - key: 'next-js'
-    value: 'Next.js'
-  - key: 'remix'
-    value: 'Remix'
-  - key: 'api'
-    value: 'API'
-  - key: 'pwa'
-    value: 'PWA'
-  - key: 'twa'
-    value: 'TWA'
-  - key: 'native'
-    value: 'Native'
-  - key: 'prototype'
-    value: 'Prototype'
-  - key: 'progressive-enhancement'
-    value: 'Progressive enhancement'
-  - key: 'seo'
-    value: 'SEO'
-  - key: 'serverless'
-    value: 'Serverless'
-  - key: 'git-hub'
-    value: 'GitHub'
-  - key: 'front-end'
-    value: 'Front-end'
-  - key: 'design'
-    value: 'Design'
-  - key: 'es6'
-    value: 'ES6+'
+  - key: "css"
+    value: "CSS"
+  - key: "javascript"
+    value: "JavaScript"
+  - key: "firebase"
+    value: "Firebase"
+  - key: "spa"
+    value: "SPA"
+  - key: "react-js"
+    value: "React.js"
+  - key: "next-js"
+    value: "Next.js"
+  - key: "remix"
+    value: "Remix"
+  - key: "api"
+    value: "API"
+  - key: "pwa"
+    value: "PWA"
+  - key: "twa"
+    value: "TWA"
+  - key: "native"
+    value: "Native"
+  - key: "prototype"
+    value: "Prototype"
+  - key: "progressive-enhancement"
+    value: "Progressive enhancement"
+  - key: "seo"
+    value: "SEO"
+  - key: "serverless"
+    value: "Serverless"
+  - key: "git-hub"
+    value: "GitHub"
+  - key: "front-end"
+    value: "Front-end"
+  - key: "design"
+    value: "Design"
+  - key: "es6"
+    value: "ES6+"
 ---
