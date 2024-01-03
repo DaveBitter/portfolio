@@ -61,6 +61,8 @@ class ArticleElementEnricher {
 
       video.parentNode.removeChild(video);
       wrapper.appendChild(videoClone);
+
+      console.log(parentNode, wrapper);
       parentNode.appendChild(wrapper);
     });
   }
@@ -76,7 +78,9 @@ class ArticleElementEnricher {
       ...this._element.querySelectorAll(
         'iframe[src^="https://www.youtube.com/embed"]'
       ),
-    ].filter((video) => !video.classList.length);
+    ];
+
+    console.log(this._videos);
   }
 
   _init() {
