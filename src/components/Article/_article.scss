@@ -1,217 +1,219 @@
 $article-header-height: 60vh;
 
 .article {
-    margin-top: -$spacing-lrg * 2;
+  margin-top: -$spacing-lrg * 2;
 
-    &__header {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: flex-end;
-        height: $article-header-height;
-        padding-bottom: $spacing-lrg;
-        text-align: right;
+  &__header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: $article-header-height;
+    padding-bottom: $spacing-lrg;
+    text-align: right;
 
-        @include mq($mq-tab--sml) {
-            @supports (mask: url('/img/shapes/blob-1.svg')) {
-                padding: $spacing-lrg;
-            }
-        }
+    @include mq($mq-tab--sml) {
+      @supports (mask: url("/img/shapes/blob-1.svg")) {
+        padding: $spacing-lrg;
+      }
+    }
+  }
+
+  &__hero {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    @supports (mask: url("/img/shapes/blob-1.svg")) {
+      mask: url("/img/shapes/blob-1.svg");
+      mask-size: cover;
+      mask-position: 25%;
+
+      @include mq($mq-tab--sml) {
+        mask-position: 0;
+      }
     }
 
-    &__hero {
-        z-index: -1;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0.4;
+      background: $gradient-primary;
+    }
+
+    @include mq($mq-tab--sml) {
+      width: 90%;
+    }
+  }
+
+  &__hero-image {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+  }
+
+  &__title,
+  &__date {
+    z-index: 1;
+    padding: $spacing-xs;
+    border-radius: $border-radius-lrg;
+    color: $color-white;
+  }
+
+  &__title {
+    margin-bottom: $spacing-xs;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background: $gradient-primary;
+  }
+
+  &__date {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    background: $gradient-dark;
+  }
+
+  &__intro {
+    @include text-m;
+
+    @include mq($mq-tab--sml) {
+      @include text-l;
+      margin: $spacing-xxl (-$spacing-xxl);
+    }
+  }
+
+  &__body {
+    max-width: 50rem;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: $spacing-lrg;
+
+      @include mq($mq-tab--sml) {
+        margin-top: $spacing-xl;
+      }
+
+      + p {
+        margin-top: 0;
+      }
+    }
+
+    a {
+      @include text-coloured;
+      text-decoration: underline;
+      word-break: break-all;
+    }
+
+    q,
+    blockquote {
+      @include text-xl;
+      font-style: italic;
+
+      p {
+        @include text-xl;
+      }
+    }
+
+    ol,
+    ul,
+    p {
+      @include text-m;
+    }
+
+    ul,
+    ol {
+      list-style-type: unset;
+      margin: $spacing-med 0;
+      padding-left: $spacing-sml;
+
+      @include mq($mq-mob--lrg) {
+        padding-left: 0;
+
+        ul {
+          margin-top: 0;
+          padding-left: $spacing-med;
+        }
+      }
+    }
+
+    li {
+      margin: $spacing-sml 0;
+      line-height: 1.6;
+
+      + li {
+        margin-top: $spacing-med;
+      }
+    }
+
+    hr {
+      display: none;
+    }
+
+    img {
+      display: block;
+      margin: $spacing-sml auto;
+      border-radius: $border-radius-med;
+    }
+
+    figure {
+      position: relative;
+      margin: $spacing-lrg 0;
+      border-radius: $border-radius-med;
+
+      @include mq($mq-tab--sml) {
+        margin: $spacing-xxl 0;
+      }
+
+      figcaption {
+        @include text-s;
+        text-align: center;
+        color: $color-gray;
+      }
+
+      button {
         position: absolute;
         top: 0;
-        left: 0;
         right: 0;
         bottom: 0;
-
-        @supports (mask: url('/img/shapes/blob-1.svg')) {
-            mask: url('/img/shapes/blob-1.svg');
-            mask-size: cover;
-            mask-position: 25%;
-
-            @include mq($mq-tab--sml) {
-                mask-position: 0;
-            }
-        }
-
-        &::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            opacity: 0.4;
-            background: $gradient-primary;
-        }
-
-        @include mq($mq-tab--sml) {
-            width: 90%;
-        }
-    }
-
-    &__hero-image {
+        left: 0;
         width: 100%;
         height: 100%;
-        margin: 0;
-        object-fit: cover;
+        background: transparent;
+        border: none;
+        cursor: zoom-in;
+      }
     }
 
-    &__title,
-    &__date {
-        z-index: 1;
-        padding: $spacing-xs;
-        border-radius: $border-radius-lrg;
-        color: $color-white;
+    pre {
+      width: 100%;
+      overflow-y: auto;
     }
+  }
 
-    &__title {
-        margin-bottom: $spacing-xs;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        background: $gradient-primary;
-    }
+  &__video {
+    width: 100%;
+    height: 100%;
+  }
 
-    &__date {
-        border-top-right-radius: 0;
-        border-top-left-radius: 0;
-        background: $gradient-dark;
-    }
+  &__video-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
 
-    &__intro {
-        @include text-m;
-
-        @include mq($mq-tab--sml) {
-            @include text-l;
-            margin: $spacing-xxl (-$spacing-xxl);
-        }
-    }
-
-    &__body {
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin-top: $spacing-lrg;
-
-            @include mq($mq-tab--sml) {
-                margin-top: $spacing-xl;
-            }
-
-            + p {
-                margin-top: 0;
-            }
-        }
-
-        a {
-            @include text-coloured;
-            text-decoration: underline;
-            word-break: break-all;
-        }
-
-        q,
-        blockquote {
-            @include text-xl;
-            font-style: italic;
-
-            p {
-                @include text-xl;
-            }
-        }
-
-        ol,
-        ul,
-        p {
-            @include text-m;
-        }
-
-        ul,
-        ol {
-            list-style-type: unset;
-            margin: $spacing-med 0;
-            padding-left: $spacing-sml;
-
-            @include mq($mq-mob--lrg) {
-                padding-left: 0;
-
-                ul {
-                    margin-top: 0;
-                    padding-left: $spacing-med;
-                }
-            }
-        }
-
-        li {
-            margin: $spacing-sml 0;
-            line-height: 1.6;
-
-            + li {
-                margin-top: $spacing-med;
-            }
-        }
-
-        hr {
-            display: none;
-        }
-
-        img {
-            display: block;
-            margin: $spacing-sml auto;
-            border-radius: $border-radius-med;
-        }
-
-        figure {
-            position: relative;
-            margin: $spacing-lrg 0;
-            border-radius: $border-radius-med;
-
-            @include mq($mq-tab--sml) {
-                margin: $spacing-xxl 0;
-            }
-
-            figcaption {
-                @include text-s;
-                text-align: center;
-                color: $color-gray;
-            }
-
-            button {
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: transparent;
-                border: none;
-                cursor: zoom-in;
-            }
-        }
-
-        pre {
-            width: 100%;
-            overflow-y: auto;
-        }
-    }
-
-    &__video {
-        width: 100%;
-        height: 100%;
-    }
-
-    &__video-wrapper {
-        width: 100%;
-        aspect-ratio: 16 / 9;
-    }
-
-    .article-type-badge {
-        display: inline-block;
-    }
+  .article-type-badge {
+    display: inline-block;
+  }
 }

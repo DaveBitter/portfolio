@@ -86,7 +86,7 @@ const Article = ({
           />
         </div>
       </header>
-      <section className="g6">
+      <section className="g8">
         {articleType !== "talks" && (
           <p className="article__intro" data-reveal-in-view>
             <strong>{intro}</strong>

@@ -25,6 +25,7 @@
   &__image {
     margin-top: $spacing-xl;
     border-radius: 100%;
+    width: 100%;
     max-width: 40rem;
 
     @include mq($mq-desk--sml) {
