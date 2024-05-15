@@ -20,6 +20,8 @@ items:
     value: "PWA"
   - key: "twa"
     value: "TWA"
+  - key: "machine-learning"
+    value: "Machine Learning"
   - key: "native"
     value: "Native"
   - key: "prototype"
