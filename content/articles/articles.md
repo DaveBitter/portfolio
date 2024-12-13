@@ -2,6 +2,448 @@
 items:
   - type: articles
     body: >-
+      As our web applications grow in complexity, we often find ourselves needing to split them into smaller, more manageable pieces. This is where Next.js Multi Zones comes in - a powerful feature that allows us to create micro-frontends that work together seamlessly. Let's look at how we can use Multi Zones to build scalable and maintainable web applications.
+
+      ## The challenge of growing applications
+
+      When a web application scales, we often need multiple teams working on different parts of the site. This can lead to:
+
+
+      * Merge conflicts: With multiple teams working on the same codebase, merge conflicts become more frequent, slowing down development and increasing the risk of errors.
+
+      * Differing scopes and business rules: Different parts of an application may have distinct requirements, making it challenging to maintain consistency across the entire codebase.
+
+      * Slower development and deployment cycles: As the application grows, building, testing, and deploying the entire application becomes more time-consuming and risky.
+
+
+      The traditional solution? Splitting the application into separate projects and/or setting up a mono-repo. But this often results in a inconsistend user experience and complex deployment processes. What if you want to have completely separate Next.js projects but combine them into a single experience?
+
+      ## How can Next.js Multi Zones help?
+
+      Next.js Multi Zones allows us to have multiple Next.js applications work together as if they were a single application. This means:
+
+
+      * Independent development and deployment: Teams can work on different parts of the site without interfering with each other, and deploy their sections independently.
+
+      * Seamless navigation for users: Despite being separate applications, users experience smooth, client-side navigation between zones.
+
+      Let's explore how to set this up with a concrete example:
+
+      ## Setting up a Multi Zones
+
+      We'll create a project with two zones: 'home' and 'blog'. Here's how to set it up step-by-step:
+
+
+      Create a new directory for your Multi Zones project:
+
+
+      ```bash
+
+      mkdir next-js-multi-zones
+
+      cd next-js-multi-zones
+
+      ```
+
+
+      Create two Next.js applications, one for 'home' and one for 'blog':
+
+
+      ```bash
+
+      npx create-next-app@latest home --typescript --eslint
+
+      npx create-next-app@latest blog --typescript --eslint
+
+      ```
+
+
+      Navigate to the 'home' directory and update **`next.config.js`**:
+
+
+      ```jsx
+
+      const nextConfig = {
+        async rewrites() {
+          return [
+            {
+              source: '/blog',
+              destination: 'http://localhost:3001/blog',
+            },
+            {
+              source: '/blog/:path*',
+              destination: 'http://localhost:3001/blog/:path*',
+            },
+          ]
+        },
+      }
+
+
+      module.exports = nextConfig
+
+      ```
+
+
+      Navigate to the 'blog' directory and update **`next.config.js`**:
+
+
+      ```jsx
+
+      const nextConfig = {
+        basePath: '/blog',
+      }
+
+
+      module.exports = nextConfig
+
+      ```
+
+
+      Navigate back to the 'home' directory and edit `home/app/page.tsx`:
+
+
+      ```jsx
+
+      import Link from 'next/link'
+
+
+      export default function Home() {
+        return (
+          <div>
+            <h1>Welcome to Home</h1>
+            <Link href="/blog">Go to Blog</Link>
+          </div>
+        )
+      }
+
+      ```
+
+
+      Navigate to the 'blog' directory and edit `blog/app/page.tsx`:
+
+
+      ```jsx
+
+      import Link from 'next/link'
+
+
+      export default function Blog() {
+        return (
+          <div>
+            <h1>Welcome to Blog</h1>
+            <Link href="/">Go to Home</Link>
+          </div>
+        )
+      }
+
+      ```
+
+
+      Open two terminal windows. In the first, start the 'home' application:
+
+
+      ```bash
+
+      cd home
+
+      npm run dev -- -p 3000
+
+      ```
+
+
+      In the second, start the 'blog' application on a different port:
+
+
+      ```bash
+
+      cd blog
+
+      npm run dev -- -p 3001
+
+      ```
+
+
+      Now, you can visit **`http://localhost:3000`** to see the 'home' application, and navigate seamlessly to the 'blog' application using the link.
+
+      ## The reality of Multi Zones
+
+      With this setup, you can now:
+
+
+      * Develop and deploy the 'home' and 'blog' applications independently: Each team can work on their respective applications without affecting others, leading to faster development cycles and reduced risk of conflicts.
+
+      * Navigate between them as if they were a single application: Thanks to Next.js's client-side routing, users can move between zones without full page reloads, providing a smooth, SPA-like experience.
+
+
+      However, it's important to understand how resources are managed in a Multi Zones setup:
+
+
+      * 1. Separate Bundles: Each zone (application) has its own JavaScript bundle, CSS, and other assets. They are not automatically shared or optimized across zones.
+
+      * 2. Independent Loading: When a user navigates from one zone to another, the resources for the new zone are loaded independently. This means that common libraries (like React) might be downloaded again if they're used in both zones.
+
+      * 3. No Automatic Deduplication: Unlike a single Next.js application, Multi Zones doesn't automatically deduplicate shared dependencies across zones. Each zone loads its resources independently.
+
+      * 4. Zone-Specific Optimization: Performance optimization happens within each zone independently. This includes features like code splitting and lazy loading, but these optimizations don't extend across zone boundaries.
+
+      ## Progressive Enhancement
+
+      One of the key benefits of Multi Zones is that it works with progressive enhancement. Even if JavaScript fails to load, users can still navigate between zones using standard HTML links. This is because:
+
+
+      * 1. Server-side rendering: Each zone can render its content on the server, ensuring that users see content even without JavaScript.
+
+      * 2. HTML-based routing: The rewrite rules we set up work at the server level, allowing for navigation between zones even without client-side JavaScript.
+
+      * 3. Graceful degradation: While features like client-side navigation enhance the experience, the basic functionality of moving between zones remains intact without them.
+
+      ## Conclusion
+
+      Next.js Multi Zones offers a powerful solution for building scalable micro-frontends. It allows teams to work independently while maintaining a seamless user experience for end-users. By enabling separate development and deployment and supporting progressive enhancement, Multi Zones provides a robust foundation for large-scale web applications.
+
+      However, it's important to understand that Multi Zones involves managing separate applications, each with its own resources. This requires careful planning and consideration of performance implications, especially when it comes to shared dependencies and overall user experience.
+
+      As your application grows, consider leveraging Multi Zones to keep your development process efficient and your user experience smooth. Remember, the web is a platform. Multi Zones helps us work with it, not against it, providing a solid foundation for large-scale web applications that can evolve and scale with your needs, while requiring thoughtful architecture and resource management.
+
+    date: 2024-12-10T00:00:00.000Z
+    slug: building-scalable-micro-frontends-with-next-js-multi-zones
+    tags:
+      - front-end
+      - react-js
+      - next-js
+    intro: >-
+      Let's see how Next.js Multi Zones can make building micro frontends a breeze.
+    teaserCopy: >-
+      Let's see how Next.js Multi Zones can make building micro frontends a breeze.
+    teaserImage: /img/articles/building-scalable-micro-frontends-with-next-js-multi-zones-hero.png
+    title: >-
+      Building Scalable Micro-Frontends with Next.js Multi Zones
+  - type: articles
+    body: >-
+      Let's dive into an incredibly powerful feature in React that you might not be using yet: React Portals. If you're not familiar with them, don't worry. By the end of this article, you'll not only know what they are but also see why they can be a incredibly useful for your projects!
+
+      ## What are React Portals?
+
+      In essence, React Portals provide a way to render children into a DOM node that exists outside the hierarchy of the parent component. Normally, React components are rendered within the confines of their parent components, but with portals, you can render a child component into a different part of the DOM.
+
+
+      ![schematic showing the NotificationBanner being rendered outside of the normal direct hierarchy](/img/articles/what-are-react-portals-react-portal-diagram.svg)
+
+
+      ### Why is this useful?
+
+      Imagine you have a notification banner that needs to be displayed at the top level of your application. This banner should be triggered by various components deep in your component hierarchy. Managing such a requirement can lead to CSS complications and z-index nightmares. React Portals solve this elegantly by allowing these elements to be rendered outside of the parent component's tree, making them easier to manage and style.
+
+      ## **How Do React Portals Work?**
+
+      Using React Portals is quite straightforward. Here's a basic example to get you started with a notification banner.
+
+      ### **Creating a Portal**
+
+      First, you need to create a component that uses a portal. In this case, we'll create a **`NotificationBanner`** component:
+
+
+      ```jsx
+
+      import React from 'react'
+
+      import { createPortal } from 'react-dom'
+
+
+      const NotificationBanner = ({ message }) => {
+        return createPortal(
+          // component to render
+          <div className="notification-banner">{message}</div>,
+          // element to render into
+          document.body
+        )
+      }
+
+
+      export default NotificationBanner
+
+      ```
+
+
+      In this example, we're using **`createPortal`** to render the notification banner directly into the **`document.body`**, outside of the normal React component tree.
+
+      ### **Using the NotificationBanner Component**
+
+      Now you can use the **`NotificationBanner`** component in other parts of your application. Here's an example of how it can be used:
+
+
+      ```jsx
+
+      import React from 'react'
+
+      import NotificationBanner from './NotificationBanner'
+
+
+      const FooBar = () => {
+        return (
+          <div>
+            <h1>FooBar Component</h1>
+            <p>This is the main content of FooBar.</p>
+            <NotificationBanner message="This is a notification banner at the bottom of the page!" />
+          </div>
+        )
+      }
+
+
+      export default FooBar
+
+      ```
+
+
+      In this example, the **`NotificationBanner`** is used within the **`FooBar`** component, but it will actually render at the bottom of the **`document.body`** due to the portal.
+
+      ## Why Should You Use React Portals?
+
+      Now that you know how to use React Portals, let's talk about why you should use them.
+
+      ### Better Control Over CSS
+
+      By rendering components outside of their parent hierarchy, you gain more control over CSS. No more fighting with z-index issues or complex CSS rules to ensure your notifications appear above other content. Portals allow you to place these elements exactly where you need them in the DOM, making styling much more straightforward.
+
+      ### Improved Accessibility
+
+      Portals can help improve the accessibility of your application. By controlling where the component is rendered, you can ensure that it appears in a logical order in the DOM, making it easier for screen readers and other assistive technologies to navigate. This is particularly useful for modal dialogs and other overlay components.
+
+      ### Simplified Event Handling
+
+      When components like notifications are rendered outside of the parent component, it simplifies event handling. You no longer need to worry about event propagation issues that can arise from deeply nested component structures. Events will still bubble up as expected, maintaining React's synthetic event system.
+
+      ### Maintaining React Virtual DOM Hierarchy
+
+      Another important use case for React Portals is when you need a component to be a child in the React virtual DOM but not in the actual DOM. This is useful in scenarios where the component needs to maintain its logical relationship with its parent for state management or context purposes but needs to be visually or structurally placed elsewhere in the DOM.
+
+      ### Flexibility in Component Design
+
+      React Portals offer great flexibility in how you structure your components. You can keep the logic for triggering a portal in one component while rendering the actual content elsewhere in the DOM. This separation of concerns can lead to cleaner, more maintainable code, especially for complex UI elements.
+
+      ### Perfect for Third-Party Integrations
+
+      If you're working with third-party libraries or legacy code, Portals can be incredibly helpful. They allow you to inject React components into any part of the DOM, even outside your main React app. This makes integrating React with other technologies much smoother.
+
+      ## Conclusion
+
+      React Portals are a powerful feature that elegantly solves common UI challenges, especially when dealing with elements that need to break out of their component hierarchy. They're particularly useful for creating overlays, modals, tooltips, and notification banners that need to be rendered at the root level of your DOM.
+
+
+      By using Portals, you can simplify your CSS management, improve accessibility, and maintain a cleaner component structure. They're not about making complex UI elements, but rather about making it easier to manage where your components render in the DOM.
+
+
+      Remember, Portals are a tool in your React toolkit. While they're incredibly useful in certain situations, they're not needed for every component. Use them when you need to render content outside of the normal component tree, and you'll find they can greatly simplify your code and improve your application's structure.
+
+
+      Now that you understand React Portals, consider where they might be useful in your current or future projects. You might be surprised at how often this simple concept can lead to cleaner, more maintainable code. Happy coding!
+
+    date: 2024-11-15T00:00:00.000Z
+    slug: what-are-react-portals
+    tags:
+      - front-end
+      - react-js
+    intro: >-
+      Let's have a look at React Portals and how they can help you in a pinch.
+    teaserCopy: >-
+      Let's have a look at React Portals and how they can help you in a pinch.
+    teaserImage: /img/articles/what-are-react-portals-hero.png
+    title: >-
+      What are React Portals
+  - type: articles
+    body: >-
+      Time to look at an, at the time of writing, experimental feature on the web! It might be a bit early to write about it, but View Transitions, proven by this being my third article about them, really excites me!
+
+      ## What are View Transitions again?
+
+      The View Transition API is an effort to bring a smoother user experience to the web much like our users are familiar with in native applications. In essence, it lets you animate elements from one view to the next one with ease.
+
+      ### Between “pages”
+
+      Consider this transition below:
+
+
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+      <img src='/img/articles/view-transitions-for-multi-page-apps-demo.gif' alt='Screen recording of the demo showing an overview with sneakers and a transition to a detailed view of a pair of sneakers'  />
+      </div>
+
+
+      Before, you had to load the markup for the next page, put it on top of the card, make the animation, make sure to clean up the old view and finally update the URL. Quite a bit of effort for relatively simple transitions. Luckily, the View Transition API makes this incredibly easy.
+
+
+      Read more on how this exactly is done technically in my article [_The View Transitions API: Enhancing the feel of the web_](/articles/the-view-transitions-api). This, however, only works with client-side navigation in a Single Page App (SPA)
+
+      ### Between “views”
+
+      But of course, this doesn’t just apply to transitioning between two “pages”. You can also use this powerful API to transition between two “views” on the page. For example, when adding or deleting an item in a grid:
+
+
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+      <img src='/img/articles/view-transitions-for-multi-page-apps-adding-animated.gif' alt='Screen recording showing an item being added and the grid of cards animate into place'  />
+      </div>
+
+
+      If you want to read more on how this is done, head over to my article [_Make awesome animated interactions with two lines of code_](/articles/view-transitions-api-animated-interactions).
+
+      ## So why the excitement for MPAs?
+
+      Well, the previous examples rely solely on having client-side JavaScript. If you don’t have an SPA, you don’t get to use it for transitioning pages. We want to be able to transition two completely separate pages, or documents to be precise.
+
+      ### Ease-of-use
+
+      Now, you could’ve made something yourself where you intercept the request for a page, fetch the content yourself, update the DOM and make sure that the client-side View Transition is taking care of making an animation. This, just like in the past, requires a lot of effort and introduces a whole new list of potential issues. No, we just want to easily animate between two views, they’re just two documents.
+
+      ## How do I use it?
+
+      Making this work for an MPA is fortunately quite similar to the approach for an SPA. If you've followed my previous articles, you'll remember that we used to call `document.startViewTransition`. However, that is no longer necessary. Now, all you need are the `view-transition-name` CSS properties as before, plus one additional piece of CSS:
+
+
+      ```css
+
+      @view-transition {
+        navigation: auto;
+      }
+
+      ```
+
+
+      That’s it! Adding this CSS does a couple of things. First, it creates a default "fade" transition between pages. Additionally, it ensures that any elements with the `view-transition-name` property (along with any other relevant CSS) will behave just as they did when using `document.startViewTransition`:
+
+
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+      <img src='/img/articles/view-transitions-for-multi-page-apps-demo.gif' alt='Screen recording of the demo showing an overview with sneakers and a transition to a detailed view of a pair of sneakers'  />
+      </div>
+
+
+      ### Experimental
+
+      Yeah, so of course my demo GIF above works really well, but in practice I saw it sometimes not work at all and other times it did. Luckily, this is an enhancement and nothing breaks if it doesn’t transition. I feel like this is because of the experimental state of this API. Do however check it out and try to see if you can make a cool transition. If you want to see all the demo code, you can [view the project on GitHub](https://github.com/DaveBitter/view-transitions-api-demo). If you’d like to see the demo in action, head over [here](https://view-transitions-api-demo.davebitter.com/mpa.html). Keep in mind that at the time of writing, only Chrome has experimental support for this and you need to turn the feature flags on:
+
+
+      ```
+
+      chrome://flags#view-transition
+
+      chrome://flags#view-transition-on-navigation
+
+      ```
+
+
+      That’s all! See you next time when I inevitably talk about the View Transitions API again!
+
+    date: 2024-08-16T00:00:00.000Z
+    slug: view-transitions-for-multi-page-apps
+    tags:
+      - front-end
+    intro: >-
+      We finally have (experimental) View Transitions for Multi-page Apps (MPA)! Let’s explore why this is cool and how we can use it.
+    teaserCopy: >-
+      We finally have (experimental) View Transitions for Multi-page Apps (MPA)! Let’s explore why this is cool and how we can use it.
+    teaserImage: /img/articles/view-transitions-for-multi-page-apps-demo.webp
+    title: >-
+      View Transitions for Multi-page Apps
+  - type: articles
+    body: >-
       I first came across [the teachable machine](https://teachablemachine.withgoogle.com/) while researching TensorFlow.js. Quite frankly, the idea of this working seemed insane to me. Are you telling me I can run machine learning in the browser where I can train the model on the fly? You sure can! Luckily, Google provides [a Codelab where you build a simple version](https://codelabs.developers.google.com/tensorflowjs-transfer-learning-teachable-machine) yourself which I followed loosely.
 
       ## The demo I'm going to build
