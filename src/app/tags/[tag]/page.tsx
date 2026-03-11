@@ -40,7 +40,7 @@ export default async function TagPage({ params }: PageProps) {
         title={label}
         lead={`A collection of articles covering ${label}`}
       />
-      <div className="mx-auto max-w-5xl px-4 pb-16">
+      <div className="mx-auto max-w-5xl px-4 pt-8 pb-16">
         <ArticleTeasers articles={content} />
       </div>
     </>
