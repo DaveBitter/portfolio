@@ -22,14 +22,20 @@ If you're building for the web and want lightweight AI functionality like summar
 
 As of Chrome 138, you can now access the:
 
-- Summarizer API - LanguageDetector API - Translator API
+- Summarizer API
+- LanguageDetector API
+- Translator API
 All three APIs run entirely on-device using Google's Gemini Nano and are part of a push to enable local AI capabilities in the browser without having to leave the device.
 
 ### Requirements and Limitations
 
 As it is still a bit experimental, it's good to consider these requirements and limitations:
 
-- Chrome 138 or later - Desktop platforms only (Windows, macOS, Linux) - Not yet supported on Android, iOS, or ChromeOS - Enable via `chrome://flags/#enable-ai-features` - Minimum pf 22 GB free disk space and 4+ GB VRAM
+- Chrome 138 or later
+- Desktop platforms only (Windows, macOS, Linux)
+- Not yet supported on Android, iOS, or ChromeOS
+- Enable via `chrome://flags/#enable-ai-features`
+- Minimum pf 22 GB free disk space and 4+ GB VRAM
 
 ## Summarizer API
 

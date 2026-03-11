@@ -22,7 +22,10 @@ title: My experience AI vibe coding a complete web application from scratch
 I was looking into an app for some breathing exercises I wanted to do. Naturally, one of the first things that went through my head was: “I can make something like this myself”. But then, as always, I thought about all the coding I’d have to do for this simple app. I need to scaffold the project, build the logic, build the UI etcetera. Not complex, but a lot of grind work.
 Nowadays, whenever I think of a simple cumbersome task that requires grind work, I think AI! So, let’s make this a challenge. Let’s “vibe code” this breathing exercise app from scratch to finish. Some rules:
 
-- I may not touch a single line of code in the editor - I may not provide example code in the prompting - It needs to be designed to a level I usually design my side projects in - I need to use simple tooling that is widely accessible
+- I may not touch a single line of code in the editor
+- I may not provide example code in the prompting
+- It needs to be designed to a level I usually design my side projects in
+- I need to use simple tooling that is widely accessible
 I ended with using [Cursor](https://www.cursor.com/) for this. Cursor is an AI code editor that I’ve been trying out recently. Even though I now have the paid version, I used the free version for this challenge. Which model did I use? I have ab-so-lutely no idea. That’s the point. Can someone who is not as much into AI build something cool as well using one of these tools?
 
 ## Setting up the project
@@ -52,7 +55,16 @@ Here it created a working exercise component including the breathing animation w
 
 Then it was just a matter of giving it more and more features by prompting for it. For example:
 
-- “Give it dark and light mode including a toggle” - “Add a search bar on the overview page” - “I want to be the style to use gradients, use Tailwind’s purple color scheme” - “I want to use the Radix UI component Library” - “Add audio feedback with a short beep so users can close their eyes and follow along” - “Make it installable as a Progressive Web App (PWA) - “Add a favourites button that stores your favourites in the browser” - “Use icons in the labels and buttons” - “Add and link to content pages in the app that have more information on the benefits” - etcetera
+- “Give it dark and light mode including a toggle”
+- “Add a search bar on the overview page”
+- “I want to be the style to use gradients, use Tailwind’s purple color scheme”
+- “I want to use the Radix UI component Library”
+- “Add audio feedback with a short beep so users can close their eyes and follow along”
+- “Make it installable as a Progressive Web App (PWA)
+- “Add a favourites button that stores your favourites in the browser”
+- “Use icons in the labels and buttons”
+- “Add and link to content pages in the app that have more information on the benefits”
+- etcetera
 It was amazing to see how quickly I was able to go from idea, to prompt, to actual value for the user in the app at a rapid pace. Each feature inspired another and I started to prompt based on my user needs. What do I want the app to do? It doesn’t matter what the effort is. Just build.
 Before I knew it, I created a very useful breathing exercise web application that is free for the world to use:
 ![Similar overview to before but with more content, better design and more features](/img/articles/paxaura-final-overview.png)

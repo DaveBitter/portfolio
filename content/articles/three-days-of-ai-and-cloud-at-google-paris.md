@@ -49,14 +49,18 @@ Next, [Valentin Deleplace, Developer Advocate Google Cloud](https://www.linkedin
 
 Finally, [Guillaume Vernade, Developer Advocate Google Gemini](https://www.linkedin.com/in/guillaumevernade/) and [Guillaume Laforge, Developer Advocate Google Cloud](https://www.linkedin.com/in/glaforge/) took us through Gemini. It was quite an information packed session where they showed all the things Gemini can do. First, they showed function calling. Basically a way where you write functionality that the AI assistant then can use (call) to perform an action. For instance, you write a function that turns on the lights in your house. Gemini can then call this when it needs to. Next, they showed 3D image recognition. Image recognition is of course nothing new. I’ve written these article showcasing it in the past:
 
-- [On-the-Fly Machine Learning in the Browser with TensorFlow.js](https://techhub.iodigital.com/articles/on-the-fly-machine-learning-in-the-browser-with-tensor-flow-js) - [Smart cropping with native browser Face Detection](https://techhub.iodigital.com/articles/native-face-detection-cropping)
+- [On-the-Fly Machine Learning in the Browser with TensorFlow.js](https://techhub.iodigital.com/articles/on-the-fly-machine-learning-in-the-browser-with-tensor-flow-js)
+- [Smart cropping with native browser Face Detection](https://techhub.iodigital.com/articles/native-face-detection-cropping)
+
 ![3D squares mapped on image with objects](/img/articles/gemini-spatial-understanding.png)
 What made it cool is that it can not just recognize things in an image, but give an estimate of the 3D space. Definitely check out the [colab Pointing and 3D Spatial Understanding with Gemini 2.0 (Experimental)](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb#scrollTo=Bgrop9U9VI08)!
 Next, we had a look at video understanding. [Multimodal live streaming is so incredibly cool!](https://ai.google.dev/gemini-api/docs/live) Make sure to check this demo out:
 <iframe width="100%" style={{aspectRatio: "16/9"}} src="https://www.youtube.com/embed/9hE5-98ZeCg?si=Ewu4hCtgqAmUxSKx&amp;controls=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
 It’s incredible to see how natural this seems to work. Even being able to interup the AI is very cool. It reminded me a lot of what I’ve been working on myself with voice and AI:
 
-- [Interacting with ChatGPT through Voice UI on the web](https://techhub.iodigital.com/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web) - [Reducing latency in AI Speech Synthesis](https://techhub.iodigital.com/articles/reducing-latency-in-ai-speech-synthesis)
+- [Interacting with ChatGPT through Voice UI on the web](https://techhub.iodigital.com/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web)
+- [Reducing latency in AI Speech Synthesis](https://techhub.iodigital.com/articles/reducing-latency-in-ai-speech-synthesis)
+
 I will definitely play around with this more! Maybe build an Aiva 2.0?
 
 ### Model Context Protocol

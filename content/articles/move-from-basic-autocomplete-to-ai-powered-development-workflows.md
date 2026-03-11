@@ -108,7 +108,8 @@ I get this fear, especially from developers earlier in their careers. But here's
 **What AI actually does:** It handles the repetitive, well-documented parts of development so you can focus on the interesting problems. Instead of writing the same form validation logic for the hundredth time, you're spending time on architecture decisions, user experience optimization, and solving unique business problems.
 **The skills that matter more now:**
 
-- **Technical skills:** Code review and quality assessment, system design and architecture thinking, problem decomposition and requirement clarification, understanding when and how to use different tools effectively - **Human skills:** Communication with stakeholders to gather clear requirements, collaboration with designers and product managers, business acumen to understand why we're building what we're building, mentoring and knowledge sharing as AI democratizes basic coding
+- **Technical skills:** Code review and quality assessment, system design and architecture thinking, problem decomposition and requirement clarification, understanding when and how to use different tools effectively
+- **Human skills:** Communication with stakeholders to gather clear requirements, collaboration with designers and product managers, business acumen to understand why we're building what we're building, mentoring and knowledge sharing as AI democratizes basic coding
 I've actually found that using AI makes me a better developer because it forces me to think more critically about code quality, maintainability, and whether a solution actually solves the right problem.
 
 ### "It's just glorified autocomplete"
@@ -116,7 +117,11 @@ I've actually found that using AI makes me a better developer because it forces 
 This misconception usually comes from only using basic GitHub Copilot suggestions. Yes, if you only ever use tab-completion features, it feels like fancy autocomplete. But that's like saying a smartphone is just a better calculator.
 **The actual spectrum of AI assistance:**
 
-- **Autocomplete level:** Single-line suggestions and basic completions - **Component level:** Generating entire functions, components, or classes based on comments or context - **Architecture level:** Discussing system design trade-offs, suggesting patterns, reviewing overall approaches - **Research level:** Explaining concepts, comparing technologies, helping learn new frameworks - **Debugging level:** Analyzing errors, suggesting test cases, identifying potential issues
+- **Autocomplete level:** Single-line suggestions and basic completions
+- **Component level:** Generating entire functions, components, or classes based on comments or context
+- **Architecture level:** Discussing system design trade-offs, suggesting patterns, reviewing overall approaches
+- **Research level:** Explaining concepts, comparing technologies, helping learn new frameworks
+- **Debugging level:** Analyzing errors, suggesting test cases, identifying potential issues
 When I [built that running coach application](/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai), AI wasn't just completing my code. It was helping me understand new APIs, debug integration issues, and explore different architectural approaches.
 
 ### Building the right mindset
@@ -124,7 +129,10 @@ When I [built that running coach application](/articles/from-idea-to-intelligent
 The most productive approach I've found is treating AI as a very knowledgeable but occasionally wrong colleague. You wouldn't blindly implement everything a human colleague suggests, and you shouldn't do it with AI either.
 **Critical thinking framework:**
 
-- **Understand before implementing:** Don't copy-paste code you don't understand - **Test everything:** AI-generated code should go through the same quality gates as human-written code - **Verify claims:** If AI suggests a library or approach, quickly verify it exists and works as described - **Iterate on prompts:** Bad output usually means unclear input. Refine your questions rather than giving up
+- **Understand before implementing:** Don't copy-paste code you don't understand
+- **Test everything:** AI-generated code should go through the same quality gates as human-written code
+- **Verify claims:** If AI suggests a library or approach, quickly verify it exists and works as described
+- **Iterate on prompts:** Bad output usually means unclear input. Refine your questions rather than giving up
 The goal isn't to eliminate human judgment. It's to augment it. AI helps you explore more possibilities, understand problems faster, and implement solutions more quickly. But you're still the one deciding what problems are worth solving and whether the solutions actually work.
 **Reality check:** I still write plenty of code from scratch. I still debug complex issues manually. I still make architectural decisions based on human judgment. But I do all of these things faster and with more confidence because I have AI assistance when I need it.
 
@@ -170,7 +178,9 @@ _This looks like:_ Development processes so integrated with AI that productivity
 
 Beyond these phases, it's helpful to think about AI assistance as a spectrum of involvement. Sometimes you want minimal AI input, other times you want it deeply involved in your process.
 
-- **Low involvement:** Autocomplete suggestions, syntax help, basic error explanations - **Medium involvement:** Component generation, refactoring suggestions, test case creation - **High involvement:** Architecture discussions, system design exploration, complex debugging assistance
+- **Low involvement:** Autocomplete suggestions, syntax help, basic error explanations
+- **Medium involvement:** Component generation, refactoring suggestions, test case creation
+- **High involvement:** Architecture discussions, system design exploration, complex debugging assistance
 The key insight is that you can operate at different points on this spectrum for different tasks. I might use high-involvement AI for exploring new architectural patterns but low-involvement for implementing well-understood features.
 
 ### Honest self-assessment
@@ -178,7 +188,11 @@ The key insight is that you can operate at different points on this spectrum for
 Here's the thing about AI adoption: most people overestimate where they are. If you're only using tab-completion in Copilot, you're in the [Adoption phase](#adoption-phase), not [Integration](#integration-phase). If you ask ChatGPT occasional questions but don't use it for actual development work, you're still in [Discovery](#discovery-phase).
 **Questions to ask yourself:**
 
-- Do you have AI tools integrated into your daily development workflow? - Can you work effectively when AI tools are unavailable? - Do you have established patterns for when and how to use AI assistance? - Are you comfortable reviewing and refining AI-generated code? - Do you use AI for learning and research, or just code generation?
+- Do you have AI tools integrated into your daily development workflow?
+- Can you work effectively when AI tools are unavailable?
+- Do you have established patterns for when and how to use AI assistance?
+- Are you comfortable reviewing and refining AI-generated code?
+- Do you use AI for learning and research, or just code generation?
 Be honest about where you actually are, not where you think you should be.
 
 ### A note on expertise and experimentation
@@ -272,7 +286,10 @@ This is the most common mistake I see. Developers think there's some perfect pro
 - **Better approach:** Start with a basic prompt and iterate. Ask for what you need, review the output, then refine your request based on what's missing or wrong. AI conversations work better than AI commands.
 _Example iteration:_
 
-1. "Create a React component for user profiles" 2. "Add TypeScript types and loading states" 3. "Include error handling and accessibility attributes" 4. "Make the layout responsive with grid"
+1. "Create a React component for user profiles"
+2. "Add TypeScript types and loading states"
+3. "Include error handling and accessibility attributes"
+4. "Make the layout responsive with grid"
 Each step builds on the previous one rather than trying to capture everything in one mega-prompt.
 
 ### Over-reliance syndrome
@@ -300,7 +317,11 @@ This one is dangerous. Developers get so impressed by AI's ability to generate w
 - **Better approach:** Treat AI-generated code like code from a junior developer. It might be correct, but it needs review. Check for security issues, performance problems, accessibility concerns, and maintainability. Test edge cases. Understand what the code does before merging it.
 **Quality checklist for AI code:**
 
-- Does it handle error cases appropriately? - Are there any security vulnerabilities? - Is it accessible and performant? - Does it follow your team's coding standards? - Are there adequate tests?
+- Does it handle error cases appropriately?
+- Are there any security vulnerabilities?
+- Is it accessible and performant?
+- Does it follow your team's coding standards?
+- Are there adequate tests?
 
 ### Tool switching chaos
 
@@ -324,7 +345,11 @@ Similar to magic prompt syndrome, but specifically about spending too much time 
 The common thread in all these failure patterns is losing sight of the goal: getting quality work done efficiently. AI tools should make you more productive, not more anxious about using them perfectly.
 **Simple principles that help:**
 
-- Start simple and iterate rather than trying to be perfect upfront - Maintain your core development skills alongside AI usage - Always review and understand AI output before implementing it - Use fewer tools well rather than many tools poorly - Focus on outcomes, not on perfect technique
+- Start simple and iterate rather than trying to be perfect upfront
+- Maintain your core development skills alongside AI usage
+- Always review and understand AI output before implementing it
+- Use fewer tools well rather than many tools poorly
+- Focus on outcomes, not on perfect technique
 Remember, we're all still learning how to use these tools effectively. The key is to fail fast, learn from mistakes, and keep shipping quality code.
 
 ## 7. From Vibe Coding to Professional Practice
@@ -337,22 +362,40 @@ When AI can generate working code quickly, having clear evaluation criteria beco
 **Concrete quality checklist for AI-generated code:**
 **Functionality:**
 
-- Does it actually solve the stated problem? - Are edge cases handled appropriately? - Does it integrate properly with existing systems? - Are error conditions managed gracefully?
+- Does it actually solve the stated problem?
+- Are edge cases handled appropriately?
+- Does it integrate properly with existing systems?
+- Are error conditions managed gracefully?
 **Security:**
 
-- Are there obvious vulnerabilities (SQL injection, XSS, insecure data handling)? - Does it follow authentication and authorization patterns? - Are sensitive data and API keys handled properly? - Does it validate inputs appropriately?
+- Are there obvious vulnerabilities (SQL injection, XSS, insecure data handling)?
+- Does it follow authentication and authorization patterns?
+- Are sensitive data and API keys handled properly?
+- Does it validate inputs appropriately?
 **Performance:**
 
-- Are there obvious performance bottlenecks? - Does it follow efficient patterns for the technology stack? - Are database queries optimized? - Does it handle large datasets appropriately?
+- Are there obvious performance bottlenecks?
+- Does it follow efficient patterns for the technology stack?
+- Are database queries optimized?
+- Does it handle large datasets appropriately?
 **Maintainability:**
 
-- Is the code readable and well-structured? - Are variable and function names clear? - Is the logic easy to follow and modify? - Does it follow established patterns in your codebase?
+- Is the code readable and well-structured?
+- Are variable and function names clear?
+- Is the logic easy to follow and modify?
+- Does it follow established patterns in your codebase?
 **Accessibility:**
 
-- Are proper ARIA attributes included where needed? - Is keyboard navigation supported? - Are color contrast and text sizing appropriate? - Does it work with screen readers?
+- Are proper ARIA attributes included where needed?
+- Is keyboard navigation supported?
+- Are color contrast and text sizing appropriate?
+- Does it work with screen readers?
 **Testing:**
 
-- Are there adequate unit tests? - Are integration points tested? - Are edge cases covered? - Can the code be easily tested in isolation?
+- Are there adequate unit tests?
+- Are integration points tested?
+- Are edge cases covered?
+- Can the code be easily tested in isolation?
 
 ### Prompt engineering for developers
 
@@ -381,34 +424,54 @@ The pattern is: ask for analysis, options, and reasoning rather than just implem
 AI changes the code review process in interesting ways. You can use it for pre-review quality checks and to help make human reviews more focused and effective.
 **Pre-review AI checks:**
 
-- Run significant changes through AI for initial feedback on obvious issues - Ask AI to identify potential security or performance problems - Get AI suggestions for improving code clarity and documentation - Generate comprehensive test cases to verify functionality
+- Run significant changes through AI for initial feedback on obvious issues
+- Ask AI to identify potential security or performance problems
+- Get AI suggestions for improving code clarity and documentation
+- Generate comprehensive test cases to verify functionality
 **Enhanced human review:** With AI handling basic quality checks, human reviewers can focus on higher-level concerns like architectural fit, business logic correctness, and team knowledge sharing.
 **Review process I've found effective:**
 
-1. Developer completes feature with AI assistance 2. AI pre-review for basic quality, security, and performance issues 3. Developer addresses AI feedback and documents any decisions to ignore suggestions 4. Human review focuses on design decisions, business requirements, and knowledge transfer 5. Final review ensures AI-generated code meets team standards
+1. Developer completes feature with AI assistance
+2. AI pre-review for basic quality, security, and performance issues
+3. Developer addresses AI feedback and documents any decisions to ignore suggestions
+4. Human review focuses on design decisions, business requirements, and knowledge transfer
+5. Final review ensures AI-generated code meets team standards
 
 ### Security & compliance
 
 Using AI for development introduces new security considerations beyond the code it generates.
 **Code security concerns:**
 
-- AI might suggest outdated security practices or introduce common vulnerabilities - Generated code might not follow your organization's specific security requirements - AI models are trained on public code that may include security flaws
+- AI might suggest outdated security practices or introduce common vulnerabilities
+- Generated code might not follow your organization's specific security requirements
+- AI models are trained on public code that may include security flaws
 **Data security considerations:**
 
-- Be mindful of what code you're sharing with AI services - Avoid pasting sensitive data, API keys, or proprietary algorithms into AI tools - Consider using local AI tools for sensitive projects - Understand the data retention policies of the AI services you use
+- Be mindful of what code you're sharing with AI services
+- Avoid pasting sensitive data, API keys, or proprietary algorithms into AI tools
+- Consider using local AI tools for sensitive projects
+- Understand the data retention policies of the AI services you use
 **Compliance implications:**
 
-- Some organizations have policies about AI-generated code that need approval - Consider licensing implications of AI-generated code - Document AI usage for audit purposes if required - Ensure AI-generated code meets accessibility and regulatory requirements
+- Some organizations have policies about AI-generated code that need approval
+- Consider licensing implications of AI-generated code
+- Document AI usage for audit purposes if required
+- Ensure AI-generated code meets accessibility and regulatory requirements
 
 ### Version control & documentation
 
 Tracking AI contributions makes debugging and knowledge transfer much easier later.
 **Commit message practices using conventional commits:** When AI generates significant portions of code, include that context:
 
-- `feat: add user validation logic (AI-assisted implementation)` - `refactor: improve authentication flow error handling (AI suggestions)` - `test: generate comprehensive payment processing test suite`
+- `feat: add user validation logic (AI-assisted implementation)`
+- `refactor: improve authentication flow error handling (AI suggestions)`
+- `test: generate comprehensive payment processing test suite`
 **Documentation approaches:**
 
-- Include AI prompts in pull request descriptions for complex features - Document any significant AI suggestions that were rejected and why - Note when AI helped solve particular architectural or performance challenges - Keep track of which AI tools were used for different parts of the system
+- Include AI prompts in pull request descriptions for complex features
+- Document any significant AI suggestions that were rejected and why
+- Note when AI helped solve particular architectural or performance challenges
+- Keep track of which AI tools were used for different parts of the system
 **Code comments:** For complex AI-generated logic, include comments explaining the approach and any modifications made to the original AI output. This helps future maintainers understand both the logic and its origins.
 The goal isn't to create bureaucracy around AI usage, but to maintain the same professional standards you'd apply to any development tool. AI assistance should make your code better and your team more productive while maintaining quality and security standards.
 
@@ -424,7 +487,10 @@ Individual AI adoption is one thing. Getting an entire team or organization to e
 **Address tool proliferation.** Instead of everyone using different AI tools, establish team preferences for specific use cases. Having consistent tooling makes knowledge sharing more effective.
 **Phase rollout by complexity:**
 
-1. **Phase 1:** Documentation and simple code generation 2. **Phase 2:** Debugging assistance and refactoring 3. **Phase 3:** Architecture discussions and complex problem-solving 4. **Phase 4:** Custom workflows and advanced integration
+1. **Phase 1:** Documentation and simple code generation
+2. **Phase 2:** Debugging assistance and refactoring
+3. **Phase 3:** Architecture discussions and complex problem-solving
+4. **Phase 4:** Custom workflows and advanced integration
 
 ### Measuring success
 
@@ -437,7 +503,9 @@ Individual AI adoption is one thing. Getting an entire team or organization to e
 - **Time to prototype:** For new features or experiments, how quickly can the team go from idea to working prototype?
 **Metrics to avoid:**
 
-- Lines of code generated (meaningless and potentially harmful) - Speed of individual task completion (can encourage cutting corners) - Tool usage frequency (usage doesn't equal value)
+- Lines of code generated (meaningless and potentially harmful)
+- Speed of individual task completion (can encourage cutting corners)
+- Tool usage frequency (usage doesn't equal value)
 
 ### Handling resistance
 
@@ -514,7 +582,11 @@ Instead of using one AI tool for everything, advanced practitioners are developi
 - **Documentation:** AI tools are particularly good at generating documentation after the code is written, since they can analyze what was actually built rather than working from requirements.
 **Example workflow approach:**
 
-1. Discuss architecture approach using AI chat 2. Implement core functionality using Cursor 3. Generate tests using Cursor's AI assistance 4. Review for potential improvements using AI analysis 5. Create documentation using AI analysis of the final code
+1. Discuss architecture approach using AI chat
+2. Implement core functionality using Cursor
+3. Generate tests using Cursor's AI assistance
+4. Review for potential improvements using AI analysis
+5. Create documentation using AI analysis of the final code
 The key is treating different AI interactions as serving different purposes rather than trying to do everything in one conversation or with one approach.
 
 ### Custom integrations and automation
@@ -598,5 +670,15 @@ Now stop reading and start experimenting. The best way to understand AI-assisted
 ### Resources to continue learning
 
 
-- [Addy Osmani's research on AI-assisted development](https://beyond.addy.ie/) - [Top 10 Ways AI Can Help Your Dev Workflow Outside of Code Generation](/articles/top-10-ways-ai-can-help-your-dev-workflow-outside-of-code-generation) - [From Idea to Intelligent Running Coach: Vibe Coding with n8n and AI](/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai) - [My Experience: AI Vibe Coding a Complete Web Application from Scratch](/articles/my-experience-ai-vibe-coding-a-complete-web-application-from-scratch) - [Built-in AI in Chrome](/articles/built-in-ai-in-chrome) - [Three Days of AI and Cloud at Google Paris](/articles/three-days-of-ai-and-cloud-at-google-paris) - [Reducing Latency in AI Speech Synthesis](/articles/reducing-latency-in-ai-speech-synthesis) - [Interacting with Chat GPT through Voice UI on the Web](/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web) - GitHub Copilot documentation and best practices - Cursor AI documentation and community discussions - OpenAI and Anthropic developer resources
+- [Addy Osmani's research on AI-assisted development](https://beyond.addy.ie/)
+- [Top 10 Ways AI Can Help Your Dev Workflow Outside of Code Generation](/articles/top-10-ways-ai-can-help-your-dev-workflow-outside-of-code-generation)
+- [From Idea to Intelligent Running Coach: Vibe Coding with n8n and AI](/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai)
+- [My Experience: AI Vibe Coding a Complete Web Application from Scratch](/articles/my-experience-ai-vibe-coding-a-complete-web-application-from-scratch)
+- [Built-in AI in Chrome](/articles/built-in-ai-in-chrome)
+- [Three Days of AI and Cloud at Google Paris](/articles/three-days-of-ai-and-cloud-at-google-paris)
+- [Reducing Latency in AI Speech Synthesis](/articles/reducing-latency-in-ai-speech-synthesis)
+- [Interacting with Chat GPT through Voice UI on the Web](/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web)
+- GitHub Copilot documentation and best practices
+- Cursor AI documentation and community discussions
+- OpenAI and Anthropic developer resources
 The journey of AI-assisted development is just beginning. Join the conversation, share your discoveries, and help shape how our industry evolves with these powerful new tools.

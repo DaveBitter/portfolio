@@ -69,7 +69,10 @@ The detection is surprisingly fast! It happens almost instantly, even for longer
 
 To use the Language Detection API, you need to enable specific flags in Chrome:
 
-1. Navigate to `chrome://flags/#language-detection-api` and enable it 2. Navigate to `chrome://flags/#optimization-guide-on-device-model` and enable it 3. Restart Chrome 4. Go to `chrome://components/` and update "Optimization Guide On Device Model"
+1. Navigate to `chrome://flags/#language-detection-api` and enable it
+2. Navigate to `chrome://flags/#optimization-guide-on-device-model` and enable it
+3. Restart Chrome
+4. Go to `chrome://components/` and update "Optimization Guide On Device Model"
 Without these steps, `window.LanguageDetector` will be undefined and the API won't be available.
 
 ## Translation API Deep Dive
@@ -108,7 +111,10 @@ Here's the implementation:
 } ```
 ### The Workflow
 When someone clicks "Translate" on a review, here's what happens:
-1. **Language Detection**: We detect the source language (if not already detected) 2. **Model Download**: If this is the first translation for this language pair, Chrome downloads the model (1-2GB). We show a progress bar for this! 3. **Translation**: The actual translation happens 4. **Display**: We show the translated text with a visual indicator
+1. **Language Detection**: We detect the source language (if not already detected)
+2. **Model Download**: If this is the first translation for this language pair, Chrome downloads the model (1-2GB). We show a progress bar for this!
+3. **Translation**: The actual translation happens
+4. **Display**: We show the translated text with a visual indicator
 The download progress tracking is particularly nice for UX:
 ```javascript const translated = await translateText(
 
@@ -128,7 +134,12 @@ The component for a review manages quite a bit of state:
 
 ```javascript const [translatedText, setTranslatedText] = useState(null) const [selectedLanguage, setSelectedLanguage] = useState('') const [isTranslating, setIsTranslating] = useState(false) const [isDownloading, setIsDownloading] = useState(false) const [downloadProgress, setDownloadProgress] = useState(0) const [detectedLanguage, setDetectedLanguage] = useState(null) // ... more state for error handling and UI ```
 This gives us fine-grained control over the UI:
-- Show a spinner while detecting language - Display the detected language badge - Show download progress during model download - Switch to translated text when ready - Let users toggle back to see the original - Highlight reviews that match the user's system language
+- Show a spinner while detecting language
+- Display the detected language badge
+- Show download progress during model download
+- Switch to translated text when ready
+- Let users toggle back to see the original
+- Highlight reviews that match the user's system language
 The visual feedback is important because some operations take time. Language detection is fast, but downloading a translation model on first use? That can take a minute or two depending on your connection.
 ## API Changes Since Last Article
 Here's something important: **the API has changed since Chrome 138!**
@@ -158,15 +169,31 @@ In my demo, if the APIs aren't available, users see a friendly banner explaining
 The language detection results include a confidence score. I didn't display it in my demo, but you could use it to show uncertainty or ask users to confirm the detected language if confidence is low.
 ## Putting It All Together
 The beauty of these APIs is how they compose. In my demo:
-1. Page loads → Language Detection API runs on all reviews 2. User selects a target language → State updates 3. User clicks "Translate" → We check if we have the detected language 4. If not detected yet → Detect it now 5. Translation API creates a translator for the language pair 6. If model needs downloading → Show progress bar 7. Translation completes → Display translated text with visual indicator 8. User can toggle back to original anytime
+1. Page loads → Language Detection API runs on all reviews
+2. User selects a target language → State updates
+3. User clicks "Translate" → We check if we have the detected language
+4. If not detected yet → Detect it now
+5. Translation API creates a translator for the language pair
+6. If model needs downloading → Show progress bar
+7. Translation completes → Display translated text with visual indicator
+8. User can toggle back to original anytime
 All of this happens without a single network request to a translation service. It's all local, private, and fast.
 ## Tech Stack
 For the curious, here's what I used:
-- **[Next.js 16](https://nextjs.org/)** with App Router - **[React 19](https://react.dev/)** - **[TypeScript](https://www.typescriptlang.org/)** for type safety - **[Tailwind CSS 4](https://tailwindcss.com/)** for styling - **[Radix UI](https://www.radix-ui.com/)** for the language selector (accessible components ftw!) - **Chrome 141** for the AI APIs
+- **[Next.js 16](https://nextjs.org/)** with App Router
+- **[React 19](https://react.dev/)**
+- **[TypeScript](https://www.typescriptlang.org/)** for type safety
+- **[Tailwind CSS 4](https://tailwindcss.com/)** for styling
+- **[Radix UI](https://www.radix-ui.com/)** for the language selector (accessible components ftw!)
+- **Chrome 141** for the AI APIs
 ## Conclusion
 Chrome's built-in AI APIs are getting better with every release. We've gone from Chrome 138 to 141, the APIs have been cleaned up, and the functionality is solid.
 These APIs open up some really interesting possibilities:
-- **Privacy-first translation** in chat apps - **Offline-capable multilingual apps** for travelers - **Browser extensions** that translate selected text instantly - **Progressive web apps** with built-in language support - **Content moderation** tools that work locally
+- **Privacy-first translation** in chat apps
+- **Offline-capable multilingual apps** for travelers
+- **Browser extensions** that translate selected text instantly
+- **Progressive web apps** with built-in language support
+- **Content moderation** tools that work locally
 The key is progressive enhancement. Build your core experience to work everywhere, then layer on these AI features for users who have them available. That way, you're not excluding anyone, but you're giving Chrome users something special.
 I'm genuinely excited about where this is heading. On-device AI in the browser feels like a superpower, and we're still in the early days. I can't wait to see what people build with these tools!
 **Go try the demo yourself:** [web-ai-translation-demo.davebitter.com](https://web-ai-translation-demo.davebitter.com/)

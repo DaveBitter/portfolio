@@ -94,14 +94,17 @@ What I love about this approach is that you're reusing your existing application
 
 You might be wondering how this relates to the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) you may have already heard of. The distinction is straightforward:
 
-- **MCP** is for backend services and server-to-agent communication - **WebMCP** is for browser-based tools where users are present
+- **MCP** is for backend services and server-to-agent communication
+- **WebMCP** is for browser-based tools where users are present
 They're complementary. Use MCP when you need an agent to talk to your backend services directly, no browser involved. Use WebMCP when the interaction happens through the browser. The user doesn't have to be actively looking at the page, but their browser tab needs to be open with an active session. The AI assistant (like ChatGPT or Claude) connects to that tab and calls the registered tools using the user's existing authentication and context.
 
 ## Use cases
 
 The [Chrome for Developers blog post](https://developer.chrome.com/blog/webmcp-epp) highlights a few compelling use cases:
 
-- **E-commerce**: Agents can find products, configure options, and navigate checkout flows with precision. No more fragile screen scraping that breaks when you update your UI. - **Travel**: Agents can search, filter flights, and handle bookings using structured data to ensure accurate results every time. - **Customer support**: Agents can help users create detailed support tickets by automatically filling in technical details.
+- **E-commerce**: Agents can find products, configure options, and navigate checkout flows with precision. No more fragile screen scraping that breaks when you update your UI.
+- **Travel**: Agents can search, filter flights, and handle bookings using structured data to ensure accurate results every time.
+- **Customer support**: Agents can help users create detailed support tickets by automatically filling in technical details.
 These are just the starting points. Any website that has actions a user can take could benefit from exposing those actions as WebMCP tools. Think about form-heavy workflows, dashboards, booking systems, content management, the possibilities are endless.
 
 ## Things to Consider

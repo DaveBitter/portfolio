@@ -160,6 +160,7 @@ Finally, I’ve created a `useConversation` hook that:
   * `"STOPPED"` the user stopped the application ![calm visualisation of Aiva stopped](/img/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web-aiva-stopped.gif)
 
 * Uses the utilities exposed by the `useSpeechRecognition` and `useSpeechSynthesis` hooks to create a turn-based conversation
+
 ![A schematic of the flow described above](/img/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web-aiva-interaction-schematic.png)
 
 #### ChatGPT integration

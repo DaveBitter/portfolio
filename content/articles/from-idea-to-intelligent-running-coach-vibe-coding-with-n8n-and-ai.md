@@ -40,7 +40,11 @@ Instead of manual weather checking, I wanted to wake up to intelligent analysis:
 _"Running Score: 85/100 - Perfect conditions! Light layer recommended. Morning window optimal before 10 AM rain."_
 Not just weather data, but intelligent analysis with AI coaching. The system needed to:
 
-- **Analyze multiple weather factors** including temperature, conditions, humidity, wind speed, and precipitation - **Generate a smart running score** with a 0-100 rating based on optimal conditions - **Provide AI coaching** through personalized advice, gear recommendations, and safety warnings - **Deliver daily insights** via automated morning emails with multi-period analysis - **Run entirely on free tiers** using [OpenWeatherMap API](https://openweathermap.org/api) and [Google Gemini](https://gemini.google.com)
+- **Analyze multiple weather factors** including temperature, conditions, humidity, wind speed, and precipitation
+- **Generate a smart running score** with a 0-100 rating based on optimal conditions
+- **Provide AI coaching** through personalized advice, gear recommendations, and safety warnings
+- **Deliver daily insights** via automated morning emails with multi-period analysis
+- **Run entirely on free tiers** using [OpenWeatherMap API](https://openweathermap.org/api) and [Google Gemini](https://gemini.google.com)
 I think we are perhaps moving to this way of building things where we are more in charge as devs in connecting systems than writing all logic and code from scratch.
 
 ## Building with Orchestration and Vibe Coded Logic
@@ -50,7 +54,11 @@ Unlike my previous vibe coding experiment where AI generated traditional applica
 ### Core Stack:
 
 
-- **n8n Cloud** for hosted workflow automation - **OpenWeatherMap API** for current weather + 5-day forecast (free tier) - **Google Gemini 2.0 Flash** for intelligent coaching and analysis (ideal for automation) - **SMTP email integration** for reliable message delivery - **Zero infrastructure management** with cloud hosting
+- **n8n Cloud** for hosted workflow automation
+- **OpenWeatherMap API** for current weather + 5-day forecast (free tier)
+- **Google Gemini 2.0 Flash** for intelligent coaching and analysis (ideal for automation)
+- **SMTP email integration** for reliable message delivery
+- **Zero infrastructure management** with cloud hosting
 The beauty here? Instead of writing complete applications, I was combining pre-built services with small, focused code snippets that I never had to write myself. And by moving to n8n Cloud, I eliminated all the infrastructure overhead entirely.
 
 ## Cursor AI Builds Everything
@@ -60,7 +68,14 @@ I could prompt Cursor with:
 Create an n8n workflow JSON that triggers daily at 6 AM, fetches current weather and 5-day forecast from OpenWeatherMap API for Haarlem, analyzes the morning window, calculates dynamic running scores, enhances with Gemini 2.0 Flash AI coaching advice, and sends a formatted email via SMTP
 Cursor would then generate not just the workflow structure, but also sophisticated JavaScript code nodes embedded within it for:
 
-- **Multi-endpoint data fetching** - Parallel current weather and 5-day forecast calls - **Time-based analysis** - Dynamic period calculation based on current time - **Advanced scoring algorithms** - Weather condition classification with 200+ lines of logic - **AI prompt engineering** - Structured coaching requests to Gemini 2.0 Flash - **HTML email generation** - Complete responsive email templates with CSS - **Error handling and logging** - Comprehensive failure recovery and debugging - **Data validation and transformation** - Safe data extraction with fallbacks
+- **Multi-endpoint data fetching** - Parallel current weather and 5-day forecast calls
+- **Time-based analysis** - Dynamic period calculation based on current time
+- **Advanced scoring algorithms** - Weather condition classification with 200+ lines of logic
+- **AI prompt engineering** - Structured coaching requests to Gemini 2.0 Flash
+- **HTML email generation** - Complete responsive email templates with CSS
+- **Error handling and logging** - Comprehensive failure recovery and debugging
+- **Data validation and transformation** - Safe data extraction with fallbacks
+
 ![Screenshot of above mentioned nodes being connected in the n8n UI](/img/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai-hero.png)
 For example, one of the code nodes that Cursor generated for scoring:
 
@@ -85,7 +100,10 @@ Everything in this project was vibe coded. From the workflow structure to the lo
 
 One breakthrough technique I discovered was taking screenshots of the n8n UI and sharing them directly in my Cursor chat. Instead of trying to describe the workflow structure in text, I could show Cursor exactly:
 
-- How nodes were connected - What the current data flow looked like - Which specific node was failing - The exact error messages in context
+- How nodes were connected
+- What the current data flow looked like
+- Which specific node was failing
+- The exact error messages in context
 This visual context dramatically improved Cursor's ability to suggest fixes and generate new nodes that fit perfectly into the existing workflow structure.
 
 ## The Magic of Visual Debugging
@@ -100,7 +118,10 @@ The most interesting part was how I could vibe code the more complex algorithmic
 _"Add a code node that fetches weather for 3 time periods today and determines the optimal running window, considering score changes and precipitation timing"_
 Cursor generated a sophisticated code node that:
 
-- Called the weather API for different time periods - Calculated scores for each period - Analyzed precipitation timing to avoid getting caught in rain - Recommended the optimal running window with reasoning
+- Called the weather API for different time periods
+- Calculated scores for each period
+- Analyzed precipitation timing to avoid getting caught in rain
+- Recommended the optimal running window with reasoning
 When I wanted better email formatting with proper HTML and CSS, I prompted:
 _"Create a code node that generates beautiful HTML emails with weather icons, score visualization, and responsive design"_
 And got a complete email templating system with embedded CSS, weather condition icons, and mobile-friendly layouts. Styling emails is everyone's favorite, right? It was great to let AI handle the HTML/CSS while I focused on the content.
@@ -160,7 +181,11 @@ Free tier viability meant this actually runs in production without ongoing costs
 AI integration felt natural, not bolted on, but genuinely useful. Having personalized coaching based on actual conditions added real value beyond basic automation.
 ## The Challenges: Reality Check
 Let's be honest - this approach isn't perfect yet. Here's what I actually experienced:
-- **Disconnect between n8n instance and Cursor** - Working locally while deploying to cloud created friction - **Bug fixing in loops** - When AI-generated code failed, debugging required understanding both n8n context and the generated logic - **Breaking unrelated things while trying to fix bugs** - Making changes to one node sometimes affected unexpected parts of the workflow - **Tunnel vision on specific issues** - Getting stuck on AI-generated solutions that weren't quite right - **The future isn't here yet... but it's close!** - The tooling is powerful but still requires patience and iteration
+- **Disconnect between n8n instance and Cursor** - Working locally while deploying to cloud created friction
+- **Bug fixing in loops** - When AI-generated code failed, debugging required understanding both n8n context and the generated logic
+- **Breaking unrelated things while trying to fix bugs** - Making changes to one node sometimes affected unexpected parts of the workflow
+- **Tunnel vision on specific issues** - Getting stuck on AI-generated solutions that weren't quite right
+- **The future isn't here yet... but it's close!** - The tooling is powerful but still requires patience and iteration
 There are also traditional development challenges to consider. Code node debugging can be trickier than traditional development. Complex logic still needs good prompting and multiple iterations. Testing isolated code nodes requires different approaches. And version control and collaboration remain tricky with JSON workflows.
 ## The Future of Development?
 This experiment reinforced my belief that we're shifting toward system orchestration with AI-generated logic. Why build email sending when you can connect to a service? Why write scoring algorithms when AI can generate them? Why create data processing when you can vibe code it?
@@ -171,14 +196,21 @@ The combination of AI-generated workflows with AI-generated custom code creates 
 Once I had the weather system running smoothly, I couldn't resist applying the same approach to other areas. Enter the **Strava Auto-Descriptions project**, another workflow that demonstrates the versatility of this AI-orchestrated approach.
 The challenge was simple: every time I complete a run or bike ride, Strava gives it a generic name like "Morning Run" or "Afternoon Ride." Boring. I wanted something more descriptive and engaging.
 So I built an automated workflow that:
-- Triggers whenever I complete a Strava activity - Analyzes the workout data (heart rate zones, pace patterns, power metrics) - Uses Gemini AI to classify the workout type and generate engaging titles - Automatically updates the Strava activity with AI-generated descriptions
+- Triggers whenever I complete a Strava activity
+- Analyzes the workout data (heart rate zones, pace patterns, power metrics)
+- Uses Gemini AI to classify the workout type and generate engaging titles
+- Automatically updates the Strava activity with AI-generated descriptions
 The results speak for themselves. Instead of "Morning Run," I get "🚀 Easy run with tempo block." Rather than "Afternoon Run," it generates "⚡ Interval session 5x3min." And boring "Evening Ride" becomes "🔥 Threshold workout 20min@FTP."
 This second project proved that the approach scales beautifully across different domains.
 ## The Real Test
 The real test of any development approach is: would you actually use what you built?
 **Two weeks later:** When the system warns about humidity or suggests optimal timing, I actually consider it. It has influenced my training decisions. When the system warns about incoming precipitation or suggests optimal timing, I listen. That's when you know it works.
 ## Key Insights
-- **Orchestration > Implementation** - Connect services, don't rebuild them - **Use AI to generate everything** - Workflows AND custom logic - **Vibe Coding is not just a meme** - Describe what you want, get what you need - **Choose the right AI for automation** - Gemini 2.0 Flash works well for this use case - **The future is now** - As developers, we're moving more toward orchestration
+- **Orchestration > Implementation** - Connect services, don't rebuild them
+- **Use AI to generate everything** - Workflows AND custom logic
+- **Vibe Coding is not just a meme** - Describe what you want, get what you need
+- **Choose the right AI for automation** - Gemini 2.0 Flash works well for this use case
+- **The future is now** - As developers, we're moving more toward orchestration
 ## The Complete Setup
 The entire project runs on free tiers and includes cloud-hosted n8n with enterprise-grade reliability, built-in email capabilities and scheduling, vibe coded workflows with embedded JavaScript logic nodes, zero infrastructure management or server maintenance, automated backups and professional monitoring, version-controlled workflows as importable JSON files with embedded code, and instant deployment with cloud-based configuration.
 The development toolkit includes pnpm scripts for deploying workflows to n8n Cloud, downloading workflows from cloud, checking workflow JSON integrity, and creating version control snapshots.
@@ -191,5 +223,9 @@ The unexpected takeaway: moving to cloud did not only remove infrastructure work
 ## Your Next Steps
 If you're curious about automation platforms with custom logic, n8n Cloud is genuinely accessible. Start simple with a personal workflow or notification. Add custom logic by vibe coding code nodes for data processing or formatting. Try AI integration using Gemini's free tier. Think in systems about what services you could connect and what logic you need.
 A few directions to explore:
-- **Data analysis workflows**: automated insights from any data source - **Content pipelines**: AI-enhanced writing, editing, formatting - **Personal productivity**: smart scheduling, task management, notifications - **Business automation**: customer service, lead qualification, reporting - **Creative tooling**: image processing, content curation, social workflows
+- **Data analysis workflows**: automated insights from any data source
+- **Content pipelines**: AI-enhanced writing, editing, formatting
+- **Personal productivity**: smart scheduling, task management, notifications
+- **Business automation**: customer service, lead qualification, reporting
+- **Creative tooling**: image processing, content curation, social workflows
 The tools are there. The APIs are available. AI can generate both the workflows and the custom logic. The only limit is imagination.
