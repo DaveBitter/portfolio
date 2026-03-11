@@ -3,6 +3,7 @@ type: articles
 date: 2023-11-02T00:00:00.000Z
 slug: interacting-with-chat-gpt-through-voice-ui-on-the-web
 tags:
+  - ai
   - front-end
 intro: >-
   I probably don’t have to tell you what an enormous impact the rise of AI has

@@ -3,6 +3,7 @@ type: articles
 date: 2024-05-15T00:00:00.000Z
 slug: on-the-fly-machine-learning-in-the-browser-with-tensor-flow-js
 tags:
+  - ai
   - machine-learning
   - front-end
   - react-js

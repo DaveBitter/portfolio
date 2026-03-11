@@ -3,6 +3,7 @@ type: articles
 date: 2023-11-16T00:00:00.000Z
 slug: reducing-latency-in-ai-speech-synthesis
 tags:
+  - ai
   - front-end
 intro: >-
   AI-powered speech synthesis is getting incredibly realistic. This opens up

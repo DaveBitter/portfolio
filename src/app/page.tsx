@@ -36,8 +36,8 @@ export default async function HomePage() {
                 Hi, I&apos;m Dave
               </Heading>
               <Text size="3" color="gray" align="center">
-                Senior Front-end Consultant · Developer Advocate · Engineering
-                Manager
+                Senior Front-end Consultant · Developer Advocate · AI
+                Enthusiast · Engineering Manager
               </Text>
               <Box mt="2">
                 <Socials />

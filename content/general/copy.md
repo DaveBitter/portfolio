@@ -7,7 +7,7 @@ items:
       I build things for the web, lead teams, and talk about it way too much.
   - key: "elevatorPitch"
     value: >-
-      I combine deep technical expertise in React.js, Next.js, and TypeScript with strong leadership to deliver exceptional results — creating user-centred solutions while developing the capabilities of technical teams. As a Developer Advocate, I transform complex concepts into accessible knowledge through speaking, writing, and mentorship.
+      I combine deep technical expertise in React.js, Next.js, and TypeScript with a growing focus on AI — from browser-based machine learning and built-in AI APIs to AI-powered developer workflows. As a Developer Advocate and Google Developer Expert for Web, I transform complex concepts into accessible knowledge through speaking, writing, and mentorship.
 
 
       As Engineering Manager at iO, I lead ~35 seconded consultants, providing strategic career guidance while strengthening the organization's market position. My collaborative approach bridges organizational divides, connecting teams across departments to foster innovation and knowledge sharing.
