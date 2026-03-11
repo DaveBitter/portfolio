@@ -3,9 +3,9 @@ items:
   - key: 'greeting'
     value: Hi, I'm Dave
   - key: 'elevatorPitch'
-    value: Elevator Pitch
+    value: About me
   - key: 'latestItems'
-    value: Latest
+    value: Fresh off the press
   - key: 'latestArticles'
     value: Latest articles
   - key: 'latestArticlesAndTags'

@@ -1,0 +1,44 @@
+---
+description: Content loading and markdown conventions
+globs: src/lib/**/*.ts
+alwaysApply: false
+---
+
+# Content & Data
+
+## Content Files
+
+Markdown with YAML frontmatter in `content/`. Loaded by `src/lib/content.ts`.
+
+- `content/articles/{slug}.md` — Articles (type: "articles"), one file per article
+- `content/quick-bits/{slug}.md` — Quick Bits (type: "quick-bits"), one file per quick bit
+- `content/talks/{slug}.md` — Talks (type: "talks"), one file per talk
+- `content/resume/workExperience.md` — Work experience (supports `subEntries` for grouped roles)
+- `content/resume/education.md` — Education
+- `content/general/copy.md` — Site copy (elevatorPitch, greetingIntro, etc.)
+- `content/general/dictionary.md` — UI labels
+- `content/general/headings.md` — Section headings
+- `content/general/tags.md` — Tag key/value pairs
+
+Articles, quick bits, and talks each have their own directory with one `.md` file per entry. Each file has YAML frontmatter (metadata) and the article body as markdown content. Loaded via `loadMarkdownDir()` in `content.ts`.
+
+## Duplicate Slugs
+
+The talks data has duplicate slugs (same talk at different events). `dedupeBySlug()` keeps the most recent. Always deduplicate content to avoid breaking view transitions.
+
+## Markdown Pipeline
+
+`src/lib/markdown.ts`: marked → marked-highlight (highlight.js, Atom One Dark) → `enrichHtml()`.
+
+`src/lib/enrich-html.ts` post-processes HTML:
+- External links get `target="_blank" rel="noopener noreferrer"`
+- Images get `loading="lazy"` and `<figure>` wrapping
+- YouTube iframes get responsive aspect-ratio containers
+
+## Article Body Fallback
+
+The markdown body of each content file is loaded as the `body` field. The Article component falls back: `article.body || article.summary || ""`.
+
+## Friday Tips
+
+`src/lib/youtube.ts` fetches from YouTube API at build time. Requires `YOUTUBE_API_KEY` env var. Returns `[]` without it.

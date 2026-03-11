@@ -1,29 +1,43 @@
-# Node.js
-node_modules
-npm-debug.log
-lerna-debug
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# Build and test tools
-*.zip
-dist/*
-out
-build/*
-.next
-coverage
-storybook-static
+# next.js
+/.next/
+/out/
 
-# Cache
-.sass-cache
-.cache
+# generated API files
+/public/api/
 
-# Operating system
+# import articles (keep folder, ignore contents)
+/import_articles/*
+!/import_articles/.gitkeep
+
+# production
+/build
+
+# misc
 .DS_Store
-Thumbs.db
+*.pem
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# Other
+# env files
 .env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

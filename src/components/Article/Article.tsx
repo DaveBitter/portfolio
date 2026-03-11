@@ -1,112 +1,99 @@
-// Libs
-import React, { useEffect, useRef } from "react";
-import hljs from "highlight.js";
+import Image from "next/image";
+import { Badge, Text } from "@radix-ui/themes";
+import { ArticleTypeBadge } from "./article-type-badge";
+import { ArticleTeasers } from "./article-teaser";
+import { TagList } from "@/components/tag";
+import { Share } from "@/components/share";
+import { formatDate } from "@/lib/format-date";
+import { renderMarkdown } from "@/lib/markdown";
+import type { Article as ArticleType } from "@/lib/content";
 
-// Utils
-import {
-  ArticleInterface,
-  TagInterface,
-} from "../../static/js/utils/Interfaces/Interfaces";
-import formatDate from "../../static/js/utils/formatDate";
-import ArticleElementEnricher from "../../static/js/utils/ArticleElementEnricher";
-import compileMarkdownToJSX from "../../static/js/utils/compileMarkdownToJSX";
-import { ArticleTypeType } from "../../static/js/utils/Interfaces/Types";
-import { getDictionary } from "../../static/js/utils/getContent";
-// Resources
-
-// Components
-import Tag from "../Tag/Tag";
-import Share from "../Share/Share";
-import ArticleTypeBadge from "./ArticleTypeBadge/ArticleTypeBadge";
-
-// Interface
-interface IProps {
-  articleType: ArticleTypeType;
+function vtName(article: ArticleType, element: string): string {
+  return `${article.type}-${element}-${article.slug}`;
 }
 
-// Component
-const Article = ({
-  articleType,
-  body,
-  date,
-  intro,
-  city,
-  countryCode,
-  event,
-  type,
-  tags: articleTags,
-  teaserImage,
-  title,
-}: ArticleInterface & IProps) => {
-  const dictionary = getDictionary();
-
-  const articleContent = useRef<null | HTMLDivElement>(null);
-  useEffect(() => {
-    new ArticleElementEnricher(articleContent.current, null);
-    hljs.initHighlighting();
-  }, [title]);
-
-  // NOTE: TS made me do it :/
-  const tags = [...(articleTags || [])];
+export function Article({
+  article,
+  relatedArticles,
+}: {
+  article: ArticleType;
+  relatedArticles?: ArticleType[];
+}) {
+  const html = renderMarkdown(article.body || article.summary || "");
 
   return (
-    <article className="article grid">
-      <header className="article__header g0">
-        <div className="grid">
-          <div className="g2">
-            <ArticleTypeBadge contentType={type} data-reveal-in-view />
-            <h1 className="article__title" data-reveal-in-view>
-              {title}
-            </h1>
-            <time className="article__date" dateTime={date} data-reveal-in-view>
-              {formatDate(date, {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}{" "}
-              {event && city && countryCode && (
-                <small>{`, ${dictionary[event]} | ${city} (${countryCode})`}</small>
-              )}
-            </time>
-            {tags && !!tags.length && (
-              <Tag.Wrapper alignment="right">
-                {tags.map((tag: TagInterface) => (
-                  <Tag.Item key={tag.key} tag={tag} />
-                ))}
-              </Tag.Wrapper>
-            )}
-          </div>
+    <article className="mx-auto max-w-3xl px-4 py-12">
+      <header className="mb-10">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span style={{ viewTransitionName: vtName(article, "badge") }}>
+            <ArticleTypeBadge type={article.type} />
+          </span>
+          <Text
+            size="2"
+            color="gray"
+            style={{ viewTransitionName: vtName(article, "date") }}
+          >
+            {formatDate(article.date)}
+          </Text>
+          {article.event && (
+            <Badge variant="outline" size="1">
+              {article.event}
+            </Badge>
+          )}
+          {article.city && (
+            <Text size="1" color="gray">
+              {article.city}
+            </Text>
+          )}
         </div>
-        <div className="article__hero" data-reveal-in-view>
-          <img
-            className="article__hero-image"
-            src={teaserImage}
-            alt={teaserImage}
-            loading="lazy"
-          />
-        </div>
-      </header>
-      <section className="g8">
-        {articleType !== "talks" && (
-          <p className="article__intro" data-reveal-in-view>
-            <strong>{intro}</strong>
+        <h1
+          className="text-gradient mb-4 text-3xl font-bold md:text-4xl"
+          style={{ viewTransitionName: vtName(article, "title") }}
+        >
+          {article.title}
+        </h1>
+        {article.intro && (
+          <p className="text-lg text-[var(--color-text-muted)]">
+            {article.intro}
           </p>
         )}
-        {body && (
-          <div
-            className="article__body"
-            dangerouslySetInnerHTML={{ __html: compileMarkdownToJSX(body) }}
-            ref={articleContent}
-            data-reveal-in-view
+      </header>
+
+      {article.teaserImage && (
+        <div
+          className="relative mb-12 aspect-video overflow-hidden rounded-xl"
+          style={{ viewTransitionName: vtName(article, "image") }}
+        >
+          <Image
+            src={article.teaserImage}
+            alt=""
+            fill
+            className="object-cover"
+            priority
           />
+        </div>
+      )}
+
+      <div
+        className="article-body max-w-none text-[var(--color-text)]"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+
+      <footer className="mt-16 border-t border-[var(--color-border)] pt-10">
+        {article.tags && article.tags.length > 0 && (
+          <div className="mb-6">
+            <TagList tags={article.tags} />
+          </div>
         )}
-      </section>
-      <Share />
+        <Share />
+      </footer>
+
+      {relatedArticles && relatedArticles.length > 0 && (
+        <section className="mt-16">
+          <h2 className="mb-6 text-2xl font-bold">Related</h2>
+          <ArticleTeasers articles={relatedArticles} columns={2} />
+        </section>
+      )}
     </article>
   );
-};
-
-// Props
-Article.defaultProps = {};
-
-export default Article;
+}

@@ -1,0 +1,317 @@
+@import "tailwindcss";
+@import "@radix-ui/themes/styles.css";
+
+:root {
+  --color-primary: #ff5420;
+  --color-secondary: #ff1343;
+  --color-pumpkin: #ff7c43;
+  --color-bg: #222;
+  --color-bg-dark: #1a1a1a;
+  --color-surface: #2a2a2a;
+  --color-surface-hover: #333;
+  --color-text: #fff;
+  --color-text-muted: #8d9297;
+  --color-border: #3a3a3a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(180deg, #1e1e1e 0%, #191919 50%, #141414 100%);
+  background-attachment: fixed;
+  color: var(--color-text);
+  min-height: 100dvh;
+}
+
+/* --- View Transitions --- */
+
+/* Forward navigation: old slides up + fades, new slides up + fades in */
+::view-transition-old(root) {
+  animation: vt-slide-out-up 200ms ease-in-out;
+}
+::view-transition-new(root) {
+  animation: vt-slide-in-up 200ms ease-in-out;
+}
+
+/* Back navigation: reverse the direction */
+[data-vt-direction="back"]::view-transition-old(root) {
+  animation: vt-slide-out-down 200ms ease-in-out;
+}
+[data-vt-direction="back"]::view-transition-new(root) {
+  animation: vt-slide-in-down 200ms ease-in-out;
+}
+
+/* Nav and footer stay perfectly still */
+::view-transition-old(site-nav),
+::view-transition-new(site-nav),
+::view-transition-old(site-footer),
+::view-transition-new(site-footer) {
+  animation: none;
+}
+
+/* Breadcrumbs crossfade in place */
+::view-transition-old(breadcrumbs) {
+  animation: vt-fade-out 150ms ease-in-out;
+}
+::view-transition-new(breadcrumbs) {
+  animation: vt-fade-in 150ms ease-in-out;
+}
+
+/* Shared elements morph smoothly between positions */
+::view-transition-group(*) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-group(site-nav),
+::view-transition-group(site-footer) {
+  animation-duration: 0ms;
+}
+
+/* --- Transition keyframes --- */
+
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes vt-slide-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes vt-slide-out-up {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-16px); }
+}
+
+@keyframes vt-slide-in-down {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes vt-slide-out-down {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(16px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* --- Utilities --- */
+
+.text-gradient {
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.radix-themes {
+  --default-font-family: var(--font-public-sans), system-ui, sans-serif;
+}
+
+/* --- Article prose --- */
+
+.article-body > *:first-child {
+  margin-top: 0;
+}
+
+.article-body h2,
+.article-body h3,
+.article-body h4 {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.article-body h2 {
+  margin-top: 2.5em;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+}
+
+.article-body h3 {
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+  font-size: 1.25em;
+}
+
+.article-body h4 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 1.1em;
+}
+
+.article-body p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  line-height: 1.8;
+}
+
+.article-body ul {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.5em;
+  list-style: disc inside;
+}
+
+.article-body ol {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.5em;
+  list-style: decimal inside;
+}
+
+.article-body ul ul {
+  list-style-type: circle;
+}
+
+.article-body li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.7;
+}
+
+.article-body li > p {
+  display: inline;
+  margin: 0;
+}
+
+.article-body li img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0.75em 0;
+  border-radius: 0.5rem;
+}
+
+.article-body blockquote {
+  margin-top: 1.75em;
+  margin-bottom: 1.75em;
+  padding-left: 1.25em;
+  border-left: 3px solid var(--color-primary);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.article-body pre {
+  margin-top: 1.75em;
+  margin-bottom: 1.75em;
+  padding: 1.25em;
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+  overflow-x: auto;
+  font-size: 0.875em;
+  line-height: 1.7;
+}
+
+.article-body :not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  background: var(--color-surface);
+  font-size: 0.875em;
+}
+
+.article-body img {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-radius: 0.75rem;
+}
+
+.article-body hr {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+  border-color: var(--color-border);
+}
+
+.article-body a:any-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.15s;
+}
+
+.article-body a:any-link:hover {
+  text-decoration-color: var(--color-primary);
+}
+
+/* --- Highlight.js theme (Atom One Dark) --- */
+
+.hljs {
+  color: #abb2bf;
+}
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #c678dd;
+}
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #d19a66;
+}
+.hljs-string,
+.hljs-doctag {
+  color: #98c379;
+}
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #e06c75;
+}
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #e5c07b;
+}
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #e06c75;
+}
+.hljs-regexp,
+.hljs-link {
+  color: #56b6c2;
+}
+.hljs-symbol,
+.hljs-bullet {
+  color: #61aeee;
+}
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #56b6c2;
+}
+.hljs-meta {
+  color: #abb2bf;
+}
+.hljs-deletion {
+  color: #e06c75;
+}
+.hljs-addition {
+  color: #98c379;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: bold;
+}

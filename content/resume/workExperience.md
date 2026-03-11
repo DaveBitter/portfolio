@@ -1,49 +1,107 @@
 ---
 items:
-  - body: >-
-      At ANWB, I play a crucial role as a member of the Design System team, contributing to the development of the ANWB Design System - Poncho. This system is widely used by over 60 developers and 40 designers, supporting over a hundred web applications.
-
-
-      My work involves two primary areas of focus. Firstly, I am responsible for providing major architectural solutions for the organization. This includes establishing a new way of working between development and design for design tokens through the Design System. I skillfully utilize my soft skills to get all stakeholders on board while also utilizing my technical expertise to develop solutions. I am essential in any major change in the ANWB's way of working, as it all starts with Poncho. This requires me to be versatile in various roles, including technical, business-focused, and other related areas.
-
-
-      Secondly, I serve as a dependable support system to all front-end developers at ANWB. This includes providing assistance with questions regarding Poncho and providing input on development decisions in general.
-    company: Frontmen
-    companyWebsite: https://frontmen.nl
+  - company: iO
+    companyWebsite: https://www.iodigital.com
+    body: ""
     roles:
-      - role: Senior Front-end Developer/Consultant
-        startDate: 2021-06-01T00:00:00.000Z
-        endDate: 2021-01-01T00:00:00.000Z
+      - role: Technical Lead
+        startDate: 2025-10-01T00:00:00.000Z
+        endDate: 2025-10-01T00:00:00.000Z
         present: true
+      - role: Engineering Manager
+        startDate: 2024-06-01T00:00:00.000Z
+        endDate: 2024-06-01T00:00:00.000Z
+        present: true
+      - role: Senior Front-end Consultant
+        startDate: 2021-06-01T00:00:00.000Z
+        endDate: 2024-08-01T00:00:00.000Z
+        present: false
       - role: Developer Advocate
         startDate: 2021-08-01T00:00:00.000Z
-        endDate: 2021-01-01T00:00:00.000Z
-        present: true
-      - role: Team Captain
-        startDate: 2022-08-01T00:00:00.000Z
-        endDate: 2021-01-01T00:00:00.000Z
+        endDate: 2021-08-01T00:00:00.000Z
         present: true
     startDate: 2021-06-01T00:00:00.000Z
-    endDate: 2021-01-01T00:00:00.000Z
+    endDate: 2021-06-01T00:00:00.000Z
     present: true
     city: Amsterdam
     countryCode: NL
-  - body: >-
-      My experience at Mirabeau involved building interactive web applications and front-end component libraries while taking on various roles such as front-end developer, visual designer, interaction designer, back-end developer, and DevOps engineer. I primarily focused on building interactive web applications using React.js and Next.js while actively participating in the design and development process from start to finish.
+    subEntries:
+      - title: Technical Lead — iO Resumator
+        startDate: 2025-10-01T00:00:00.000Z
+        endDate: 2025-10-01T00:00:00.000Z
+        present: true
+        body: >-
+          Led the technical transformation of iO Resumator, a critical tool for iO's secondment delivery model, by migrating from a React SPA to NextJS with the App Router and server components, implementing iO's Bonzai AI platform for automation, and driving organizational adoption across multiple stakeholder groups.
 
 
-      In addition to building web applications, I also worked on component libraries using HTML, CSS (SASS), and vanilla JS, which were used by development teams or standalone websites. I acted as a bridge between the design, front-end, and back-end teams, and became a valuable point of contact for a variety of stakeholders, using my natural confidence and communication abilities to take the lead successfully.
+          * Architected and executed a major technical refactor migrating the platform from React SPA to NextJS using the new App Router, server components, and a server-first approach for data handling and authentication
+
+          * Improved code reusability, consistency, and development efficiency by creating numerous new components and enhancing the overall project architecture
+
+          * Enhanced user experience by collaborating with designers to identify and resolve UX issues, ensuring a more intuitive and effective platform
+
+          * Integrated iO's Bonzai AI platform to automate previously manual processes, including automatic resume content extraction for new employees, uniform rewriting of work experiences, AI-powered personalized interview preparation with scoped questions and tailored tips, and automated motivation letter tailoring based on complete resumes and job vacancies
+
+          * Optimized AI model usage and costs while leading a development team, building features alongside the team, and maintaining communication with organizational stakeholders to advocate for platform adoption
+
+          * Initiated the RBAC (role-based access control) feature to improve platform usability for large organizations and drive more efficient workflows across iO
+      - title: Engineering Manager
+        startDate: 2024-06-01T00:00:00.000Z
+        endDate: 2024-06-01T00:00:00.000Z
+        present: true
+        body: >-
+          As Engineering Manager at iO, I lead a department of approximately 35 seconded consultants, focusing on exceeding client expectations while fostering a productive team environment. I am responsible for the professional development of all team members throughout their career journey, while continuing my Developer Advocate role to strengthen the organization's market position.
 
 
-      Finally, my passion for knowledge sharing manifested in activities such as code reviews, presentations, articles, guest lectures, workshops, and meetups. I also coached front-end developers of all seniority levels, finding joy in helping others grow in a meaningful way.
-    company: Mirabeau
+          * Provided strategic career guidance that resulted in significant professional advancement across the team, including successfully guiding role transitions and supporting specialized technical interests to increase growth
+
+          * Helped team members secure placements at key clients, ensuring successful career progression and client satisfaction
+
+          * Initiated technical standards across campus and developed standardized documentation for critical workflows to improve consistency and efficiency
+
+          * Implemented clear goal-setting frameworks with measurable objectives to track and support team member development
+
+          * Connected different technical teams to enable cross-organizational knowledge sharing and drive innovation across the organization
+
+          * Regularly spoke at conferences, wrote for the company technical blog, and organized industry meetups to create valuable business opportunities across multiple sectors
+      - title: Senior Front-end Consultant — ANWB
+        startDate: 2021-06-01T00:00:00.000Z
+        endDate: 2024-08-01T00:00:00.000Z
+        present: false
+        body: >-
+          I contributed to the ANWB Design System - Poncho as a member of the Design System team, supporting over 60 developers and 40 designers across more than 100 web applications. My work focused on delivering architectural solutions and providing reliable support to front-end developers throughout the organization.
+
+
+          * Established a new way of working between development and design teams for design tokens through the Design System, requiring both technical expertise and stakeholder management
+
+          * Provided major architectural solutions for the organization, playing an essential role in any significant change to ANWB's development processes as they all originated with Poncho
+
+          * Leveraged soft skills to align and gain buy-in from all stakeholders while simultaneously developing technical solutions to support organizational initiatives
+
+          * Served as a dependable support system to all front-end developers at ANWB, addressing questions about Poncho and providing guidance on development decisions
+
+          * Operated in versatile roles spanning technical, business-focused, and related areas to ensure successful implementation of the Design System across the organization
+  - company: Mirabeau
     companyWebsite: https://www.mirabeau.nl
+    body: >-
+      I served as a Senior Front-end Developer at Mirabeau, building interactive web applications and front-end component libraries using React.js and Next.js. I took on multiple roles including visual designer, interaction designer, back-end developer, and DevOps engineer, actively participating in the design and development process from start to finish.
+
+
+      * Developed interactive web applications using React.js and Next.js, handling both front-end and back-end development responsibilities
+
+      * Built component libraries using HTML, CSS (SASS), and vanilla JavaScript for use by development teams and standalone websites
+
+      * Acted as a bridge between design, front-end, and back-end teams, serving as a valuable point of contact for various stakeholders through strong communication abilities and natural confidence
+
+      * Led knowledge sharing initiatives including code reviews, presentations, articles, guest lectures, workshops, and meetups
+
+      * Coached front-end developers of all seniority levels, helping them grow in a meaningful way
     roles:
-      - role: Senior Front-end developer
+      - role: Senior Front-end Developer
         startDate: 2021-01-01T00:00:00.000Z
         endDate: 2021-06-01T00:00:00.000Z
         present: false
-      - role: Medior Front-end developer
+      - role: Medior Front-end Developer
         startDate: 2018-07-02T00:00:00.000Z
         endDate: 2021-01-01T00:00:00.000Z
         present: false
@@ -52,18 +110,23 @@ items:
     present: false
     city: Amsterdam
     countryCode: NL
-  - body: >-
-      At ViriCiti, I was responsible for creating user experience and visual designs, as well as building interactive real-time front-end data visualization and monitoring applications for electric vehicles and charging stations. Similar to my role at Mirabeau, I handled the roles of front-end developer, visual designer, interaction designer, back-end developer, and DevOps engineer daily.
-
-
-      My main focus was building interactive web applications (React.js and Node.js), while being solely responsible for the design and development process. I conducted user interviews and tests, worked on visual explorations, designed components, and defined an overall visual style for all products.
-
-
-      Additionally, I worked closely with the back-end team for a significant portion of my time in this role.
-    company: ViriCiti
+  - company: ViriCiti
     companyWebsite: https://www.viriciti.com
+    body: >-
+      I was responsible for designing and building interactive real-time front-end data visualization and monitoring applications for electric vehicles and charging stations at ViriCiti, serving as a full-stack developer handling front-end development, visual design, interaction design, back-end development, and DevOps engineering.
+
+
+      * Built interactive web applications using React.js and Node.js, maintaining sole responsibility for the entire design and development process
+
+      * Created user experience and visual designs for real-time data visualization applications, defining an overall visual style for all products
+
+      * Conducted user interviews and tests to inform design decisions and ensure applications met user needs
+
+      * Designed components and worked on visual explorations to establish a cohesive design system across the product suite
+
+      * Collaborated closely with the back-end team for a significant portion of the role to ensure seamless integration between front-end and back-end systems
     roles:
-      - role: Front-end developer
+      - role: Front-end Developer
         startDate: 2016-08-01T00:00:00.000Z
         endDate: 2018-07-01T00:00:00.000Z
         present: false
@@ -72,12 +135,23 @@ items:
     present: false
     city: Amsterdam
     countryCode: NL
-  - body: >-
-      During a short-term project as part of my studies, I worked for Wallscope on a project for the NHS regarding the visualization of linked data. In this role, I gained experience working with the SPARQL Query Language, RDF, and natural language processing.
-    company: Wallscope
+  - company: Wallscope
     companyWebsite: https://www.wallscope.co.uk
+    body: >-
+      Completed a short-term academic project for Wallscope and the NHS, focusing on developing a linked data visualization solution to improve healthcare data accessibility and interpretation.
+
+
+      * Worked with SPARQL Query Language to query and retrieve linked data from healthcare databases
+
+      * Implemented RDF (Resource Description Framework) to structure and represent healthcare data relationships
+
+      * Applied natural language processing techniques to enhance data interpretation and user interaction
+
+      * Contributed to the development of visualization tools that made complex NHS linked data more accessible and understandable
+
+      * Gained hands-on experience with semantic web technologies in a real-world healthcare context
     roles:
-      - role: Front-end developer
+      - role: Front-end Developer
         startDate: 2017-05-01T00:00:00.000Z
         endDate: 2017-06-01T00:00:00.000Z
         present: false
@@ -86,15 +160,23 @@ items:
     present: false
     city: Edinburgh
     countryCode: UK
-  - body: >-
-      During my internship at Cohere, I built an interactive front-end application to view real-time data on the energy use and generation combined with the charging data of electric cars. Similar to my roles at ViriCiti and Mirabeau, I handled the roles of front-end developer, visual designer, interaction designer, and back-end developer daily.
-
-
-      In this role, I mainly focused on building components and functionalities for the platform.
-    company: Cohere
+  - company: Cohere
     companyWebsite: https://www.maxem.io
+    body: >-
+      During my internship at Cohere, I developed an interactive front-end application for visualizing real-time energy data, including energy use, generation metrics, and electric vehicle charging information.
+
+
+      * Built front-end components and functionalities for the energy data visualization platform
+
+      * Served as front-end developer, visual designer, interaction designer, and back-end developer across multiple aspects of the project
+
+      * Designed and implemented the user interface to display real-time energy consumption and generation data
+
+      * Developed features to integrate and visualize electric vehicle charging data within the platform
+
+      * Applied full-stack development skills similar to previous roles at ViriCiti and Mirabeau to deliver a comprehensive solution
     roles:
-      - role: Front-end developer
+      - role: Front-end Developer
         startDate: 2016-05-01T00:00:00.000Z
         endDate: 2016-08-01T00:00:00.000Z
         present: false

@@ -1,43 +1,34 @@
 ---
 items:
   - key: "pageDescription"
-    value: I am a Senior Front-end Consultant, Developer Advocate, and Google Developer Expert for Web. Here, you can find my resume, a collection of my articles covering a wide range of topics and get in contact.
+    value: Front-end consultant, developer advocate, and engineering manager who writes about web development, speaks at conferences, and occasionally makes things that work.
   - key: "greetingIntro"
     value: >-
-      I am a Senior Front-end Consultant, Developer Advocate
-
-
-      and Google Developer Expert for Web.
+      I build things for the web, lead teams, and talk about it way too much.
   - key: "elevatorPitch"
     value: >-
-      I am a Senior Front-end Consultant, Developer Advocate, and Google Developer Expert for Web, with a rich background in development and design. I have amassed considerable experience creating state-of-the-art, human-centered web applications. As a Developer Advocate, I take immense joy in sharing my expertise with fellow developers and empowering them with the tools, resources, and support needed to deliver exceptional web experiences.
+      I combine deep technical expertise in React.js, Next.js, and TypeScript with a growing focus on AI — from browser-based machine learning and built-in AI APIs to AI-powered developer workflows. As a Developer Advocate and Google Developer Expert for Web, I transform complex concepts into accessible knowledge through speaking, writing, and mentorship.
 
 
-      I have a unique perspective on web development, combining my experience in both development and design to deliver exceptional results for clients. I am skilled in developing user interfaces that enhance the user experience and enjoy working collaboratively with designers to create visually engaging designs. My approach to web development is always user-centered, ensuring that the end product is not only functional but also aesthetically pleasing. My expertise in user-centered design ensures that my web solutions are not only visually stunning but also intuitive and easy to use.
-
-
-      I have worked with a wide range of organizations, including large multinationals and small startups, and have helped them overcome challenges and achieve their goals. In my current role as a Senior Front-end Consultant, I continue to deliver innovative, user-centered web solutions that exceed client expectations.
-
-
-      In conclusion, my skills, experience, and passion make me a valuable asset to any organization. I am excited about the prospect of contributing to an organization's mission of delivering exceptional web experiences and look forward to the opportunity to discuss my qualifications further.
+      As Engineering Manager at iO, I lead ~35 seconded consultants, providing strategic career guidance while strengthening the organization's market position. My collaborative approach bridges organizational divides, connecting teams across departments to foster innovation and knowledge sharing.
   - key: "latestLead"
-    value: A collection of my talks, articles, Quick Bits and Friday Tips covering a wide range of topics
+    value: A mix of talks, articles, Quick Bits and Friday Tips — whatever I've been up to lately.
   - key: "articlesLead"
-    value: A collection of my articles covering a wide range of topics
+    value: Long-form deep dives into the things I find interesting. Mostly front-end, sometimes opinions.
   - key: "articlesAndTagsLead"
-    value: A collection of my articles and tags covering a wide range of topics
+    value: Articles and tags, all in one place. Browse around.
   - key: "quickBitsLead"
-    value: A collection of my Quick Bits covering a wide range of topics
+    value: Short, sharp, and to the point. Bite-sized things I learned and want to share.
   - key: "fridayTipsLead"
-    value: A collection of my Friday Tips covering a wide range of topics
+    value: Weekly video tips to close out the work week. Short enough to watch before your Friday afternoon drink.
   - key: "talksLead"
-    value: A collection of my talks covering a wide range of topics
+    value: Conference talks, meetups, and guest lectures. I like a stage and a clicker.
   - key: "tagLead"
-    value: A collection of articles covering {{tag}}
+    value: Everything I've written about {{tag}}
   - key: "reachedEnd"
-    value: Hey explorer! You've reached the end!
+    value: You've scrolled all the way down. Respect.
   - key: "getInTouch"
-    value: Let's get in touch
+    value: Always happy to chat.
   - key: "ahhh"
     value: AHHH!
   - key: "daveScrewedUp"
