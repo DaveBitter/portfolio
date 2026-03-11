@@ -2,6 +2,2354 @@
 items:
   - type: articles
     body: >-
+      The web is evolving. AI agents are increasingly being used to interact with websites on behalf of users. Whether it's booking a flight, filling in a support ticket, or shopping for a product, AI agents are expected to navigate the web just like we do. The problem? The web was built for humans, not for agents. Buttons, forms, and visual flows were designed for clicking and reading, not for programmatic interaction.
+
+      That's where [WebMCP](https://webmachinelearning.github.io/webmcp/) comes in. Published as a [W3C Draft Community Group Report](https://webmachinelearning.github.io/webmcp/) on February 10, 2026, WebMCP is a new browser API that makes your website "AI-agent ready". I think this is a really cool addition to the web platform and want to walk you through what it does and why it matters.
+
+      ## What is WebMCP?
+
+      WebMCP stands for Web Model Context Protocol. It builds on top of Anthropic's [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) but brings it to the browser. The core idea is simple: instead of AI agents trying to figure out what your website does by scraping the DOM and clicking buttons like a robot, you explicitly tell agents what actions are available and how to perform them.
+
+      You do this by exposing your web application functionality as "tools". These are JavaScript functions with natural language descriptions and structured schemas that AI agents can discover and invoke. Think of it as creating an API for your website, but one that lives right in the browser and uses your existing session.
+
+      ## The two APIs
+
+      [WebMCP proposes two approaches](https://developer.chrome.com/blog/webmcp-epp) for browser agents to take action on behalf of the user:
+
+      ### Declarative API
+
+      The Declarative API allows you to define standard actions directly in HTML forms. This is great for straightforward interactions where the action maps neatly to a form submission. If your website already has forms for things like search, checkout, or contact, you can make these discoverable for agents without writing additional JavaScript. The browser can automatically derive the tool's schema from the form structure and its validation attributes. The agent sees a structured tool with typed inputs instead of just raw HTML.
+
+      The exact syntax for the declarative API is still being finalized as part of the [early preview](https://developer.chrome.com/blog/webmcp-epp). Based on [community examples](https://webmcp.link/), this is roughly what it could look like:
+
+      ```html
+      <form data-webmcp-tool="place_order" data-webmcp-description="Place an order for a product">
+        <input
+          type="text"
+          name="productId"
+          required
+          data-webmcp-description="The unique identifier of the product"
+        />
+
+        <input
+          type="number"
+          name="quantity"
+          required
+          min="1"
+          data-webmcp-description="The number of items to order"
+        />
+
+        <button type="submit">Place Order</button>
+      </form>
+      ```
+
+      Keep in mind that the attribute names above are illustrative and may change as the [specification](https://webmachinelearning.github.io/webmcp/) evolves. The concept however is clear: annotate your existing forms and the browser takes care of the rest.
+
+      ### Imperative API
+
+      The Imperative API is where it gets really interesting for us developers. It allows you to define complex, dynamic interactions through JavaScript. The core of this API lives on `navigator.modelContext`, which exposes a `ModelContextContainer`. This is where you register your tools.
+
+      ## A practical example
+
+      Let's say you have an e-commerce site and you want to allow an AI agent to add products to the cart on behalf of the user. Here's how you could register that as a tool:
+
+      ```js
+      if ('modelContext' in navigator) {
+        navigator.modelContext.registerTool({
+          name: 'add_to_cart',
+          description: 'Add a product to the shopping cart by its product ID and a specified quantity',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              productId: {
+                type: 'string',
+                description: 'The unique identifier of the product',
+              },
+              quantity: {
+                type: 'number',
+                description: 'The number of items to add',
+              },
+            },
+            required: ['productId', 'quantity'],
+          },
+          async execute({ productId, quantity }) {
+            const response = await fetch('/api/cart', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ productId, quantity }),
+            })
+
+            const result = await response.json()
+            return { success: true, cartTotal: result.total }
+          },
+        })
+      }
+      ```
+
+      Let's break that down. First, we check if the `modelContext` API is available on the `navigator` object. Then, we register a tool with a `name`, a human-readable `description`, an `inputSchema` that describes what parameters the tool expects, and an `execute` function that contains the actual logic. The agent can now discover this tool, understand what it does, and call it with the right parameters. No guessing, no clicking around.
+
+      What I love about this approach is that you're reusing your existing application logic. The `execute` function is just regular JavaScript. You're not building a separate API or integration layer. You're exposing what your app already does.
+
+      ## WebMCP vs MCP
+
+      You might be wondering how this relates to the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) you may have already heard of. The distinction is straightforward:
+
+      - **MCP** is for backend services and server-to-agent communication
+      - **WebMCP** is for browser-based tools where users are present
+
+      They're complementary. Use MCP when you need an agent to talk to your backend services directly, no browser involved. Use WebMCP when the interaction happens through the browser. The user doesn't have to be actively looking at the page, but their browser tab needs to be open with an active session. The AI assistant (like ChatGPT or Claude) connects to that tab and calls the registered tools using the user's existing authentication and context.
+
+      ## Use cases
+
+      The [Chrome for Developers blog post](https://developer.chrome.com/blog/webmcp-epp) highlights a few compelling use cases:
+
+      - **E-commerce**: Agents can find products, configure options, and navigate checkout flows with precision. No more fragile screen scraping that breaks when you update your UI.
+      - **Travel**: Agents can search, filter flights, and handle bookings using structured data to ensure accurate results every time.
+      - **Customer support**: Agents can help users create detailed support tickets by automatically filling in technical details.
+
+      These are just the starting points. Any website that has actions a user can take could benefit from exposing those actions as WebMCP tools. Think about form-heavy workflows, dashboards, booking systems, content management, the possibilities are endless.
+
+      ## Things to Consider
+
+      ### 1. Still very early
+
+      WebMCP is in [early preview](https://developer.chrome.com/blog/webmcp-epp) as of February 2026. The [W3C specification](https://webmachinelearning.github.io/webmcp/) is a Draft Community Group Report, not a standard yet. This means the API surface can and likely will change. It's great for prototyping and experimenting, but keep in mind that things might shift.
+
+      ### 2. No native browser support yet
+
+      Browsers don't natively support `navigator.modelContext` at the time of writing. [MCP-B](https://docs.mcp-b.ai/) serves as the reference implementation and acts as a polyfill. It adds `navigator.modelContext` to any browser and bridges WebMCP tools to the MCP format for compatibility with existing AI frameworks. You can check out the [MCP-B GitHub](https://github.com/WebMCP-org) for the source code.
+
+      ### 3. Security and user consent
+
+      Because WebMCP tools execute within the browser's existing session, they inherit the user's authentication and permissions. This is convenient but also means that proper security considerations around what you expose and to whom are crucial. The spec includes sections on security and privacy considerations that are worth reviewing.
+
+      ## Conclusion
+
+      WebMCP is an exciting step towards making the web work seamlessly with AI agents. By giving developers a structured way to expose their application's functionality, it bridges the gap between the human-first web and the emerging agentic web. Instead of AI agents clumsily automating your interface, they become native extensions of your application.
+
+      It's still early days, but the fundamentals are promising. A simple API, reuse of existing application logic, and a standards-based approach through the W3C. If you're building for the web and want to explore how AI agents could interact with your site, now is a great time to experiment.
+
+      Want to try it out? [Sign up for the early preview program](https://developer.chrome.com/blog/webmcp-epp) and check out the [WebMCP specification](https://webmachinelearning.github.io/webmcp/) and [MCP-B documentation](https://docs.mcp-b.ai/) to get started.
+    date: 2026-02-12T00:00:00.000Z
+    slug: web-mcp-making-the-web-ai-agent-ready
+    tags:
+      - ai
+      - front-end
+    intro: >-
+      WebMCP is a new browser API that lets you expose your web application functionality as structured tools for AI agents. No screen scraping, no brittle automation, just direct function calls.
+    teaserCopy: >-
+      WebMCP is a new browser API that lets you expose your web application functionality as structured tools for AI agents. No screen scraping, no brittle automation, just direct function calls.
+    teaserImage: /img/articles/web-mcp-making-the-web-ai-agent-ready.jpg
+    title: "WebMCP: Making the web AI-agent ready"
+  - type: articles
+    body: >-
+      A few days ago, our office manager approached me with a fun challenge. He's planning to broadcast the 2026 Winter Olympics on the TV in our office bar whenever Dutch athletes compete. Great idea! But there's a problem: how do colleagues know when to drop what they're doing and head to the bar?
+
+      The Netherlands is a speed skating powerhouse. With 133 all-time Olympic medals in the sport (48 gold!), there will be plenty of events worth watching. But Olympic schedules are confusing, and nobody wants to miss Suzanne Schulting racing for gold because they were stuck in a meeting.
+
+      The solution? A Slack bot that notifies everyone right before Dutch events start. And because I can't resist overengineering things, I decided to make it generate enthusiastic sports commentary using AI. Like having a virtual Dutch commentator in your pocket!
+
+      ## What I Built
+
+      The bot does three main things:
+
+      1. **Morning Digest** - Every day at 8 AM, it sends a summary of all Dutch events scheduled for that day
+      2. **Pre-Event Reminders** - 30 minutes before each event, it sends an urgent "get to the bar!" notification
+      3. **Live Results Checker** - It automatically discovers when Dutch athletes qualify for finals and announces medals
+
+      The messages are bilingual (English first, then Dutch) and packed with context: venue information, athlete storylines, records to beat, and fun facts about the host cities.
+
+      Here's what a reminder looks like:
+
+      ```
+      ⏰ STARTING IN 30 MINUTES!
+
+      Women's 3000m Speed Skating
+      📍 Milano Santa Giulia Arena - Milan
+
+      STARTING IN 30 MINUTES! Buckle up, team, because Joy Beune is about
+      to dominate the Women's 3000m Speed Skating at 16:00! 🇳🇱 The
+      'Allround Queen' is ready to transform her 1500m dominance into a
+      medal-winning performance. Will Joy break the Olympic record of
+      3:52.02 set in Vancouver? Grab your seat and cheer!
+
+      📊 Olympic record: 3:52.02 - Martina Sáblíková (CZE) - Vancouver 2010
+
+      Generated by Bonzai • May contain inaccuracies
+
+      ─────────────────────────
+
+      ⏰ BEGINT OVER 30 MINUTEN!
+
+      Vrouwen 3000m Schaatsen
+      📍 Milano Santa Giulia Arena - Milaan
+
+      Maak je klaar, team! Joy Beune gaat knallen in de 3000m vrouwen
+      schaatsen om 16:00! 🇳🇱 De 'Allround Koningin' staat klaar om haar
+      dominantie om te zetten in een medaille. Zet je schrap en juich
+      voor Nederland!
+
+      📊 Olympisch record: 3:52.02 - Martina Sáblíková (CZE) - Vancouver 2010
+
+      Gegenereerd door Bonzai • Kan onnauwkeurigheden bevatten
+      ```
+
+      No boring "Event starting soon" messages here. We're going full commentator mode!
+
+      ## AI Content Generation with Bonzai
+
+      For the AI-powered content, I used Bonzai. For those unfamiliar, Bonzai is iO's internal AI platform that we develop and use across projects, making it easy to integrate AI capabilities into our applications.
+
+      The key to getting good output is providing rich context. I didn't just ask "write a message about a speed skating event." Instead, I built a comprehensive prompt with athlete backgrounds, venue details, historical records, and even personality traits:
+
+      ```typescript
+      const prompt = `You are an ENTHUSIASTIC Dutch sports commentator writing
+      a morning message for a Slack channel about today's Winter Olympics events.
+
+      DATE: ${daySchedule.date_display}
+
+      TODAY'S EVENTS:
+      ${eventSummaries}
+
+      ATHLETE BACKGROUNDS:
+      ${athleteContext}
+
+      VENUE INFORMATION:
+      ${venueContexts}
+
+      NETHERLANDS OLYMPIC HISTORY:
+      - Total Winter Olympic medals: ${history.total_winter_medals}
+      - ${history.speed_skating_dominance}
+
+      INSTRUCTIONS:
+      1. Write an EXCITING morning digest in the style of an enthusiastic
+         Dutch sports commentator
+      2. Include the schedule with times and athletes
+      3. Highlight the most dramatic storylines
+      4. Mention venue/city interesting facts
+      5. Use emojis sparingly (2-3 per section max)
+      6. Keep the energy HIGH but professional
+
+      Write TWO versions:
+      1. ENGLISH version first
+      2. Then DUTCH version
+      `
+      ```
+
+      The response comes back as structured JSON with both language versions, which makes parsing straightforward.
+
+      ## The Bilingual Challenge
+
+      Here's something I learned the hard way: literal translations don't work for sports commentary.
+
+      Early versions of the bot would translate "Tune in NOW!" as "Stem af NU!" in Dutch. Technically correct, but no Dutch person would ever say that. It sounds robotic and weird.
+
+      The fix was adding explicit instructions to the prompt:
+
+      ```typescript
+      IMPORTANT FOR DUTCH VERSION:
+      - Write naturally, NOT literal translations!
+      - Dutch people don't say "stem af" for "tune in"
+      - Use actual Dutch sports expressions: "Kijk mee!", "Zet 'm op!",
+        "Kom op!", "Niet missen!"
+      ```
+
+      Now the bot uses expressions that actually sound like something a Dutch commentator would say. Small detail, but it makes a huge difference in how the messages feel.
+
+      ## Dynamic Schedule Discovery
+
+      Here's where it gets interesting. At the start of the Olympics, we know when the heats and quarterfinals are. But we don't know which Dutch athletes will qualify for the finals. Those events don't exist in our schedule yet!
+
+      The solution: use AI web search to discover new qualifications as they happen.
+
+      Every 30 minutes during the Olympics, a cron job runs that asks Bonzai to search the web for Dutch Olympic results. If it finds that someone qualified for a final, it:
+
+      1. Adds the new event to our dynamic schedule (stored in [Vercel Blob](https://vercel.com/docs/storage/vercel-blob))
+      2. Sends a celebratory Slack message
+      3. The new event automatically appears in future morning digests and reminders
+
+      ```typescript
+      // Use Bonzai to search for new events
+      const discoveryResult = await discoverNewEvents(todayISO)
+
+      // Process discovered events
+      for (const foundEvent of discoveryResult.found_events) {
+        // Add to dynamic schedule
+        const savedEvent = await addDiscoveredEvent(foundEvent.date, eventData)
+
+        // Send Slack notification
+        const message = await generateDiscoveryMessage(savedEvent)
+        await sendSimpleMessage(message)
+
+        // Record notification to prevent duplicates
+        await recordNotification(eventId, 'discovery')
+      }
+      ```
+
+      The flow looks like this:
+
+      ```
+      ┌─────────────────┐     ┌──────────────┐     ┌───────────────┐
+      │  Cron Job       │────▶│   Bonzai     │────▶│  Vercel Blob  │
+      │  (every 30 min) │     │  Web Search  │     │ Store events  │
+      └─────────────────┘     └──────────────┘     └───────────────┘
+                                                          │
+              ┌───────────────────────────────────────────┘
+              ▼
+      ┌─────────────────────────────────────────────────────────────┐
+      │                    All Features Updated                      │
+      │  Morning Digest  │  Event Reminders  │  Schedule View        │
+      └─────────────────────────────────────────────────────────────┘
+      ```
+
+      ## Preventing Duplicate Messages
+
+      One challenge with serverless functions: there's no persistent state between invocations. If the cron job runs twice and finds the same qualification result, we don't want to spam Slack with duplicate messages.
+
+      The solution is simple: store a log of sent notifications in [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) and check it before sending anything new.
+
+      ```typescript
+      export async function hasNotificationBeenSent(eventId: string): Promise<boolean> {
+        const data = await getDynamicData()
+        return data.notifications.some((n) => n.event_id === eventId)
+      }
+
+      export async function recordNotification(
+        eventId: string,
+        type: 'discovery' | 'medal' | 'update'
+      ): Promise<void> {
+        const data = await getDynamicData()
+
+        data.notifications.push({
+          event_id: eventId,
+          sent_at: new Date().toISOString(),
+          type,
+        })
+
+        await saveDynamicData(data)
+      }
+      ```
+
+      Before sending any message, we generate a unique ID for the event and check if it's already in the log. Simple, but effective.
+
+      ## Smart Cron Scheduling
+
+      Running AI-powered web searches every 15 minutes, 24/7, would be wasteful. Most of the time there's nothing new to find.
+
+      Instead, the live results checker only runs when it makes sense:
+
+      1. **Only during daytime hours** (7:00-22:00 CET) when events actually happen
+      2. **Only when qualification events are scheduled** for that day
+      3. **Only within a time window after those events** when results would be available
+
+      ```typescript
+      // Only call Bonzai if there are qualification events today
+      if (!hasQualificationEventsToday()) {
+        return res.status(200).json({
+          type: 'skipped',
+          reason: 'No qualification events today',
+        })
+      }
+
+      if (!isWithinQualificationWindow()) {
+        return res.status(200).json({
+          type: 'skipped',
+          reason: 'Not within qualification event window',
+        })
+      }
+
+      // Now it's worth checking for new results
+      const discoveryResult = await discoverNewEvents(todayISO)
+      ```
+
+      This keeps costs down and avoids unnecessary API calls.
+
+      ## The Data Layer
+
+      There's no official API for Netherlands Olympic athlete data, so I had to get creative. I scraped the internet for all the information I needed: athlete profiles from Wikipedia, event schedules from olympics.com, venue details from news articles, and historical medal counts from various sports databases. All of this was compiled into a single JSON file that includes:
+
+      - **Schedule**: All known Netherlands events with ISO dates and times
+      - **Athletes**: Profiles with achievements, storylines, and personality traits
+      - **Venues**: Milano Santa Giulia Arena, Cortina Sliding Centre, with fun facts
+      - **Cities**: Milan and Cortina d'Ampezzo background information
+      - **Records**: Olympic and world records for each event
+      - **History**: Netherlands' Olympic history and medal counts
+
+      Having rich data means the AI can generate contextually relevant messages. It knows that Joy Beune is the "Allround Queen" and that Suzanne Schulting had a breakthrough gold in PyeongChang 2018. This context makes the messages feel informed rather than generic.
+
+      ## Things I Learned
+
+      **1. Prompt engineering for bilingual content is tricky**
+
+      You can't just ask for translations. You need to explicitly instruct the AI to write naturally in each language, with examples of what good output looks like.
+
+      **2. [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) is perfect for simple serverless state**
+
+      No need for a full database when you just need to store some JSON. Vercel Blob is simple, fast, and integrates seamlessly with [Vercel Functions](https://vercel.com/docs/functions).
+
+      **3. Sports commentary style makes messages engaging**
+
+      Nobody wants to read "Event: Women's 500m. Time: 16:00. Athletes: Femke Kok." The commentator style takes more effort but makes the bot actually fun to follow.
+
+      **4. Small disclaimers build trust**
+
+      Every message includes "Generated by Bonzai - May contain inaccuracies." AI can hallucinate, and being upfront about that builds trust with users.
+
+      **5. Rich context in, rich content out**
+
+      The more background information you give the AI, the better the output. Athlete storylines, venue history, and Olympic records all contribute to messages that feel researched and valuable.
+
+      ## Tech Stack
+
+      - **Runtime**: [Vercel Serverless Functions](https://vercel.com/docs/functions)
+      - **Language**: TypeScript
+      - **AI**: Bonzai (iO's AI platform)
+      - **Messaging**: [Slack Incoming Webhooks](https://api.slack.com/messaging/webhooks)
+      - **Storage**: [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) for dynamic events and notification tracking
+      - **Scheduling**: [Vercel Cron](https://vercel.com/docs/cron-jobs)
+
+      ## Wrapping Up
+
+      What started as "notify people when to go to the bar" turned into a fun exploration of AI-generated content, dynamic data merging, and bilingual prompt engineering.
+
+      The real magic is in combining structured data with AI generation. The bot doesn't just say "there's an event." It knows the athletes, their stories, the venue history, and the records to beat. That context transforms a simple notification into something people actually want to read.
+
+      Will it get people to the office bar on time? I guess we'll find out in February! If you're at the iO office during the Olympics, keep an eye on Slack. You might just catch Suzanne Schulting winning gold.
+
+      🇳🇱 Hup Holland Hup!
+    date: 2026-02-03T00:00:00.000Z
+    slug: building-a-winter-olympics-slack-bot-with-ai
+    tags:
+      - ai
+      - typescript
+      - serverless
+    intro: >-
+      A deep dive into building a Slack bot that keeps colleagues informed about Dutch athletes at the 2026 Winter Olympics, featuring AI-generated bilingual messages, dynamic schedule discovery, and enthusiastic sports commentary.
+    teaserCopy: >-
+      A deep dive into building a Slack bot that keeps colleagues informed about Dutch athletes at the 2026 Winter Olympics, featuring AI-generated bilingual messages, dynamic schedule discovery, and enthusiastic sports commentary.
+    teaserImage: /img/articles/building-a-winter-olympics-slack-bot-with-ai-hero.png
+    title: Building a Winter Olympics Slack Bot with AI-Generated Bilingual Messages
+  - type: articles
+    body: >-
+      Back in June, I wrote about [Chrome's built-in AI APIs](https://techhub.iodigital.com/articles/built-in-ai-in-chrome) after attending Google I/O Connect and the Google Developer Expert Summit in Berlin. I covered the Summarizer API, Language Detection API, and Translation API, all running on-device using Google's [Gemini Nano](https://deepmind.google/technologies/gemini/nano/) model.
+
+      Since then, I've been itching to build something real with these APIs. Theory is great, but nothing beats getting your hands dirty with actual code! So I decided to focus on the Translation and Language Detection APIs and build a proper demo to see how they work in practice.
+
+      Spoiler alert: The APIs have matured quite a bit since Chrome 138, and building with them is actually really fun!
+
+      ## What I Built
+
+      I created a fake e-commerce product page for an "AI-Powered Universal Translator Device." The irony? The product reviews are written in multiple languages and need to be translated. Meta, right?
+
+      **[Try the live demo →](https://web-ai-translation-demo.davebitter.com/)**
+      **[View the source code →](https://github.com/DaveBitter/web-ai-translation-demo)**
+
+      ![Demo of Chrome Translation API in action](/img/articles/chrome-ai-translation-demo.gif)
+
+      The concept is simple: 8 customer reviews in different languages (English, Spanish, French, German, Dutch, Japanese, Italian, and Swedish), each with a language selector and translate button. The demo automatically detects what language each review is written in, and you can translate any review to your preferred language, all happening on your device.
+
+      No servers. No API keys. No cloud. Just your browser doing AI magic locally.
+
+      ## Language Detection API in Action
+
+      The Language Detection API does exactly what it says on the tin: it detects what language a piece of text is written in. This happens completely on-device, so your text never leaves your computer.
+
+      Here's how it works:
+
+      ```javascript
+      async function detectLanguage(text) {
+        if (!window.LanguageDetector) {
+          return null
+        }
+
+        // Check availability
+        const availability = await window.LanguageDetector.availability()
+        if (availability === 'no') {
+          return null
+        }
+
+        const detector = await window.LanguageDetector.create()
+        const results = await detector.detect(text)
+
+        if (results && results.length > 0) {
+          return results[0].detectedLanguage
+        }
+
+        return null
+      }
+      ```
+
+      In my demo, I run language detection as soon as the page loads for each review:
+
+      ```javascript
+      // Detect language on mount
+      useEffect(() => {
+        const detectOnMount = async () => {
+          setIsDetecting(true)
+          const detected = await detectLanguage(review.text)
+          setDetectedLanguage(detected)
+          setIsDetecting(false)
+        }
+        detectOnMount()
+      }, [review.text])
+      ```
+
+      The detection is surprisingly fast! It happens almost instantly, even for longer reviews. Each review card shows a language badge showing what language was detected.
+
+      ### Important: Enabling the API
+
+      To use the Language Detection API, you need to enable specific flags in Chrome:
+
+      1. Navigate to `chrome://flags/#language-detection-api` and enable it
+      2. Navigate to `chrome://flags/#optimization-guide-on-device-model` and enable it
+      3. Restart Chrome
+      4. Go to `chrome://components/` and update "Optimization Guide On Device Model"
+
+      Without these steps, `window.LanguageDetector` will be undefined and the API won't be available.
+
+      ## Translation API Deep Dive
+
+      Once we know what language we're dealing with, we can translate it. The Translation API takes a source language, a target language, and gives you back translated text.
+
+      Here's the implementation:
+
+      ```javascript
+      async function translateText(text, targetLanguage, sourceLanguage, onProgress) {
+        if (!window.Translator?.create) {
+          throw new Error('Translator API not available')
+        }
+
+        const translator = await window.Translator.create({
+          sourceLanguage,
+          targetLanguage,
+        })
+
+        // Listen for download progress
+        if (onProgress) {
+          translator.addEventListener('downloadprogress', (e) => {
+            onProgress({
+              loaded: e.loaded,
+              total: e.total,
+              percentage: Math.round((e.loaded / e.total) * 100),
+            })
+          })
+        }
+
+        // Wait for the translator to be ready
+        if (translator.ready) {
+          await translator.ready
+        }
+
+        // Perform the translation
+        return await translator.translate(text)
+      }
+      ```
+
+      ### The Workflow
+
+      When someone clicks "Translate" on a review, here's what happens:
+
+      1. **Language Detection**: We detect the source language (if not already detected)
+      2. **Model Download**: If this is the first translation for this language pair, Chrome downloads the model (1-2GB). We show a progress bar for this!
+      3. **Translation**: The actual translation happens
+      4. **Display**: We show the translated text with a visual indicator
+
+      The download progress tracking is particularly nice for UX:
+
+      ```javascript
+      const translated = await translateText(
+        review.text,
+        selectedLanguage,
+        detectedLanguage,
+        (progress) => {
+          setIsDownloading(true)
+          setDownloadProgress(progress.percentage)
+        }
+      )
+      ```
+
+      Users see a progress bar showing "Downloaded 45% of model" or whatever. Much better than a silent wait.
+
+      ## Real-World Implementation Details
+
+      The component for a review manages quite a bit of state:
+
+      ```javascript
+      const [translatedText, setTranslatedText] = useState(null)
+      const [selectedLanguage, setSelectedLanguage] = useState('')
+      const [isTranslating, setIsTranslating] = useState(false)
+      const [isDownloading, setIsDownloading] = useState(false)
+      const [downloadProgress, setDownloadProgress] = useState(0)
+      const [detectedLanguage, setDetectedLanguage] = useState(null)
+      // ... more state for error handling and UI
+      ```
+
+      This gives us fine-grained control over the UI:
+
+      - Show a spinner while detecting language
+      - Display the detected language badge
+      - Show download progress during model download
+      - Switch to translated text when ready
+      - Let users toggle back to see the original
+      - Highlight reviews that match the user's system language
+
+      The visual feedback is important because some operations take time. Language detection is fast, but downloading a translation model on first use? That can take a minute or two depending on your connection.
+
+      ## API Changes Since Last Article
+
+      Here's something important: **the API has changed since Chrome 138!**
+
+      This is something to expect with experimental APIs. They're still evolving, and you need to keep an eye on the documentation and updates. The good news? If you build with progressive enhancement, these changes won't break your UI or show errors to users. The APIs will simply not be available, and your fallback experience kicks in.
+
+      In my original article, I showed code using `window.ai.translator` and `window.ai.languageDetector`. That's the old way. As of Chrome 141, it's now:
+
+      ```javascript
+      // Old way (Chrome 138):
+      window.ai.translator.create()
+      window.ai.languageDetector.create()
+
+      // New way (Chrome 141):
+      window.Translator.create()
+      window.LanguageDetector.create()
+      ```
+
+      The APIs moved from being nested under `window.ai` to being global objects. This actually makes the API surface cleaner and easier to work with.
+
+      Here's what the API looks like now:
+
+      ```javascript
+      // Create a language detector
+      const detector = await window.LanguageDetector.create()
+      const results = await detector.detect(text)
+      // results[0].detectedLanguage => "en", "es", "fr", etc.
+
+      // Create a translator for a specific language pair
+      const translator = await window.Translator.create({
+        sourceLanguage: 'es',
+        targetLanguage: 'en',
+      })
+      const translatedText = await translator.translate(text)
+      ```
+
+      The flag names also changed. You now need to enable `chrome://flags/#language-detection-api` and `chrome://flags/#optimization-guide-on-device-model`. It's no longer just `#translation-api`.
+
+      ## Things I Learned Building This
+
+      ### 1. Detection is Really Fast
+
+      I was expecting language detection to be slow, but it's not. It happens almost instantly, even for longer text. This makes it perfect for real-time use cases.
+
+      ### 2. Model Downloads Happen on First Use
+
+      The first time you translate to a specific language, Chrome needs to download the translation model. This can take a minute or two (1-2GB download). But it's a one-time thing, and Chrome shows you the progress.
+
+      ### 3. Progressive Enhancement is Your Friend
+
+      Not everyone will have Chrome 138+. Not everyone will have the flags enabled. So build your UI to degrade gracefully.
+
+      In my demo, if the APIs aren't available, users see a friendly banner explaining how to enable them. The reviews are still readable, you just can't translate them.
+
+      ### 4. The Confidence Score Exists (But I Didn't Use It)
+
+      The language detection results include a confidence score. I didn't display it in my demo, but you could use it to show uncertainty or ask users to confirm the detected language if confidence is low.
+
+      ## Putting It All Together
+
+      The beauty of these APIs is how they compose. In my demo:
+
+      1. Page loads → Language Detection API runs on all reviews
+      2. User selects a target language → State updates
+      3. User clicks "Translate" → We check if we have the detected language
+      4. If not detected yet → Detect it now
+      5. Translation API creates a translator for the language pair
+      6. If model needs downloading → Show progress bar
+      7. Translation completes → Display translated text with visual indicator
+      8. User can toggle back to original anytime
+
+      All of this happens without a single network request to a translation service. It's all local, private, and fast.
+
+      ## Tech Stack
+
+      For the curious, here's what I used:
+
+      - **[Next.js 16](https://nextjs.org/)** with App Router
+      - **[React 19](https://react.dev/)**
+      - **[TypeScript](https://www.typescriptlang.org/)** for type safety
+      - **[Tailwind CSS 4](https://tailwindcss.com/)** for styling
+      - **[Radix UI](https://www.radix-ui.com/)** for the language selector (accessible components ftw!)
+      - **Chrome 141** for the AI APIs
+
+      ## Conclusion
+
+      Chrome's built-in AI APIs are getting better with every release. We've gone from Chrome 138 to 141, the APIs have been cleaned up, and the functionality is solid.
+
+      These APIs open up some really interesting possibilities:
+
+      - **Privacy-first translation** in chat apps
+      - **Offline-capable multilingual apps** for travelers
+      - **Browser extensions** that translate selected text instantly
+      - **Progressive web apps** with built-in language support
+      - **Content moderation** tools that work locally
+
+      The key is progressive enhancement. Build your core experience to work everywhere, then layer on these AI features for users who have them available. That way, you're not excluding anyone, but you're giving Chrome users something special.
+
+      I'm genuinely excited about where this is heading. On-device AI in the browser feels like a superpower, and we're still in the early days. I can't wait to see what people build with these tools!
+
+      **Go try the demo yourself:** [web-ai-translation-demo.davebitter.com](https://web-ai-translation-demo.davebitter.com/)
+
+      Make sure you have Chrome 138+ and the flags enabled. Then start translating those reviews and see the magic happen locally on your device. If you build something cool with these APIs, I'd love to hear about it!
+
+      For more details on Chrome's built-in AI capabilities, check out the [official Chrome AI documentation](https://developer.chrome.com/docs/ai/built-in-apis) or read my [previous article on built-in AI in Chrome](https://techhub.iodigital.com/articles/built-in-ai-in-chrome).
+    date: 2025-10-29T00:00:00.000Z
+    slug: building-a-translation-demo-with-chromes-built-in-ai-apis
+    tags:
+      - ai
+      - front-end
+    intro: >-
+      A deep dive into the Chrome Translation and Language Detection APIs, featuring a live demo with multilingual product reviews and on-device AI translation.
+    teaserCopy: >-
+      A deep dive into the Chrome Translation and Language Detection APIs, featuring a live demo with multilingual product reviews and on-device AI translation.
+    teaserImage: /img/articles/building-a-translation-demo-with-chromes-built-in-ai-apis-hero.png
+    title: Building a Translation Demo with the Chrome Built-in AI APIs
+  - type: articles
+    body: >-
+      I've been experimenting with AI-assisted development since early 2023, building everything from [complete web applications from scratch](/articles/my-experience-ai-vibe-coding-a-complete-web-application-from-scratch) to [voice interfaces that interact with ChatGPT](/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web). What started as curiosity has become a fundamental shift in how I approach development.
+
+      This isn't another "AI will change everything" piece. It's a practical guide based on nearly two years of real experience, real projects, and honest assessment of what actually works. We'll cover everything from getting your first quick wins today to building advanced AI-assisted workflows that genuinely improve your development process.
+
+      Whether you're already using [GitHub Copilot](https://github.com/features/copilot) for autocomplete or you've been putting this whole AI thing off, there's something here for you. Let's explore what's actually possible when you move beyond treating AI as just a better search engine.
+
+      ## Table of Contents
+
+      <TOCInline toc={props.toc} exclude={["Table of Contents"]} toHeading={2} />
+
+      ## 1. The New Reality
+
+      ### Industry momentum
+
+      The developers I talk to fall into two camps: those who've integrated AI tools into their workflow and can't imagine going back, and those who are still trying to figure out if this is worth the effort. If you're in the second group, I get it. I was there too.
+
+      Here's what changed my mind: I spent [three days building an intelligent running coach application](/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai) using AI assistance, going from initial concept to working prototype faster than I'd managed with any previous project. Not because the AI wrote perfect code (it definitely didn't), but because it accelerated every part of my workflow, from research to implementation to debugging.
+
+      **What I'm observing in practice:**
+
+      **AI-assisted developers are solving problems differently.** Instead of spending hours researching the "right" way to implement something, they're quickly prototyping multiple approaches and iterating based on results. The development cycle has compressed from plan-research-implement-debug to rapid experiment-refine-deploy.
+
+      **The learning curve for new technologies has flattened.** When you can ask [Claude](https://claude.ai) or [ChatGPT](https://chat.openai.com) specific questions about unfamiliar frameworks and get instant, contextual examples, picking up new skills becomes much more accessible.
+
+      **Code quality patterns are emerging faster.** AI tools are excellent pattern recognition systems. They surface best practices, suggest optimizations, and help identify potential issues that might take code reviews or production incidents to catch traditionally.
+
+      ### The productivity gap
+
+      Here's what I've noticed about developers who haven't adopted AI assistance yet:
+
+      **More time spent on solved problems.** While AI-assisted developers get instant help with syntax questions, debugging strategies, and architectural decisions, others are still navigating documentation and Stack Overflow for common issues.
+
+      **Limited exploration of alternatives.** AI excels at suggesting approaches you might not have considered. Without that input, you're constrained by your current knowledge and whatever you happen to discover through traditional research.
+
+      **Slower adaptation to new tools and patterns.** Whether it's a new framework, a different architectural approach, or an unfamiliar API, AI can provide personalized explanations and examples that match your experience level and coding style.
+
+      I'm not suggesting traditional development skills are obsolete. They're more important than ever for evaluating and refining AI output. But the developers who combine strong fundamentals with AI assistance are operating at a different pace.
+
+      ### Why this matters for you
+
+      This isn't about keeping up with trends. It's about concrete advantages:
+
+      **Enhanced problem-solving capacity.** AI tools excel at helping you break down complex problems, explore solution spaces, and validate approaches quickly. This means you can tackle more ambitious projects and deliver more value.
+
+      **Accelerated learning opportunities.** The ability to get immediate, contextual explanations of concepts, patterns, and techniques means you can level up much faster than traditional learning methods allow.
+
+      **Competitive differentiation.** As AI assistance becomes more common, the developers who use these tools thoughtfully and effectively will stand out from those who either avoid them entirely or use them poorly.
+
+      The reality is straightforward: AI tools are becoming standard equipment for professional development, joining the toolkit alongside version control, testing frameworks, and build systems.
+
+      ## 2. Quick Wins: Start Here Today
+
+      Before we dive into philosophy and frameworks, let's get you some immediate value. Here are things you can try right now that will improve your workflow within the next hour.
+
+      ### 5-minute setup wins
+
+      **Get GitHub Copilot running properly.** If you're only using the basic autocomplete suggestions, you're missing 80% of the value. Enable [GitHub Copilot Chat](https://docs.github.com/en/copilot/github-copilot-chat/using-github-copilot-chat) in your editor and try asking it to explain a complex function in your current codebase or suggest refactoring approaches for a messy component.
+
+      **Set up a dedicated AI chat workspace.** Whether it's [Claude](https://claude.ai), [ChatGPT](https://chat.openai.com), or both, create a bookmark folder and get familiar with starting new conversations for different types of tasks. I keep separate chats for debugging, architecture discussions, and learning new concepts.
+
+      **Try [Cursor](https://cursor.com) for one specific task.** Download it and use it for one small feature or bug fix. Don't try to replace your entire workflow. Just see how it handles a single, contained problem. The AI-first editor approach feels different from Copilot's assistance-when-asked model.
+
+      ### Low-risk experiments
+
+      **Use AI for code review.** Take a recent pull request and ask ChatGPT or Claude to review the code for potential issues, performance problems, or maintainability concerns. Compare their feedback to what human reviewers caught. You'll quickly see both the strengths and limitations.
+
+      **Generate test cases for existing code.** Pick a function or component you've already written and ask AI to generate comprehensive test cases. This is low-risk because you're not relying on AI for core functionality, but you'll see how well it understands edge cases and testing patterns.
+
+      **Refactor something small.** Take a function that works but feels messy and ask AI to suggest cleaner implementations. You can easily revert if the suggestions aren't helpful, but you'll get a feel for how AI thinks about code organization.
+
+      **Use AI for documentation.** Ask it to write README sections, comment complex functions, or explain what a piece of code does in plain English. Documentation is perfect for AI assistance because it's descriptive rather than functional.
+
+      ### Measuring your baseline
+
+      Here's something most people skip: actually tracking whether AI tools help. Before you go all-in, establish some baselines:
+
+      **Time-to-solution for debugging.** Next time you hit a tricky bug, note how long it takes to solve using your current approach. Then, when you encounter similar issues, try involving AI in the debugging process and compare.
+
+      **Learning speed for new concepts.** When you need to understand a new library or framework, track how long it takes using traditional documentation vs. asking AI for explanations and examples.
+
+      **Code review thoroughness.** If you're doing code reviews, note what types of issues you typically catch. After using AI for review assistance, see if you're catching different or additional problems.
+
+      **Documentation quality.** Before AI assistance, how much documentation do you actually write? After integrating AI for docs, is the documentation better, more complete, or just easier to create?
+
+      The key is being honest about the comparison. AI tools work best when you understand their strengths and limitations, which means measuring real impact rather than relying on gut feelings.
+
+      **Quick experiment for today:** Pick one function from your current project. Ask an AI tool to explain what it does, suggest improvements, and generate tests for it. Spend 15 minutes on this and see what you learn about both your code and the AI's capabilities.
+
+      ## 3. Myths & Mental Barriers
+
+      Let's address the elephant in the room. I've heard every objection to AI-assisted development, and honestly, I've had most of them myself. The difference is I decided to test them rather than assume they were true.
+
+      ### "AI code is unreliable"
+
+      This was my biggest concern initially. I'd seen those viral examples of ChatGPT generating completely wrong code or hallucinating non-existent APIs. The thing is, those examples tell you more about prompting and context than about AI capabilities.
+
+      **What I've found in practice:** AI-generated code is as reliable as the context you give it and the review process you apply. When I ask for a generic "login component," I get generic, potentially problematic code. But when I provide detailed context:
+
+      _"Create a React login component using TypeScript that handles authentication for a Next.js 14 application. Requirements: email and password fields with real-time validation, proper accessibility attributes including ARIA labels, error state management using React Hook Form with Zod validation, loading states during submission, responsive design using Tailwind CSS classes, integration with NextAuth.js, and proper TypeScript interfaces for the form data and API responses. The component should follow current React best practices including proper error boundaries and should be testable with React Testing Library."_
+
+      The quality jumps dramatically. As research shows, the specificity of your prompt directly correlates with code quality and reliability.
+
+      The real insight here is that AI forces you to be more specific about requirements. If you can't clearly describe what you want the code to do, AI will fill in the gaps, usually poorly. But if you're working on well-defined problems with clear constraints, AI reliability is actually quite good.
+
+      **Current reality:** AI tools are excellent at implementing patterns they've seen many times (CRUD operations, common UI components, standard algorithms) and surprisingly good at combining familiar patterns in new ways. They struggle with novel problems, cutting-edge libraries, and requirements that change mid-conversation.
+
+      ### "It'll replace us"
+
+      I get this fear, especially from developers earlier in their careers. But here's what I've observed: AI doesn't replace developers any more than Stack Overflow replaced developers. It changes what we spend our time on.
+
+      **What AI actually does:** It handles the repetitive, well-documented parts of development so you can focus on the interesting problems. Instead of writing the same form validation logic for the hundredth time, you're spending time on architecture decisions, user experience optimization, and solving unique business problems.
+
+      **The skills that matter more now:**
+
+      - **Technical skills:** Code review and quality assessment, system design and architecture thinking, problem decomposition and requirement clarification, understanding when and how to use different tools effectively
+      - **Human skills:** Communication with stakeholders to gather clear requirements, collaboration with designers and product managers, business acumen to understand why we're building what we're building, mentoring and knowledge sharing as AI democratizes basic coding
+
+      I've actually found that using AI makes me a better developer because it forces me to think more critically about code quality, maintainability, and whether a solution actually solves the right problem.
+
+      ### "It's just glorified autocomplete"
+
+      This misconception usually comes from only using basic GitHub Copilot suggestions. Yes, if you only ever use tab-completion features, it feels like fancy autocomplete. But that's like saying a smartphone is just a better calculator.
+
+      **The actual spectrum of AI assistance:**
+
+      - **Autocomplete level:** Single-line suggestions and basic completions
+      - **Component level:** Generating entire functions, components, or classes based on comments or context
+      - **Architecture level:** Discussing system design trade-offs, suggesting patterns, reviewing overall approaches
+      - **Research level:** Explaining concepts, comparing technologies, helping learn new frameworks
+      - **Debugging level:** Analyzing errors, suggesting test cases, identifying potential issues
+
+      When I [built that running coach application](/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai), AI wasn't just completing my code. It was helping me understand new APIs, debug integration issues, and explore different architectural approaches.
+
+      ### Building the right mindset
+
+      The most productive approach I've found is treating AI as a very knowledgeable but occasionally wrong colleague. You wouldn't blindly implement everything a human colleague suggests, and you shouldn't do it with AI either.
+
+      **Critical thinking framework:**
+
+      - **Understand before implementing:** Don't copy-paste code you don't understand
+      - **Test everything:** AI-generated code should go through the same quality gates as human-written code
+      - **Verify claims:** If AI suggests a library or approach, quickly verify it exists and works as described
+      - **Iterate on prompts:** Bad output usually means unclear input. Refine your questions rather than giving up
+
+      The goal isn't to eliminate human judgment. It's to augment it. AI helps you explore more possibilities, understand problems faster, and implement solutions more quickly. But you're still the one deciding what problems are worth solving and whether the solutions actually work.
+
+      **Reality check:** I still write plenty of code from scratch. I still debug complex issues manually. I still make architectural decisions based on human judgment. But I do all of these things faster and with more confidence because I have AI assistance when I need it.
+
+      ## 4. Your Development Journey & The AI Spectrum
+
+      Not all AI assistance is created equal, and not every developer needs to be at the same level of AI integration. Understanding where you are and where you want to be is crucial for making this transition productive rather than overwhelming.
+
+      ### The 6 phases framework
+
+      Let me walk you through the six phases I've observed in AI adoption. These aren't levels where one is "better" than another. They're different approaches based on comfort, need, and context.
+
+      #### Discovery Phase: Skeptical Approach
+
+      You're here if AI still feels unreliable or unnecessary. Maybe you've tried ChatGPT a few times but didn't see the value, or you're concerned about code quality and security. You rely on traditional development methods and trust your existing workflow.
+
+      _This looks like:_ A senior developer who tried GitHub Copilot for a week but turned it off because the suggestions felt distracting and often incorrect for their specific use case.
+
+      #### Adoption Phase: Experimental Approach
+
+      You're using GitHub Copilot for autocomplete and occasionally asking ChatGPT syntax questions. You see some value but still treat AI as a better Stack Overflow. You're cautious about relying on AI suggestions without heavy verification.
+
+      _This looks like:_ Using Copilot daily for boilerplate code but still googling complex problems and preferring human-written tutorials for learning new concepts.
+
+      #### Integration Phase: Practical Approach
+
+      AI is becoming part of your regular workflow. You're using it for code generation, documentation, and basic debugging. You're starting to trust AI suggestions with proper review and developing patterns for when to use which tools.
+
+      _This looks like:_ Generating initial component structures with AI, using it for writing tests, and having AI help with refactoring. You've developed a good sense of when AI output needs more scrutiny.
+
+      #### Collaboration Phase: Strategic Approach
+
+      You're having architectural conversations with AI, using it for research and learning, and integrating it into code review processes. You understand the strengths and limitations well enough to use AI strategically rather than tactically.
+
+      _This looks like:_ Discussing system design trade-offs with AI, using AI to explore different approaches to complex problems, and having AI help with performance optimization strategies.
+
+      #### Innovation Phase: Advanced Approach
+
+      AI is deeply integrated into your workflow. You're creating custom prompts, using multiple AI tools for different purposes, and even building AI-assisted tooling for your team. You're teaching others and developing new patterns.
+
+      _This looks like:_ Building custom workflows using AI APIs, creating team-specific AI assistants, and regularly experimenting with new AI tools to solve unique development challenges.
+
+      #### Mastery Phase: AI-Native Approach
+
+      You seamlessly blend AI capabilities with deep technical expertise. You're pushing the boundaries of what's possible with AI assistance, contributing to the broader conversation about AI-assisted development, and your workflow would be difficult to replicate without AI tools.
+
+      _This looks like:_ Development processes so integrated with AI that productivity drops significantly when AI tools are unavailable. Creating new patterns that other developers adopt.
+
+      ### The AI spectrum concept
+
+      Beyond these phases, it's helpful to think about AI assistance as a spectrum of involvement. Sometimes you want minimal AI input, other times you want it deeply involved in your process.
+
+      - **Low involvement:** Autocomplete suggestions, syntax help, basic error explanations
+      - **Medium involvement:** Component generation, refactoring suggestions, test case creation
+      - **High involvement:** Architecture discussions, system design exploration, complex debugging assistance
+
+      The key insight is that you can operate at different points on this spectrum for different tasks. I might use high-involvement AI for exploring new architectural patterns but low-involvement for implementing well-understood features.
+
+      ### Honest self-assessment
+
+      Here's the thing about AI adoption: most people overestimate where they are. If you're only using tab-completion in Copilot, you're in the [Adoption phase](#adoption-phase), not [Integration](#integration-phase). If you ask ChatGPT occasional questions but don't use it for actual development work, you're still in [Discovery](#discovery-phase).
+
+      **Questions to ask yourself:**
+
+      - Do you have AI tools integrated into your daily development workflow?
+      - Can you work effectively when AI tools are unavailable?
+      - Do you have established patterns for when and how to use AI assistance?
+      - Are you comfortable reviewing and refining AI-generated code?
+      - Do you use AI for learning and research, or just code generation?
+
+      Be honest about where you actually are, not where you think you should be.
+
+      ### A note on expertise and experimentation
+
+      I should be transparent here: while I've been experimenting with AI tools since early 2023 and have built several projects using AI assistance, we're all still figuring this out. The field is moving so quickly that what worked six months ago might be outdated, and new tools appear regularly that change the landscape.
+
+      What I've learned is that the specific tools and techniques matter less than developing a mindset of experimentation and continuous learning. The developers who are succeeding with AI aren't necessarily the ones who know the most about it. They're the ones who are comfortable trying new approaches, iterating quickly, and learning from what doesn't work.
+
+      Honestly, none of us really know what the optimal AI-assisted development workflow looks like yet. But that's exactly why it's important to start experimenting now rather than waiting for best practices to be established. The learning comes from doing, not from reading about what others have done.
+
+      ### Non-linear progression
+
+      Here's something important: you don't have to progress through these phases sequentially. You might be in the [Integration phase](#integration-phase) for frontend work but still in [Discovery](#discovery-phase) for backend development. You might be [Advanced](#innovation-phase) with debugging assistance but [Basic](#adoption-phase) with architectural discussions.
+
+      Different projects, technologies, and contexts call for different levels of AI involvement. The goal isn't to reach "AI-Native" as quickly as possible. The goal is to find the right level of AI assistance for your current situation and be intentional about when you want to expand that involvement.
+
+      **The practical takeaway:** Focus on moving one phase forward in one specific area of your development workflow. Don't try to revolutionize everything at once.
+
+      ## 5. Beyond Code Generation: The Complete Workflow
+
+      Most developers think AI assistance begins and ends with "write me a function that does X." That's like using a smartphone only to make phone calls. Let me show you how AI can transform your entire development process, drawing from my [top 10 ways AI can help beyond code generation](/articles/top-10-ways-ai-can-help-your-dev-workflow-outside-of-code-generation) and expanding into areas I've discovered since.
+
+      ### Research & planning
+
+      - **Tech stack decisions:** Instead of spending hours researching whether to use Zustand or Redux for state management, describe your project requirements to Claude or ChatGPT. Ask about trade-offs, performance implications, and team learning curves. For my recent project, AI helped me understand why Tanstack Query made more sense than traditional REST handling for my specific use case.
+
+        - _Tools for this:_ Most modern AI tools can help with technology comparisons. ChatGPT, Claude, and Perplexity can all access current web information to give you up-to-date details about library adoption, recent updates, and community discussions. The key is asking for sources and recent information when you need current data rather than general knowledge.
+
+      - **Architecture research:** Before I start a new project, I often have a conversation with AI about different architectural approaches. "I'm building a real-time collaborative editing tool. What are the main architectural patterns, and what are the pros and cons of each?" This gives me a foundation for more targeted research.
+
+      - **Feasibility studies:** AI can quickly help you understand if something is technically possible and what the main challenges might be. Instead of diving deep into documentation, start with AI to get the landscape, then dive into specifics.
+
+      ### Architecture & design
+
+      - **System design conversations:** This is where AI really shines. You can describe a system you're planning and have AI ask clarifying questions, suggest potential issues, and propose different approaches. I've found AI particularly good at thinking through edge cases and scalability concerns.
+
+      - **Pattern suggestions:** Describe a problem you're facing, and AI can suggest relevant design patterns, architectural approaches, or even specific libraries that might help. It's like having a conversation with a senior developer who's seen every pattern before.
+
+      - **Trade-off analysis:** AI excels at helping you think through the implications of different choices. "If I use server-side rendering vs. static generation for this e-commerce site, what are the implications for SEO, performance, development complexity, and hosting costs?"
+
+      ### Development beyond autocomplete
+
+      - **Refactoring assistance:** Take a messy function and ask AI to suggest cleaner implementations. But go beyond basic refactoring. Ask it to identify code smells, suggest better naming, or propose different organizational structures.
+
+        - _Example prompt:_ "Review this React component for potential improvements. Focus on readability, performance, accessibility, and maintainability. Suggest specific changes with explanations."
+
+      - **Debugging strategies:** Instead of just asking AI to fix your bug, describe the problem and ask for debugging approaches. "I'm getting inconsistent renders in React. What are the most likely causes, and what's the systematic way to debug this?"
+
+      - **Performance optimization:** AI can suggest optimization strategies, help identify performance bottlenecks, and explain the trade-offs of different approaches. I've used it to understand why my webapp was slow and get specific suggestions for improvement.
+
+      - **Code review assistance:** Run your code through AI before human review. Ask it to check for security issues, performance problems, accessibility concerns, and maintainability issues. It won't catch everything, but it'll catch a lot.
+
+      ### Testing & QA
+
+      - **Test generation:** This is one of AI's strongest areas. Give it a function or component, and it can generate comprehensive test cases, including edge cases you might not have thought of.
+
+        - _Tools for this:_ GitHub Copilot and Cursor are particularly effective for generating tests inline because they understand your entire codebase context and can match your existing testing patterns and conventions. Claude and ChatGPT excel at discussing testing strategies and generating comprehensive test suites when you copy-paste your code, but they lack the project context that makes Copilot and Cursor suggestions more immediately useful.
+
+      - **Edge case discovery:** Describe your function or feature, and ask AI what edge cases you should consider. It's surprisingly good at thinking of scenarios that might break your code.
+
+      - **Testing strategy discussions:** Before writing tests, have a conversation with AI about what testing approach makes sense for your specific use case. Should you focus on unit tests, integration tests, or end-to-end tests? What should you mock, and what should you test directly?
+
+      ### Documentation
+
+      - **README generation:** AI excels at writing clear, comprehensive README files. Give it your project structure and main functionality, and it can generate installation instructions, usage examples, and API documentation.
+
+      - **Code comments:** For complex functions, AI can generate helpful comments that explain not just what the code does, but why it does it that way.
+
+      - **Commit messages:** AI can help you write clear, descriptive commit messages that follow conventional commit standards. These detailed commit messages become invaluable later when generating release notes or understanding project history.
+
+      - **API documentation:** If you're building APIs, AI can help generate comprehensive documentation, including example requests and responses, error handling, and usage guidelines.
+
+      - **Technical writing:** Need to explain a complex technical concept to stakeholders? AI can help you write clear, jargon-free explanations that non-technical people can understand.
+
+      ### Learning & upskilling
+
+      This is where AI really transforms the development experience. Instead of generic tutorials, you get personalized learning that matches your exact situation.
+
+      - **Personalized explanations:** "I'm a React developer with 3 years of experience. Explain GraphQL subscriptions to me, focusing on how they're different from REST polling and when I'd use them in a real project."
+
+      - **Concept exploration:** Use AI to explore concepts you're curious about. "What are the main differences between microservices and monolithic architectures? Give me real-world examples of when each makes sense."
+
+      - **Framework learning:** When picking up a new framework, AI can provide learning paths, explain key concepts, and generate examples that match your existing knowledge level. This personalized approach helps you connect new concepts to what you already know.
+
+      - **Staying current:** Ask AI about recent developments in your technology stack. "What are the main changes in React 18, and how do they affect performance and development patterns?"
+
+      ### The integration approach
+
+      The key to making this work is integration, not replacement. I still do my own research, make my own architectural decisions, and write plenty of code from scratch. But AI accelerates every part of the process.
+
+      Start with one area that interests you most. If you're always struggling with documentation, begin there. If debugging takes forever, start with debugging assistance. Don't try to transform your entire workflow overnight.
+
+      The goal is to move from "AI, write me some code" to "AI, help me think through this complex problem." That shift in perspective is what transforms AI from a fancy autocomplete tool into a genuine development partner.
+
+      ## 6. Common Failure Patterns (And How to Avoid Them)
+
+      I've made every AI-assisted development mistake possible, and I've watched other developers make them too. Learning to recognize these patterns early will save you frustration and help you get better results faster.
+
+      ### The "magic prompt" trap
+
+      This is the most common mistake I see. Developers think there's some perfect prompt that will make AI generate exactly what they need every time. They spend more time crafting the "perfect" prompt than they would writing the code themselves.
+
+      - **What this looks like:** Spending 20 minutes trying to write the perfect prompt for a simple function, or copying prompting techniques from Twitter without understanding the context.
+
+      - **Why it happens:** We're used to precise tools where exact syntax matters. With AI, specificity helps, but conversation and iteration work better than trying to be perfect upfront.
+
+      - **Better approach:** Start with a basic prompt and iterate. Ask for what you need, review the output, then refine your request based on what's missing or wrong. AI conversations work better than AI commands.
+
+      _Example iteration:_
+
+      1. "Create a React component for user profiles"
+      2. "Add TypeScript types and loading states"
+      3. "Include error handling and accessibility attributes"
+      4. "Make the layout responsive with grid"
+
+      Each step builds on the previous one rather than trying to capture everything in one mega-prompt.
+
+      ### Over-reliance syndrome
+
+      Developers can become so dependent on AI that they can't solve basic problems when the tools aren't available. This actually makes you a weaker developer, not a stronger one.
+
+      - **What this looks like:** Immediately reaching for AI for every coding decision, not understanding the code you're implementing, or feeling lost when AI tools are down.
+
+      - **Why it happens:** AI makes easy things even easier, so it's tempting to use it for everything. But if you don't maintain your independent problem-solving skills, you become fragile.
+
+      - **Better approach:** Use the 80/20 rule. Let AI handle routine, well-understood tasks (boilerplate, documentation, common patterns) but tackle complex, novel, or learning-oriented problems yourself first. AI should augment your skills, not replace them.
+
+      ### Context overload
+
+      This is a newer problem I'm seeing more often. Developers dump their entire codebase into AI and expect it to maintain context across huge conversations or understand massive amounts of code.
+
+      - **What this looks like:** Pasting 500 lines of code into ChatGPT and asking "fix all the bugs," or having conversations that span dozens of messages across multiple files and expecting AI to remember everything perfectly.
+
+      - **Why it happens:** We assume AI has unlimited context and perfect memory. Current AI tools have context limitations and can lose track of earlier parts of long conversations.
+
+      - **Better approach:** Be surgical with context. Include just the relevant files and functions. For complex multi-file changes, break the work into smaller, focused conversations. Start fresh conversations for new problems rather than continuing indefinitely.
+
+      ### Quality blindness
+
+      This one is dangerous. Developers get so impressed by AI's ability to generate working code that they stop critically evaluating the output.
+
+      - **What this looks like:** Copy-pasting AI code without reading it, not testing edge cases, or assuming AI output follows best practices just because it runs.
+
+      - **Why it happens:** AI output often looks professional and confident. It's easy to assume that working code is good code, especially when you're moving fast.
+
+      - **Better approach:** Treat AI-generated code like code from a junior developer. It might be correct, but it needs review. Check for security issues, performance problems, accessibility concerns, and maintainability. Test edge cases. Understand what the code does before merging it.
+
+      **Quality checklist for AI code:**
+
+      - Does it handle error cases appropriately?
+      - Are there any security vulnerabilities?
+      - Is it accessible and performant?
+      - Does it follow your team's coding standards?
+      - Are there adequate tests?
+
+      ### Tool switching chaos
+
+      With so many AI tools available, some developers try to use everything at once, switching between Copilot, Cursor, ChatGPT, Claude, and whatever's new this week without establishing clear patterns for when to use what.
+
+      - **What this looks like:** Having five AI tools open simultaneously, constantly switching between them for different tasks without clear reasoning, or chasing every new AI tool that launches without evaluating if it actually improves your workflow.
+
+      - **Why it happens:** FOMO and the belief that there's always a better tool for each specific task. Also, different tools do excel at different things, which makes it tempting to use all of them.
+
+      - **Better approach:** Establish clear use cases for each tool you adopt. The key isn't limiting the number of tools, but having intentional reasons for when you use each one rather than randomly switching based on mood or impulse. Some developers prefer using AI through Cursor for everything, others switch between standalone ChatGPT and Copilot in their editor, and others have completely different combinations that work for their workflow.
+
+      The important thing is developing consistent patterns rather than tool-hopping without purpose.
+
+      ### The prompt perfectionism trap
+
+      Similar to magic prompt syndrome, but specifically about spending too much time optimizing prompts instead of getting work done.
+
+      - **What this looks like:** Reading prompt engineering guides obsessively, trying to apply every prompting technique to every task, or spending more time on prompt optimization than on actual development.
+
+      - **Why it happens:** Prompt engineering content makes it seem like there are huge productivity gains available if you just prompt correctly. While better prompts do help, the returns diminish quickly.
+
+      - **Better approach:** Learn basic prompting principles (be specific, provide context, ask for explanations) and focus on the work. Good enough prompts that move your project forward are better than perfect prompts that take forever to craft.
+
+      ### Avoiding these patterns
+
+      The common thread in all these failure patterns is losing sight of the goal: getting quality work done efficiently. AI tools should make you more productive, not more anxious about using them perfectly.
+
+      **Simple principles that help:**
+
+      - Start simple and iterate rather than trying to be perfect upfront
+      - Maintain your core development skills alongside AI usage
+      - Always review and understand AI output before implementing it
+      - Use fewer tools well rather than many tools poorly
+      - Focus on outcomes, not on perfect technique
+
+      Remember, we're all still learning how to use these tools effectively. The key is to fail fast, learn from mistakes, and keep shipping quality code.
+
+      ## 7. From Vibe Coding to Professional Practice
+
+      There's a big difference between "hey AI, make me a thing" and having professional standards when working with AI assistance. The key is developing systematic approaches to evaluate and refine AI output rather than treating it as a black box.
+
+      ### Quality assessment frameworks
+
+      When AI can generate working code quickly, having clear evaluation criteria becomes crucial. The goal is ensuring AI-generated code meets the same standards as human-written code.
+
+      **Concrete quality checklist for AI-generated code:**
+
+      **Functionality:**
+
+      - Does it actually solve the stated problem?
+      - Are edge cases handled appropriately?
+      - Does it integrate properly with existing systems?
+      - Are error conditions managed gracefully?
+
+      **Security:**
+
+      - Are there obvious vulnerabilities (SQL injection, XSS, insecure data handling)?
+      - Does it follow authentication and authorization patterns?
+      - Are sensitive data and API keys handled properly?
+      - Does it validate inputs appropriately?
+
+      **Performance:**
+
+      - Are there obvious performance bottlenecks?
+      - Does it follow efficient patterns for the technology stack?
+      - Are database queries optimized?
+      - Does it handle large datasets appropriately?
+
+      **Maintainability:**
+
+      - Is the code readable and well-structured?
+      - Are variable and function names clear?
+      - Is the logic easy to follow and modify?
+      - Does it follow established patterns in your codebase?
+
+      **Accessibility:**
+
+      - Are proper ARIA attributes included where needed?
+      - Is keyboard navigation supported?
+      - Are color contrast and text sizing appropriate?
+      - Does it work with screen readers?
+
+      **Testing:**
+
+      - Are there adequate unit tests?
+      - Are integration points tested?
+      - Are edge cases covered?
+      - Can the code be easily tested in isolation?
+
+      ### Prompt engineering for developers
+
+      Moving beyond "make me a component" requires thinking about AI collaboration differently. Instead of asking for finished solutions, ask for strategic input that you can evaluate and refine.
+
+      - **Instead of:** "Create a user authentication system"
+
+        - **Try:** "I'm designing authentication for a Next.js app that needs to support social login and email/password. What are the main architectural decisions I should consider, and what are the trade-offs of different approaches?"
+
+      - **Instead of:** "Fix this bug" (with code dump)
+
+        - **Try:** "I'm getting inconsistent state updates in this React component. Based on the code, what are the most likely causes, and what debugging steps would help identify the issue?"
+
+      - **Instead of:** "Write tests for this function"
+        - **Try:** "Looking at this function, what edge cases should I test, and what testing approach makes sense given that it handles async operations and external API calls?"
+
+      The pattern is: ask for analysis, options, and reasoning rather than just implementation.
+
+      **Advanced prompting for development:**
+
+      - **Role-based prompting:** "As a senior React developer reviewing this code for production readiness, what concerns would you have?"
+
+      - **Constraint-based prompting:** "Suggest refactoring approaches for this component, keeping in mind we need to maintain backward compatibility and can't introduce new dependencies."
+
+      - **Comparative prompting:** "Compare these two approaches for handling form validation, considering developer experience, performance, and maintainability."
+
+      ### Code review with AI assistance
+
+      AI changes the code review process in interesting ways. You can use it for pre-review quality checks and to help make human reviews more focused and effective.
+
+      **Pre-review AI checks:**
+
+      - Run significant changes through AI for initial feedback on obvious issues
+      - Ask AI to identify potential security or performance problems
+      - Get AI suggestions for improving code clarity and documentation
+      - Generate comprehensive test cases to verify functionality
+
+      **Enhanced human review:**
+      With AI handling basic quality checks, human reviewers can focus on higher-level concerns like architectural fit, business logic correctness, and team knowledge sharing.
+
+      **Review process I've found effective:**
+
+      1. Developer completes feature with AI assistance
+      2. AI pre-review for basic quality, security, and performance issues
+      3. Developer addresses AI feedback and documents any decisions to ignore suggestions
+      4. Human review focuses on design decisions, business requirements, and knowledge transfer
+      5. Final review ensures AI-generated code meets team standards
+
+      ### Security & compliance
+
+      Using AI for development introduces new security considerations beyond the code it generates.
+
+      **Code security concerns:**
+
+      - AI might suggest outdated security practices or introduce common vulnerabilities
+      - Generated code might not follow your organization's specific security requirements
+      - AI models are trained on public code that may include security flaws
+
+      **Data security considerations:**
+
+      - Be mindful of what code you're sharing with AI services
+      - Avoid pasting sensitive data, API keys, or proprietary algorithms into AI tools
+      - Consider using local AI tools for sensitive projects
+      - Understand the data retention policies of the AI services you use
+
+      **Compliance implications:**
+
+      - Some organizations have policies about AI-generated code that need approval
+      - Consider licensing implications of AI-generated code
+      - Document AI usage for audit purposes if required
+      - Ensure AI-generated code meets accessibility and regulatory requirements
+
+      ### Version control & documentation
+
+      Tracking AI contributions makes debugging and knowledge transfer much easier later.
+
+      **Commit message practices using conventional commits:**
+      When AI generates significant portions of code, include that context:
+
+      - `feat: add user validation logic (AI-assisted implementation)`
+      - `refactor: improve authentication flow error handling (AI suggestions)`
+      - `test: generate comprehensive payment processing test suite`
+
+      **Documentation approaches:**
+
+      - Include AI prompts in pull request descriptions for complex features
+      - Document any significant AI suggestions that were rejected and why
+      - Note when AI helped solve particular architectural or performance challenges
+      - Keep track of which AI tools were used for different parts of the system
+
+      **Code comments:**
+      For complex AI-generated logic, include comments explaining the approach and any modifications made to the original AI output. This helps future maintainers understand both the logic and its origins.
+
+      The goal isn't to create bureaucracy around AI usage, but to maintain the same professional standards you'd apply to any development tool. AI assistance should make your code better and your team more productive while maintaining quality and security standards.
+
+      ## 8. Team Integration & Organizational Change
+
+      Individual AI adoption is one thing. Getting an entire team or organization to embrace AI-assisted development effectively is much more complex. Here's what I've learned about making this transition work for groups, not just individuals.
+
+      ### Team adoption playbook
+
+      **Start with volunteers, not mandates.** The developers who are curious about AI tools will be your early adopters and champions. Let them experiment first and share their experiences rather than forcing adoption across the entire team immediately.
+
+      **Establish shared standards early.** Once you have a few people using AI tools, create basic guidelines around code review for AI-generated code, which tools are approved for use, and how to handle sensitive data. This prevents inconsistency and security issues later.
+
+      **Create learning opportunities.** Regular demos where team members share AI workflows, challenges they've solved, and failures they've learned from. This normalizes both success and failure with AI tools.
+
+      **Address tool proliferation.** Instead of everyone using different AI tools, establish team preferences for specific use cases. Having consistent tooling makes knowledge sharing more effective.
+
+      **Phase rollout by complexity:**
+
+      1. **Phase 1:** Documentation and simple code generation
+      2. **Phase 2:** Debugging assistance and refactoring
+      3. **Phase 3:** Architecture discussions and complex problem-solving
+      4. **Phase 4:** Custom workflows and advanced integration
+
+      ### Measuring success
+
+      **Metrics that actually matter:**
+
+      - **Developer satisfaction:** Are team members finding AI tools helpful, or are they adding frustration? Regular surveys can track this better than assuming productivity gains equal satisfaction.
+
+      - **Code review efficiency:** How much time are reviews taking now that AI assists with initial quality checks? Are reviewers catching different types of issues?
+
+      - **Learning acceleration:** How quickly are developers picking up new technologies or solving unfamiliar problems? This is harder to measure but often the most valuable benefit.
+
+      - **Bug rates:** Are you introducing more bugs with AI assistance, or are you catching more issues early? Track this over several months to see real trends.
+
+      - **Time to prototype:** For new features or experiments, how quickly can the team go from idea to working prototype?
+
+      **Metrics to avoid:**
+
+      - Lines of code generated (meaningless and potentially harmful)
+      - Speed of individual task completion (can encourage cutting corners)
+      - Tool usage frequency (usage doesn't equal value)
+
+      ### Handling resistance
+
+      **Common objections and responses:**
+
+      - **"AI will make developers lazy"**
+
+        - _Response:_ Share examples of how AI enables tackling more complex problems, not avoiding challenges. Show how it's freeing up time for higher-value work.
+
+      - **"The code quality will suffer"**
+
+        - _Response:_ Demonstrate your quality assessment processes and show examples of well-reviewed AI-assisted code. Emphasize that standards haven't changed, just the initial source.
+
+      - **"It's too expensive"**
+
+        - _Response:_ Calculate the actual costs (usually $10-20 per developer per month) against productivity gains. Most teams find the ROI positive within weeks.
+
+      - **"We don't understand what the AI is doing"**
+        - _Response:_ This is actually a valid concern. Focus on education and demonstrating how to evaluate AI output critically rather than dismissing the concern.
+
+      ### Building AI-friendly culture
+
+      - **Psychological safety for experimentation:** Make it clear that failing with AI tools is expected and valuable. Create space for sharing both successes and mistakes without judgment.
+
+      - **Knowledge sharing systems:** Regular show-and-tell sessions, shared repositories of successful prompts, and documentation of tools and workflows that work for the team.
+
+      - **Continuous learning mindset:** Since AI tools evolve rapidly, establish patterns for evaluating new tools, sharing discoveries, and updating team practices based on what's working.
+
+      - **Clear boundaries:** Establish guidelines for what should and shouldn't be shared with AI tools, especially around proprietary code, sensitive data, and client information.
+
+      ### Knowledge sharing
+
+      **Effective knowledge sharing approaches:**
+
+      - **Prompt libraries:** Collect and share prompts that work well for common development tasks. Include context about when each approach is effective.
+
+      - **Tool recommendations:** Document which AI tools work best for different types of tasks based on team experience, not just marketing claims.
+
+      - **Failure stories:** Share what doesn't work and why. This prevents others from making the same mistakes and helps refine team practices.
+
+      - **Workflow documentation:** Document end-to-end workflows that combine AI tools with traditional development practices effectively.
+
+      - **Regular AI office hours:** Designated time when team members can ask questions, share discoveries, and troubleshoot AI-related challenges together.
+
+      ### Managing organizational change
+
+      **For managers and leads:**
+
+      - **Set realistic expectations:** AI assistance improves productivity, but it's not magic. Expect learning curves and occasional setbacks.
+
+      - **Budget for tools and training:** Factor in subscription costs for AI tools and time for team members to learn and experiment.
+
+      - **Update development processes:** Code review, quality assurance, and security practices may need adjustments when AI is involved.
+
+      - **Consider policy implications:** Legal, compliance, and intellectual property considerations around AI-generated code may need organizational guidance.
+
+      **For individual contributors:**
+
+      - **Document your learning:** Keep track of what works, what doesn't, and why. This helps both personal improvement and team knowledge sharing.
+
+      - **Be patient with teammates:** People adopt new tools at different speeds. Focus on sharing knowledge rather than pressuring others to match your pace.
+
+      - **Maintain critical thinking:** AI tools are powerful, but human judgment remains essential. Don't let convenience override good development practices.
+
+      ### Common organizational pitfalls
+
+      - **Tool mandate without training:** Requiring teams to use AI tools without providing learning time or resources usually results in poor adoption and frustration.
+
+      - **Security as an afterthought:** Not addressing data security and compliance considerations until after teams are already using various AI tools creates problems later.
+
+      - **Productivity pressure:** Expecting immediate productivity gains can lead to cutting corners on quality or pushing AI tools beyond their appropriate use cases.
+
+      - **One-size-fits-all approaches:** Different team members and different types of projects benefit from AI assistance in different ways. Flexibility is important.
+
+      The key insight is that organizational AI adoption is more about culture change than tool adoption. Focus on creating environments where people can experiment safely, learn effectively, and maintain quality standards.
+
+      ## 9. Advanced Workflows & Future Skills
+
+      Once you're comfortable with basic AI assistance, there are emerging patterns and advanced approaches that can take your productivity to another level. This is where things get interesting, and honestly, where we're all still figuring things out together.
+
+      ### Multi-agent approaches
+
+      Instead of using one AI tool for everything, advanced practitioners are developing workflows that use different AI systems for their specific strengths.
+
+      **Specialized tool combinations:**
+
+      - **Research and exploration:** Use AI chat interfaces for broad technology research and architectural discussions. These excel at explaining trade-offs and suggesting approaches.
+
+      - **Implementation:** Use Cursor for actual coding. AI-integrated editors like these understand your codebase context and can generate code that fits your existing patterns.
+
+      - **Review and refinement:** Use AI tools to review generated code for security, performance, and maintainability issues. This might be the same AI in a fresh conversation or a different tool entirely.
+
+      - **Documentation:** AI tools are particularly good at generating documentation after the code is written, since they can analyze what was actually built rather than working from requirements.
+
+      **Example workflow approach:**
+
+      1. Discuss architecture approach using AI chat
+      2. Implement core functionality using Cursor
+      3. Generate tests using Cursor's AI assistance
+      4. Review for potential improvements using AI analysis
+      5. Create documentation using AI analysis of the final code
+
+      The key is treating different AI interactions as serving different purposes rather than trying to do everything in one conversation or with one approach.
+
+      ### Custom integrations and automation
+
+      Some teams are building their own AI-assisted tooling for specific needs. This requires more technical investment but can provide significant advantages for recurring tasks.
+
+      - **API integrations:** Using OpenAI, Anthropic, or other AI APIs to build custom development tools. Examples include automated code review bots, documentation generators, or testing assistants that understand your specific codebase. Tools like [CodeRabbit](https://coderabbit.ai/) demonstrate how AI can be integrated into existing workflows for contextual pull request reviews.
+
+      - **Workflow automation:** Integrating AI tools into CI/CD pipelines for tasks like generating release notes from commit messages, creating API documentation from code changes, or running automated security reviews. [Release Drafter](https://github.com/release-drafter/release-drafter) is a good example of how GitHub Actions can leverage AI for automatic release note generation.
+
+      - **Custom prompting systems:** Building internal tools that provide team-specific prompts for common development tasks, ensuring consistency across the team while leveraging AI assistance. Frameworks like [Fabric](https://github.com/danielmiessler/fabric) show how teams can create reusable AI workflows for development tasks.
+
+      - **Editor extensions:** Some teams are building custom VS Code or other editor extensions that integrate multiple AI services for specific development workflows. Open-source tools like [Continue.dev](https://continue.dev/) provide foundations for building customized AI coding assistants that work with your preferred models and workflows.
+
+      ### Emerging patterns
+
+      Here are some approaches I'm seeing from developers who are pushing the boundaries:
+
+      - **Iterative architecture design:** Using AI to explore multiple architectural approaches for the same problem, comparing trade-offs, and iterating toward optimal solutions faster than traditional design processes.
+
+      - **AI-assisted debugging:** Instead of just asking AI to fix bugs, using it to systematically explore debugging strategies, generate hypothesis about root causes, and suggest comprehensive testing approaches.
+
+      - **Contextual learning:** Using AI to create personalized learning materials based on your current codebase and specific knowledge gaps. Instead of generic tutorials, getting explanations that relate to your actual work.
+
+      - **Code evolution:** Using AI to suggest refactoring paths that gradually improve code quality over time, rather than one-off improvements.
+
+      - **Pattern mining:** Having AI analyze your codebase to identify inconsistent patterns, suggest standardizations, and highlight areas where architectural improvements could have the biggest impact.
+
+      ### Future readiness
+
+      The AI development landscape is changing rapidly. Here are the skills and mindsets that I think will matter most in the coming years:
+
+      - **Prompt iteration skills:** The ability to refine and improve AI interactions based on results. This is less about memorizing perfect prompts and more about understanding how to guide AI toward better outputs.
+
+      - **AI output evaluation:** Getting better at quickly assessing whether AI-generated code, suggestions, or analysis is correct and useful. This requires maintaining and improving your core development skills, not replacing them.
+
+      - **Tool combination fluency:** Understanding how to combine multiple AI tools effectively rather than trying to do everything with one system.
+
+      - **Context management:** Learning to provide the right amount of context to AI systems for optimal results. Too little context gives poor results; too much can overwhelm the system.
+
+      - **Integration thinking:** Understanding how AI tools fit into broader development workflows, team processes, and organizational practices.
+
+      ### Staying current
+
+      The pace of change in AI tooling is intense. Here's how to keep up without burning out:
+
+      - **Follow practitioners, not just vendors:** Pay attention to what experienced developers are actually using and achieving, rather than just marketing announcements about new tools.
+
+      - **Experiment regularly but systematically:** Try new tools and approaches, but give each a fair evaluation period rather than constantly switching.
+
+      - **Focus on principles over specifics:** Understanding the general principles of AI-assisted development will serve you better than memorizing the exact features of current tools.
+
+      - **Share and learn from others:** The community around AI-assisted development is active and collaborative. Engaging with others who are exploring these tools accelerates your own learning.
+
+      - **Maintain perspective:** AI tools are advancing rapidly, but fundamental development skills remain important. Don't sacrifice deep technical knowledge for tool proficiency.
+
+      ### What's coming next
+
+      Based on current trends, here's what I expect to see in AI-assisted development:
+
+      - **Better codebase understanding:** AI tools that can maintain context across entire projects, understand architectural decisions, and suggest changes that account for the full system impact.
+
+      - **Specialized development AI:** Tools trained specifically for different types of development (mobile, web, embedded, etc.) rather than general-purpose coding assistants.
+
+      - **Real-time collaboration:** AI tools that can participate in pair programming sessions, code reviews, and architectural discussions in more natural ways.
+
+      - **Improved accuracy and reliability:** As models improve, we'll see AI that makes fewer factual errors and generates more reliable code on first try.
+
+      - **Integration with development tools:** Deeper integration with version control, project management, testing frameworks, and deployment systems.
+
+      The key is staying engaged with these developments while maintaining focus on delivering value through your current work. The future will be built by developers who combine strong fundamental skills with thoughtful AI integration, not by those who rely entirely on either traditional or AI-assisted approaches.
+
+      ## Conclusion
+
+      If you've made it this far, you probably fall into one of two camps: you're either excited to start experimenting with AI-assisted development, or you're convinced you need to level up your current AI usage. Both reactions are exactly right.
+
+      ### Your personal action plan
+
+      Rather than trying to implement everything at once, pick your starting point based on where you are in the journey:
+
+      **If you're in [Discovery phase](#discovery-phase-skeptical-approach):** Start with the quick wins from section 2. Try Cursor for one small feature, or use ChatGPT to explain a complex piece of code you're working with. Give yourself permission to experiment without pressure.
+
+      **If you're in [Adoption phase](#adoption-phase-experimental-approach):** Focus on expanding beyond autocomplete. Pick one area from section 5 (documentation, testing, or debugging) and systematically use AI assistance for that task over the next two weeks.
+
+      **If you're in [Integration phase](#integration-phase-practical-approach):** Work on the professional practices from section 7. Develop your quality assessment framework and start being more intentional about when and how you use AI tools.
+
+      **If you're in [Collaboration phase](#collaboration-phase-strategic-approach) or beyond:** Focus on team integration from section 8, or explore the advanced workflows from section 9. Share your knowledge and help others on their AI adoption journey.
+
+      ### Remember the fundamentals
+
+      AI tools are incredibly powerful, but they work best when combined with strong development fundamentals. Keep learning about software architecture, design patterns, testing strategies, and user experience. AI makes these skills more important, not less important.
+
+      The developers who succeed with AI assistance are the ones who use it to tackle more ambitious problems, learn faster, and deliver better solutions. They're not the ones who use it to avoid learning or thinking critically about code.
+
+      ### Keep experimenting
+
+      We're still in the early stages of understanding how AI can transform development work. The patterns and practices I've shared here are based on current tools and my own experience, but the landscape will continue evolving rapidly.
+
+      The most important skill you can develop is the ability to experiment thoughtfully, learn from both successes and failures, and adapt your practices as new tools and techniques emerge.
+
+      ### Final thoughts
+
+      AI-assisted development isn't about replacing human creativity and problem-solving. It's about augmenting these capabilities so you can focus on the work that matters most: understanding user needs, designing elegant solutions, and building software that makes a real difference.
+
+      Whether you're just getting started or you're already deep into AI-assisted workflows, the goal remains the same: ship better software faster while continuing to grow as a developer.
+
+      Now stop reading and start experimenting. The best way to understand AI-assisted development is to experience it yourself.
+
+      ### Resources to continue learning
+
+      - [Addy Osmani's research on AI-assisted development](https://beyond.addy.ie/)
+      - [Top 10 Ways AI Can Help Your Dev Workflow Outside of Code Generation](/articles/top-10-ways-ai-can-help-your-dev-workflow-outside-of-code-generation)
+      - [From Idea to Intelligent Running Coach: Vibe Coding with n8n and AI](/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai)
+      - [My Experience: AI Vibe Coding a Complete Web Application from Scratch](/articles/my-experience-ai-vibe-coding-a-complete-web-application-from-scratch)
+      - [Built-in AI in Chrome](/articles/built-in-ai-in-chrome)
+      - [Three Days of AI and Cloud at Google Paris](/articles/three-days-of-ai-and-cloud-at-google-paris)
+      - [Reducing Latency in AI Speech Synthesis](/articles/reducing-latency-in-ai-speech-synthesis)
+      - [Interacting with Chat GPT through Voice UI on the Web](/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web)
+      - GitHub Copilot documentation and best practices
+      - Cursor AI documentation and community discussions
+      - OpenAI and Anthropic developer resources
+
+      The journey of AI-assisted development is just beginning. Join the conversation, share your discoveries, and help shape how our industry evolves with these powerful new tools.
+    date: 2025-08-20T00:00:00.000Z
+    slug: move-from-basic-autocomplete-to-ai-powered-development-workflows
+    tags:
+      - ai
+    intro: >-
+      Most developers think AI assistance begins and ends with autocomplete suggestions. But after building everything from complete web applications to voice interfaces using AI tools, I've discovered workflows that transform how we approach development entirely. This isn't about replacing human skills - it's about augmenting them to tackle more ambitious problems, learn faster, and ship better software. Whether you're skeptical about AI or already using basic tools, here's your roadmap from simple suggestions to AI-powered development workflows.
+    teaserCopy: >-
+      Most developers think AI assistance begins and ends with autocomplete suggestions. But after building everything from complete web applications to voice interfaces using AI tools, I've discovered workflows that transform how we approach development entirely. This isn't about replacing human skills - it's about augmenting them to tackle more ambitious problems, learn faster, and ship better software. Whether you're skeptical about AI or already using basic tools, here's your roadmap from simple suggestions to AI-powered development workflows.
+    teaserImage: /img/articles/move-from-basic-autocomplete-to-ai-powered-development-workflows.png
+    title: Move from Basic Autocomplete to AI-Powered Development Workflows
+  - type: articles
+    body: >-
+      After my recent experience [vibe coding a complete web application](/articles/my-experience-ai-vibe-coding-a-complete-web-application-from-scratch) without touching a single line of code, I was hungry for another experiment. This time, I wanted to explore a different kind of building. Not generating code with AI, but orchestrating systems and services to create something genuinely useful.
+
+      The idea was simple: what if I could wake up each morning to a personalized running coach in my inbox? Not just a weather report, but an intelligent analysis that considers temperature, humidity, wind, precipitation, and even gives me AI-powered training advice. And what if I could build this entire system using automation tools instead of traditional coding?
+
+      Enter [n8n](https://n8n.io), a workflow automation platform that promised to let me connect APIs, trigger actions, and build complex logic through visual workflows. When I got access to n8n Cloud, I moved from my local setup to their hosted platform. Armed with [Cursor AI](https://cursor.sh) to help with workflow generation, I discovered how this change transformed both the development experience and system reliability.
+
+      ## The Spark: Make Life Easier, Build Something Cool
+
+      This started with a simple thought: I could make my mornings easier and build something fun in the process. I love running, I check the weather anyway, and I enjoy experimenting with automation. So I set out to create a small system that would bring those pieces together in a useful way.
+
+      ## The Vision: More Than Just Weather
+
+      Instead of manual weather checking, I wanted to wake up to intelligent analysis:
+
+      _"Running Score: 85/100 - Perfect conditions! Light layer recommended. Morning window optimal before 10 AM rain."_
+
+      Not just weather data, but intelligent analysis with AI coaching. The system needed to:
+
+      - **Analyze multiple weather factors** including temperature, conditions, humidity, wind speed, and precipitation
+      - **Generate a smart running score** with a 0-100 rating based on optimal conditions
+      - **Provide AI coaching** through personalized advice, gear recommendations, and safety warnings
+      - **Deliver daily insights** via automated morning emails with multi-period analysis
+      - **Run entirely on free tiers** using [OpenWeatherMap API](https://openweathermap.org/api) and [Google Gemini](https://gemini.google.com)
+
+      I think we are perhaps moving to this way of building things where we are more in charge as devs in connecting systems than writing all logic and code from scratch.
+
+      ## Building with Orchestration and Vibe Coded Logic
+
+      Unlike my previous vibe coding experiment where AI generated traditional application code, this project was about connecting existing services through workflows. But here's where it gets interesting: I still needed custom logic for data processing, scoring algorithms, and formatting. Instead of writing this code myself, I vibe coded it using Cursor AI.
+
+      ### Core Stack:
+
+      - **n8n Cloud** for hosted workflow automation
+      - **OpenWeatherMap API** for current weather + 5-day forecast (free tier)
+      - **Google Gemini 2.0 Flash** for intelligent coaching and analysis (ideal for automation)
+      - **SMTP email integration** for reliable message delivery
+      - **Zero infrastructure management** with cloud hosting
+
+      The beauty here? Instead of writing complete applications, I was combining pre-built services with small, focused code snippets that I never had to write myself. And by moving to n8n Cloud, I eliminated all the infrastructure overhead entirely.
+
+      ## Cursor AI Builds Everything
+
+      Here's where this approach gets interesting. I didn't build the n8n workflow by dragging and dropping nodes in the UI. Instead, I used Cursor AI to generate the complete workflow as JSON, including all the custom code nodes needed for data processing.
+
+      I could prompt Cursor with:
+
+      Create an n8n workflow JSON that triggers daily at 6 AM, fetches current weather and 5-day forecast from OpenWeatherMap API for Haarlem, analyzes the morning window, calculates dynamic running scores, enhances with Gemini 2.0 Flash AI coaching advice, and sends a formatted email via SMTP
+
+      Cursor would then generate not just the workflow structure, but also sophisticated JavaScript code nodes embedded within it for:
+
+      - **Multi-endpoint data fetching** - Parallel current weather and 5-day forecast calls
+      - **Time-based analysis** - Dynamic period calculation based on current time
+      - **Advanced scoring algorithms** - Weather condition classification with 200+ lines of logic
+      - **AI prompt engineering** - Structured coaching requests to Gemini 2.0 Flash
+      - **HTML email generation** - Complete responsive email templates with CSS
+      - **Error handling and logging** - Comprehensive failure recovery and debugging
+      - **Data validation and transformation** - Safe data extraction with fallbacks
+
+      ![Screenshot of above mentioned nodes being connected in the n8n UI](/img/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai-hero.png)
+
+      For example, one of the code nodes that Cursor generated for scoring:
+
+      ```javascript
+      // Temperature scoring (7-18°C optimal)
+      if (temp >= 7 && temp <= 18) {
+        score += 20
+        recommendations.push(`Perfect temperature at ${temp}°C!`)
+      } else if (temp < 2) {
+        score -= 15
+        warnings.push(`Quite cold at ${temp}°C - layer up and warm up gradually`)
+      }
+
+      // Weather condition scoring
+      const conditionScores = { Clear: 15, Clouds: 15, Rain: -25, Snow: -25 }
+      score += conditionScores[condition] || 0
+      ```
+
+      And email formatting:
+
+      ```javascript
+      let emoji = score >= 80 ? '🌟' : score >= 60 ? '✅' : '⚠️'
+      return {
+        subject: `${emoji} Running Score: ${score}/100`,
+        html: generateEmailHTML(score, weather, aiAdvice),
+      }
+      ```
+
+      I never wrote any of this code. I just described what I wanted each node to do, and Cursor generated the complete JavaScript functions.
+
+      Everything in this project was vibe coded. From the workflow structure to the logic inside the code nodes, I used prompts to describe intent and let the AI do the implementation. From here on, I’ll just refer to the outputs and results without repeating that context.
+
+      ### Pro Tip: Visual Context for AI
+
+      One breakthrough technique I discovered was taking screenshots of the n8n UI and sharing them directly in my Cursor chat. Instead of trying to describe the workflow structure in text, I could show Cursor exactly:
+
+      - How nodes were connected
+      - What the current data flow looked like
+      - Which specific node was failing
+      - The exact error messages in context
+
+      This visual context dramatically improved Cursor's ability to suggest fixes and generate new nodes that fit perfectly into the existing workflow structure.
+
+      ## The Magic of Visual Debugging
+
+      While Cursor generated both the workflow structure and all the custom code nodes, the n8n UI became my debugging and monitoring interface. I could manually trigger the workflow to test without waiting for the daily cron, see data flow through each node including the output of my custom code, and debug code node failures by examining error messages and intermediate data. I could test individual code nodes in isolation with sample data, monitor performance of both API calls and custom logic, and iterate quickly by asking Cursor to modify specific code nodes and reimporting them.
+
+      ![Screenshot of n8n UI where one of the node is red as there's an error](/img/articles/n8n-error.png)
+
+      This hybrid approach gave me the best of both worlds: AI-generated workflow logic AND custom code logic, with visual debugging and monitoring for everything.
+
+      ## Coding the Complex Parts
+
+      The most interesting part was how I could vibe code the more complex algorithmic logic. When I wanted to add multi-period analysis (morning, afternoon, evening), I just prompted:
+
+      _"Add a code node that fetches weather for 3 time periods today and determines the optimal running window, considering score changes and precipitation timing"_
+
+      Cursor generated a sophisticated code node that:
+
+      - Called the weather API for different time periods
+      - Calculated scores for each period
+      - Analyzed precipitation timing to avoid getting caught in rain
+      - Recommended the optimal running window with reasoning
+
+      When I wanted better email formatting with proper HTML and CSS, I prompted:
+
+      _"Create a code node that generates beautiful HTML emails with weather icons, score visualization, and responsive design"_
+
+      And got a complete email templating system with embedded CSS, weather condition icons, and mobile-friendly layouts. Styling emails is everyone's favorite, right? It was great to let AI handle the HTML/CSS while I focused on the content.
+
+      The beauty was that I could focus entirely on the problem-solving and user experience, while AI handled all the implementation details of both the workflow orchestration and the custom logic.
+
+      ## Intelligence Through Integration
+
+      The real magic happened when I connected Google Gemini to analyze the weather data and provide coaching insights. Even the Gemini integration was vibe coded - I created a code node that formats the weather data into a prompt for Gemini:
+
+      ```javascript
+      // Actual Gemini 2.0 Flash API integration with sophisticated prompting
+      const geminiRequest = {
+        contents: [
+          {
+            parts: [
+              {
+                text: `You are an expert AI running coach analyzing weather conditions for optimal training. Provide comprehensive yet organized advice in 300-400 words.
+
+      IMPORTANT: Do NOT include any greetings, names, or salutations - jump straight into the coaching advice. The email already has a personalized greeting.
+
+      FOCUS: Recommend what types of training these weather conditions are OPTIMAL for. Don't assume training schedule or fatigue - focus purely on weather-based training opportunities.
+
+      WEATHER DATA:
+      • Location: ${location}
+      • Current: ${temperature}°C, ${description}
+      • Humidity: ${humidity}% | Wind: ${windSpeed} km/h
+      • Best time: ${bestPeriod} (Score: ${score}/100)
+
+      PROVIDE DETAILED ADVICE WITH THESE SECTIONS:
+      🎯 **Weather-Optimal Training:** What specific types of workouts these conditions are PERFECT for (easy runs, tempo, intervals, long runs, hill training, etc.) and explain WHY these conditions suit that training type
+
+      👕 **Gear & Clothing:** Comprehensive clothing strategy including layers, materials, and accessories with scientific reasoning for these conditions
+
+      ⚠️ **Weather Considerations:** How these specific conditions affect performance, hydration needs, and any weather-related risks to watch for
+
+      💡 **Condition-Specific Tips:** Tactical advice for maximizing performance in these exact conditions - pacing adjustments, technique modifications, timing strategies
+
+      Explain the science behind why certain weather conditions favor specific training types. Start immediately with the first section - no introduction needed.`,
+              },
+            ],
+          },
+        ],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 600,
+        },
+      }
+      ```
+
+      Instead of hardcoded responses, my morning emails now include intelligent analysis like:
+
+      **Real Output Example:**
+      _"Running Score: 85/100 - Perfect Running Conditions_
+
+      _🎯 **Weather-Optimal Training:** These conditions are PERFECT for tempo runs! The 12°C temperature sits in the ideal zone for sustained efforts, while stable humidity and minimal wind create optimal heat dissipation. Perfect for threshold work or progression runs._
+
+      _👕 **Gear & Clothing:** Layer with moisture-wicking base and light windproof jacket. The temperature differential between start and peak effort will be significant._
+
+      _⚠️ **Weather Considerations:** Excellent visibility and stable conditions. Hydration needs are moderate - start hydrated but you won't need mid-run fluids for sessions under 90 minutes._
+
+      _Temperature: 12℃ | Humidity: 45% | Wind: 8 km/h"_
+
+      ![Email with above mentioned content](/img/articles/email-example.png)
+
+      This wasn't programmed responses. This was genuine AI analysis of real-time conditions, automatically delivered and personalized, all orchestrated through vibe coded logic that analyzes multiple weather periods and recommends optimal training windows.
+
+      ## Why Gemini 2.0 Flash Works Well for This
+
+      In my experience building this automation, Gemini 2.0 Flash handled the requirements well:
+
+      The responses were consistent enough that my workflows didn't break, which was important since this runs daily without supervision. The API proved reliable: I never hit rate limits (though with just one call per day, I probably never will) and haven't experienced downtime that would disrupt the morning email delivery.
+
+      From a practical standpoint, the free tier covered my usage completely. Running one analysis per day fits comfortably within the limits, which meant I could build and test without worrying about costs.
+
+      For this specific use case - analyzing weather data and generating structured coaching advice - Gemini seemed well-suited. It handled the bounded task of taking weather inputs and producing formatted recommendations without going off-topic or being overly creative.
+
+      ## The Developer Experience Revolution
+
+      The developer's role is fundamentally changing. We used to ask "How do I implement this?" Now we ask "How do I connect these services?" This represents a major shift from being code writers to becoming system orchestrators.
+
+      What struck me most was how moving to n8n Cloud eliminated all infrastructure concerns while Cursor AI helped me focus purely on workflow configuration and custom code logic. Instead of managing Docker containers and email servers, I could prompt:
+
+      _"Create n8n workflows with advanced scheduling, email integration, and custom code nodes for data processing"_
+
+      And within minutes, I had zero infrastructure setup required, built-in email capabilities, reliable hosting and scaling, automated backups and monitoring, professional-grade reliability, and could focus purely on workflow logic.
+      This felt like the evolution beyond infrastructure as code: pure logic as conversation with enterprise-grade hosting included.
+
+      ## The Good: Rapid Value Creation
+
+      Speed was incredible. Within hours, I went from idea to a working system delivering daily value. No boilerplate, no setup overhead, no infrastructure management, no database configuration, and no manual coding of business logic. Moving to n8n Cloud eliminated even the Docker setup time, leaving just pure problem-solving through prompting.
+
+      The hybrid approach of AI-generated JSON workflows with vibe coded logic nodes made complex systems surprisingly manageable. I could generate sophisticated workflows AND custom algorithms with Cursor, then use n8n's UI to understand and debug everything.
+
+      Code node flexibility meant I never hit platform limitations. When n8n's built-in nodes couldn't do exactly what I needed, I just vibe coded a custom solution.
+
+      Free tier viability meant this actually runs in production without ongoing costs. OpenWeatherMap's free tier plus Gemini's generous limits make this sustainable indefinitely.
+
+      AI integration felt natural, not bolted on, but genuinely useful. Having personalized coaching based on actual conditions added real value beyond basic automation.
+
+      ## The Challenges: Reality Check
+
+      Let's be honest - this approach isn't perfect yet. Here's what I actually experienced:
+
+      - **Disconnect between n8n instance and Cursor** - Working locally while deploying to cloud created friction
+      - **Bug fixing in loops** - When AI-generated code failed, debugging required understanding both n8n context and the generated logic
+      - **Breaking unrelated things while trying to fix bugs** - Making changes to one node sometimes affected unexpected parts of the workflow
+      - **Tunnel vision on specific issues** - Getting stuck on AI-generated solutions that weren't quite right
+      - **The future isn't here yet... but it's close!** - The tooling is powerful but still requires patience and iteration
+
+      There are also traditional development challenges to consider. Code node debugging can be trickier than traditional development. Complex logic still needs good prompting and multiple iterations. Testing isolated code nodes requires different approaches. And version control and collaboration remain tricky with JSON workflows.
+
+      ## The Future of Development?
+
+      This experiment reinforced my belief that we're shifting toward system orchestration with AI-generated logic. Why build email sending when you can connect to a service? Why write scoring algorithms when AI can generate them? Why create data processing when you can vibe code it?
+
+      The developer's role is evolving from "How do I implement this?" to "How do I connect and orchestrate these services and what logic do I need to glue them together?"
+
+      This doesn't replace traditional development. Complex applications still need sophisticated user interfaces, database design, and architectural decisions. But for automation, integrations, and workflow-driven solutions, this combination of platform orchestration with vibe coded logic represents a genuinely different approach.
+
+      The combination of AI-generated workflows with AI-generated custom code creates a development experience that's both incredibly rapid and surprisingly powerful.
+
+      ## Beyond Weather: Expanding the Automation
+
+      Once I had the weather system running smoothly, I couldn't resist applying the same approach to other areas. Enter the **Strava Auto-Descriptions project**, another workflow that demonstrates the versatility of this AI-orchestrated approach.
+
+      The challenge was simple: every time I complete a run or bike ride, Strava gives it a generic name like "Morning Run" or "Afternoon Ride." Boring. I wanted something more descriptive and engaging.
+
+      So I built an automated workflow that:
+
+      - Triggers whenever I complete a Strava activity
+      - Analyzes the workout data (heart rate zones, pace patterns, power metrics)
+      - Uses Gemini AI to classify the workout type and generate engaging titles
+      - Automatically updates the Strava activity with AI-generated descriptions
+
+      The results speak for themselves. Instead of "Morning Run," I get "🚀 Easy run with tempo block." Rather than "Afternoon Run," it generates "⚡ Interval session 5x3min." And boring "Evening Ride" becomes "🔥 Threshold workout 20min@FTP."
+
+      This second project proved that the approach scales beautifully across different domains.
+
+      ## The Real Test
+
+      The real test of any development approach is: would you actually use what you built?
+
+      **Two weeks later:** When the system warns about humidity or suggests optimal timing, I actually consider it. It has influenced my training decisions. When the system warns about incoming precipitation or suggests optimal timing, I listen. That's when you know it works.
+
+      ## Key Insights
+
+      - **Orchestration > Implementation** - Connect services, don't rebuild them
+      - **Use AI to generate everything** - Workflows AND custom logic
+      - **Vibe Coding is not just a meme** - Describe what you want, get what you need
+      - **Choose the right AI for automation** - Gemini 2.0 Flash works well for this use case
+      - **The future is now** - As developers, we're moving more toward orchestration
+
+      ## The Complete Setup
+
+      The entire project runs on free tiers and includes cloud-hosted n8n with enterprise-grade reliability, built-in email capabilities and scheduling, vibe coded workflows with embedded JavaScript logic nodes, zero infrastructure management or server maintenance, automated backups and professional monitoring, version-controlled workflows as importable JSON files with embedded code, and instant deployment with cloud-based configuration.
+
+      The development toolkit includes pnpm scripts for deploying workflows to n8n Cloud, downloading workflows from cloud, checking workflow JSON integrity, and creating version control snapshots.
+
+      What makes this approach powerful is that once you have the cloud hosting, creating new workflows with custom logic becomes incredibly fast. Generate the workflow AND the code with AI, import it into n8n Cloud, test and iterate without any infrastructure concerns.
+
+      ## The Migration: From Self-Hosted to Cloud Hosting
+
+      I first ran this locally in Docker. For production, I did not want to manage containers, updates, or deployment plumbing, so when I got access to n8n Cloud I moved it there and kept building.
+
+      What improved: maintenance overhead dropped to near zero, with no Docker updates, server monitoring, or backup chores. Reliability improved with solid uptime and automatic scaling I could not get locally. Deploys became instant, and email, scheduling, and monitoring were available out of the box. Most importantly, I could focus on the workflow logic.
+
+      What I gave up: there is less local control, mocking external services or working fully offline is harder, and there’s a natural disconnect between Cursor and the deployed n8n Cloud instance which added friction when iterating and debugging. I did less infrastructure work, so I learned less about orchestration.
+
+      The unexpected takeaway: moving to cloud did not only remove infrastructure work, it also changed my headspace. I stopped thinking about "How do I deploy this?" and started asking "What should I automate next?"
+
+      ## Your Next Steps
+
+      If you're curious about automation platforms with custom logic, n8n Cloud is genuinely accessible. Start simple with a personal workflow or notification. Add custom logic by vibe coding code nodes for data processing or formatting. Try AI integration using Gemini's free tier. Think in systems about what services you could connect and what logic you need.
+
+      A few directions to explore:
+
+      - **Data analysis workflows**: automated insights from any data source
+      - **Content pipelines**: AI-enhanced writing, editing, formatting
+      - **Personal productivity**: smart scheduling, task management, notifications
+      - **Business automation**: customer service, lead qualification, reporting
+      - **Creative tooling**: image processing, content curation, social workflows
+
+      The tools are there. The APIs are available. AI can generate both the workflows and the custom logic. The only limit is imagination.
+    date: 2025-08-11T00:00:00.000Z
+    slug: from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai
+    tags:
+      - ai
+    intro: >-
+      I set out to make my mornings easier and build something fun: a personal running coach that lands in my inbox at 6am. Using n8n Cloud to orchestrate APIs, Cursor to generate the workflows and code nodes, and Gemini to turn weather data into clear coaching advice, I wired up a simple scoring model, friendly analysis, and a nicely styled email (yes, the AI handled the email CSS). This is a practical walkthrough of the approach—less handwritten code, more connecting services—what worked, what didn’t, and why this pattern feels like where everyday developer automation is headed.
+    teaserCopy: >-
+      I set out to make my mornings easier and build something fun: a personal running coach that lands in my inbox at 6am. Using n8n Cloud to orchestrate APIs, Cursor to generate the workflows and code nodes, and Gemini to turn weather data into clear coaching advice, I wired up a simple scoring model, friendly analysis, and a nicely styled email (yes, the AI handled the email CSS). This is a practical walkthrough of the approach—less handwritten code, more connecting services—what worked, what didn’t, and why this pattern feels like where everyday developer automation is headed.
+    teaserImage: /img/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai-hero.png
+    title: "From Idea to Intelligent Running Coach: Vibe Coding with n8n and AI"
+  - type: articles
+    body: >-
+      I was chatting with some colleagues recently about Cursor AI and GitHub Copilot, and it got me thinking about how we all use these tools. While many of us have moved beyond just basic code generation (asking for React components or help with algorithms), I've noticed we sometimes forget about all the other ways AI can fit into our development workflow.
+
+      Even developers using, for instance, Cursor's agent mode often focus primarily on the code generation and review aspects. But these AI tools are capable of so much more than just churning out code.
+
+      After diving deep into agent mode recently and really exploring what these tools can do, I've found that AI can help with almost every aspect of development, from the boring documentation tasks we always postpone to the architectural decisions that keep us up at night.
+
+      Let me share some ways AI has expanded my development workflow, beyond the usual code generation.
+
+      ## 1. Write the documentation you never write
+
+      Let's be honest: we all hate writing documentation. But what if I told you that you could just ask AI to do it for you?
+
+      I've started using Cursor to generate comprehensive README files, API documentation, and even inline code comments. The beauty is that it has full context of your codebase, so it's not writing generic docs. It's writing documentation specific to your project.
+
+      Try prompting: "Create detailed documentation for this API endpoint including examples, error handling, and edge cases" or "Generate a README for this project that explains the architecture, setup instructions, and common use cases."
+
+      The result? You actually have proper documentation now, and your team loves you for it.
+
+      ## 2. Explain unfamiliar codebases
+
+      Ever been thrown into a new project or asked to make changes to a part of the codebase you've never touched? Instead of spending hours trying to understand the architecture, just ask AI to be your guide.
+
+      I regularly prompt Cursor with: "I don't know this codebase. I need to make some changes to the API response for the product detail page. Explain this project and in particular where I need to make changes and suggest how to do it."
+
+      It's like having a senior developer who knows the entire codebase sitting next to you, ready to explain any part of it on demand.
+
+      ## 3. Get expert code reviews before committing
+
+      This one changed my game completely. Before pushing any significant changes, I ask AI to review my code from different perspectives:
+
+      - "Give me an expert performance review on this code"
+      - "Provide a security review of this implementation"
+      - "General code review: what can be improved?"
+
+      It's not perfect, but it catches issues I might have missed and often suggests improvements I would not have thought of. Think of it as a pre-review before your actual code review.
+
+      ## 4. Write meaningful commit messages
+
+      We've all written commit messages like "fix stuff" or "updates." Now I let AI write proper commit messages with actual commit bodies.
+
+      AI can analyze your changes and generate descriptive commit messages that follow best practices. No more lazy commits: every change gets properly documented.
+
+      ## 5. Create project tooling and scripts
+
+      AI excels at creating supporting tools for your project. I've used it to generate validation scripts, precommit hooks, deployment scripts, and custom utilities.
+
+      For example, I recently had it create a validation script that checks generated workflows in a project I'm working on. The agent now uses this same script to test its own work, and we've integrated it into our CI pipeline.
+
+      ## 6. Create comprehensive testing strategies and edge cases
+
+      While AI can certainly generate test code (which is basically code generation), what's more valuable is using it to think through testing strategies and identify edge cases you might miss.
+
+      I'll prompt: "What testing strategy would you recommend for this feature? What edge cases should I consider?" Then use those insights to guide my own test writing or to generate tests based on a solid strategy.
+
+      ## 7. Plan architecture and technical decisions
+
+      Before diving into implementation, I've started using AI to brainstorm architectural approaches. The beauty of using Cursor for this is that it has full context of your existing codebase.
+
+      Instead of getting generic advice like you would from ChatGPT, you can ask: "Given our current architecture, how should we implement real-time notifications? What patterns are we already using that we should follow?"
+
+      It will not make the final decision for you, but it's excellent at laying out options that actually fit your existing codebase and helping you think through the implications.
+
+      ## 8. Analyze and improve your existing code patterns
+
+      Instead of generating new code, use AI to analyze patterns in your codebase and suggest improvements. "Look at how we handle API responses across this project: are there inconsistencies we should fix?" or "Review our error handling patterns and suggest standardizations."
+
+      This helps maintain consistency across your codebase and can reveal technical debt you might not have noticed.
+
+      ## 9. Write release notes and changelogs
+
+      Instead of hastily writing "bug fixes and improvements" for every release, let AI analyze your commits and generate proper release notes that actually explain what changed.
+
+      ## 10. Create onboarding documentation
+
+      New team members joining your project? Have AI create comprehensive onboarding guides that explain the codebase structure, development workflow, and common tasks.
+
+      ## The mindset shift
+
+      Here's what I've realized: AI tools like Cursor's agent mode are not just about generating code faster. They are about removing all the friction around the important but tedious parts of development that we usually skip.
+
+      Documentation, proper commit messages, comprehensive testing, thorough code reviews: these are the things that separate good developers from great ones. But they are also the things we often do not have time for when we are focused on shipping features.
+
+      AI removes that excuse. Now I can be that developer who actually does all the best practices, without the time investment that previously made it impractical.
+
+      ## A word of caution
+
+      I've definitely noticed myself becoming more dependent on AI and sometimes less aware of how certain parts of my codebase work. It's important to always review what AI generates and make sure you understand it.
+
+      Think of AI as that incredibly productive pair programming partner who never gets tired, but still needs you to make the important decisions and catch their mistakes.
+
+      ## Expanding your toolkit
+
+      The next time you fire up Cursor or Copilot, consider all the other tasks in your development workflow beyond just the code you need to write.
+
+      Documentation that needs updating, commit messages that could be clearer, code patterns that could be more consistent: these are all opportunities where AI can remove friction and help you work more effectively.
+
+      What I love about this approach is that AI becomes less about replacing what we do and more about helping us do the things we know we should be doing but often do not have the bandwidth for.
+
+      These tools can genuinely help you become a more thorough developer, just with a lot less manual work.
+    date: 2025-08-01T00:00:00.000Z
+    slug: top-10-ways-ai-can-help-your-dev-workflow-outside-of-code-generation
+    tags:
+      - ai
+    intro: >-
+      AI tools like Cursor and GitHub Copilot can do way more than just generate code. I've been exploring how to use them for documentation, commit messages, code reviews, and other workflow tasks that often get skipped. Here are some practical ways to expand how you use AI in development beyond the usual code generation.
+    teaserCopy: >-
+      AI tools like Cursor and GitHub Copilot can do way more than just generate code. I've been exploring how to use them for documentation, commit messages, code reviews, and other workflow tasks that often get skipped. Here are some practical ways to expand how you use AI in development beyond the usual code generation.
+    teaserImage: /img/articles/top-10-ways-ai-can-help-your-dev-workflow-outside-of-code-generation-hero.jpg
+    title: "Top 10 ways AI can help your dev workflow outside of code generation"
+  - type: articles
+    body: >-
+      If you're building for the web and want lightweight AI functionality like summarization or translation, Chrome now has some built-in capabilities you can use straight out of the box! These features run on-device using Google's Gemini Nano model and are exposed through browser APIs. That means no API calls, no API keys, and no additional libraries required.
+
+      ![Dave in front of a banner that says "Google Developer Expert Summit"](/img/articles/google-io-connect-berlin.jpg)
+
+      [Whilst visiting Google IO Connect and the Google Developer Expert Summit in Berlin](https://www.linkedin.com/feed/update/urn:li:activity:7344273611823702020/) as part of my Google Developer Expert perks, I saw a few demo's on this. It got me excited to enhance the web using AI capabilities in the browser. In this article we go through what’s available, how to use it, and what to expect in real-world usage.
+
+      ## Overview
+
+      As of Chrome 138, you can now access the:
+
+      - Summarizer API
+      - LanguageDetector API
+      - Translator API
+
+      All three APIs run entirely on-device using Google's Gemini Nano and are part of a push to enable local AI capabilities in the browser without having to leave the device.
+
+      ### Requirements and Limitations
+
+      As it is still a bit experimental, it's good to consider these requirements and limitations:
+
+      - Chrome 138 or later
+      - Desktop platforms only (Windows, macOS, Linux)
+      - Not yet supported on Android, iOS, or ChromeOS
+      - Enable via `chrome://flags/#enable-ai-features`
+      - Minimum pf 22 GB free disk space and 4+ GB VRAM
+
+      ## Summarizer API
+
+      The Summarizer API generates concise summaries from longer text, supporting types like `tl-dr`, `key-points`, `headline`, and `teaser`. This allows you to customize the summary style to fit your application, whether it’s generating a quick TL;DR for news articles or extracting key points from long-form content.
+
+      For example, in a web-based documentation viewer or a news aggregator, you could automatically create short overviews to help users scan content faster. Messaging platforms could also use the API to summarize long conversation threads or emails, reducing information overload. Additionally, because it runs fully on-device, it fits well with offline-first or privacy-sensitive applications where sending data to a server is not prefered.
+
+      Here’s an example on how to create a summarizer and generate a summary:
+
+      ```js
+      if ('Summarizer' in self) {
+        const summarizer = await Summarizer.create({
+          type: 'key-points',
+          format: 'markdown',
+          length: 'short',
+        })
+
+        const summary = await summarizer.summarize(text, {
+          context:
+            "I'm a long sample text, just here to fill up space. You can read me, but there’s nothing meaningful inside. I’m just repeating myself, extending my length to look impressive. Yes, I’m still going. More text, more filler. You’re still reading? That’s dedication. This is a demo, remember—nothing important, just words piling up. I’m not trying to say anything useful. Placeholder here, placeholder there, sample everywhere. Keep scrolling, I’ll keep rambling. Almost at the end now. Just a few more words and we’re done. Congratulations! You’ve reached the end of this wonderfully empty, yet convincingly long, sample text.",
+        })
+
+        console.log(summary.output)
+      }
+      ```
+
+      You can also monitor the model download progress since the underlying model first needs to be downloaded and cached locally:
+
+      ```js
+      summarizer.addEventListener('downloadprogress', (e) => {
+        console.log(`Downloaded ${e.loaded} of ${e.total}`)
+      })
+      ```
+
+      ## LanguageDetector API
+
+      The LanguageDetector API detects the language of a given text snippet. This is particularly useful in multilingual applications where the UI or logic needs to adapt dynamically based on user input.
+
+      For example, chat applications can use this to route messages for automatic translation or content moderation based on language. Web forms and editors can pre-select appropriate spellcheck languages or keyboard layouts based on detected text. Content platforms can analyze user-generated content to surface language-specific feeds or statistics.
+
+      The simple API allows you to pass a string and receive the most probable language code, making it easy to integrate:
+
+      ```js
+      if ('LanguageDetector' in self) {
+        const language = await LanguageDetector.detect(text)
+        console.log(language) // e.g., "en", "es", "fr"
+      }
+      ```
+
+      ## Translator API
+
+      The Translator API performs local translation between supported languages. This on-device translation capability enables real-time translation features without relying on external services, enhancing privacy and offline usability.
+
+      Use cases include chat or collaboration tools that provide live translations, browser extensions offering quick translation of selected text, and offline web apps that need to support multilingual content. Content moderation systems might also leverage this to flag or process foreign text more efficiently.
+
+      A basic example for translating text into English:
+
+      ```js
+      if ('Translator' in self) {
+        const translator = await Translator.create()
+        const result = await translator.translate(
+          'Ik ben een voorbeeldtekst, gewoon om ruimte op te vullen. Niet echt belangrijk, alleen wat woorden om te laten zien hoe het eruitziet. Nog een beetje tekst hier, nog wat daar. Bijna klaar nu. Klaar!',
+          {
+            to: 'en',
+          }
+        )
+
+        console.log(result.output)
+      }
+      ```
+
+      ## Things to Consider
+
+      ### 1. Still Experimental
+
+      These APIs are not yet standardized, but are now documented on MDN with an experimental status. They are currently only available in Chrome and are subject to change.
+
+      ### 2. Disk Space + Hardware Requirements
+
+      Models require approximately 1.5–2 GB of space, but Chrome requires at least 22 GB free disk space and a minimum of 4 GB VRAM. If space is too low, models silently fail to load. This can lead to no output without clear errors, as experienced during testing.
+
+      ### 3. Input Length Limits
+
+      Due to limited model context size, large documents need chunking and hierarchical summarization.
+
+      Example:
+
+      ```js
+      const chunks = splitIntoChunks(longText)
+      const summaries = await Promise.all(chunks.map((chunk) => summarizer.summarize(chunk)))
+      const finalSummary = await summarizer.summarize(summaries.map((s) => s.output).join('\\n\\n'))
+      ```
+
+      To learn more, [see these docs on scaling summarization](https://developer.chrome.com/docs/ai/scale-summarization/).
+
+      ## Other Use Cases
+
+      Browser extensions can use these APIs to provide on-the-fly summarization or translation of selected text, enhancing user experiences and flows without leaving the page. Smart input fields might automatically detect language and translate user input in real time, or adapt spellchecking accordingly. Documentation viewers and knowledge bases could dynamically generate summaries or translate content, making them more accessible across regions. Messaging or email clients can integrate live translation to break language barriers between users.
+
+      Offline web apps and progressive web apps in particular are a good use case. Since these APIs run locally without cloud dependencies. Lastly, onboarding experiences in multi-region apps can leverage automatic language detection and translation to create a more personalized and inclusive experience.
+
+      ## Conclusion
+
+      Chrome’s built-in AI APIs offer you easy access to powerful summarization, translation, and language detection tools that run fully on-device. While still experimental and requiring significant disk space and hardware, they offer a promising direction toward more privacy-preserving and performant AI on the web.
+
+      If your app targets desktop Chrome users with the hardware resources available, these APIs are worth exploring now. Especially for enhancing user experience through progressive enhancement.
+    date: 2025-06-30T00:00:00.000Z
+    slug: built-in-ai-in-chrome
+    tags:
+      - ai
+      - front-end
+    intro: >-
+      Chrome now offers built-in, on-device AI APIs for summarization, translation, and language detection without the use of cloud required.
+    teaserCopy: >-
+      Chrome now offers built-in, on-device AI APIs for summarization, translation, and language detection without the use of cloud required.
+    teaserImage: /img/articles/built-in-ai-in-chrome-hero.jpg
+    title: Built-in AI in Chrome
+  - type: articles
+    body: >-
+      I was looking into an app for some breathing exercises I wanted to do. Naturally, one of the first things that went through my head was: “I can make something like this myself”. But then, as always, I thought about all the coding I’d have to do for this simple app. I need to scaffold the project, build the logic, build the UI etcetera. Not complex, but a lot of grind work.
+
+      Nowadays, whenever I think of a simple cumbersome task that requires grind work, I think AI! So, let’s make this a challenge. Let’s “vibe code” this breathing exercise app from scratch to finish. Some rules:
+
+      - I may not touch a single line of code in the editor
+      - I may not provide example code in the prompting
+      - It needs to be designed to a level I usually design my side projects in
+      - I need to use simple tooling that is widely accessible
+
+      I ended with using [Cursor](https://www.cursor.com/) for this. Cursor is an AI code editor that I’ve been trying out recently. Even though I now have the paid version, I used the free version for this challenge. Which model did I use? I have ab-so-lutely no idea. That’s the point. Can someone who is not as much into AI build something cool as well using one of these tools?
+
+      ## Setting up the project
+
+      I created a new empty GIT repository and wrote my first prompt.
+
+      ```jsx
+      init a nextjs app with app router for paxaura project
+      ```
+
+      I wanted to use the “new” app router in Next.js for this project. I also, like any cool new side project, gave it a nice name. “Pax” (Latin for peace) and “Aura” (lating for breath/air/essence). Well, at least according to the AI I used.
+
+      Now, it had no issue performing this task. It doesn’t surprise me at all as there is so much documentation on how to set up a new Next.js project not even mentioning all the example repositories it can draw inspiration from.
+
+      If you’ve never seen Cursor before, you basically have a regular code editor with a chat window at the side. What’s pretty cool is that Cursor will be able to access the entire project, create/read/update/delete files and even run commands from the terminal.
+
+      ![Code editor with an AI chat on the right hand side](/img/articles/cursor-init-project.png)
+
+      You can see it explains what it’s going to do first. Then it opens a small terminal inline and first asks me to hit the “run this command” button. This is something nice because of course, you’d like to keep a bit of control in what it does in your terminal. When running the generated command it initialised the entire Next.js app with sensible defaults. Cool, as it’s good practice, let’s quickly commit this. Wait, can’t the AI do that for me? Of course! Just prompt “commit this for me”. It then does a scan of the changes and types out a neat commit message to go with it.
+
+      ## Hey AI, build this entire app for me in one go!
+
+      Naturally, I wanted to do as little as possible myself. I could give it step-by-step instructions, but what happens if I just describe the app that I want? Can I just let it figure it out itself. Vibe Coding 🤘. Here’s the simple, non-technical, prompt I gave it:
+
+      ```jsx
+      I want to create an app with simple breathing exercises. I want an overview page with the different ones (i'll share the actual excersises later) and a detail page were you can do them. They will be simple time based inhale exhale reps
+      ```
+
+      Then it went to work. Step by step it created folders, files, types etcetera. All the things I would normally do. Maybe even a bit neater as I’d take some shortcuts during a side project.
+
+      ![Code editor with an AI chat on the right hand side and all files created](/img/articles/cursor-mvp-project.png)
+
+      And just like that, we had a working Minimal Viable Product (MVP) within minutes of starting this challenge. It generated an overview page:
+
+      ![Basic overview page with cards that have exercises for breathing](/img/articles/paxaura-mvp-overview.png)
+
+      What I found interesting is that it created some features I didn’t instruct it to or even thought of. For instance, giving the exercises labels like beginner, intermediate and advanced is a nice addition. As well as the benefit tags. Naturally, you then want to be able to filter so it made a filter bar. A nice extra benefit of using AI, it generated the data to be used for the exercises as well. I don’t know all breathing technique exercises so nice to see that it listed them for me.
+
+      When you click on one of the cards it brings you to the detail page:
+
+      ![Basic detail page with the breathing exercise on there](/img/articles/paxaura-mvp-detail.png)
+
+      Here it created a working exercise component including the breathing animation which grows and shrinks on the inhale and exhale. It also added the live information on whether to inhale/exhale, how many seconds remaining, and which repetition you’re currently doing. Nice! Within minutes I have a working MVP!
+
+      ## Adding feature after feature
+
+      Then it was just a matter of giving it more and more features by prompting for it. For example:
+
+      - “Give it dark and light mode including a toggle”
+      - “Add a search bar on the overview page”
+      - “I want to be the style to use gradients, use Tailwind’s purple color scheme”
+      - “I want to use the Radix UI component Library”
+      - “Add audio feedback with a short beep so users can close their eyes and follow along”
+      - “Make it installable as a Progressive Web App (PWA)
+      - “Add a favourites button that stores your favourites in the browser”
+      - “Use icons in the labels and buttons”
+      - “Add and link to content pages in the app that have more information on the benefits”
+      - etcetera
+
+      It was amazing to see how quickly I was able to go from idea, to prompt, to actual value for the user in the app at a rapid pace. Each feature inspired another and I started to prompt based on my user needs. What do I want the app to do? It doesn’t matter what the effort is. Just build.
+
+      Before I knew it, I created a very useful breathing exercise web application that is free for the world to use:
+
+      ![Similar overview to before but with more content, better design and more features](/img/articles/paxaura-final-overview.png)
+
+      ![Similar detail to before but with more content, better design and more features](/img/articles/paxaura-final-detail.png)
+
+      You can try it yourself over at [paxaura.davebitter.com](https://paxaura.davebitter.com)! Curious about the source code it generated? Head over to [github.com/DaveBitter/paxaura](https://github.com/DaveBitter/paxaura).
+
+      ## The good
+
+      First, some benefits you can expect. I was able to quickly get all the simple grind work done. Not having to start with the boring bits I’ve done a million times like setting up a new Next.js project, creating simple layouts, creating all the files, creating the types etcetera. The things we as developers can do with our eyes closed. Not having this barrier to actually get started in building this side project was incredibly nice. The AI was able to create a setup with a first working MVP in minutes so I could immediately start building the cool parts!
+
+      Once this base was there, I was able to generate real user value at an unbelievable pace. Many items? Create a search bar. Storing favourite exercise? Create a working system that uses LocalStorage in the browser. No audible feedback during the exercise? Use the Web Audio API to generate a beep. These features are not hard to build, but do take some times in looking up docs, creating the files and writing the code. Being able to almost build these features real-time got me into a mode of thinking purely from a user standpoint. I want/need this. Build it. Now.
+
+      An unexpected benefit I saw was that (A)I also build the nice to have features. For example, i like to have icons in the labels. Useful to have, but not the most important thing to normally spend time on. Now I just mentioned I’d like icons in all labels and within a minute it was there.
+
+      Finally, I was impressed by the extras it built that were indeed good to add for the best user experience. I mentioned I wanted an audible beep during the switching between inhaling and exhaling. What I didn’t think about was that some users might not want that. So it added a mute button without me asking. Awesome!
+
+      ## The bad
+
+      Naturally, not all was good. Sometimes you hear people say: “Just use AI. Just vibe code it.”. You get the feeling that AI is able to create the end result I showed you without any issue. But that wasn’t the case I found.
+
+      Firstly, I noticed I did had to use some technical terms here and there to steer it towards what I want. For instance, when prompting for the functionality of favouriting it tried to make Next.js API routes and was expecting for me to have a database to store the user’s favourites. Then also you need to have user management, so on, so on. I stopped it because that was way overkill for me. I mentioned to use LocalStorage for it. It then perfectly builds the feature. Of course, I should’ve given it the context that I wanted the easy solution, but on the other hand I asked myself why? With all the prompting and code we generated, it was clear that this is a super lightweight simple breathing exercise app. Adding such complexity just to favourite a few exercises is, in my opinion, overengineering. In **my opinion**. How did I get to that opinion? From building applications for years and making that judgment. I felt that sometimes it was to focused on the functionality and not the bigger picture.
+
+      Secondly, it often changed unrelated things and actually breaking parts of the application. When it was building the feature of the audible feedback, it had to tie into the state of whether the user was inhaling or exhaling. It tried to be clever and hook into the breathing animation code. Now normally, I’d separate these two concerns as they shouldn’t affect each other. Outside of it being neater to split, it didn’t work when combined. As a real vibe coder, I can’t remember what the actual issue was, but it needed to change some of the code of how we animate. It then made the audio work, but the visual was now broken. Naturally, chatting a bit back and forth I could steer it to a better solution. But it did keep breaking the animation until I said that it should just be separate and hook into the state with a `useEffect` hook.
+
+      Thirdly, I felt the AI had a bit of tunnel vision. Kind of what you see when people just start out with programming but with one dangerous difference. When you just start out with programming, you focus on just the bit you need to build. Before you do any actual real damage, you probably get stuck and ask for some help. Then whoever helps you probably mentions what parts you might break with the solution you want to build. Not the AI. It happily went on creating the feature I prompted for while simultaneously breaking other features. And I don’t mean syntax errors. Don’t get me wrong, it sometimes made issues there as well, but I mean functional issues. Suddenly a dropdown doesn’t filter the list anymore as the AI updated the handler and forgot to check the other components using it. This happend more than once and I actually shipped it to the live version as well as I just didn’t catch it. But Dave, you should’ve checked it yourself. No, why? The AI should check it for me, right? I thought that that was part of vibe coding. Not checking all the code but trusting that the AI builds it right.
+
+      Finally, when it doesn’t get it right the first few times the proces got incredibly frustrating. You know when you have a discussion with someone and you keep on going in circles and feel like they don’t remember what you already discussed and said? Kind of like that. I had to start fresh chats just to be able to get out of that loop. Incredibly annoying! But on the other had, very human-like hahaha!
+
+      ## The future
+
+      There’s no way around it, AI isn’t going anywhere. I’m not going to predict the future for you here. I’ll just share my experiences and thoughts. The goal of this experience was to fully immerse myself in the AI tooling. Fully rely on it to do my job. And it did for the most part. The way I build changed, but I felt like I was still in the driver’s seat. I was able to deliver more in a shorter time. It could (and will) improve in a lot of areas but working with this kind of programming approach is, in my opinion, where we are heading. Sure it doesn’t replace me but it empowers me so much!
+
+      The question I asked in the end was if I could do better on my own. Well, yes and no. At the moment, the AI still needs me to give guidance, choices etc. It can’t one-on-one replace me. But! For this specific application, AI would always be better. You know why? Because without it I would’ve not even built it. It’s competing with an app I wouldn’t have build in the first place. I have the skills, but not the time en focus to actually built it in my free time. Empowered with AI I did and I’m happy with the end result.
+
+      And now what? I get to use [my breathing exercise app](https://paxaura.davebitter.com/) every time I hear somebody say I will be out of a job as I can just be replaced. Nice!
+    date: 2025-05-27T00:00:00.000Z
+    slug: my-experience-ai-vibe-coding-a-complete-web-application-from-scratch
+    tags:
+      - ai
+      - cursor
+      - front-end
+    intro: >-
+      Discover how I built a complete breathing exercise web app without touching a single line of code, using AI to transform an idea into a fully functional product. What was good, what was bad and is this where we are heading in our industry?
+    teaserCopy: >-
+      Discover how I built a complete breathing exercise web app without touching a single line of code, using AI to transform an idea into a fully functional product. What was good, what was bad and is this where we are heading in our industry?
+    teaserImage: /img/articles/paxaura-final-overview.png
+    title: My experience AI vibe coding a complete web application from scratch
+  - type: articles
+    body: >-
+      ## The program
+
+      I traveled out to Paris Sunday evening. After a quick meal and early night’s sleep I was ready for the first day on Monday. The first day was a [Google Developer Expert](https://developers.google.com/community/experts) (GDE) bootcamp called Train the Trainer on AI. Day two was a Google Cloud Summit which was more open to the public. Finally, day three focussed on Gemma with a nice surprise.
+
+      ## Day 1: GDE Bootcamp Train the Trainer AI
+
+      ![Screen welcoming the GDEs to the Train the Trainer event](/img/articles/ttt-ai-bootcamp-screen.jpg)
+
+      It was really cool to visit the Google Paris Headquarters. Just look at what a nice building it is:
+
+      ![Beautiful architecture of Paris Office](/img/articles/google-paris-office.jpg)
+
+      The day consisted of a range of presentations. [Richard Seroter, Google Cloud Chief Evangelist](https://www.linkedin.com/in/seroter/) kicked of with showcasing the Google Cloud platform specifically surrounding AI. What I took note of was how easy it becomes nowadays to proper tooling to deploy entire architectures. His demo showed a seamless experience where the platform works for you instead of you for the platform. Of course a demo is seamless, but even as a developer that is not specifically skilled in the Google Cloud platform I could easily follow along and work with it if needed. And this is specifically a point that he made.
+
+      ### From Front-end Developer to Developer
+
+      Richard made the point that our “old roles” might be more of a thing of the past. With the assistance of AI, a Front-end Developer can now more easily get assistance in doing some Back-end Development, Full-stack Development, Dev Ops etc. Naturally, these roles stay, but it makes it easier nowadays to venture a bit outside of your own little island by utilising AI. I tend to agree, I do think it can also go wrong. You might be able to produce a working product, but it’s hard to verify whether what you did was right, safe etc. Again, you could use AI to verify your work, but I wouldn’t underestimate this.
+
+      ### Application Design Center (ADC)
+
+      Richard also shared a demo on [Application Design Center](https://cloud.google.com/application-design-center/docs/overview) where he showed how easy it was to design, share and deploy Google Cloud application infrastructure. What struck me is how accessible it seemed for me who isn’t familiar with this platform as much. I liked how well they integrated AI assistance throughout the interface. It really seems to assist you in setting things up, writing good queries and more. They really seem to have an approach of having the platform do the work instead of the developer.
+
+      ### Gemini Deep Research
+
+      He finished his talk by showcasing Gemini Deep Research. It was cool to see how he used it to make a sprint planning for a project. More specifically, he uploaded documents he found on things like secure application development, performance and more. He then inputted the capacity of his team and how much time he’d like to spend on optimizing the application. The AI then made a nice sprint planning incorporating not just how many hours to spend, but also made stories based on the best practices that were found in the documents. Naturally, this won’t replace a product owner, but it simply makes it easier to create these plans and ideate. [Make sure to check it out here](https://gemini.google.com/deepresearch?hl=en).
+
+      ### How to host an AI workshop
+
+      Next, [Valentin Deleplace, Developer Advocate Google Cloud](https://www.linkedin.com/in/deleplacevalentin/), gave some practical tips on how to host a good workshop. He listed what you need to have an enjoyable experience. This was a nice reminder to have as I host workshops myself as well. He then showed how we, as GDEs, can request Google Cloud credits for our workshops. Definitely will see if I can host one this year!
+
+      ### Gemini overview
+
+      Finally, [Guillaume Vernade, Developer Advocate Google Gemini](https://www.linkedin.com/in/guillaumevernade/) and [Guillaume Laforge, Developer Advocate Google Cloud](https://www.linkedin.com/in/glaforge/) took us through Gemini. It was quite an information packed session where they showed all the things Gemini can do. First, they showed function calling. Basically a way where you write functionality that the AI assistant then can use (call) to perform an action. For instance, you write a function that turns on the lights in your house. Gemini can then call this when it needs to. Next, they showed 3D image recognition. Image recognition is of course nothing new. I’ve written these article showcasing it in the past:
+
+      - [On-the-Fly Machine Learning in the Browser with TensorFlow.js](https://techhub.iodigital.com/articles/on-the-fly-machine-learning-in-the-browser-with-tensor-flow-js)
+      - [Smart cropping with native browser Face Detection](https://techhub.iodigital.com/articles/native-face-detection-cropping)
+
+      ![3D squares mapped on image with objects](/img/articles/gemini-spatial-understanding.png)
+
+      What made it cool is that it can not just recognize things in an image, but give an estimate of the 3D space. Definitely check out the [colab Pointing and 3D Spatial Understanding with Gemini 2.0 (Experimental)](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb#scrollTo=Bgrop9U9VI08)!
+
+      Next, we had a look at video understanding. [Multimodal live streaming is so incredibly cool!](https://ai.google.dev/gemini-api/docs/live) Make sure to check this demo out:
+
+      <iframe width="100%" style={{aspectRatio: "16/9"}} src="https://www.youtube.com/embed/9hE5-98ZeCg?si=Ewu4hCtgqAmUxSKx&amp;controls=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+
+      It’s incredible to see how natural this seems to work. Even being able to interup the AI is very cool. It reminded me a lot of what I’ve been working on myself with voice and AI:
+
+      - [Interacting with ChatGPT through Voice UI on the web](https://techhub.iodigital.com/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web)
+      - [Reducing latency in AI Speech Synthesis](https://techhub.iodigital.com/articles/reducing-latency-in-ai-speech-synthesis)
+
+      I will definitely play around with this more! Maybe build an Aiva 2.0?
+
+      ### Model Context Protocol
+
+      One of the many new things I learned was about [Model Context Protocol (MCP) by Anthropic](https://www.anthropic.com/news/model-context-protocol). MCP is Anthropic's new open-source standard that tackles a real problem in the AI world - connecting AI assistants to where your data actually lives. Even the most advanced AI models hit a wall when they can't access your content repositories, business tools, and development environments. Before MCP, you'd need a custom integration for every data source, making truly connected AI systems a nightmare to scale. MCP fixes this by providing a universal way for AI systems to talk to your data sources, replacing the fragmented approach with a single protocol. The setup is straightforward: developers can expose their data through MCP servers or build AI applications that connect to these servers. Pre-built MCP servers are available for popular systems like Google Drive, Slack, GitHub, Git, Postgres, and Puppeteer. This means AI assistants can access the context they need to give you better, more relevant responses without getting trapped behind information silos.
+
+      ### Building a small application whilst attending
+
+      I got so inspired during the talks that I wanted to build a small application with full AI assistance. I used Gemini to ideate with. We came up with making a small application where the user can upload an image and a bit of text. The AI will then come up with a meme and generate an image.
+
+      ![Screenshot of input fields and a generated photo with text on it](/img/articles/ai-meme-generator.jpg)
+
+      Note that the quality of the jokes varies haha! What’s cool is that I ideated with Gemini, designed and wrote all the code using [Cursor](https://www.cursor.com/), generated it, let Cursor refactor the app to make it production-ready, let Cursor write the documentation, create the commits, and create the pull request, and finally let [Copilot on GitHub create a pull request](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-for-pull-requests/using-copilot-to-help-you-work-on-a-pull-request). What especially stood out to me was that I used several AI tools together. I got to pick the tool I wanted for each stage of the process, which was really nice. I will definitely write an article soon that goes a bit more in-depth on this, as I feel this is the direction we are heading as developers.
+
+      ## Day 2: Google Cloud Summit
+
+      ![Front of the movie theatre Le Grand Rex Paris](/img/articles/le-grand-rex-paris.jpg)
+
+      On the second day I visited the Google Cloud Summit at the Rex Theater in Paris. What a beautiful place! I got to see a similar presentation by Richard Seroter again and a variety of, of course, cloud focussed talks. As this was a bit less what I do day to day, I had a bit of a hard time to follow sometimes.
+
+      ![Big stage in the movie theatre](/img/articles/google-cloud-summit-stage.jpg)
+
+      What I did take away from the day was the focus on improving of the developer experience when working with cloud. Or maybe not even developer experience, but the experience for someone configuring. I felt like it is becoming more and more accessible for “non-cloud people” to work with it. I think it’s a natural thing where more people can deliver value as the platform does more and more for you.
+
+      ## Day 3: Gemma Developer Day
+
+      ![Sign with Gemma Developer Day on it](/img/articles/gemma-developer-day.jpg)
+
+      On day 3 we dove into everything Gemma. At the intro, I mentioned that there was a nice surprise. [Gemma 3 got announced](https://blog.google/technology/developers/gemma-3/) live on stage! Really cool to see! After the initial announcement, an incredible amount of information was shared. The day was filled with many, tightly choreographed presentation back-to-back.
+
+      Firstly, a lot of numbers were shared. Like an immense amount. It was impressive to see how powerful they could make Gemma 3 whilst keeping the size down. I was particularly interested in the Gemma 3 2B model as it is tiny. What cool use cases can we come up with to use this tiny model? Maybe ask Gemini ;).
+
+      ### Multilinguality
+
+      One of the big things Google focussed on was multilinguality. Gemma 3 has out-of-the-box support for over 35 languages and pretrained support for over 140 languages. This is important as you want to let people interact in the language they speak, but also have a diverse pretraining proces. Cool to see the effort they made!
+
+      ### NVIDIA Jetson Orin Nano Developer
+
+      ![Small compute without a case](/img/articles/nvidia-jetson-orin-nano.jpg)
+
+      Then we got another awesome surprise! We all received an [NVIDIA Jetson Orin Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-orin-nano-devkit)! It is an AI development platform by NVIDIA, designed for edge AI and robotics applications. It features an Orin Nano system-on-module (SoM) with GPU-accelerated computing, supporting AI workloads like computer vision, deep learning, and robotics. It offers high performance, low power consumption, and multiple I/O interfaces, making it ideal for prototyping AI-powered embedded systems. Needless to say, I will definitely try to build something cool with this!
+
+      ## Day 4: Exploring Paris and wrapping up!
+
+      After three jam-packed days of information it was nice to have a final day in Paris before I travelled back home in the evening. I got to explore as much as I could fit in a day to see what Paris has to offer. What a beautiful city and I will definitely come back to properly explore one day.
+
+      ![Grid with photos of Parisian architecture](/img/articles/paris-photos-grid.jpg)
+
+      Thank you Google for an amazing couple of days! And thank you to all the amazing people I got to meet (again)!
+    date: 2025-03-20T00:00:00.000Z
+    slug: three-days-of-ai-and-cloud-at-google-paris
+    tags:
+      - ai
+      - cloud
+    intro: >-
+      As part of being a Google Developer Expert, I’m fortunate to be able to join certain Google events to connect, learn and share. The past week I was invited to Google Paris for three days of everything around AI and Cloud. Here’s a short recap with interesting things I heard and what inspired me!
+    teaserCopy: >-
+      As part of being a Google Developer Expert, I’m fortunate to be able to join certain Google events to connect, learn and share. The past week I was invited to Google Paris for three days of everything around AI and Cloud. Here’s a short recap with interesting things I heard and what inspired me!
+    teaserImage: /img/articles/three-days-of-ai-and-cloud-at-google-paris-hero.jpg
+    title: Three days of AI and Cloud at Google Paris
+  - type: articles
+    body: >-
       As our web applications grow in complexity, we often find ourselves needing to split them into smaller, more manageable pieces. This is where Next.js Multi Zones comes in - a powerful feature that allows us to create micro-frontends that work together seamlessly. Let's look at how we can use Multi Zones to build scalable and maintainable web applications.
 
       ## The challenge of growing applications
@@ -7310,7 +9658,7 @@ items:
       I often come up with new ideas for applications and tools. I usually sketch these ideas in my notebook to build whenever I have spare time. This is where I used to stop because I didn't want to handle with things like databases, authentication and all other requirements that my idea might have.I asked myself 'How can I take my idea from sketch to a fully functioning and rapidly built prototype?'.
     teaserCopy: >-
       I often come up with new ideas for applications and tools. I used to stop at sketching these ideas in my notebook to build whenever I have spare time. I asked myself 'How can I take my idea from sketch to a fully functioning and rapidly built prototype?'.
-    teaserImage: /img/articles/firebase-dave.png
+    teaserImage: /img/articles/firebase-dave.jpg
     title: How to take an idea from sketch to a fully functioning and rapidly built prototype?
   - type: articles
     body: >-

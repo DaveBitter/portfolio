@@ -40,4 +40,12 @@ items:
     value: "Design"
   - key: "es6"
     value: "ES6+"
+  - key: "ai"
+    value: "AI"
+  - key: "typescript"
+    value: "TypeScript"
+  - key: "cursor"
+    value: "Cursor"
+  - key: "cloud"
+    value: "Cloud"
 ---

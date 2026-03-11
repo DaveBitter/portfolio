@@ -1,0 +1,29 @@
+---
+description: View Transitions API implementation details
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# View Transitions
+
+## How It Works
+
+`TransitionLink` intercepts clicks, calls `document.startViewTransition()`, then `router.push()`. The `ViewTransitionHandler` component resolves the transition promise when the new page renders (via `useLayoutEffect` on pathname change).
+
+Back navigation is handled by an inline `<script>` in `layout.tsx` `<head>` that registers a `popstate` handler BEFORE Next.js hydrates. This is critical — Next.js's own popstate handler runs first otherwise, completing navigation before the transition captures the old state.
+
+## Safety Timeout
+
+A 150ms timeout auto-resolves the transition if the page hasn't rendered yet. This prevents the UI from freezing.
+
+## Direction
+
+`data-vt-direction` attribute on `<html>` is set to `"forward"` or `"back"`. CSS uses this for directional slide animations.
+
+## Persistent Elements
+
+Nav and footer have `viewTransitionName: "site-nav"` / `"site-footer"` with `animation: none` so they stay still during transitions.
+
+## Common Pitfall
+
+Duplicate `viewTransitionName` values on a page silently abort ALL transitions. Always include the content type in names: `${type}-${element}-${slug}`.

@@ -1,0 +1,34 @@
+---
+description: Component patterns and conventions
+globs: src/components/**/*.tsx
+alwaysApply: false
+---
+
+# Component Conventions
+
+## Server vs Client
+
+- Default to Server Components. Only add `"use client"` when using hooks, event handlers, or browser APIs.
+- Client components: `SiteNav`, `SiteBreadcrumbs`, `Share`, `Analytics`, `ViewTransitionHandler`, `TransitionLink`, `ResumeProfileChart`.
+
+## Radix Themes + Tailwind
+
+- Use Radix components (`Card`, `Badge`, `Text`, `Heading`, `Button`, `Flex`, `Box`, `Container`, `Section`, `Separator`) for UI elements.
+- Use Tailwind for layout, spacing, and custom styling outside Radix.
+- Page sections: wrap in `<Section size="2|3">` + `<Container size="4" px="4">`.
+
+## Navigation Links
+
+Always use `TransitionLink` from `@/components/transition-link` instead of plain `next/link` for internal links. This enables View Transitions.
+
+## View Transition Names
+
+When adding shared elements between list/detail pages, use `viewTransitionName` style prop:
+```tsx
+style={{ viewTransitionName: `${article.type}-${element}-${article.slug}` }}
+```
+Names MUST be unique per page. Duplicate names silently abort all transitions.
+
+## Article Cards
+
+`ArticleTeasers` supports `columns` prop: `2 | 3 | 4`. Default is 3. The teaser cards include view transition names for image, title, badge, and date.

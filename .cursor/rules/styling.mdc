@@ -1,0 +1,36 @@
+---
+description: Styling conventions for articles and global CSS
+globs: src/app/globals.css
+alwaysApply: false
+---
+
+# Styling
+
+## Article Body
+
+Article content uses the `.article-body` class (not Tailwind prose). Styles are in `globals.css` and cover:
+- Headings (h2/h3/h4 with explicit sizes, white color, bold)
+- Paragraphs (1.8 line-height, 1.25em vertical margins)
+- Lists (`list-style: disc inside` for ul, `decimal inside` for ol)
+- Code blocks (highlight.js Atom One Dark theme)
+- Links (orange with transparent underline that fades in on hover, using `:any-link` for specificity over Tailwind reset)
+- Blockquotes (orange left border, italic, muted color)
+- Images (lazy, rounded, vertical margins)
+
+Tailwind's reset strips list markers and link colors. Always use high-specificity selectors (`.article-body ul`, `.article-body a:any-link`) to override.
+
+## Theme Colors (CSS Variables)
+
+```
+--color-primary: #ff5420 (orange)
+--color-secondary: #ff1343 (red)
+--color-bg: #222
+--color-surface: #2a2a2a
+--color-text: #fff
+--color-text-muted: #8d9297
+--color-border: #3a3a3a
+```
+
+## Gradient Text
+
+Use the `.text-gradient` class for orange-to-red gradient text. Does NOT work inside `dangerouslySetInnerHTML` — use explicit white color for article headings instead.

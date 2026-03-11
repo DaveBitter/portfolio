@@ -1,0 +1,36 @@
+---
+description: Portfolio site architecture and conventions
+alwaysApply: true
+---
+
+# Portfolio Site Overview
+
+Next.js 16 App Router portfolio site for Dave Bitter. Statically generated (`output: "export"` in next.config.ts).
+
+## Stack
+
+- Next.js 16 (App Router, Turbopack, SSG)
+- React 19 (Server Components by default)
+- Radix Themes (dark theme, orange accent) for UI components
+- Tailwind CSS v4 for layout and custom styling
+- TypeScript throughout
+- pnpm as package manager
+
+## Key Constraints
+
+- `output: "export"` means NO server-side features at runtime. All pages are static HTML.
+- API routes use `export const dynamic = "force-static"` to pre-render as static JSON.
+- `generateStaticParams` returning `[]` with `output: "export"` causes build failures — avoid creating dynamic `[slug]` routes with no data.
+- OG images use `opengraph-image.tsx` with `force-static` and `generateStaticParams`.
+- View Transitions API is browser-native (not React's `<ViewTransition>` which is canary-only). Use `document.startViewTransition()` via the `TransitionLink` component.
+
+## Content
+
+Markdown files in `content/` (not `_legacy/content/`). Loaded by `src/lib/content.ts` using `gray-matter`. Content changes require a rebuild.
+
+## Dave's Info
+
+- Title: Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, Engineering Manager
+- Company: iO (iodigital.com)
+- Email: dave.bitter@iodigital.com
+- Location: Amsterdam, NL
