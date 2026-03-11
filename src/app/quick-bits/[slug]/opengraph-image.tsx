@@ -13,5 +13,5 @@ export async function generateStaticParams() {
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const article = getQuickBits().find((a) => a.slug === slug);
-  return generateOGImage(article?.title ?? "Quick Bit", article?.teaserCopy);
+  return generateOGImage(article?.title ?? "Quick Bit", article?.teaserCopy, article?.teaserImage);
 }

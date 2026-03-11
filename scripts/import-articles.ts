@@ -4,7 +4,7 @@ import matter from "gray-matter";
 
 const ROOT = path.resolve(process.cwd());
 const IMPORT_DIR = path.join(ROOT, "import_articles");
-const ARTICLES_MD = path.join(ROOT, "content/articles/articles.md");
+const ARTICLES_DIR = path.join(ROOT, "content/articles");
 const TAGS_MD = path.join(ROOT, "content/general/tags.md");
 const PUBLIC_IMG = path.join(ROOT, "public/img/articles");
 
@@ -35,18 +35,6 @@ const ARTICLE_FILES = fs
   .filter((f) => f.endsWith(".md"))
   .sort();
 
-function escapeYamlString(s: string): string {
-  return s.replace(/'/g, "''");
-}
-
-function indentBody(body: string, spaces: number): string {
-  const indent = " ".repeat(spaces);
-  return body
-    .split("\n")
-    .map((line) => (line.trim() === "" ? "" : `${indent}${line}`))
-    .join("\n");
-}
-
 function fixImagePaths(text: string, slug: string): string {
   const pattern = new RegExp(`/articles/${slug}/`, "g");
   return text.replace(pattern, "/img/articles/");
@@ -65,40 +53,6 @@ function buildTeaserImage(images: string[], slug: string): string {
   const imgPath = images[0];
   const filename = path.basename(imgPath);
   return `/img/articles/${filename}`;
-}
-
-function buildEntryYaml(entry: {
-  type: string;
-  body: string;
-  date: string;
-  slug: string;
-  tags: string[];
-  intro: string;
-  teaserCopy: string;
-  teaserImage: string;
-  title: string;
-}): string {
-  const lines: string[] = [];
-  lines.push("  - type: articles");
-  lines.push("    body: >-");
-
-  const indented = indentBody(entry.body.trim(), 6);
-  lines.push(indented);
-
-  lines.push(`    date: ${entry.date}`);
-  lines.push(`    slug: ${entry.slug}`);
-  lines.push("    tags:");
-  for (const tag of entry.tags) {
-    lines.push(`      - ${tag}`);
-  }
-  lines.push("    intro: >-");
-  lines.push(indentBody(entry.intro.trim(), 6));
-  lines.push("    teaserCopy: >-");
-  lines.push(indentBody(entry.teaserCopy.trim(), 6));
-  lines.push(`    teaserImage: ${entry.teaserImage}`);
-  lines.push(`    title: ${entry.title}`);
-
-  return lines.join("\n");
 }
 
 function copyImages(slug: string) {
@@ -146,7 +100,6 @@ function addNewTags(newTags: Set<string>) {
   }
 
   let content = fs.readFileSync(TAGS_MD, "utf-8");
-  const closingDashes = "\n---\n";
   const insertionPoint = content.lastIndexOf("---");
 
   let newEntries = "";
@@ -167,9 +120,9 @@ function main() {
   }
 
   console.log(`Found ${ARTICLE_FILES.length} article(s) to import.`);
+  fs.mkdirSync(ARTICLES_DIR, { recursive: true });
 
   const allNewTags = new Set<string>();
-  const entries: string[] = [];
 
   for (const filename of ARTICLE_FILES) {
     const slug = filename.replace(/\.md$/, "");
@@ -187,9 +140,8 @@ function main() {
     const title = cleanTitle(data.title);
     const date = `${data.date}T00:00:00.000Z`;
 
-    const entry = buildEntryYaml({
+    const frontmatter: Record<string, unknown> = {
       type: "articles",
-      body,
       date,
       slug,
       tags: mappedTags,
@@ -197,33 +149,16 @@ function main() {
       teaserCopy: data.summary || "",
       teaserImage,
       title,
-    });
+    };
 
-    entries.push(entry);
+    const output = matter.stringify(body, frontmatter);
+    const dest = path.join(ARTICLES_DIR, `${slug}.md`);
+    fs.writeFileSync(dest, output, "utf-8");
+    console.log(`  Wrote: content/articles/${slug}.md`);
 
     console.log("  Copying images...");
     copyImages(slug);
   }
-
-  console.log("\nUpdating articles.md...");
-  let articlesContent = fs.readFileSync(ARTICLES_MD, "utf-8");
-
-  const insertAfter = "items:\n";
-  const idx = articlesContent.indexOf(insertAfter);
-  if (idx === -1) {
-    throw new Error("Could not find 'items:' in articles.md");
-  }
-
-  const insertPos = idx + insertAfter.length;
-  const newBlock = entries.join("\n") + "\n";
-
-  articlesContent =
-    articlesContent.slice(0, insertPos) +
-    newBlock +
-    articlesContent.slice(insertPos);
-
-  fs.writeFileSync(ARTICLES_MD, articlesContent, "utf-8");
-  console.log(`Prepended ${entries.length} articles.`);
 
   console.log("\nUpdating tags.md...");
   addNewTags(allNewTags);

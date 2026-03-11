@@ -65,7 +65,7 @@ export default function ResumePage() {
           >
             <Box flexGrow="1" flexShrink="1" style={{ minWidth: 0 }}>
               <Heading size="5" mb="4" className="text-gradient">
-                About
+                About me
               </Heading>
               <ResumePitch pitch={copy.elevatorPitch} showLink={false} />
             </Box>

@@ -4,13 +4,14 @@ import {
   getQuickBits,
   getTalks,
   getTags,
+  getFridayTips,
 } from "@/lib/content";
 
 export const dynamic = "force-static";
 
 const BASE_URL = "https://www.davebitter.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/`, changeFrequency: "monthly", priority: 1 },
     { url: `${BASE_URL}/articles`, changeFrequency: "weekly", priority: 0.9 },
@@ -42,6 +43,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const fridayTips = (await getFridayTips()).map((tip) => ({
+    url: `${BASE_URL}/friday-tips/${tip.slug}`,
+    lastModified: new Date(tip.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   const tagPages = Object.keys(getTags()).map((tag) => ({
     url: `${BASE_URL}/tags/${tag}`,
     changeFrequency: "weekly" as const,
@@ -53,6 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...articles,
     ...quickBits,
     ...talks,
+    ...fridayTips,
     ...tagPages,
   ];
 }

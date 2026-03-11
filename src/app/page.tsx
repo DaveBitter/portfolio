@@ -11,11 +11,11 @@ import { ResumePitch } from "@/components/resume/resume-pitch";
 import { ContentSection } from "@/components/content-section";
 import { ArticleTeasers } from "@/components/article/article-teaser";
 import { Socials } from "@/components/socials";
-import { getAllContent, getCopy } from "@/lib/content";
+import { getAllContentWithFridayTips, getCopy } from "@/lib/content";
 
-export default function HomePage() {
+export default async function HomePage() {
   const copy = getCopy();
-  const latest = getAllContent().slice(0, 9);
+  const latest = (await getAllContentWithFridayTips()).slice(0, 9);
 
   return (
     <>
@@ -47,11 +47,11 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <ContentSection title="Elevator Pitch">
+      <ContentSection title="About me">
         <ResumePitch pitch={copy.elevatorPitch} />
       </ContentSection>
 
-      <ContentSection title="Latest">
+      <ContentSection title="Fresh off the press">
         <ArticleTeasers articles={latest} />
       </ContentSection>
     </>

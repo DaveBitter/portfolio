@@ -8,10 +8,10 @@ export function SiteFooter() {
     >
       <div className="mx-auto max-w-5xl px-4 text-center">
         <p className="mb-4 text-lg font-semibold text-[var(--color-text)]">
-          Hey explorer! You&apos;ve reached the end!
+          You&apos;ve scrolled all the way down. Respect.
         </p>
         <p className="mb-6 text-[var(--color-text-muted)]">
-          Let&apos;s get in touch
+          Always happy to chat.
         </p>
         <Socials />
       </div>

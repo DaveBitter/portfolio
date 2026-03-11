@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Dave Bitter",
   },
   description:
-    "I am a Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, and Engineering Manager. Here, you can find my resume, a collection of my articles covering a wide range of topics and get in contact.",
+    "Front-end consultant, developer advocate, and engineering manager who writes about web development, speaks at conferences, and occasionally makes things that work.",
   metadataBase: new URL("https://www.davebitter.com"),
   openGraph: {
     type: "website",

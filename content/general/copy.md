@@ -1,10 +1,10 @@
 ---
 items:
   - key: "pageDescription"
-    value: I am a Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, and Engineering Manager. Here, you can find my resume, a collection of my articles covering a wide range of topics and get in contact.
+    value: Front-end consultant, developer advocate, and engineering manager who writes about web development, speaks at conferences, and occasionally makes things that work.
   - key: "greetingIntro"
     value: >-
-      Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, and Engineering Manager. I build sophisticated web applications while developing high-performing teams — leading 35+ consultants at iO, establishing architectural standards, and turning complex concepts into knowledge that empowers developers.
+      I build things for the web, lead teams, and talk about it way too much.
   - key: "elevatorPitch"
     value: >-
       I combine deep technical expertise in React.js, Next.js, and TypeScript with strong leadership to deliver exceptional results — creating user-centred solutions while developing the capabilities of technical teams. As a Developer Advocate, I transform complex concepts into accessible knowledge through speaking, writing, and mentorship.
@@ -12,23 +12,23 @@ items:
 
       As Engineering Manager at iO, I lead ~35 seconded consultants, providing strategic career guidance while strengthening the organization's market position. My collaborative approach bridges organizational divides, connecting teams across departments to foster innovation and knowledge sharing.
   - key: "latestLead"
-    value: A collection of my talks, articles, Quick Bits and Friday Tips covering a wide range of topics
+    value: A mix of talks, articles, Quick Bits and Friday Tips — whatever I've been up to lately.
   - key: "articlesLead"
-    value: A collection of my articles covering a wide range of topics
+    value: Long-form deep dives into the things I find interesting. Mostly front-end, sometimes opinions.
   - key: "articlesAndTagsLead"
-    value: A collection of my articles and tags covering a wide range of topics
+    value: Articles and tags, all in one place. Browse around.
   - key: "quickBitsLead"
-    value: A collection of my Quick Bits covering a wide range of topics
+    value: Short, sharp, and to the point. Bite-sized things I learned and want to share.
   - key: "fridayTipsLead"
-    value: A collection of my Friday Tips covering a wide range of topics
+    value: Weekly video tips to close out the work week. Short enough to watch before your Friday afternoon drink.
   - key: "talksLead"
-    value: A collection of my talks covering a wide range of topics
+    value: Conference talks, meetups, and guest lectures. I like a stage and a clicker.
   - key: "tagLead"
-    value: A collection of articles covering {{tag}}
+    value: Everything I've written about {{tag}}
   - key: "reachedEnd"
-    value: Hey explorer! You've reached the end!
+    value: You've scrolled all the way down. Respect.
   - key: "getInTouch"
-    value: Let's get in touch
+    value: Always happy to chat.
   - key: "ahhh"
     value: AHHH!
   - key: "daveScrewedUp"

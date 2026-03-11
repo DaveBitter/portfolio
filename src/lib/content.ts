@@ -12,6 +12,20 @@ function loadMarkdownData<T>(filePath: string): T[] {
   return (data.items as T[]) || [];
 }
 
+function loadMarkdownDir<T>(dirPath: string): T[] {
+  const fullPath = path.join(contentDir, dirPath);
+  const files = fs
+    .readdirSync(fullPath)
+    .filter((f) => f.endsWith(".md"))
+    .sort();
+
+  return files.map((file) => {
+    const fileContents = fs.readFileSync(path.join(fullPath, file), "utf8");
+    const { data, content } = matter(fileContents);
+    return { ...data, body: content.trim() } as T;
+  });
+}
+
 function dedupeBySlug(items: Article[]): Article[] {
   const seen = new Set<string>();
   return items.filter((item) => {
@@ -94,21 +108,21 @@ export interface KeyValue {
 }
 
 export function getArticles(): Article[] {
-  const sorted = loadMarkdownData<Article>("articles/articles.md").sort(
+  const sorted = loadMarkdownDir<Article>("articles").sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   return dedupeBySlug(sorted);
 }
 
 export function getQuickBits(): Article[] {
-  const sorted = loadMarkdownData<Article>("articles/quickBits.md").sort(
+  const sorted = loadMarkdownDir<Article>("quick-bits").sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   return dedupeBySlug(sorted);
 }
 
 export function getTalks(): Article[] {
-  const sorted = loadMarkdownData<Article>("speaking/talks.md").sort(
+  const sorted = loadMarkdownDir<Article>("talks").sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   return dedupeBySlug(sorted);
