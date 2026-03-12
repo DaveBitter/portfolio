@@ -5,7 +5,7 @@ import {
   Heading,
   Button,
 } from "@radix-ui/themes";
-import { ArrowRight } from "lucide-react";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { TransitionLink } from "@/components/transition-link";
 
 interface ContentSectionProps {
@@ -32,12 +32,12 @@ export function ContentSection({
             <TransitionLink href={href}>
               <Button
                 variant="ghost"
-                color="orange"
+                color="tomato"
                 size="2"
                 className="cursor-pointer"
               >
                 {linkLabel}
-                <ArrowRight size={14} />
+                <ArrowRightIcon width={14} height={14} />
               </Button>
             </TransitionLink>
           )}

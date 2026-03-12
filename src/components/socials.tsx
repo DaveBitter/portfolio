@@ -1,30 +1,55 @@
-import { Github, Linkedin, Twitter, Instagram, Mail } from "lucide-react";
+import {
+  GitHubLogoIcon,
+  LinkedInLogoIcon,
+  InstagramLogoIcon,
+  EnvelopeClosedIcon,
+} from "@radix-ui/react-icons";
+
+function XLogoIcon({
+  width = 20,
+  height = 20,
+}: {
+  width?: number;
+  height?: number;
+}) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      width={width}
+      height={height}
+      fill="currentColor"
+    >
+      <path d="M18.244 2H21.5l-7.112 8.128L22.75 22h-6.548l-5.127-6.712L5.2 22H1.94l7.606-8.693L1.5 2h6.714l4.634 6.116L18.244 2Zm-1.142 18h1.804L7.23 3.895H5.294L17.102 20Z" />
+    </svg>
+  );
+}
 
 const socialLinks = [
   {
     href: "https://github.com/DaveBitter",
     label: "GitHub",
-    icon: Github,
+    icon: GitHubLogoIcon,
   },
   {
     href: "https://www.linkedin.com/in/davebitter/",
     label: "LinkedIn",
-    icon: Linkedin,
+    icon: LinkedInLogoIcon,
   },
   {
-    href: "https://twitter.com/Dave_Bitter",
-    label: "Twitter",
-    icon: Twitter,
+    href: "https://x.com/Dave_Bitter",
+    label: "X",
+    icon: XLogoIcon,
   },
   {
     href: "https://www.instagram.com/davebitter/",
     label: "Instagram",
-    icon: Instagram,
+    icon: InstagramLogoIcon,
   },
   {
     href: "mailto:dave.bitter@iodigital.com",
     label: "Email",
-    icon: Mail,
+    icon: EnvelopeClosedIcon,
   },
 ];
 
@@ -40,7 +65,7 @@ export function Socials() {
           aria-label={label}
           className="text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-primary)]"
         >
-          <Icon size={20} />
+          <Icon width={20} height={20} />
         </a>
       ))}
     </div>

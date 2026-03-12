@@ -1,4 +1,5 @@
 import { Text, Button, Flex } from "@radix-ui/themes";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { TransitionLink } from "@/components/transition-link";
 import { renderMarkdown } from "@/lib/markdown";
 
@@ -24,11 +25,12 @@ export function ResumePitch({ pitch, showLink = true }: ResumePitchProps) {
           <TransitionLink href="/resume">
             <Button
               variant="soft"
-              color="orange"
+              color="tomato"
               size="3"
               className="cursor-pointer"
             >
               View my resume
+              <ArrowRightIcon width={16} height={16} />
             </Button>
           </TransitionLink>
         </div>

@@ -1,4 +1,5 @@
 import { Button, Text } from "@radix-ui/themes";
+import { HomeIcon } from "@radix-ui/react-icons";
 import { TransitionLink } from "@/components/transition-link";
 import { getCopy } from "@/lib/content";
 
@@ -15,7 +16,8 @@ export default function NotFound() {
         {copy.pageNotFound}
       </Text>
       <TransitionLink href="/">
-        <Button variant="soft" color="orange" size="3" className="cursor-pointer">
+        <Button variant="soft" color="tomato" size="3" className="cursor-pointer">
+          <HomeIcon width={16} height={16} />
           Go home
         </Button>
       </TransitionLink>

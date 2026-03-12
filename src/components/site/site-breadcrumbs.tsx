@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { TransitionLink } from "@/components/transition-link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRightIcon } from "@radix-ui/react-icons";
 
 export function SiteBreadcrumbs() {
   const pathname = usePathname();
@@ -38,7 +38,7 @@ export function SiteBreadcrumbs() {
         </li>
         {crumbs.map(({ href, label, isLast }) => (
           <li key={href} className="flex items-center gap-1">
-            <ChevronRight size={14} />
+            <ChevronRightIcon width={14} height={14} />
             {isLast ? (
               <span className="text-[var(--color-text)]">{label}</span>
             ) : (

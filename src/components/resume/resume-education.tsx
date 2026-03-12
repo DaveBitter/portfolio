@@ -38,7 +38,7 @@ export function ResumeEducation({ items }: { items: Education[] }) {
               {item.study}
             </Text>
             {item.grade && (
-              <Badge color="orange" variant="soft" size="1" className="mb-3">
+              <Badge color="tomato" variant="soft" size="1" className="mb-3">
                 {item.grade}
               </Badge>
             )}

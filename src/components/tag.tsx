@@ -17,7 +17,7 @@ export function TagItem({
         variant="soft"
         color={tagKey === "ai" ? "orange" : "gray"}
         size={size === "small" ? "1" : "2"}
-        className="cursor-pointer transition-colors hover:bg-[var(--color-surface-hover)]"
+        className="cursor-pointer transition-colors hover:bg-[var(--site-surface-hover)]"
       >
         {tagLabels[tagKey] || tagKey}
       </Badge>

@@ -34,7 +34,7 @@ export default function TagsPage() {
                   variant="soft"
                   color="gray"
                   size="3"
-                  className="cursor-pointer transition-colors hover:bg-[var(--color-surface-hover)]"
+                  className="cursor-pointer transition-colors hover:bg-[var(--site-surface-hover)]"
                 >
                   {label} ({tagCounts[key] || 0})
                 </Badge>

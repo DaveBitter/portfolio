@@ -9,13 +9,13 @@ import {
 import Image from "next/image";
 import { ResumePitch } from "@/components/resume/resume-pitch";
 import { ContentSection } from "@/components/content-section";
-import { ArticleTeasers } from "@/components/article/article-teaser";
+import { ArticleMasonryGrid } from "@/components/article/article-teaser";
 import { Socials } from "@/components/socials";
 import { getAllContentWithFridayTips, getCopy } from "@/lib/content";
 
 export default async function HomePage() {
   const copy = getCopy();
-  const latest = (await getAllContentWithFridayTips()).slice(0, 9);
+  const latest = (await getAllContentWithFridayTips()).slice(0, 10);
 
   return (
     <>
@@ -52,7 +52,7 @@ export default async function HomePage() {
       </ContentSection>
 
       <ContentSection title="Fresh off the press">
-        <ArticleTeasers articles={latest} />
+        <ArticleMasonryGrid articles={latest} />
       </ContentSection>
     </>
   );

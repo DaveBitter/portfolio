@@ -3,19 +3,20 @@
 import { usePathname } from "next/navigation";
 import { TransitionLink } from "@/components/transition-link";
 import {
-  Home,
-  FileText,
-  Zap,
-  Mic,
-  Briefcase,
-} from "lucide-react";
+  HomeIcon,
+  FileTextIcon,
+  LightningBoltIcon,
+  ChatBubbleIcon,
+  BackpackIcon,
+} from "@radix-ui/react-icons";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navItems = [
-  { href: "/articles", label: "Articles", icon: FileText },
-  { href: "/quick-bits", label: "Quick Bits", icon: Zap },
-  { href: "/", label: "Home", icon: Home },
-  { href: "/talks", label: "Talks", icon: Mic },
-  { href: "/resume", label: "Resume", icon: Briefcase },
+  { href: "/articles", label: "Articles", icon: FileTextIcon },
+  { href: "/quick-bits", label: "Quick Bits", icon: LightningBoltIcon },
+  { href: "/", label: "Home", icon: HomeIcon },
+  { href: "/talks", label: "Talks", icon: ChatBubbleIcon },
+  { href: "/resume", label: "Resume", icon: BackpackIcon },
 ];
 
 export function SiteNav() {
@@ -23,10 +24,11 @@ export function SiteNav() {
 
   return (
     <nav
-      className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur-sm"
+      className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/70 backdrop-blur-md"
       style={{ viewTransitionName: "site-nav" }}
     >
-      <div className="mx-auto flex max-w-5xl items-center justify-evenly px-4 py-2">
+      <div className="mx-auto flex max-w-5xl items-center px-4 py-2">
+        <div className="flex flex-1 items-center justify-evenly">
         {navItems.map(({ href, label, icon: Icon }) => {
           const isActive =
             href === "/"
@@ -43,11 +45,13 @@ export function SiteNav() {
                   : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
               }`}
             >
-              <Icon size={18} />
+              <Icon width={18} height={18} />
               <span>{label}</span>
             </TransitionLink>
           );
         })}
+        </div>
+        <ThemeToggle />
       </div>
     </nav>
   );

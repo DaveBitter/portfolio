@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Text } from "@radix-ui/themes";
+import { ReloadIcon, HomeIcon } from "@radix-ui/react-icons";
 import { TransitionLink } from "@/components/transition-link";
 
 export default function Error({
@@ -19,11 +20,12 @@ export default function Error({
       <div className="flex gap-4">
         <Button
           variant="soft"
-          color="orange"
+          color="tomato"
           size="3"
           className="cursor-pointer"
           onClick={reset}
         >
+          <ReloadIcon width={16} height={16} />
           Try again
         </Button>
         <TransitionLink href="/">
@@ -33,6 +35,7 @@ export default function Error({
             size="3"
             className="cursor-pointer"
           >
+            <HomeIcon width={16} height={16} />
             Go home
           </Button>
         </TransitionLink>

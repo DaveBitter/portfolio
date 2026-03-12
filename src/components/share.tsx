@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@radix-ui/themes";
-import { Share2, Check } from "lucide-react";
+import { Share1Icon, CheckIcon } from "@radix-ui/react-icons";
 import { useScrollDirection } from "@/hooks/use-scroll-direction";
 
 export function Share() {
@@ -42,7 +42,7 @@ export function Share() {
         onClick={handleShare}
         className="cursor-pointer"
       >
-        {copied ? <Check size={16} /> : <Share2 size={16} />}
+        {copied ? <CheckIcon width={16} height={16} /> : <Share1Icon width={16} height={16} />}
         {copied ? "Copied to clipboard!" : "Share"}
       </Button>
     </div>

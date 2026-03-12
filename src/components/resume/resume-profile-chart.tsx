@@ -16,11 +16,17 @@ const SKILLS_DATA: Array<{ label: string; value: number }> = [
 
 const DEFAULT_SIZE = 400;
 const GRID_LEVELS = [0.25, 0.5, 0.75, 1];
-const GRID_COLOR = "#3a3a3a";
 const DATA_FILL = "rgba(255, 84, 32, 0.3)";
 const DATA_STROKE = "#ff5420";
-const TEXT_COLOR = "#e5e5e5";
-const LABEL_OFFSET = 1.15; // Place labels slightly outside the chart
+const LABEL_OFFSET = 1.15;
+
+function getThemeColors() {
+  const style = getComputedStyle(document.documentElement);
+  return {
+    grid: style.getPropertyValue("--color-border").trim() || "#3a3a3a",
+    text: style.getPropertyValue("--color-text-muted").trim() || "#e5e5e5",
+  };
+}
 
 function renderChart(container: SVGSVGElement | null, width: number, height: number) {
   if (!container) return;
@@ -49,7 +55,8 @@ function renderChart(container: SVGSVGElement | null, width: number, height: num
     };
   };
 
-  // Draw concentric polygon rings (grid) at 25%, 50%, 75%, 100%
+  const { grid: GRID_COLOR, text: TEXT_COLOR } = getThemeColors();
+
   GRID_LEVELS.forEach((level) => {
     const points: [number, number][] = [];
     for (let i = 0; i < numSkills; i++) {
@@ -144,14 +151,18 @@ export function ResumeProfileChart() {
     // Initial draw
     draw();
 
-    const resizeObserver = new ResizeObserver(() => {
-      draw();
-    });
-
+    const resizeObserver = new ResizeObserver(() => draw());
     resizeObserver.observe(container);
+
+    const themeObserver = new MutationObserver(() => draw());
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
     return () => {
       resizeObserver.disconnect();
+      themeObserver.disconnect();
     };
   }, [draw]);
 
