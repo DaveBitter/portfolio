@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Article } from "@/components/article/article";
 import { getQuickBits } from "@/lib/content";
 import type { Metadata } from "next";
+import { buildArticleMetadata } from "@/lib/page-metadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -16,31 +17,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = getQuickBits().find((a) => a.slug === slug);
   if (!article) return {};
 
-  const image = `/quick-bits/${slug}/opengraph-image`;
+  const image = `/quick-bits/${slug}/opengraph-image.png`;
 
-  return {
-    title: article.title,
-    description: article.teaserCopy,
-    openGraph: {
-      title: article.title,
-      description: article.teaserCopy,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: article.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      creator: "@Dave_Bitter",
-      title: article.title,
-      description: article.teaserCopy,
-      images: [image],
-    },
-  };
+  return buildArticleMetadata(article, image, "Quick Bits");
 }
 
 export default async function QuickBitPage({ params }: PageProps) {

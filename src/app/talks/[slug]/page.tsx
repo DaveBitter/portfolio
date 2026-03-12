@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Article } from "@/components/article/article";
 import { getTalks } from "@/lib/content";
 import type { Metadata } from "next";
+import { buildArticleMetadata } from "@/lib/page-metadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -16,31 +17,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const talk = getTalks().find((t) => t.slug === slug);
   if (!talk) return {};
 
-  const image = `/talks/${slug}/opengraph-image`;
+  const image = `/talks/${slug}/opengraph-image.png`;
 
-  return {
-    title: talk.title,
-    description: talk.teaserCopy,
-    openGraph: {
-      title: talk.title,
-      description: talk.teaserCopy,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: talk.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      creator: "@Dave_Bitter",
-      title: talk.title,
-      description: talk.teaserCopy,
-      images: [image],
-    },
-  };
+  return buildArticleMetadata(talk, image, "Talks");
 }
 
 export default async function TalkPage({ params }: PageProps) {

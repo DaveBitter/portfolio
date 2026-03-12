@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Article } from "@/components/article/article";
 import { getFridayTips } from "@/lib/content";
 import type { Metadata } from "next";
+import { buildArticleMetadata } from "@/lib/page-metadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -17,31 +18,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const tip = (await getFridayTips()).find((t) => t.slug === slug);
   if (!tip) return {};
 
-  const image = `/friday-tips/${slug}/opengraph-image`;
+  const image = `/friday-tips/${slug}/opengraph-image.png`;
 
-  return {
-    title: tip.title,
-    description: tip.teaserCopy,
-    openGraph: {
-      title: tip.title,
-      description: tip.teaserCopy,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: tip.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      creator: "@Dave_Bitter",
-      title: tip.title,
-      description: tip.teaserCopy,
-      images: [image],
-    },
-  };
+  return buildArticleMetadata(tip, image, "Friday Tips");
 }
 
 export default async function FridayTipPage({ params }: PageProps) {
