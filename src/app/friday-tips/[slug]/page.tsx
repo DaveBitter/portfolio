@@ -17,9 +17,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const tip = (await getFridayTips()).find((t) => t.slug === slug);
   if (!tip) return {};
 
+  const image = `/friday-tips/${slug}/opengraph-image`;
+
   return {
     title: tip.title,
     description: tip.teaserCopy,
+    openGraph: {
+      title: tip.title,
+      description: tip.teaserCopy,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: tip.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@Dave_Bitter",
+      title: tip.title,
+      description: tip.teaserCopy,
+      images: [image],
+    },
   };
 }
 

@@ -25,10 +25,19 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Dave Bitter",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dave Bitter - Senior Front-end Consultant & Engineering Manager",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@Dave_Bitter",
+    images: ["/opengraph-image"],
   },
 };
 

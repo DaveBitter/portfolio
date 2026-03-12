@@ -16,9 +16,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const talk = getTalks().find((t) => t.slug === slug);
   if (!talk) return {};
 
+  const image = `/talks/${slug}/opengraph-image`;
+
   return {
     title: talk.title,
     description: talk.teaserCopy,
+    openGraph: {
+      title: talk.title,
+      description: talk.teaserCopy,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: talk.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@Dave_Bitter",
+      title: talk.title,
+      description: talk.teaserCopy,
+      images: [image],
+    },
   };
 }
 

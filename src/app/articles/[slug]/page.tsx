@@ -16,9 +16,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = getArticles().find((a) => a.slug === slug);
   if (!article) return {};
 
+  const image = `/articles/${slug}/opengraph-image`;
+
   return {
     title: article.title,
     description: article.teaserCopy,
+    openGraph: {
+      title: article.title,
+      description: article.teaserCopy,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@Dave_Bitter",
+      title: article.title,
+      description: article.teaserCopy,
+      images: [image],
+    },
   };
 }
 
