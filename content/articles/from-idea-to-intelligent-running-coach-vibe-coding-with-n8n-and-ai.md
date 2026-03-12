@@ -79,20 +79,29 @@ Cursor would then generate not just the workflow structure, but also sophisticat
 ![Screenshot of above mentioned nodes being connected in the n8n UI](/img/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai-hero.webp)
 For example, one of the code nodes that Cursor generated for scoring:
 
-```javascript // Temperature scoring (7-18°C optimal) if (temp >= 7 && temp <= 18) {
+```javascript
+// Temperature scoring (7-18°C optimal)
+if (temp >= 7 && temp <= 18) {
   score += 20
   recommendations.push(`Perfect temperature at ${temp}°C!`)
 } else if (temp < 2) {
   score -= 15
   warnings.push(`Quite cold at ${temp}°C - layer up and warm up gradually`)
 }
-// Weather condition scoring const conditionScores = { Clear: 15, Clouds: 15, Rain: -25, Snow: -25 } score += conditionScores[condition] || 0 ```
+// Weather condition scoring
+const conditionScores = { Clear: 15, Clouds: 15, Rain: -25, Snow: -25 }
+score += conditionScores[condition] || 0
+```
 And email formatting:
-```javascript let emoji = score >= 80 ? '🌟' : score >= 60 ? '✅' : '⚠️' return {
+```javascript
+let emoji = score >= 80 ? '🌟' : score >= 60 ? '✅' : '⚠️'
+
+return {
 
   subject: `${emoji} Running Score: ${score}/100`,
   html: generateEmailHTML(score, weather, aiAdvice),
-} ```
+}
+```
 I never wrote any of this code. I just described what I wanted each node to do, and Cursor generated the complete JavaScript functions.
 Everything in this project was vibe coded. From the workflow structure to the logic inside the code nodes, I used prompts to describe intent and let the AI do the implementation. From here on, I’ll just refer to the outputs and results without repeating that context.
 
@@ -131,7 +140,9 @@ The beauty was that I could focus entirely on the problem-solving and user exper
 
 The real magic happened when I connected Google Gemini to analyze the weather data and provide coaching insights. Even the Gemini integration was vibe coded - I created a code node that formats the weather data into a prompt for Gemini:
 
-```javascript // Actual Gemini 2.0 Flash API integration with sophisticated prompting const geminiRequest = {
+```javascript
+// Actual Gemini 2.0 Flash API integration with sophisticated prompting
+const geminiRequest = {
   contents: [
     {
       parts: [
@@ -154,7 +165,8 @@ Explain the science behind why certain weather conditions favor specific trainin
     temperature: 0.7,
     maxOutputTokens: 600,
   },
-} ```
+}
+```
 Instead of hardcoded responses, my morning emails now include intelligent analysis like:
 **Real Output Example:** _"Running Score: 85/100 - Perfect Running Conditions_
 _🎯 **Weather-Optimal Training:** These conditions are PERFECT for tempo runs! The 12°C temperature sits in the ideal zone for sustained efforts, while stable humidity and minimal wind create optimal heat dissipation. Perfect for threshold work or progression runs._

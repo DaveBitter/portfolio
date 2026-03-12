@@ -32,7 +32,9 @@ I ended with using [Cursor](https://www.cursor.com/) for this. Cursor is an AI c
 
 I created a new empty GIT repository and wrote my first prompt.
 
-```jsx init a nextjs app with app router for paxaura project ```
+```jsx
+init a nextjs app with app router for paxaura project
+```
 I wanted to use the “new” app router in Next.js for this project. I also, like any cool new side project, gave it a nice name. “Pax” (Latin for peace) and “Aura” (lating for breath/air/essence). Well, at least according to the AI I used.
 Now, it had no issue performing this task. It doesn’t surprise me at all as there is so much documentation on how to set up a new Next.js project not even mentioning all the example repositories it can draw inspiration from.
 If you’ve never seen Cursor before, you basically have a regular code editor with a chat window at the side. What’s pretty cool is that Cursor will be able to access the entire project, create/read/update/delete files and even run commands from the terminal.
@@ -40,7 +42,9 @@ If you’ve never seen Cursor before, you basically have a regular code editor w
 You can see it explains what it’s going to do first. Then it opens a small terminal inline and first asks me to hit the “run this command” button. This is something nice because of course, you’d like to keep a bit of control in what it does in your terminal. When running the generated command it initialised the entire Next.js app with sensible defaults. Cool, as it’s good practice, let’s quickly commit this. Wait, can’t the AI do that for me? Of course! Just prompt “commit this for me”. It then does a scan of the changes and types out a neat commit message to go with it.
 ## Hey AI, build this entire app for me in one go!
 Naturally, I wanted to do as little as possible myself. I could give it step-by-step instructions, but what happens if I just describe the app that I want? Can I just let it figure it out itself. Vibe Coding 🤘. Here’s the simple, non-technical, prompt I gave it:
-```jsx I want to create an app with simple breathing exercises. I want an overview page with the different ones (i'll share the actual excersises later) and a detail page were you can do them. They will be simple time based inhale exhale reps ```
+```jsx
+I want to create an app with simple breathing exercises. I want an overview page with the different ones (i'll share the actual excersises later) and a detail page were you can do them. They will be simple time based inhale exhale reps
+```
 
 Then it went to work. Step by step it created folders, files, types etcetera. All the things I would normally do. Maybe even a bit neater as I’d take some shortcuts during a side project.
 ![Code editor with an AI chat on the right hand side and all files created](/img/articles/cursor-mvp-project.webp)

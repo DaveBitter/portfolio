@@ -253,10 +253,22 @@ html.light body {
   margin-bottom: 1.75em;
   padding: 1.25em;
   border-radius: 0.75rem;
-  background: var(--site-surface);
+  background: #141414;
+  border: 1px solid rgb(255 255 255 / 0.04);
+  box-shadow:
+    0 10px 30px rgb(0 0 0 / 0.35),
+    0 2px 8px rgb(0 0 0 / 0.2);
   overflow-x: auto;
   font-size: 0.875em;
   line-height: 1.7;
+}
+
+html.light .article-body pre {
+  background: var(--site-surface);
+  border: 1px solid rgb(0 0 0 / 0.06);
+  box-shadow:
+    0 8px 20px rgb(0 0 0 / 0.08),
+    0 1px 3px rgb(0 0 0 / 0.05);
 }
 
 .article-body :not(pre) > code {

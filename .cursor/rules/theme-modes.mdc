@@ -1,0 +1,12 @@
+---
+description: Ensure UI changes work in both dark and light mode
+alwaysApply: true
+---
+
+# Theme Modes
+
+- Any visual change must be checked for both dark and light mode, not just the currently active theme.
+- When updating colors, backgrounds, borders, shadows, code blocks, cards, or text contrast, make sure the result feels intentional in both themes.
+- Prefer theme-aware styles using existing CSS variables or explicit `html.light` overrides when the two themes need different tuning.
+- Avoid shipping a styling change after validating only one mode.
+- If a change looks right in dark mode but too heavy or low-contrast in light mode, add a light-mode-specific adjustment instead of compromising both.

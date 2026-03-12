@@ -33,7 +33,8 @@ You do this by exposing your web application functionality as "tools". These are
 The Declarative API allows you to define standard actions directly in HTML forms. This is great for straightforward interactions where the action maps neatly to a form submission. If your website already has forms for things like search, checkout, or contact, you can make these discoverable for agents without writing additional JavaScript. The browser can automatically derive the tool's schema from the form structure and its validation attributes. The agent sees a structured tool with typed inputs instead of just raw HTML.
 The exact syntax for the declarative API is still being finalized as part of the [early preview](https://developer.chrome.com/blog/webmcp-epp). Based on [community examples](https://webmcp.link/), this is roughly what it could look like:
 
-```html <form data-webmcp-tool="place_order" data-webmcp-description="Place an order for a product">
+```html
+<form data-webmcp-tool="place_order" data-webmcp-description="Place an order for a product">
   <input
     type="text"
     name="productId"
@@ -50,13 +51,15 @@ The exact syntax for the declarative API is still being finalized as part of the
   />
 
   <button type="submit">Place Order</button>
-</form> ```
+</form>
+```
 Keep in mind that the attribute names above are illustrative and may change as the [specification](https://webmachinelearning.github.io/webmcp/) evolves. The concept however is clear: annotate your existing forms and the browser takes care of the rest.
 ### Imperative API
 The Imperative API is where it gets really interesting for us developers. It allows you to define complex, dynamic interactions through JavaScript. The core of this API lives on `navigator.modelContext`, which exposes a `ModelContextContainer`. This is where you register your tools.
 ## A practical example
 Let's say you have an e-commerce site and you want to allow an AI agent to add products to the cart on behalf of the user. Here's how you could register that as a tool:
-```js if ('modelContext' in navigator) {
+```js
+if ('modelContext' in navigator) {
 
   navigator.modelContext.registerTool({
     name: 'add_to_cart',
@@ -86,7 +89,8 @@ Let's say you have an e-commerce site and you want to allow an AI agent to add p
       return { success: true, cartTotal: result.total }
     },
   })
-} ```
+}
+```
 Let's break that down. First, we check if the `modelContext` API is available on the `navigator` object. Then, we register a tool with a `name`, a human-readable `description`, an `inputSchema` that describes what parameters the tool expects, and an `execute` function that contains the actual logic. The agent can now discover this tool, understand what it does, and call it with the right parameters. No guessing, no clicking around.
 What I love about this approach is that you're reusing your existing application logic. The `execute` function is just regular JavaScript. You're not building a separate API or integration layer. You're exposing what your app already does.
 

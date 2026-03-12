@@ -32,7 +32,8 @@ No servers. No API keys. No cloud. Just your browser doing AI magic locally.
 The Language Detection API does exactly what it says on the tin: it detects what language a piece of text is written in. This happens completely on-device, so your text never leaves your computer.
 Here's how it works:
 
-```javascript async function detectLanguage(text) {
+```javascript
+async function detectLanguage(text) {
   if (!window.LanguageDetector) {
     return null
   }
@@ -51,9 +52,12 @@ Here's how it works:
   }
 
   return null
-} ```
+}
+```
 In my demo, I run language detection as soon as the page loads for each review:
-```javascript // Detect language on mount useEffect(() => {
+```javascript
+// Detect language on mount
+useEffect(() => {
 
   const detectOnMount = async () => {
     setIsDetecting(true)
@@ -62,7 +66,8 @@ In my demo, I run language detection as soon as the page loads for each review:
     setIsDetecting(false)
   }
   detectOnMount()
-}, [review.text]) ```
+}, [review.text])
+```
 The detection is surprisingly fast! It happens almost instantly, even for longer reviews. Each review card shows a language badge showing what language was detected.
 
 ### Important: Enabling the API
@@ -80,7 +85,8 @@ Without these steps, `window.LanguageDetector` will be undefined and the API won
 Once we know what language we're dealing with, we can translate it. The Translation API takes a source language, a target language, and gives you back translated text.
 Here's the implementation:
 
-```javascript async function translateText(text, targetLanguage, sourceLanguage, onProgress) {
+```javascript
+async function translateText(text, targetLanguage, sourceLanguage, onProgress) {
   if (!window.Translator?.create) {
     throw new Error('Translator API not available')
   }
@@ -108,7 +114,8 @@ Here's the implementation:
 
   // Perform the translation
   return await translator.translate(text)
-} ```
+}
+```
 ### The Workflow
 When someone clicks "Translate" on a review, here's what happens:
 1. **Language Detection**: We detect the source language (if not already detected)
@@ -116,7 +123,8 @@ When someone clicks "Translate" on a review, here's what happens:
 3. **Translation**: The actual translation happens
 4. **Display**: We show the translated text with a visual indicator
 The download progress tracking is particularly nice for UX:
-```javascript const translated = await translateText(
+```javascript
+const translated = await translateText(
 
   review.text,
   selectedLanguage,
@@ -125,14 +133,24 @@ The download progress tracking is particularly nice for UX:
     setIsDownloading(true)
     setDownloadProgress(progress.percentage)
   }
-) ```
+)
+```
 Users see a progress bar showing "Downloaded 45% of model" or whatever. Much better than a silent wait.
 
 ## Real-World Implementation Details
 
 The component for a review manages quite a bit of state:
 
-```javascript const [translatedText, setTranslatedText] = useState(null) const [selectedLanguage, setSelectedLanguage] = useState('') const [isTranslating, setIsTranslating] = useState(false) const [isDownloading, setIsDownloading] = useState(false) const [downloadProgress, setDownloadProgress] = useState(0) const [detectedLanguage, setDetectedLanguage] = useState(null) // ... more state for error handling and UI ```
+```javascript
+const [translatedText, setTranslatedText] = useState(null)
+const [selectedLanguage, setSelectedLanguage] = useState('')
+const [isTranslating, setIsTranslating] = useState(false)
+const [isDownloading, setIsDownloading] = useState(false)
+const [downloadProgress, setDownloadProgress] = useState(0)
+const [detectedLanguage, setDetectedLanguage] = useState(null)
+
+// ... more state for error handling and UI
+```
 This gives us fine-grained control over the UI:
 - Show a spinner while detecting language
 - Display the detected language badge
@@ -145,17 +163,32 @@ The visual feedback is important because some operations take time. Language det
 Here's something important: **the API has changed since Chrome 138!**
 This is something to expect with experimental APIs. They're still evolving, and you need to keep an eye on the documentation and updates. The good news? If you build with progressive enhancement, these changes won't break your UI or show errors to users. The APIs will simply not be available, and your fallback experience kicks in.
 In my original article, I showed code using `window.ai.translator` and `window.ai.languageDetector`. That's the old way. As of Chrome 141, it's now:
-```javascript // Old way (Chrome 138): window.ai.translator.create() window.ai.languageDetector.create()
+```javascript
+// Old way (Chrome 138):
+window.ai.translator.create()
+window.ai.languageDetector.create()
 
-// New way (Chrome 141): window.Translator.create() window.LanguageDetector.create() ```
+// New way (Chrome 141):
+window.Translator.create()
+window.LanguageDetector.create()
+```
 The APIs moved from being nested under `window.ai` to being global objects. This actually makes the API surface cleaner and easier to work with.
 Here's what the API looks like now:
 
-```javascript // Create a language detector const detector = await window.LanguageDetector.create() const results = await detector.detect(text) // results[0].detectedLanguage => "en", "es", "fr", etc.
-// Create a translator for a specific language pair const translator = await window.Translator.create({
+```javascript
+// Create a language detector
+const detector = await window.LanguageDetector.create()
+const results = await detector.detect(text)
+// results[0].detectedLanguage => "en", "es", "fr", etc.
+
+// Create a translator for a specific language pair
+const translator = await window.Translator.create({
   sourceLanguage: 'es',
   targetLanguage: 'en',
-}) const translatedText = await translator.translate(text) ```
+})
+
+const translatedText = await translator.translate(text)
+```
 The flag names also changed. You now need to enable `chrome://flags/#language-detection-api` and `chrome://flags/#optimization-guide-on-device-model`. It's no longer just `#translation-api`.
 ## Things I Learned Building This
 ### 1. Detection is Really Fast

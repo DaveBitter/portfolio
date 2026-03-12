@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import sharp from "sharp";
+import { normalizeMarkdown } from "../src/lib/normalize-markdown";
 
 const ROOT = path.resolve(process.cwd());
 const IMPORT_DIR = path.join(ROOT, "import_articles");
@@ -178,7 +179,7 @@ async function main() {
     const mappedTags = mapTags(data.tags || []);
     for (const t of mappedTags) allNewTags.add(t);
 
-    const body = fixImagePaths(content.trim(), slug);
+    const body = normalizeMarkdown(fixImagePaths(content.trim(), slug));
     const teaserImage = buildTeaserImage(data.images, slug);
     const title = cleanTitle(data.title);
     const date = `${data.date}T00:00:00.000Z`;
