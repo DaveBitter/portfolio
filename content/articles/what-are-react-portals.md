@@ -7,7 +7,7 @@ tags:
   - react-js
 intro: Let's have a look at React Portals and how they can help you in a pinch.
 teaserCopy: Let's have a look at React Portals and how they can help you in a pinch.
-teaserImage: /img/articles/what-are-react-portals-hero.png
+teaserImage: /img/articles/what-are-react-portals-hero.webp
 title: What are React Portals
 ---
 Let's dive into an incredibly powerful feature in React that you might not be using yet: React Portals. If you're not familiar with them, don't worry. By the end of this article, you'll not only know what they are but also see why they can be a incredibly useful for your projects!

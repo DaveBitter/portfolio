@@ -11,7 +11,7 @@ intro: >-
 teaserCopy: >-
   The LoaderFunction and ActionFunction are two core functionalities of working
   with data in Remix. Let’s have a look at how they work.
-teaserImage: /img/articles/remix.jpg
+teaserImage: /img/articles/remix.webp
 title: Remix LoaderFunction vs ActionFunction
 ---
 **New to [Remix](http://remix.run)? Get up to speed by reading my [first look at Remix](https://www.davebitter.com/articles/first-look-at-remix).**

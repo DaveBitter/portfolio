@@ -13,7 +13,7 @@ teaserCopy: >-
   As developers and designers, we make a plethora of design decisions while
   building a website. We try to cater to everybody, but that is an impossible
   task. So how can we listen to some of the preferences of our users?
-teaserImage: /img/articles/your-user-does-not-prefer-your-design.png
+teaserImage: /img/articles/your-user-does-not-prefer-your-design.webp
 title: Your user doesn’t prefer your design
 ---
 The new [Apple Vision Pro](https://www.apple.com/apple-vision-pro/) has been a lot in the news lately. This new device comes with a new design language in the new [VisionOS](https://developer.apple.com/visionos/). One of the key characteristics that stood out to me was the “frosted glass” backgrounds being used everywhere. Whilst looking great, not all people will appreciate this as they may find it difficult to see.

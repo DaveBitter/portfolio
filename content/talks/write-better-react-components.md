@@ -4,7 +4,7 @@ title: N ways to write better React components for your next Nerdy Party Machine
 teaserCopy: >-
   Writing (React.js) components is hard. How can we make this easier for
   yourself and your team?
-teaserImage: /img/talks.jpg
+teaserImage: /img/talks.webp
 slug: write-better-react-components
 tags:
   - react-js

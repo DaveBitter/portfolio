@@ -17,7 +17,7 @@ teaserCopy: >-
   Those were some of the questions I asked myself recently while starting a
   two-day hackathon at iO. I’ll take you through what I build, how, and most
   importantly, why.
-teaserImage: /img/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web-aiva.png
+teaserImage: /img/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web-aiva.webp
 title: Interacting with ChatGPT through Voice UI on the web
 ---
 I probably don’t have to tell you what an enormous impact the rise of AI has had on the industry in recent times. It’s amazing to see all the progress that is being made. I knew when I was looking at an upcoming two-day hackathon at iO, I just needed to build something cool with ChatGPT. More particularly, the way you interact with ChatGPT.
@@ -27,7 +27,7 @@ I probably don’t have to tell you what an enormous impact the rise of AI has h
 Personally, I don’t develop AI. I do however interact with it a lot. Like most of you reading, I interact the most with ChatGPT. While the chat interface is great to use while working, It always felt slightly awkward to interact with. When given the choice, I will always rather walk over to someone (or have a call) than use chat to discuss something. It feels a bit more natural as it is the way of communicating that is powered by our natural hardware: speaking and listening. So, if ChatGPT requires me to input text and read outputted text, can’t I just do that by speaking and listening?
 
 I’ve wanted to build a demo application that enables just that. A user can start a conversation with ChatGPT and just talk. Once they’re done talking, ChatGPT processes the text and sends back a response. This response is then read out loud to the user after which the cycle continues.
-![A schematic of the flow described above](/img/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web-user-interaction-schematic.png)
+![A schematic of the flow described above](/img/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web-user-interaction-schematic.webp)
 Being a developer for the web, I naturally gravitated to the techniques I would use there. As it turned out in the end, this gave a surprising advantage in the user experience. Here is a quick glimpse of the result called “Aiva”:
 <div> <iframe width="100%" style="aspectRatio: 16/9;" src="https://www.youtube.com/embed/z95qWSJoYGo?si=v0f4Mh_AEmN-yCjK&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> </div>
 
@@ -161,7 +161,7 @@ Finally, I’ve created a `useConversation` hook that:
 
 * Uses the utilities exposed by the `useSpeechRecognition` and `useSpeechSynthesis` hooks to create a turn-based conversation
 
-![A schematic of the flow described above](/img/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web-aiva-interaction-schematic.png)
+![A schematic of the flow described above](/img/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web-aiva-interaction-schematic.webp)
 
 #### ChatGPT integration
 

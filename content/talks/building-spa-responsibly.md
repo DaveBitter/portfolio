@@ -4,7 +4,7 @@ title: Building SPA the responsible way
 teaserCopy: >-
   Building Single Page Applications (SPA) introduce new problems that we've
   solved in the past. How can we fix these for SPA?
-teaserImage: /img/talks.jpg
+teaserImage: /img/talks.webp
 slug: building-spa-responsibly
 tags:
   - progressive-enhancement

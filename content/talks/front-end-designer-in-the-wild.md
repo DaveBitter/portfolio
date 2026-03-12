@@ -4,7 +4,7 @@ title: The front-end designer in the wild
 teaserCopy: >-
   T-shaped front-end designers have a unique way of looking at things. How does
   this translate to real-world project team collaboration?
-teaserImage: /img/talks.jpg
+teaserImage: /img/talks.webp
 slug: front-end-designer-in-the-wild
 tags:
   - design

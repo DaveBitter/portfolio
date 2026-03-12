@@ -10,7 +10,7 @@ intro: >-
 teaserCopy: >-
   Let’s have a look at how you can better structure your CSS layers with CSS
   Cascade Layers!
-teaserImage: /img/articles/you-need-css-cascade-layers-hero.jpg
+teaserImage: /img/articles/you-need-css-cascade-layers-hero.webp
 title: You need CSS Cascade Layers
 ---
 We’ve all been there. You load some third-party CSS for a date picker and you need to overwrite some CSS to make if fit the visual design language of your project. Suddenly, you’re fighting CSS specificity and slapping an `important!` after every line of CSS. There must be a better way of layering your CSS, right?
@@ -20,7 +20,7 @@ We’ve all been there. You load some third-party CSS for a date picker and you 
 You can use CSS Cascade Layers for this. Currently, with any webpage, there are already two CSS Cascade Layers being loaded. Firstly, the browser styles layer is loaded. For instance, buttons in let’s say Chrome already has some styles applied to them. Then, when you add your own CSS, you basically add another CSS Cascade Layer. This layer is more specific than the browser styles layer and your CSS is applied.
 
 So what if we can add another layer? And another? This can be very useful in the date picker example. If we scope that a bit bigger, we actually need a vendor layer. In this layer, right after the browser layer, we load all vendor styles. Then next, we can load our regular CSS layer. It might look a bit like this:
-![Image showing three stacked squares as CSS Cascade layers](/img/articles/you-need-css-cascade-layers-layers-example.png)
+![Image showing three stacked squares as CSS Cascade layers](/img/articles/you-need-css-cascade-layers-layers-example.webp)
 This way, you don’t need to combat any vendor styles and have everything needly stacked. This is what CSS Cascade Layers allow you to do.
 
 ## How do I use it?

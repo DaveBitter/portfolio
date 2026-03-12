@@ -14,7 +14,7 @@ teaserCopy: >-
   and external dependencies up-to-date between packages. You could do this
   manually once in a while, but there is a better way. Let’s have a look at
   Manypkg!
-teaserImage: /img/quick-bits/mono-repo.jpg
+teaserImage: /img/quick-bits/mono-repo.webp
 title: Keeping dependencies in sync in your mono-repo
 ---
 As a reference, the mono-repo might look something like this:

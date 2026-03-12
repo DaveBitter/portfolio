@@ -9,7 +9,7 @@ tags:
   - native
 intro: "Progressive Web App\_(PWA) is often written about. These articles, including mine, mostly only cover the technical parts. Although vital, one aspect of building a successful PWA is design. How can we develop and design for PWA to deliver the best native user experience (UX)?"
 teaserCopy: "Progressive Web App\_(PWA) is often written about. These articles, including mine, mostly only cover the technical parts. Although vital, one aspect of building a successful PWA is design. How can we develop and design for PWA to deliver the best native user experience (UX)?"
-teaserImage: /img/articles/design-and-develop-for-pwa.jpg
+teaserImage: /img/articles/design-and-develop-for-pwa.webp
 title: >-
   How can we develop and design for a PWA to deliver the best native user
   experience?
@@ -35,7 +35,7 @@ A2H is a basic, but incredibly useful. We can trigger a button to add the PWA to
     * A `display` property (e.g. 'fullscreen', 'standalone' or 'minimal-ui')
 
 
-![PWA install trigger](/img/articles/pwa-install-trigger.jpg)*PWA install trigger*
+![PWA install trigger](/img/articles/pwa-install-trigger.webp)*PWA install trigger*
 
 After meeting these requirements, developers can trigger the button. A good thing to note is that even though we'd like to trigger this on phones and tablets, this will also work on a desktop.
 
@@ -53,7 +53,7 @@ Firstly, we need to request permission to send notifications. You might have see
 
 Secondly, there is one major player that doesn't offer support for this. As you can see below, at the time of writing, iOS Safari does not offer support for the Notification API. This is often a dealbreaker as this is often a large part of the user base.
 
-![Notification API support](/img/articles/notification-api-support.jpg)*Notification API support*
+![Notification API support](/img/articles/notification-api-support.webp)*Notification API support*
 
 So, does this mean that you have to switch completely to native? Well, not necessarily. The way I see it, you have two routes you can take. You either go for progressive enhancement. For devices that support the Notification API, we use it. For devices that don't, we omit this feature or implement it in another way (e.g. email notification). The other route is wrapping your PWA in a native shell. This way, you can make use of the native notification possibilities while loading your PWA in the native wrapper itself. Next to that, these native wrappers cater for the often expressed need to have a presence in the Apple Appstore and Google Playstore. To get a clearer picture of this, please read my article ["Wrapping your Progressive Web App for Android with Trusted Web Activity"](/articles/wrapping-your-progressive-web-app-for-android-with-trusted-web-activities).
 
@@ -68,7 +68,7 @@ Great, the technical part is out of the way. So why do we need to talk about des
 
 Let's look at a quick example. An interface pattern for a website is having a header, body with sections and finally a footer. This is great to use for the web, but you never see this in a native app. In a native app, you will see something called an 'app shell' that has a main part or view to load content in. This content is, for instance, something like a list. You can see this in social media applications. You often have a top navigation bar and a bottom tab navigation. These parts always remain on the screen. In the content section, you might see a list of posts by other users.
 
-![App shell](/img/articles/app-shell.jpg)*App shell*
+![App shell](/img/articles/app-shell.webp)*App shell*
 
 This, amongst other patterns, gives the native app feeling. It's important to remember this when designing for a PWA. You can still design and build a mobile website next to the PWA. Developers can detect whether the website is loaded in a PWA and load the UI accordingly.
 
@@ -77,7 +77,7 @@ This, amongst other patterns, gives the native app feeling. It's important to re
 On an interaction level, we should have a look at interaction patterns. As a simple example, let's take a look at the bottom tab navigation. Every tab is like a separate browser tab. Open your Instagram app. Now scroll the feed, go over to notifications and click on one of them. If you go back to feed using the bottom tab navigation, you will see that it's still where you left it off. Now go back to the notification using the bottom navigation tab again. That's right, exactly where you left off. This is one of the numerous examples of how native apps work. We can replicate this behaviour on the web, but it does require designers and developers working together to account for this.
 Another example is the way the top navigation bar is used to show the user where they are and how to get back. By loading a fullscreen PWA you lose the browser bar. It can therefore be hard to see where you are and how you can go back to the previous page.
 
-![Instagram bottom tab navigation](/img/articles/instagram-feed.png)*Instagram bottom tab navigation*
+![Instagram bottom tab navigation](/img/articles/instagram-feed.webp)*Instagram bottom tab navigation*
 
 ### Ubiquitous features
 

@@ -15,7 +15,7 @@ teaserCopy: >-
   hassle it can be. Besides the regular content, you have to worry about the
   formatting of numbers, currencies and dates. In this article, we’ll go over
   how we can make this easier with Intl.
-teaserImage: /img/articles/internationalisation.jpg
+teaserImage: /img/articles/internationalisation.webp
 title: You should use the Intl browser API
 ---
 ## Why should I use this at all?

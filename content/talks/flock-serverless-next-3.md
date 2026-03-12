@@ -4,7 +4,7 @@ title: How I leveraged Next.js to solve my issues with React.js
 teaserCopy: >-
   Going for React.js can introduce quite a few new challenges. How can we solve
   this with Next.js?
-teaserImage: /img/talks.jpg
+teaserImage: /img/talks.webp
 slug: flock-serverless-next
 tags:
   - next-js

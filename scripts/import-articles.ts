@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import sharp from "sharp";
 
 const ROOT = path.resolve(process.cwd());
 const IMPORT_DIR = path.join(ROOT, "import_articles");
@@ -37,7 +38,14 @@ const ARTICLE_FILES = fs
 
 function fixImagePaths(text: string, slug: string): string {
   const pattern = new RegExp(`/articles/${slug}/`, "g");
-  return text.replace(pattern, "/img/articles/");
+  let result = text.replace(pattern, "/img/articles/");
+
+  result = result.replace(
+    /(<img\s[^>]*src=["'])([^"']+)\.(jpe?g|png)(["'][^>]*>)/gi,
+    (match, prefix, name, _ext, suffix) => `${prefix}${name}.webp${suffix}`
+  );
+
+  return result;
 }
 
 function mapTags(sourceTags: string[]): string[] {
@@ -48,14 +56,46 @@ function cleanTitle(title: string): string {
   return title.replace(/_/g, "");
 }
 
+const MAX_WIDTH = 1600;
+const WEBP_QUALITY = 80;
+const OPTIMIZABLE_EXTS = new Set([".jpg", ".jpeg", ".png"]);
+
+function toWebpFilename(filename: string): string {
+  const ext = path.extname(filename).toLowerCase();
+  if (OPTIMIZABLE_EXTS.has(ext)) {
+    return filename.replace(/\.[^.]+$/, ".webp");
+  }
+  return filename;
+}
+
 function buildTeaserImage(images: string[], slug: string): string {
   if (!images || images.length === 0) return "";
   const imgPath = images[0];
   const filename = path.basename(imgPath);
-  return `/img/articles/${filename}`;
+  return `/img/articles/${toWebpFilename(filename)}`;
 }
 
-function copyImages(slug: string) {
+async function optimizeAndCopyImage(src: string, dest: string): Promise<void> {
+  const ext = path.extname(src).toLowerCase();
+
+  if (!OPTIMIZABLE_EXTS.has(ext)) {
+    fs.copyFileSync(src, dest);
+    return;
+  }
+
+  const webpDest = dest.replace(/\.[^.]+$/, ".webp");
+  const image = sharp(src);
+  const metadata = await image.metadata();
+
+  let pipeline = image;
+  if (metadata.width && metadata.width > MAX_WIDTH) {
+    pipeline = pipeline.resize(MAX_WIDTH, undefined, { withoutEnlargement: true });
+  }
+
+  await pipeline.webp({ quality: WEBP_QUALITY }).toFile(webpDest);
+}
+
+async function copyImages(slug: string) {
   const srcDir = path.join(IMPORT_DIR, slug);
   if (!fs.existsSync(srcDir)) return;
 
@@ -64,10 +104,13 @@ function copyImages(slug: string) {
   const files = fs.readdirSync(srcDir);
   for (const file of files) {
     const src = path.join(srcDir, file);
-    const dest = path.join(PUBLIC_IMG, file);
     if (fs.statSync(src).isFile() && !file.startsWith(".")) {
-      fs.copyFileSync(src, dest);
-      console.log(`  Copied: ${file}`);
+      const dest = path.join(PUBLIC_IMG, file);
+      await optimizeAndCopyImage(src, dest);
+      const outName = OPTIMIZABLE_EXTS.has(path.extname(file).toLowerCase())
+        ? toWebpFilename(file)
+        : file;
+      console.log(`  Optimized: ${file} → ${outName}`);
     }
   }
 }
@@ -113,7 +156,7 @@ function addNewTags(newTags: Set<string>) {
   fs.writeFileSync(TAGS_MD, content, "utf-8");
 }
 
-function main() {
+async function main() {
   if (ARTICLE_FILES.length === 0) {
     console.log("No articles to import in import_articles/.");
     return;
@@ -156,8 +199,8 @@ function main() {
     fs.writeFileSync(dest, output, "utf-8");
     console.log(`  Wrote: content/articles/${slug}.md`);
 
-    console.log("  Copying images...");
-    copyImages(slug);
+    console.log("  Optimizing and copying images...");
+    await copyImages(slug);
   }
 
   console.log("\nUpdating tags.md...");

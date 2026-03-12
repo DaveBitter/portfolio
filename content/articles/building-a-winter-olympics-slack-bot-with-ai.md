@@ -14,7 +14,7 @@ teaserCopy: >-
   A deep dive into building a Slack bot that keeps colleagues informed about
   Dutch athletes at the 2026 Winter Olympics, featuring AI-generated bilingual
   messages, dynamic schedule discovery, and enthusiastic sports commentary.
-teaserImage: /img/articles/building-a-winter-olympics-slack-bot-with-ai-hero.png
+teaserImage: /img/articles/building-a-winter-olympics-slack-bot-with-ai-hero.webp
 title: Building a Winter Olympics Slack Bot with AI-Generated Bilingual Messages
 ---
 

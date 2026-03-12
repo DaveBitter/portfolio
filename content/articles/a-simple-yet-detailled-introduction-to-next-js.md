@@ -16,26 +16,26 @@ teaserCopy: >-
   though there are many articles out there for starting with Next.js, I want to
   share my point of view and perhaps help you on your way to creating your first
   kick-ass Next.js application.
-teaserImage: /img/articles/create-next-app-hero.jpg
+teaserImage: /img/articles/create-next-app-hero.webp
 title: 'A simple, yet detailed introduction to Next.js'
 ---
 ## Ultra quick setup
 
 Many of the people I speak to regarding [React.js](https://reactjs.org/) use [Create React App](https://github.com/facebook/create-react-app) (CRA) to quickly bootstrap applications. It would be great if [Next.js](https://nextjs.org/) had something similar. Let's call it Create Next App (CNA). Well, it exists! [Vercel](https://vercel.com/), the company behind Next.js has created [CNA](https://nextjs.org/docs/api-reference/create-next-app). Let's have a look.
 
-![yarn create next-app](/img/articles/create-next-app-command.png)
+![yarn create next-app](/img/articles/create-next-app-command.webp)
 
 You will be guided to an interactive setup that will just ask you for a project name. After that, all the required node modules will be installed and a very basic Next.js app will be bootstrapped. You could opt-in for a TypeScript variant as well. The output should look something like this:
 
-![Outputted Create Next App folders](/img/articles/create-next-app-folders.jpg)*Outputted Create Next App folders*
+![Outputted Create Next App folders](/img/articles/create-next-app-folders.webp)*Outputted Create Next App folders*
 
 Note: you can ignore the `pages/api` folder for now. If you are interested in the feature you can have a read at my article ["Next.js API routes"](https://www.davebitter.com/articles/next-js-api-routes).
 
 For those who are familiar with CRA, this will look very familiar. Besides all the build tools, CNA outputs a simple home page with an image and some styling. As you can see, by default CSS modules are used. If you want to add something like SCSS you can easily do so by installing SCSS. Next.js will just work. Next to all of this, CNA comes with the development tools that you'd expect it to like, for instance, hot-module reloading. In my experience, the way you alter your CRA project for things like linting and rules is very similar in CNA. Please refer to the documentation if you want more details. That's it, you are now ready to start developing!
 
-![yarn dev](/img/articles/create-next-app-dev.png)
+![yarn dev](/img/articles/create-next-app-dev.webp)
 
-![Create Next App default page](/img/articles/create-next-app-boilerplate-page.jpg)*Create Next App default page*
+![Create Next App default page](/img/articles/create-next-app-boilerplate-page.webp)*Create Next App default page*
 
 ## Building your first page
 
@@ -45,7 +45,7 @@ Naturally, Next.js documented all you need to know very well. Let's have a quick
 
 The `pages` folder is a special folder by Next.js. Basically, every file in this folder translates to a route. For example, by default, you see an `index.js` file. This gets build into `/index.html`.  So what if we want to create an about page. Well, we make a file called `about.js` and return a React.js component. In this case a functional component:
 
-![Created "about" page](/img/articles/create-next-app-about-page.png)*Created "about" page*
+![Created "about" page](/img/articles/create-next-app-about-page.webp)*Created "about" page*
 
 If you go to `/about` in your browser you will see that you now have an about page. This is all you need to do to create pages. Creating folders works as you expect it to. `pages/contact/socials.js` will translate to `/contact/socials.html`.
 
@@ -72,13 +72,13 @@ In essence, these functions run on the server, or during build time, before the 
 
 Let's keep using the blog as an example. When the user navigates to `/articles/the-meaning-of-life` we want to fetch the articles from a CMS and return it as a React.js prop to the page. This is done through by exporting a special Next.js function. This could look something like this:
 
-![Code example getInitialProps](/img/articles/create-next-app-get-initial-props.png)*Code example getInitialProps*
+![Code example getInitialProps](/img/articles/create-next-app-get-initial-props.webp)*Code example getInitialProps*
 
 As you can see, we retrieve the dynamic slug from the request object, fetch the article and return the article. We now receive it as a React.js prop for the page itself. You can now use the data to render the page (server-side).
 
 There is however a small addition to this. Next.js needs to know what all the possible slugs are in order to build a page for every article. We can do this by exporting another special Next.js function like this:
 
-![Code example getStaticPaths](/img/articles/create-next-app-get-static-paths.png)*Code example getStaticPaths*
+![Code example getStaticPaths](/img/articles/create-next-app-get-static-paths.webp)*Code example getStaticPaths*
 
 Based on this array of slugs, Next.js will now build pages during the build process.
 
@@ -86,7 +86,7 @@ Based on this array of slugs, Next.js will now build pages during the build proc
 
 The previous example is used when you want to fetch some data on the serving during build time, but what if you want to fetch during run time? You can export an other special Next.js function like this:
 
-![Code example getInitialPaths](/img/articles/create-next-app-get-initial-paths.png)*Code example getInitialPaths*
+![Code example getInitialPaths](/img/articles/create-next-app-get-initial-paths.webp)*Code example getInitialPaths*
 
 The vital difference in this function, compared to the previous one, is that this will only run on run time. This page will therefore no longer be statically generated but requires either a Node.js server or serverless function. The question is how you want to host your site. A statically generated site is easier to deploy as it is just some static files, a Node.js server or serverless environment will allow you to retrieve data on demand. The cool thing about Next.js is that you can use both these techniques on different pages. If you want to dive a bit more into this part of Next.js I suggest you to read my article ["Next.js page generation"](https://www.davebitter.com/articles/next-js-page-generation).
 
@@ -94,13 +94,13 @@ The vital difference in this function, compared to the previous one, is that thi
 
 The deployment of your Next.js app depends on a variety of factors. Let's take a statically generated site for the purpose of keeping it simple. You can run the following command to create a fresh build of your app:
 
-![yarn build](/img/articles/create-next-app-build.png)
+![yarn build](/img/articles/create-next-app-build.webp)
 
 You then have to add a new NPM script called `export` that runs the command `next export`. Once you run that you will have the following output:
 
-![yarn export](/img/articles/create-next-app-export.png)
+![yarn export](/img/articles/create-next-app-export.webp)
 
-![Outputted Create Next App export](/img/articles/create-next-app-export.jpg)*Outputted Create Next App export*
+![Outputted Create Next App export](/img/articles/create-next-app-export.webp)*Outputted Create Next App export*
 
 You're now free to host these static files wherever you want. In the case of going for serverless, you might want to check out my article [Implementing the latest web technologies to boost the Mirabeau blog](https://www.davebitter.com/articles/mirabeau-blog-latest-web-technologies).
 

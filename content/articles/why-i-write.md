@@ -11,7 +11,7 @@ teaserCopy: >-
   Writing articles is one of the things I started doing fairly regularly over
   the past year. It took quite a while for me to get into it so I want to share
   why I write and why you should start.
-teaserImage: /img/articles/why-i-write-hero.jpg
+teaserImage: /img/articles/why-i-write-hero.webp
 title: Why I write and you should too
 ---
 ## But!

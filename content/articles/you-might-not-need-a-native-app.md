@@ -16,7 +16,7 @@ teaserCopy: >-
   notifications and...". Native apps have provided fundamental functionalities
   that serve the purpose of creating a wonderful user experience. But, you might
   not need that native app and opt for the technology of the wondrous web!
-teaserImage: /img/articles/pwa-vs-native.png
+teaserImage: /img/articles/pwa-vs-native.webp
 title: You might not need a native app
 ---
 ## Disclaimer: I love native apps
@@ -40,7 +40,7 @@ Why? The hardware is capable, the OS is up to date. This is a problem that the w
 
 This one gets me more than anything. Often, new applications are just available for one OS and sometimes even starting from a specific version. This excludes a large number of potential users just because they don't have the specific OS and version you support.
 
-![This item isn't available in your country.](/img/articles/app-unavailable.jpg)*This item isn't available in your country.*
+![This item isn't available in your country.](/img/articles/app-unavailable.webp)*This item isn't available in your country.*
 
 ## Can it provide the same features of native apps?
 
@@ -61,7 +61,7 @@ This is where native apps are better suited on first sight. The native app can m
 ### Offline support
 
 [Progressive Web Apps](https://web.dev/progressive-web-apps/) (PWA) and more explicitly [WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). bring offline support to the web. This ensures that, like native apps, PWas can always be loaded, cache resources and offer functionality even without an active internet connection.
-![Twitter PWA](/img/articles/twitter-pwa.jpg)*Twitter PWA*
+![Twitter PWA](/img/articles/twitter-pwa.webp)*Twitter PWA*
 
 ### Home screen presence
 
@@ -75,7 +75,7 @@ Native and web apps run into the same issues regarding OS (and browser). There i
 ### iOS App Store/Google Play store/Windows store presence
 
 One of the lesser know features of PWAs is the ability to add your app to the iOS App Store/Google Play store/Windows store. This opens up a whole way to be discovered by potential users. For a more detailed look head over to [this](https://www.freecodecamp.org/news/i-built-a-pwa-and-published-it-in-3-app-stores-heres-what-i-learned-7cb3f56daf9b/) article explaining the possibilities and experience.
-![Twitter PWA in Google Play Store](/img/articles/twitter-google-play-store.jpeg)*Twitter PWA in Google Play Store*
+![Twitter PWA in Google Play Store](/img/articles/twitter-google-play-store.webp)*Twitter PWA in Google Play Store*
 
 ### Version updates
 
@@ -93,7 +93,7 @@ You get the picture by now. The web offers many of the functionalities that nati
 
 That was a lot of technical information, but let's step back a bit and look at the 'look and feel'. Often, web apps are turned into PWAs on a technical level. Although this is a good start, there is a big part we aren't covering yet. The look and feel of a native app versus a web app are immense. Besides platform-specific styles and interaction patterns, there is a fundamentally different design pattern.
 Native apps don't scroll. Well, they do, but very specific. On the web, it is custom to have multiple sections on a page. You might have a header, latest posts, a contact form and end with a footer. Native apps do have this sometimes, but mostly 'tuck away' sections. Generally, lists and content are scrollable. Forms and other standalone sections are often available after a user interaction on, for instance, a button.
-![Load flow with app shell](/img/articles/appshell.png)*Load flow with app shell*
+![Load flow with app shell](/img/articles/appshell.webp)*Load flow with app shell*
 Next to this, native apps often have a shell with a top- and bottom bar with a place for the content in the middle. This 'shell' is always available and loaded first. Content will be loaded second.
 Naturally, there is way more that goes into designing an app versus a website, but this exemplifies how crucial the design is when building a PWA.
 

@@ -411,7 +411,7 @@ Next to this, there is quite some more boilerplating. This is in the nature of m
 ## Which pattern do I pick and where do I start?
 
 Well…
-![Bart Simpson's classmates asking him to say the line, he sighs and says "it depends" and they are cheering](/img/articles/inversion-of-control-through-compound-components-it-depends.png)
+![Bart Simpson's classmates asking him to say the line, he sighs and says "it depends" and they are cheering](/img/articles/inversion-of-control-through-compound-components-it-depends.webp)
 Look at some of the reusable functions and components in your codebase. What is one of the functions or components that you often have to fight against or have to make more complex every time you work with it? Usually, that’s a good start.
 
 * **Functions with many parameters for different use cases**: use Inversion of Control to simplify them and empower the developer using them.

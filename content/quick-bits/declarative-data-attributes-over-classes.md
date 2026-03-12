@@ -10,7 +10,7 @@ intro: >-
 teaserCopy: >-
   I always use data attributes over classes to query declarative elements in my
   JS code for a few reasons. Here's why.
-teaserImage: /img/quick-bits/js.png
+teaserImage: /img/quick-bits/js.webp
 title: Why I use data attributes over classes for declarative element states
 ---
 ## My problem with classes

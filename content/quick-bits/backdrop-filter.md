@@ -15,7 +15,7 @@ teaserCopy: >-
   writing, CSS properties that are landing in major browsers. It will allow you
   to set a custom backdrop-filter on a div. This is not to be mistaken for the
   CSS filter property.
-teaserImage: /img/articles.jpg
+teaserImage: /img/articles.webp
 title: Backdrop Filter
 ---
 The backdrop-filter property lets you apply graphical effects such as blurring or colour shifting to the area behind an element. Because it applies to everything behind the element, to see the effect you must make the element or its background at least partially transparent.
@@ -42,7 +42,7 @@ For this example, we are going to build a simple modal. First, we’ll create th
     ...
 
 ```
-![default backdrop](/img/quick-bits/backdrop-default.jpg)*Default backdrop*
+![default backdrop](/img/quick-bits/backdrop-default.webp)*Default backdrop*
 Then we add one simple CSS property.
 ```scss
 
@@ -65,6 +65,6 @@ Then we add one simple CSS property.
     ...
 
 ```
-![blurry backdrop](/img/quick-bits/backdrop-blur.jpg)*Blurry backdrop*
+![blurry backdrop](/img/quick-bits/backdrop-blur.webp)*Blurry backdrop*
 
 And there we have it. It’s a simple way to quickly enhance the feel of your website or web-application. Just add this property below your default slightly transparent backdrop and you will offer this style as soon as it hits in the browser your user is using. Obviously, this effect is more dramatic with a less empty page. [View the demo here](/examples/backdrop-filter/modal/modal.html). This demo was built with the [Mirabeau boilerplate](https://github.com/mirabeau-nl/frontend-boilerplate). The source code for this demo can be found at [this Gist](https://gist.github.com/DaveBitter/dd0cc612ce87bd6f69fc379b101b9265) if you would like to have a look at the final working code.

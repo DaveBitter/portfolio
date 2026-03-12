@@ -13,7 +13,7 @@ teaserCopy: >-
   WebMCP is a new browser API that lets you expose your web application
   functionality as structured tools for AI agents. No screen scraping, no
   brittle automation, just direct function calls.
-teaserImage: /img/articles/web-mcp-making-the-web-ai-agent-ready.jpg
+teaserImage: /img/articles/web-mcp-making-the-web-ai-agent-ready.webp
 title: 'WebMCP: Making the web AI-agent ready'
 ---
 The web is evolving. AI agents are increasingly being used to interact with websites on behalf of users. Whether it's booking a flight, filling in a support ticket, or shopping for a product, AI agents are expected to navigate the web just like we do. The problem? The web was built for humans, not for agents. Buttons, forms, and visual flows were designed for clicking and reading, not for programmatic interaction.

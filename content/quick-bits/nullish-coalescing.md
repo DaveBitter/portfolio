@@ -12,7 +12,7 @@ teaserCopy: >-
   One of my favourite features which were added in ES2020 is nullish coalescing.
   Despite its difficult pronunciation, this feature is a simple way of checking
   for falsey values. Let's have a look.
-teaserImage: /img/quick-bits/js.png
+teaserImage: /img/quick-bits/js.webp
 title: Nullish Coalescing (try to say it quickly ten times)
 ---
 The nullish coalescing operator is a short-circuiting operator you can use to provide an alternative for a left-hand side operand by writing `??`. You might already have used `&&` or `||` before. So how is this different?  Let's take the following examples:

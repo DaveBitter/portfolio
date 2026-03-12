@@ -14,7 +14,7 @@ teaserCopy: >-
   one of the most common web vulnerabilities on the web proves that we need to
   better defend ourselves and our users against this. Let’s see how Trusted
   Types can help us!
-teaserImage: /img/articles/developers-are-not-trusted-types-hero.jpg
+teaserImage: /img/articles/developers-are-not-trusted-types-hero.webp
 title: Developers are not Trusted Types!
 ---
 Recently quite a few developers, including myself, followed a two-day training course on web security by [Philippe De Ryck](https://pragmaticwebsecurity.com/about.html). This course covered a wide arrange of topics, but one technique, in particular, stood out to me. He showed how you can use Trusted Types in your Content Security Policy (CSP) to protect yourself against cross-site scripting (XSS) attacks. Let’s have a look at what Trusted Types are, why you want to use this technique and how you can use it.
@@ -118,7 +118,7 @@ Recently quite a few developers, including myself, followed a two-day training c
 
  You can use CSP for quite a few things, but let’s focus on the example at hand. If malicious JavaScript being executed is the real issue, can’t you just block that? You can! I’ve built a demo website to showcase different solutions. Firstly, let’s see what happens when you don’t have any CSP on your page [showcased here](https://www.trusted-type-csp-demo.davebitter.com/).
 
- ![XSS injection without CSP](/img/articles/developers-are-not-trusted-types-without-csp.png)
+ ![XSS injection without CSP](/img/articles/developers-are-not-trusted-types-without-csp.webp)
 
  Once you hit the injection button, the following code is executed and the XSS vulnerability is exploited:
 
@@ -151,11 +151,11 @@ Recently quite a few developers, including myself, followed a two-day training c
 
  Now when you hit the injection button the malicious JavaScript of the `onerror` attribute will not be executed as [showcased here](https://www.trusted-type-csp-demo.davebitter.com/with-csp.html):
 
- ![XSS injection with CSP](/img/articles/developers-are-not-trusted-types-with-csp-without-dom-purify.png)
+ ![XSS injection with CSP](/img/articles/developers-are-not-trusted-types-with-csp-without-dom-purify.webp)
 
  You can see the error thrown by the CSP in the console. To clean this up a bit up you can use DOMPurify to remove the `onerror` attribute just like we did before so you will just see this message if you forgot to sanitise somewhere:
 
- ![XSS injection with CSP and DOMPurify](/img/articles/developers-are-not-trusted-types-with-csp-and-dom-purify.png)
+ ![XSS injection with CSP and DOMPurify](/img/articles/developers-are-not-trusted-types-with-csp-and-dom-purify.webp)
 
  Perfect, all done! Right?
 
@@ -173,7 +173,7 @@ Recently quite a few developers, including myself, followed a two-day training c
 
  Now when you hit the injection button none of the content is injected and parsed in the DOM:
 
- ![XSS injection with Trusted Types CSP](/img/articles/developers-are-not-trusted-types-with-csp-trusted-types-and--without-dom-purify.png)
+ ![XSS injection with Trusted Types CSP](/img/articles/developers-are-not-trusted-types-with-csp-trusted-types-and--without-dom-purify.webp)
 
  Next to that, it shows a more detailed error message for you as a developer as to where the `innerHTML` was used to try to inject and parse the content in the DOM.
 
@@ -217,7 +217,7 @@ Recently quite a few developers, including myself, followed a two-day training c
 
  Now when you hit the injection button the malicious JavaScript of the `onerror` attribute will not be executed and the safe content will be injected and parsed as [showcased here](https://www.trusted-type-csp-demo.davebitter.com/with-csp-and-trusted-type.html):
 
- ![XSS injection with Trusted Types CSP and DOMPurify](/img/articles/developers-are-not-trusted-types-with-csp-trusted-types-and-dom-purify.png)
+ ![XSS injection with Trusted Types CSP and DOMPurify](/img/articles/developers-are-not-trusted-types-with-csp-trusted-types-and-dom-purify.webp)
 
  ## Develop with the Trusted Types CSP header set
 

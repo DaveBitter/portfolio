@@ -10,7 +10,7 @@ intro: >-
 teaserCopy: >-
   How to build a component library Part 3: Setting up linting, unit, snapshot
   and visual regression testing.
-teaserImage: /img/articles/linting-testing-hero.png
+teaserImage: /img/articles/linting-testing-hero.webp
 title: 'How do I set up linting, unit, snapshot and visual regression testing?'
 ---
 This article is part 3 of the series _How do I build a Component Library?_. You can find the demo repository for this series on [GitHub](https://github.com/DaveBitter/fe-monorepo) and the component library itself hosted [here](https://fe-monorepo.davebitter.com/).
@@ -319,7 +319,7 @@ You can help developers with this process using [Commitizen](https://github.com/
 
 This will then guide you through an interactive CLI:
 
-![Screenshot of questions the interactive CLI prompts with](/img/articles/linting-testing-commitizen.png)
+![Screenshot of questions the interactive CLI prompts with](/img/articles/linting-testing-commitizen.webp)
 
 ## Looking back
 

@@ -6,7 +6,7 @@ tags:
   - front-end
 intro: 'How to build a component library Part 4: Setting up CI/CD & hosting.'
 teaserCopy: 'How to build a component library Part 4: Setting up CI/CD & hosting.'
-teaserImage: /img/articles/ci-cd-hosting-hero.png
+teaserImage: /img/articles/ci-cd-hosting-hero.webp
 title: How do I setup CI/CD & hosting?
 ---
 This article is part 4 of the series _How do I build a Component Library?_. You can find the demo repository for this series on [GitHub](https://github.com/DaveBitter/fe-monorepo) and the component library itself hosted [here](https://fe-monorepo.davebitter.com/).
@@ -60,11 +60,11 @@ First, give your workflow a sensible name. In this case, as you are going to cre
 
 Now if you make a pull request and push it to the demo repository, it will run these steps:
 
-![Screenshot of all steps being executed on GitHub](/img/articles/ci-cd-hosting-pull-request-action.png)
+![Screenshot of all steps being executed on GitHub](/img/articles/ci-cd-hosting-pull-request-action.webp)
 
 In the pull request overview, you can see the action being executed as well as a mandatory step before you can merge:
 
-![Screenshot of pull request overview where you can see the actions being required to merge](/img/articles/ci-cd-hosting-pull-request.png)
+![Screenshot of pull request overview where you can see the actions being required to merge](/img/articles/ci-cd-hosting-pull-request.webp)
 
 ## How do I publish to a private package registry?
 

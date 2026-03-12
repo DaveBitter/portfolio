@@ -11,7 +11,7 @@ intro: >-
 teaserCopy: >-
   The team over at Vercel just announced Next.js 11. These are the important new
   updates to Next.js you need to know about.
-teaserImage: /img/articles/next-js-11-hero.jpg
+teaserImage: /img/articles/next-js-11-hero.webp
 title: What's new in Next.js 11?
 ---
 ## Next.js ❤️ DX

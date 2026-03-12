@@ -17,13 +17,13 @@ teaserCopy: >-
   Let’s have a look at how we can use React.js Server Actions to handle your
   forms progressively enhanced.
 teaserImage: >-
-  /img/articles/progressively-enhance-handling-your-forms-with-react-js-server-actions-hero.png
+  /img/articles/progressively-enhance-handling-your-forms-with-react-js-server-actions-hero.webp
 title: Progressively Enhance Handling Your Forms With React.js Server Actions
 ---
 ## The issue with the rise of SPAs in the past
 
 When we moved to SPAs in the past we introduced a big issue to our web applications. It didn’t work without JavaScript. Whilst this has been disregarded by many as “our users run the JavaScript on their device”, there is a serious fault in this view.
-![Tweet by Jake Archibald saying: "We don't have any non-JavaScript users". No, all your users are non-JS while they're loading your JS](/img/articles/progressively-enhance-handling-your-forms-with-react-js-server-actions-jake-archibald-tweet.png)
+![Tweet by Jake Archibald saying: "We don't have any non-JavaScript users". No, all your users are non-JS while they're loading your JS](/img/articles/progressively-enhance-handling-your-forms-with-react-js-server-actions-jake-archibald-tweet.webp)
 As Jake Archibald pointed out (back in 2012!), there is a variety of situations where your JavaScript is not available to the user. It may not have been downloaded yet, your CDN might be down and more.
 
 Frameworks like Next.js render your React.js web applications on the server so it will at least render the HTML. Regardless of whether your client-side JavaScript loads, the user will still be able to view the information on the page. This is a must-have feature as before, you would simply see a white page if the React.js bundle did not load.
@@ -48,7 +48,7 @@ In my opinion, [Remix action functions](https://www.davebitter.com/articles/remi
 The React.js team has been working hard on server-side React.js for the past years. Next to being able to render your components server-side using [React.js Server Components](https://www.patterns.dev/react/react-server-components/), we are finally getting a way in React.js to handle forms on the server properly!
 
 Imagine this form in your React.js web application:
-![Untitled](/img/articles/progressively-enhance-handling-your-forms-with-react-js-server-actions-form.png)
+![Untitled](/img/articles/progressively-enhance-handling-your-forms-with-react-js-server-actions-form.webp)
 With just the HTML and CSS for this form, the browser will try to submit this to the back-end where no server is handling this POST request. The browser will reload the page and the submitted form data will be in the URL as query parameters:
 ![The form does not get properly handled resulting in a full-page reload with all the form data in the URL bar as query parmaters](/img/articles/progressively-enhance-handling-your-forms-with-react-js-server-actions-client-side-form.gif)
 So what do you do as a developer? You listen for the handle submit event and call `preventDefault` on the submit event to handle it yourself:

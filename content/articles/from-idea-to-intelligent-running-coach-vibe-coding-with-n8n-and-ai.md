@@ -23,7 +23,7 @@ teaserCopy: >-
   more connecting services—what worked, what didn’t, and why this pattern feels
   like where everyday developer automation is headed.
 teaserImage: >-
-  /img/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai-hero.png
+  /img/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai-hero.webp
 title: 'From Idea to Intelligent Running Coach: Vibe Coding with n8n and AI'
 ---
 After my recent experience [vibe coding a complete web application](/articles/my-experience-ai-vibe-coding-a-complete-web-application-from-scratch) without touching a single line of code, I was hungry for another experiment. This time, I wanted to explore a different kind of building. Not generating code with AI, but orchestrating systems and services to create something genuinely useful.
@@ -76,7 +76,7 @@ Cursor would then generate not just the workflow structure, but also sophisticat
 - **Error handling and logging** - Comprehensive failure recovery and debugging
 - **Data validation and transformation** - Safe data extraction with fallbacks
 
-![Screenshot of above mentioned nodes being connected in the n8n UI](/img/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai-hero.png)
+![Screenshot of above mentioned nodes being connected in the n8n UI](/img/articles/from-idea-to-intelligent-running-coach-vibe-coding-with-n8n-and-ai-hero.webp)
 For example, one of the code nodes that Cursor generated for scoring:
 
 ```javascript // Temperature scoring (7-18°C optimal) if (temp >= 7 && temp <= 18) {
@@ -109,7 +109,7 @@ This visual context dramatically improved Cursor's ability to suggest fixes and 
 ## The Magic of Visual Debugging
 
 While Cursor generated both the workflow structure and all the custom code nodes, the n8n UI became my debugging and monitoring interface. I could manually trigger the workflow to test without waiting for the daily cron, see data flow through each node including the output of my custom code, and debug code node failures by examining error messages and intermediate data. I could test individual code nodes in isolation with sample data, monitor performance of both API calls and custom logic, and iterate quickly by asking Cursor to modify specific code nodes and reimporting them.
-![Screenshot of n8n UI where one of the node is red as there's an error](/img/articles/n8n-error.png)
+![Screenshot of n8n UI where one of the node is red as there's an error](/img/articles/n8n-error.webp)
 This hybrid approach gave me the best of both worlds: AI-generated workflow logic AND custom code logic, with visual debugging and monitoring for everything.
 
 ## Coding the Complex Parts
@@ -161,7 +161,7 @@ _🎯 **Weather-Optimal Training:** These conditions are PERFECT for tempo runs!
 _👕 **Gear & Clothing:** Layer with moisture-wicking base and light windproof jacket. The temperature differential between start and peak effort will be significant._
 _⚠️ **Weather Considerations:** Excellent visibility and stable conditions. Hydration needs are moderate - start hydrated but you won't need mid-run fluids for sessions under 90 minutes._
 _Temperature: 12℃ | Humidity: 45% | Wind: 8 km/h"_
-![Email with above mentioned content](/img/articles/email-example.png)
+![Email with above mentioned content](/img/articles/email-example.webp)
 This wasn't programmed responses. This was genuine AI analysis of real-time conditions, automatically delivered and personalized, all orchestrated through vibe coded logic that analyzes multiple weather periods and recommends optimal training windows.
 ## Why Gemini 2.0 Flash Works Well for This
 In my experience building this automation, Gemini 2.0 Flash handled the requirements well:

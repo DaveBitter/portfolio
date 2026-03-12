@@ -10,7 +10,7 @@ intro: >-
 teaserCopy: >-
   How to build a component library Part 2: Picking a front-end framework and
   setting up Storybook.
-teaserImage: /img/articles/front-end-framework-storybook-hero.png
+teaserImage: /img/articles/front-end-framework-storybook-hero.webp
 title: How do I pick a front-end framework & showcase it with Storybook?
 ---
 This article is part 2 of the series _How do I build a Component Library?_. You can find the demo repository for this series on [GitHub](https://github.com/DaveBitter/fe-monorepo) and the component library itself hosted [here](https://fe-monorepo.davebitter.com/).

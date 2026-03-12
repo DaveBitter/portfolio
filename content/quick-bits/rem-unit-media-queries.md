@@ -12,7 +12,7 @@ teaserCopy: >-
   Confused about why your rem units aren't behaving in media queries? Find out
   the reason behind this unexpected behaviour and learn more about using rem
   units in responsive design in this article.
-teaserImage: /img/quick-bits/match-media-hero.jpg
+teaserImage: /img/quick-bits/match-media-hero.webp
 title: The unexpected behaviour of rem units in media queries
 ---
 ## How does the `rem` unit work again?

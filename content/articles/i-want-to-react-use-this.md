@@ -11,7 +11,7 @@ intro: >-
 teaserCopy: >-
   A big part of working with React.js is fetching data and displaying the
   results. Let’s see how the new React.use() hook can can help you!
-teaserImage: /img/articles/i-want-to-react-use-this-hero.jpg
+teaserImage: /img/articles/i-want-to-react-use-this-hero.webp
 title: I want to React.use() this!
 ---
 There’s quite a bit of chatter lately about an experimental hook called `React.use()`. This will fundamentally change the way you work with [React.js](https://reactjs.org/). Let’s have a look at what it is, why you would want to `React.use()` it and how it works!

@@ -18,7 +18,7 @@ teaserCopy: >-
   the ability to generate pages on the server. Let's have a look at what is
   possible, how this works and how can leverage this when building web
   applications.
-teaserImage: /img/articles/next-page-generation.jpg
+teaserImage: /img/articles/next-page-generation.webp
 title: Next.js page generation
 ---
 As a heads-up, I won't be going over how to build things like pages in [Next.js](https://nextjs.org/), but rather focus on the generation techniques. If you're unfamiliar with Next.js, please refer to their documentation.

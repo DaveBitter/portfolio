@@ -10,7 +10,7 @@ intro: >-
 teaserCopy: >-
   How to build a component library Part 1: Setting up a Monorepo, Semver
   strategy and Private package registry.
-teaserImage: /img/articles/monorepo-semver-package-registry-hero.png
+teaserImage: /img/articles/monorepo-semver-package-registry-hero.webp
 title: 'How do I set up a Monorepo, SemVer strategy and Private package registry?'
 ---
 This article is part 1 of the series _How do I build a Component Library?_. You can find the demo repository for this series on [GitHub](https://github.com/DaveBitter/fe-monorepo) and the component library itself hosted [here](https://fe-monorepo.davebitter.com/).
@@ -108,19 +108,19 @@ Great, we can now run a few commands.
 
 `yarn changeset` will open up an interactive CLI tool that assists you in creating a changeset file that can be consumed. First, you select which packages you want to create a changeset for:
 
-![CLI interface to make a selection of which package to make a changeset for](/img/articles/monorepo-semver-package-registry-changeset-select-packages.png)
+![CLI interface to make a selection of which package to make a changeset for](/img/articles/monorepo-semver-package-registry-changeset-select-packages.webp)
 
 Next, you have to select the correct SemVer bump:
 
-![CLI interface to make a selection of which SemVer to use](/img/articles/monorepo-semver-package-registry-changeset-select-semver.png)
+![CLI interface to make a selection of which SemVer to use](/img/articles/monorepo-semver-package-registry-changeset-select-semver.webp)
 
 After that, you can add a summary of the change that will be used in the changelog. Note that it prompts you for a large summary as well if you are doing a major bump:
 
-![CLI interface to add a summary for the changes](/img/articles/monorepo-semver-package-registry-changeset-add-summary.png)
+![CLI interface to add a summary for the changes](/img/articles/monorepo-semver-package-registry-changeset-add-summary.webp)
 
 Finally, it gives us a summary of the changeset:
 
-![CLI interface with summary of choices](/img/articles/monorepo-semver-package-registry-changeset-summary.png)
+![CLI interface with summary of choices](/img/articles/monorepo-semver-package-registry-changeset-summary.webp)
 
 We can now go back to the `.changeset` folder in the root of the project. A new file called `eleven-hounds-prove.md` is automatically generated. Note that the name will change for every generated changeset.
 
@@ -143,7 +143,7 @@ Next, we want to consume this changeset file. You can run `yarn changeset versio
 
 Finally, we want to actually publish the updated packages. You can run `yarn changeset publish` to publish the separate packages to the registry we are setting up next.
 
-![CLI interface with publish logs](/img/articles/monorepo-semver-package-registry-changeset-publish.png)
+![CLI interface with publish logs](/img/articles/monorepo-semver-package-registry-changeset-publish.webp)
 
 As you may notice in the image above is that Changeset creates tags for you as well.
 
@@ -155,7 +155,7 @@ Next, we want to publish these separate packages to a package registry. This doe
 
 Firstly, you need to generate a token on your GitHub. You can do this by going to [https://github.com/settings/tokens](https://github.com/settings/tokens). After hitting generate, make sure to tick the`write:packages`-box
 
-![GitHub settings page to create a new access token](/img/articles/monorepo-semver-package-registry-github-token.png)
+![GitHub settings page to create a new access token](/img/articles/monorepo-semver-package-registry-github-token.webp)
 
 Then click “generate token” at the bottom of the page and copy the generated token.
 

@@ -9,7 +9,7 @@ tags:
 intro: Let's see how Next.js Multi Zones can make building micro frontends a breeze.
 teaserCopy: Let's see how Next.js Multi Zones can make building micro frontends a breeze.
 teaserImage: >-
-  /img/articles/building-scalable-micro-frontends-with-next-js-multi-zones-hero.png
+  /img/articles/building-scalable-micro-frontends-with-next-js-multi-zones-hero.webp
 title: Building Scalable Micro-Frontends with Next.js Multi Zones
 ---
 As our web applications grow in complexity, we often find ourselves needing to split them into smaller, more manageable pieces. This is where Next.js Multi Zones comes in - a powerful feature that allows us to create micro-frontends that work together seamlessly. Let's look at how we can use Multi Zones to build scalable and maintainable web applications.

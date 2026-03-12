@@ -23,7 +23,7 @@ teaserCopy: >-
   basic tools, here's your roadmap from simple suggestions to AI-powered
   development workflows.
 teaserImage: >-
-  /img/articles/move-from-basic-autocomplete-to-ai-powered-development-workflows.png
+  /img/articles/move-from-basic-autocomplete-to-ai-powered-development-workflows.webp
 title: Move from Basic Autocomplete to AI-Powered Development Workflows
 ---
 I've been experimenting with AI-assisted development since early 2023, building everything from [complete web applications from scratch](/articles/my-experience-ai-vibe-coding-a-complete-web-application-from-scratch) to [voice interfaces that interact with ChatGPT](/articles/interacting-with-chat-gpt-through-voice-ui-on-the-web). What started as curiosity has become a fundamental shift in how I approach development.

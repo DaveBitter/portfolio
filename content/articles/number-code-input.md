@@ -15,7 +15,7 @@ teaserCopy: >-
   measures, voucher codes and more. These Number Code Inputs often have a bit
   more functionality behind them then you might think at first. Let's create our
   own as an exercise.
-teaserImage: /img/articles/number-code-input.jpg
+teaserImage: /img/articles/number-code-input.webp
 title: Building a Number Code Input
 ---
 ![Number Code Input](/img/articles/number-code-input-html-css-js.gif)*Number Code Input*

@@ -17,7 +17,7 @@ teaserCopy: >-
   practical ways to expand how you use AI in development beyond the usual code
   generation.
 teaserImage: >-
-  /img/articles/top-10-ways-ai-can-help-your-dev-workflow-outside-of-code-generation-hero.jpg
+  /img/articles/top-10-ways-ai-can-help-your-dev-workflow-outside-of-code-generation-hero.webp
 title: Top 10 ways AI can help your dev workflow outside of code generation
 ---
 I was chatting with some colleagues recently about Cursor AI and GitHub Copilot, and it got me thinking about how we all use these tools. While many of us have moved beyond just basic code generation (asking for React components or help with algorithms), I've noticed we sometimes forget about all the other ways AI can fit into our development workflow.

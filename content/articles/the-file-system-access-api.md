@@ -29,9 +29,9 @@ Quite a few API’s that you might already know or use fall under this effort. T
 As you might have guessed, this API allows you to access local files on your user’s system. But not just access them, you can perform full [CRUD operations](https://www.freecodecamp.org/news/crud-operations-explained/) straight from the browser. On the one hand, this gave me quite a few exciting idea’s to use this for. On the other hand, it gave me some concerns about potential dangers as well.
 
 To find the answers to how it works and if it’s safe, I decided to build a small demo application based on the File System Access API. I’m going to show you how you can build a local Markdown editor on the Web. This app will need to be able to **C**reate, **R**ead, **U**pdate and **D**elete local Markdown files on the user’s system.
-![Screenshot of the demo application showing a sidebar with nested files and a Markdown editor view with an edit field and a preview field](/img/articles/file-system-access-api-web-application.png)
+![Screenshot of the demo application showing a sidebar with nested files and a Markdown editor view with an edit field and a preview field](/img/articles/file-system-access-api-web-application.webp)
 If you’d like to try the demo you can [visit the web application](https://md-editor.davebitter.com/). Beware that this is for some features dependent on having the experimental features flag set in your Chrome settings. You can do this by going to `chrome://flags`, searching for `#enable-experimental-web-platform-features` and turning it on.
-![Chrome settings screen to enable experimental features](/img/articles/file-system-access-api-chrome-flags-experimental.png)
+![Chrome settings screen to enable experimental features](/img/articles/file-system-access-api-chrome-flags-experimental.webp)
 
 ## How does the File System Access API work?
 
@@ -40,7 +40,7 @@ This article will show some simplified code examples with any logic outside of t
 ### Read
 
 Firstly, I want to show a sidebar with files just like an IDE. This will look something like this:
-![Screenshot of the sidebar of the demo application showing nested files](/img/articles/file-system-access-api-sidebar.png)
+![Screenshot of the sidebar of the demo application showing nested files](/img/articles/file-system-access-api-sidebar.webp)
 Let’s see how you can read files and use the result to create a sidebar like this.
 
 #### Reading a single file
@@ -68,9 +68,9 @@ elements.openFileButton.addEventListener('click', openFile)
 ```
 
 Quite a few things are happening here. Let’s go over each of them. First, I create an asynchronous function. This is needed because we need to await the file picker window in the next line. Next, I actually request to open the native file of the user with `window.showOpenFilePicker`. You can pass a couple of options here like which files you allow and whether the user can pick multiple. The browser opens a file picker just like how it would do if you show a regular file input:
-![Screenshot of MacOS UI to pick a directory on the system](/img/articles/file-system-access-api-select-directory.png)
+![Screenshot of MacOS UI to pick a directory on the system](/img/articles/file-system-access-api-select-directory.webp)
 The user also needs to confirm that they trust my web application and allow me to read the selected files. Note that they only have to do this the first time (per file or directory). The UI looks a bit like this:
-![Screenshot of MacOS UI to confirm whether you want to allow the website to view the selected directory](/img/articles/file-system-access-api-allow-view-directory.png)
+![Screenshot of MacOS UI to confirm whether you want to allow the website to view the selected directory](/img/articles/file-system-access-api-allow-view-directory.webp)
 As the result could be multiple file handles, the result of `window.showOpenFilePicker` is always an array. As I’m only requesting a single file, I can destructure that first file handle and name it `fileHandle`. Finally, I can use the file handle for my web application.
 
 Like many other powerful APIs, calling the `window.showOpenFilePicker` should be done in a [secure context](https://w3c.github.io/webappsec-secure-contexts/). To do this, you should only call the `openFile` helper function through an event triggered by the user. In this example, that’s done after the user clicks on the button to open a file.
@@ -183,13 +183,13 @@ saveButton.addEventListener('click', async () => {
 ```
 
 First, I add an event listener to the save button. Next, I get the latest content from the Markdown editor. I can then create a writable for the file handle that I’m making changes to, write the updated content and close the writable. While doing this the first time, the user will see another confirmation window to allow the web application to save changes:
-![Screenshot of MacOS UI to confirm whether you want to allow the website to save the file](/img/articles/file-system-access-api-allow-save-file.png)
+![Screenshot of MacOS UI to confirm whether you want to allow the website to save the file](/img/articles/file-system-access-api-allow-save-file.webp)
 Now, when the user checks the local file, they will see that the changes are saved.
 
 ### Create
 
 The user might also want to create a new file in the root or one of the subdirectories. Just like an IDE, I’ve added a button to do so:
-![Screenshot of a button in the sidebar to create a new file in a directory](/img/articles/file-system-access-api-create-file-button.png)
+![Screenshot of a button in the sidebar to create a new file in a directory](/img/articles/file-system-access-api-create-file-button.webp)
 I then added an event listener that calls a function that will open a new window in the correct directory to create a new file in:
 
 ```jsx
@@ -210,7 +210,7 @@ sidebarDirectoryNewFileButton.addEventListener('click', async () => {
 ```
 
 I use `window.showSaveFilePicker` to trigger the UI for the user to save a new file. I can pass it a configuration to help the user a bit. In this example, I tell it to start in the subdirectory where the user clicked on the button for a new file. Next, I gave it a sensible suggested name. Finally, I told it that a Markdown file will be saved. The user will see the following:
-![Screenshot of MacOS UI to save a file to the system](/img/articles/file-system-access-api-create-file.png)
+![Screenshot of MacOS UI to save a file to the system](/img/articles/file-system-access-api-create-file.webp)
 
 ### Delete
 
@@ -253,7 +253,7 @@ An upside of using a platform where your files are in the cloud is that you alwa
 ## Some inspiration
 
 Naturally, the File System Access API is great for web apps that modify text like the demo shown in this article. Another great example is a web application like [edit.photo](http://edit.photo) by [Rik Schennink](https://twitter.com/rikschennink). Imagine having local file access to all your photos and saving changes directly. Finally, I think this could be data processing web applications. Especially combining PWA installability (for desktop) with it. Being able to write your own web applications to help you with your daily tasks is really cool!
-![Screenshot of the demo application running as a PWA on MacOS](/img/articles/file-system-access-api-pwa-macos.png)
+![Screenshot of the demo application running as a PWA on MacOS](/img/articles/file-system-access-api-pwa-macos.webp)
 
 ## What would make the File System Access API even better?
 

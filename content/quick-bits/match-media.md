@@ -12,7 +12,7 @@ teaserCopy: >-
   Unfortunately, sometimes you need to write viewport-based logic in your
   JavaScript code. Usually, this is done with a listener on the window for a
   resize. Let’s look at a better way.
-teaserImage: /img/quick-bits/match-media-hero.jpg
+teaserImage: /img/quick-bits/match-media-hero.webp
 title: How to use matchMedia to create a performant custom viewport hook
 ---
 ## What’s wrong with listening for the resize event?

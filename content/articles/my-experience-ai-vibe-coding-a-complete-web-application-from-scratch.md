@@ -16,7 +16,7 @@ teaserCopy: >-
   single line of code, using AI to transform an idea into a fully functional
   product. What was good, what was bad and is this where we are heading in our
   industry?
-teaserImage: /img/articles/paxaura-final-overview.png
+teaserImage: /img/articles/paxaura-final-overview.webp
 title: My experience AI vibe coding a complete web application from scratch
 ---
 I was looking into an app for some breathing exercises I wanted to do. Naturally, one of the first things that went through my head was: “I can make something like this myself”. But then, as always, I thought about all the coding I’d have to do for this simple app. I need to scaffold the project, build the logic, build the UI etcetera. Not complex, but a lot of grind work.
@@ -36,19 +36,19 @@ I created a new empty GIT repository and wrote my first prompt.
 I wanted to use the “new” app router in Next.js for this project. I also, like any cool new side project, gave it a nice name. “Pax” (Latin for peace) and “Aura” (lating for breath/air/essence). Well, at least according to the AI I used.
 Now, it had no issue performing this task. It doesn’t surprise me at all as there is so much documentation on how to set up a new Next.js project not even mentioning all the example repositories it can draw inspiration from.
 If you’ve never seen Cursor before, you basically have a regular code editor with a chat window at the side. What’s pretty cool is that Cursor will be able to access the entire project, create/read/update/delete files and even run commands from the terminal.
-![Code editor with an AI chat on the right hand side](/img/articles/cursor-init-project.png)
+![Code editor with an AI chat on the right hand side](/img/articles/cursor-init-project.webp)
 You can see it explains what it’s going to do first. Then it opens a small terminal inline and first asks me to hit the “run this command” button. This is something nice because of course, you’d like to keep a bit of control in what it does in your terminal. When running the generated command it initialised the entire Next.js app with sensible defaults. Cool, as it’s good practice, let’s quickly commit this. Wait, can’t the AI do that for me? Of course! Just prompt “commit this for me”. It then does a scan of the changes and types out a neat commit message to go with it.
 ## Hey AI, build this entire app for me in one go!
 Naturally, I wanted to do as little as possible myself. I could give it step-by-step instructions, but what happens if I just describe the app that I want? Can I just let it figure it out itself. Vibe Coding 🤘. Here’s the simple, non-technical, prompt I gave it:
 ```jsx I want to create an app with simple breathing exercises. I want an overview page with the different ones (i'll share the actual excersises later) and a detail page were you can do them. They will be simple time based inhale exhale reps ```
 
 Then it went to work. Step by step it created folders, files, types etcetera. All the things I would normally do. Maybe even a bit neater as I’d take some shortcuts during a side project.
-![Code editor with an AI chat on the right hand side and all files created](/img/articles/cursor-mvp-project.png)
+![Code editor with an AI chat on the right hand side and all files created](/img/articles/cursor-mvp-project.webp)
 And just like that, we had a working Minimal Viable Product (MVP) within minutes of starting this challenge. It generated an overview page:
-![Basic overview page with cards that have exercises for breathing](/img/articles/paxaura-mvp-overview.png)
+![Basic overview page with cards that have exercises for breathing](/img/articles/paxaura-mvp-overview.webp)
 What I found interesting is that it created some features I didn’t instruct it to or even thought of. For instance, giving the exercises labels like beginner, intermediate and advanced is a nice addition. As well as the benefit tags. Naturally, you then want to be able to filter so it made a filter bar. A nice extra benefit of using AI, it generated the data to be used for the exercises as well. I don’t know all breathing technique exercises so nice to see that it listed them for me.
 When you click on one of the cards it brings you to the detail page:
-![Basic detail page with the breathing exercise on there](/img/articles/paxaura-mvp-detail.png)
+![Basic detail page with the breathing exercise on there](/img/articles/paxaura-mvp-detail.webp)
 Here it created a working exercise component including the breathing animation which grows and shrinks on the inhale and exhale. It also added the live information on whether to inhale/exhale, how many seconds remaining, and which repetition you’re currently doing. Nice! Within minutes I have a working MVP!
 
 ## Adding feature after feature
@@ -67,8 +67,8 @@ Then it was just a matter of giving it more and more features by prompting for i
 - etcetera
 It was amazing to see how quickly I was able to go from idea, to prompt, to actual value for the user in the app at a rapid pace. Each feature inspired another and I started to prompt based on my user needs. What do I want the app to do? It doesn’t matter what the effort is. Just build.
 Before I knew it, I created a very useful breathing exercise web application that is free for the world to use:
-![Similar overview to before but with more content, better design and more features](/img/articles/paxaura-final-overview.png)
-![Similar detail to before but with more content, better design and more features](/img/articles/paxaura-final-detail.png)
+![Similar overview to before but with more content, better design and more features](/img/articles/paxaura-final-overview.webp)
+![Similar detail to before but with more content, better design and more features](/img/articles/paxaura-final-detail.webp)
 You can try it yourself over at [paxaura.davebitter.com](https://paxaura.davebitter.com)! Curious about the source code it generated? Head over to [github.com/DaveBitter/paxaura](https://github.com/DaveBitter/paxaura).
 
 ## The good

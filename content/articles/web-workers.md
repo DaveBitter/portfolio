@@ -14,7 +14,7 @@ teaserCopy: >-
   concurrent execution of code and improved performance and user experience. In
   this blog post, we explore the benefits of Web Workers and provide a practical
   use case with code examples.
-teaserImage: /img/articles/web-workers-threads.jpg
+teaserImage: /img/articles/web-workers-threads.webp
 title: Unleash the Power of Web Workers for Blazing Fast JavaScript Execution
 ---
 Web Workers are a powerful tool in the JavaScript developer’s toolkit, allowing for concurrent execution of JavaScript code. This means that Web Workers can run JavaScript code in the background, independent of the main thread, leading to improved performance and user experience.

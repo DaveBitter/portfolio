@@ -16,7 +16,7 @@ teaserCopy: >-
   The Mirabeau blog was suffering from technical debt. I decided to rebuild it
   using the latest web technologies to make it 2020 ready, which includes
   boosting the overall performance and user-friendliness.
-teaserImage: /img/articles/dave-behind-laptop.jpg
+teaserImage: /img/articles/dave-behind-laptop.webp
 title: Implementing the latest web technologies to boost the Mirabeau blog
 ---
 Back in 2018, Mirabeau updated their main website [mirabeau.nl](https://mirabeau.nl). However, the old blogging platform became the sibling that was left behind. The branding and visual style got severely updated and as you might know, the world of (front-end) development moves at a rapid pace. Projects that are about five years old become outdated both in tooling and functionality. I want to rethink the way we build web platforms and construct a stack that stays up-to-date and is resilient for the coming years.

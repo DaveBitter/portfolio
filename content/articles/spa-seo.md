@@ -15,7 +15,7 @@ teaserCopy: >-
   One of the biggest drawbacks when building a Single-Page Application (SPA) is
   to provide solid Search Engine Optimisation, often shortened to SEO. How can
   we improve SEO with some modern tools and techniques I love the most?
-teaserImage: /img/articles/dave-seo.jpg
+teaserImage: /img/articles/dave-seo.webp
 title: How can I handle SEO in my Single-page application?
 ---
 ## The issue with SEO in SPAs

@@ -12,7 +12,7 @@ teaserCopy: >-
   Scroll snapping is a popular technique to focus on a single piece of
   information. How can we implement this without the need and complexity of
   Javascript-based solutions?
-teaserImage: /img/quick-bits/scroll-snap.png
+teaserImage: /img/quick-bits/scroll-snap.webp
 title: Full page scroll snapping with CSS only
 ---
 The idea is simple; the user scrolls. As soon as the user is over a certain threshold, you snap to the next item. We used to do this with Javascript to calculate when the user is over this threshold. We would then manually scroll to a certain position with a neat animation.

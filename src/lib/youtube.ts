@@ -38,7 +38,7 @@ function toFridayTip(item: YouTubePlaylistItem): Article {
     tags: [],
     intro: snippet.description,
     teaserCopy: snippet.description,
-    teaserImage: "/img/friday-tips.jpg",
+    teaserImage: "/img/friday-tips.webp",
     title: snippet.title.replace("#", ""),
   };
 }

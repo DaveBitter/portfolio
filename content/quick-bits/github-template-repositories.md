@@ -15,7 +15,7 @@ intro: >-
 teaserCopy: >-
   Let's have a quick look at GitHub Template repositores. We'll go over the why
   and the how with a practical example.
-teaserImage: /img/articles/next-boilerplate-repository.png
+teaserImage: /img/articles/next-boilerplate-repository.webp
 title: Using template repositories with GitHub
 ---
 ## The old way
@@ -48,10 +48,10 @@ I started off with creating a boilerplate repository. My boilerplate repository,
 * Basic utilities
 
 You see why I want to have all of this quickly for a project.
-![The Next Boilerplate repository](/img/articles/next-boilerplate-repository.png)*The Next Boilerplate repository*
+![The Next Boilerplate repository](/img/articles/next-boilerplate-repository.webp)*The Next Boilerplate repository*
 
 Next, I went over to the settings of this repository and enabled 'Template repository'.
-![The Next Boilerplate settings](/img/articles/next-boilerplate-settings.png)*The Next Boilerplate settings*
+![The Next Boilerplate settings](/img/articles/next-boilerplate-settings.webp)*The Next Boilerplate settings*
 That was all the setup that is required. Whenever I want to start a new project with this repository I go to the Next Boilerplate and click the green button saying 'Use this template'.
 I then have the option to:
 * Create a new repository and name it
@@ -59,7 +59,7 @@ I then have the option to:
 * Make it public or private
 * Include all branches
 
-![The Next Boilerplate template](/img/articles/next-boilerplate-template.png)*The Next Boilerplate template*
+![The Next Boilerplate template](/img/articles/next-boilerplate-template.webp)*The Next Boilerplate template*
 
 After clicking 'Create repository from template' I have a new repository with all the files, non of the history or branches and start creating right away.
 Please head over to [GitHub](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) to learn more.

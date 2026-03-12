@@ -11,11 +11,11 @@ intro: >-
 teaserCopy: >-
   Chrome now offers built-in, on-device AI APIs for summarization, translation,
   and language detection without the use of cloud required.
-teaserImage: /img/articles/built-in-ai-in-chrome-hero.jpg
+teaserImage: /img/articles/built-in-ai-in-chrome-hero.webp
 title: Built-in AI in Chrome
 ---
 If you're building for the web and want lightweight AI functionality like summarization or translation, Chrome now has some built-in capabilities you can use straight out of the box! These features run on-device using Google's Gemini Nano model and are exposed through browser APIs. That means no API calls, no API keys, and no additional libraries required.
-![Dave in front of a banner that says "Google Developer Expert Summit"](/img/articles/google-io-connect-berlin.jpg)
+![Dave in front of a banner that says "Google Developer Expert Summit"](/img/articles/google-io-connect-berlin.webp)
 [Whilst visiting Google IO Connect and the Google Developer Expert Summit in Berlin](https://www.linkedin.com/feed/update/urn:li:activity:7344273611823702020/) as part of my Google Developer Expert perks, I saw a few demo's on this. It got me excited to enhance the web using AI capabilities in the browser. In this article we go through what’s available, how to use it, and what to expect in real-world usage.
 
 ## Overview

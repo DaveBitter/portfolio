@@ -14,7 +14,7 @@ slug: custom-inputs-web
 teaserCopy: >-
   How can we make custom inputs for the web while still offering a working
   solution without JavaScript?
-teaserImage: /img/articles/progressive-enhancement.png
+teaserImage: /img/articles/progressive-enhancement.webp
 title: Writing progressively enhanced custom inputs for the web
 ---
 ### Progressive enhancement

@@ -18,7 +18,7 @@ teaserCopy: >-
   not as big of a feature as page generation, it is one of the features I'm
   starting to enjoy more and more. Let's have a look at this feature and how to
   use it.
-teaserImage: /img/articles/next-js-api-routes.jpg
+teaserImage: /img/articles/next-js-api-routes.webp
 title: Next.js API routes
 ---
 ## What do they do?

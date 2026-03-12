@@ -11,7 +11,7 @@ intro: >-
 teaserCopy: >-
   There is an awesome feature in Remix that is easily overlooked, but is
   incredibly powerful! Let’s have a look at the Remix handle export object.
-teaserImage: /img/articles/remix.jpg
+teaserImage: /img/articles/remix.webp
 title: Remix’ powerful hidden feature you might not have noticed yet
 ---
 Remix spends a single line in the documentation on the [handle export](https://remix.run/docs/en/v1/api/conventions#handle). It simply states:

@@ -15,7 +15,7 @@ teaserCopy: >-
   efficient and sophisticated alternative for storing structured data on the
   client, eliminating the need for repetitive JSON parsing and stringifying
   operations.
-teaserImage: /img/articles/indexed-db-web-storage-hero.jpg
+teaserImage: /img/articles/indexed-db-web-storage-hero.webp
 title: IndexedDB > Web Storage
 ---
 I often use LocalStorage (or SessionStorage) to store structured data on the client for demos and real projects. While this worked fine, I’ve always had a nagging feeling that there would be a better way than `JSON.parse` and `JSON.stringify` large arrays on every change. Let’s have a look at why IndexedDB might be a better choice for you than the Storage API.
@@ -71,7 +71,7 @@ I often use LocalStorage (or SessionStorage) to store structured data on the cli
 
   Like every technique I like to learn, I first try to create an actual demo so I run into real-world requirements and issues while building. This time, I went for a good old todo app that persists data in the user’s browser:
 
-  ![Screenshot of a todo app with a form and a list of tasks](/img/articles/indexed-db-web-storage-todo-app.png)
+  ![Screenshot of a todo app with a form and a list of tasks](/img/articles/indexed-db-web-storage-todo-app.webp)
 
   You can [view the demo here](https://indexed-db-demo.davebitter.com/) and [view the source code over at GitHub](https://github.com/DaveBitter/indexed-db-demo).
 

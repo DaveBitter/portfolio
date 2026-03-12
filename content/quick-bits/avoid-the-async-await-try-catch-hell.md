@@ -14,7 +14,7 @@ teaserCopy: >-
   circumvent this nowadays with the use of Async Await. Unfortunately, this can
   introduce a new Async Await try-catch hell. Here's the solution on how to fix
   this.
-teaserImage: /img/quick-bits/js.png
+teaserImage: /img/quick-bits/js.webp
 title: Avoid the Async Await try-catch hell
 ---
 Full disclaimer, I came across this solution watching a 45-second video by Fireship on Youtube which you can watch [here]([https://www.youtube.com/watch?v=ITogH7lJTyE](https://www.youtube.com/watch?v=ITogH7lJTyE)). All credits to them. I'm a fan of reading these at my own pace, how impressive 45 seconds is though, so here it is in writing.

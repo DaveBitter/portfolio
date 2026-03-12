@@ -20,7 +20,7 @@ teaserCopy: >-
   hyper-productive work state in development. Since working full-time from home
   I noticed a serious decline in my productivity and focus. How is this possible
   and how can I resolve this?
-teaserImage: /img/articles/pomodoro-hero.jpg
+teaserImage: /img/articles/pomodoro-hero.webp
 title: I build a neumorphic Pomodoro to stay sane
 ---
 ## Why did I need this?
@@ -53,17 +53,17 @@ Neumorphism is not as focused on affordance as it is to give depth to interfaces
 
 ### Design
 
-![Pomodoro](/img/articles/pomodoro-hero.jpg)*Neumorphic Pomodoro*
+![Pomodoro](/img/articles/pomodoro-hero.webp)*Neumorphic Pomodoro*
 As you can see, the tabs at the tab are flat-design. The timer itself however seems to protrude from the background. It's clear that this is the most important element on the screen and I can interact with it. The way this effect is done is through shadows on the screen the contrast between dark and light shadows make it look like the timer itself is "higher" of the background. I used neumorphism to create the base effect in box shadows for CSS. I then tweaked the size and colour values to the point I was happy with the result. A fairly simple, but refreshing design to see on the web which at this point is flatter than the Netherlands.
 
 ### Interactivity
 
-![Pomodoro settings](/img/articles/pomodoro-settings.jpg)*Settings*
+![Pomodoro settings](/img/articles/pomodoro-settings.webp)*Settings*
 The second part of the challenge is to let the user set different values for the timers, choose a font and set a different primary colour. Through this modal, the user can tweak how the website works and looks. For the font and primary colour, I used CSS-variables. Whenever the user makes a change, I update the corresponding variable and the browser updates the screen accordingly.
 
 ### Progressive Web App?
 
-![Pomodoro Progressive Web App on MacOS](/img/articles/pomodoro-pwa.jpg)*Pomodoro Progressive Web App on MacOS*
+![Pomodoro Progressive Web App on MacOS](/img/articles/pomodoro-pwa.webp)*Pomodoro Progressive Web App on MacOS*
 My Pomodoro app just needs some static files to work. I added a service worker to cache all the static files and serve them if my server is down or internet connectivity is lost. This ensures that the app will always work. Next to that, I added a manifest with some more information about the app. This turned my app into a Progressive Web App (PWA). Besides the before-mentioned offline capabilities, the app can now be installed on desktop, tablet and mobile devices as well. This makes it easier to quickly open the Pomodoro from the device you're working on.
 
 ### Demo

@@ -4,7 +4,7 @@ title: Dynamically generate Open Graph images using Next.js serverless
 teaserCopy: >-
   Did you know it is quite easy to generate custom, freshly designed and
   stateful images which make you stand out from the crowd?
-teaserImage: /img/talks/next-js-og.jpg
+teaserImage: /img/talks/next-js-og.webp
 slug: front-end-meetup-eindhoven-og-serverless-next
 tags:
   - next-js

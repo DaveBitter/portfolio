@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Theme } from "@radix-ui/themes";
 import { Public_Sans } from "next/font/google";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteBreadcrumbs } from "@/components/site/site-breadcrumbs";
 import { Analytics } from "@/components/analytics";
 import { ViewTransitionHandler } from "@/components/view-transition-handler";
+import { ThemeProvider, ThemeWrapper } from "@/components/theme-provider";
 import "./globals.css";
 
 const publicSans = Public_Sans({
@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={publicSans.variable}>
+    <html lang="en" className={publicSans.variable} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -46,21 +46,17 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
-        <Theme
-          appearance="dark"
-          accentColor="orange"
-          grayColor="sand"
-          radius="medium"
-          scaling="100%"
-        >
-          <div className="flex min-h-dvh flex-col">
-            <SiteNav />
-            <SiteBreadcrumbs />
-            <main className="flex-1">{children}</main>
-            <SiteFooter />
-          </div>
-        </Theme>
+      <body suppressHydrationWarning>
+        <ThemeProvider>
+          <ThemeWrapper>
+            <div className="flex min-h-dvh flex-col">
+              <SiteNav />
+              <SiteBreadcrumbs />
+              <main className="flex-1">{children}</main>
+              <SiteFooter />
+            </div>
+          </ThemeWrapper>
+        </ThemeProvider>
         <ViewTransitionHandler />
         <Analytics />
       </body>

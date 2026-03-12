@@ -13,11 +13,11 @@ intro: >-
 teaserCopy: >-
   Transform your web app with two lines of code – create seamless animated
   interactions using the View Transitions API.
-teaserImage: /img/articles/view-transitions-api-animated-interactions-hero.png
+teaserImage: /img/articles/view-transitions-api-animated-interactions-hero.webp
 title: Make awesome animated interactions with two lines of code
 ---
 A few weeks ago I was lucky enough to visit the Google Campus in San Francisco through the Google Developer Expert program I am part of.
-![Dave bitter on the Google Campus in San Francisco riding a Google bike](/img/articles/view-transitions-api-animated-interactions-dave-google-campus.jpeg)
+![Dave bitter on the Google Campus in San Francisco riding a Google bike](/img/articles/view-transitions-api-animated-interactions-dave-google-campus.webp)
 There, [Una Kravets](https://twitter.com/Una) showed [a demo](https://codepen.io/una/pen/eYbOOQp) she built using the [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) to animate the deletion of cards. This excited me to look at using the API for not just page transitions, but more for micro animations!
 
 ## Give feedback to the user

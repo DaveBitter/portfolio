@@ -15,12 +15,12 @@ teaserCopy: >-
   I noticed many benefits for me as a front-end developer and the designers I
   work with using this approach. In this blog post, you will find out why you
   should design in the browser, how it works and how to start
-teaserImage: /img/articles/design-handoff-browser.jpg
+teaserImage: /img/articles/design-handoff-browser.webp
 title: Design handoff in the browser
 ---
 ## The problem with waterfall
 
-![Interaction design (ID), visual design (VD) and front-end development (FED) working with a waterfall approach](/img/articles/design-front-end-development-waterfall.png)*Interaction design (ID), visual design (VD) and front-end development (FED) working with a waterfall approach*
+![Interaction design (ID), visual design (VD) and front-end development (FED) working with a waterfall approach](/img/articles/design-front-end-development-waterfall.webp)*Interaction design (ID), visual design (VD) and front-end development (FED) working with a waterfall approach*
 
 A traditional way of collaboration between visual design, interaction design and front-end development is the waterfall technique with a review moment. Visual and interaction designers work together to produce a static design. Front-end developers translate this design into interactive components. At the end of this process, there's a moment to review the implementation by all parties.
 
@@ -32,7 +32,7 @@ This causes issues when a design is made for a limited number of these variation
 
 ## Several stages of design and development collaboration
 
-![Interaction design (ID), visual design (VD) and front-end development (FED) working together in different stages of producing components](/img/articles/design-front-end-development-fluid.png)*Interaction design (ID), visual design (VD) and front-end development (FED) working together in different stages of producing components*
+![Interaction design (ID), visual design (VD) and front-end development (FED) working together in different stages of producing components](/img/articles/design-front-end-development-fluid.webp)*Interaction design (ID), visual design (VD) and front-end development (FED) working together in different stages of producing components*
 
 Front-end development at my company Mirabeau, a Cognizant Digital Business, is in the same unit as visual design and interaction design. This structure has been set up for tight collaboration between these disciplines. In projects as a front-end developer, I've identified six major stages where design and front-end development can take advantage of each other's view, experience and skillset.
 
@@ -68,7 +68,7 @@ These points are further solidified by my colleague and visual designer Alexande
 
 Lastly, we document our single source of truth. There's already a static design, so what's the point of documenting the component again? Besides developer-documentation on how to work with the component, we want to document the interactive component in a way where you can view it in all the contexts you'd like.
 
-![Storybook showcasing a badge component](/img/articles/storybook.jpg)*Storybook showcasing a badge component*
+![Storybook showcasing a badge component](/img/articles/storybook.webp)*Storybook showcasing a badge component*
 
 A good solution for this is an interactive component showcase library, the best-known among them being [Storybook](https://storybook.js.org/). Storybook offers a flexible UI for both design and front-end development to not just view and interact with the components, but alter them as well. With the wide range of features and plugins you can dynamically change the content (e.g. change the name in a component to more characters), test different screen sizes and more. This fluid version of showcasing the design implemented in interactive components is most flexible.
 

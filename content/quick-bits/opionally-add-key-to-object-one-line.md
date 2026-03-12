@@ -12,7 +12,7 @@ teaserCopy: >-
   I sometimes need to optionally add a key to an object based on a statement.
   This can easily be done with a few lines of code, but where's the fun in that?
   How can I do this as clean as possible?
-teaserImage: /img/quick-bits/js.png
+teaserImage: /img/quick-bits/js.webp
 title: Optionally add a key to an object in one line
 ---
 ## A real-world use case

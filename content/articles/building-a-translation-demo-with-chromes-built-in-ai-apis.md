@@ -12,7 +12,7 @@ teaserCopy: >-
   A deep dive into the Chrome Translation and Language Detection APIs, featuring
   a live demo with multilingual product reviews and on-device AI translation.
 teaserImage: >-
-  /img/articles/building-a-translation-demo-with-chromes-built-in-ai-apis-hero.png
+  /img/articles/building-a-translation-demo-with-chromes-built-in-ai-apis-hero.webp
 title: Building a Translation Demo with the Chrome Built-in AI APIs
 ---
 Back in June, I wrote about [Chrome's built-in AI APIs](https://techhub.iodigital.com/articles/built-in-ai-in-chrome) after attending Google I/O Connect and the Google Developer Expert Summit in Berlin. I covered the Summarizer API, Language Detection API, and Translation API, all running on-device using Google's [Gemini Nano](https://deepmind.google/technologies/gemini/nano/) model.

@@ -15,7 +15,7 @@ teaserCopy: >-
   (PWA) is the need for native store presence. Fair enough, let's make that
   work.
 teaserImage: >-
-  /img/articles/wrapping-your-progressive-web-app-for-android-with-trusted-web-activities.jpg
+  /img/articles/wrapping-your-progressive-web-app-for-android-with-trusted-web-activities.webp
 title: Wrapping your Progressive Web App for Android with Trusted Web Activity
 ---
 [Trusted Web Activity (TWA)](https://developers.google.com/web/android/trusted-web-activity) is a technique to wrap your PWA in a native shell for Android. Make sure to notice the difference between PWA and TWA as this article wouldn't make much sense otherwise. If you are unfamiliar on want to learn more about PWA please refer to my article ["You might not need a native app"](/articles/you-might-not-need-a-native-app).
@@ -26,7 +26,7 @@ Being able to build one experience cross-platform by using web techniques is one
 
 Before TWA and still, on iOS you would traditionally load your web application in something called a [Web View](https://developer.android.com/reference/android/webkit/WebView) or a [Chrome Custom Tab (CCT)](https://developers.google.com/web/android/custom-tabs). The application is bundled with a browser that will load your page. This seems to have worked fine so why this new technique by Google?
 
-![Webview, CCT and TWA comparison](/img/articles/webview-cct-twa-comparison.jpg)*Webview, CCT and TWA comparison*
+![Webview, CCT and TWA comparison](/img/articles/webview-cct-twa-comparison.webp)*Webview, CCT and TWA comparison*
 
 In short, TWA is Google's push to ensure a seamless user experience when loading web content in an Android app. One of those features is the ability to hide the address bar similar to an install PWA on a phone. Next to that, TWA is significantly faster, can share cookies with the web application, autocomplete data with the browser and send callbacks to the application. Finally, it will make use of the user's native chrome browser. This ensures that your web application will most likely always be loaded on the most recent version of Chrome. Developers can appreciate this when using fairly new browser APIs loaded through progressive enhancement.
 > "If you are loading web content, use TWA" - Google

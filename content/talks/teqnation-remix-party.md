@@ -5,7 +5,7 @@ teaserCopy: >-
   Remix is a great framework to build robust, progressively enhanced and
   interactive web apps! I will tell you about the challenges I encountered
   building a web app and how it was solved charmingly by using Remix.
-teaserImage: /img/talks/remix-party.jpg
+teaserImage: /img/talks/remix-party.webp
 slug: teqnation-remix-party
 tags:
   - remix
