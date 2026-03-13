@@ -47,8 +47,9 @@ export default function ResumePage() {
                   Dave Bitter
                 </Heading>
                 <Text size="3" color="gray" align="center">
-                  Senior Front-end Consultant · Developer Advocate · Engineering
-                  Manager
+                  Senior Front-end Consultant · Developer Advocate ·{" "}
+                  <span className="text-gradient font-medium">AI Enthusiast</span>{" "}
+                  · Engineering Manager
                 </Text>
                 <Box mt="2">
                   <Socials />
