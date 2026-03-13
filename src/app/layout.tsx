@@ -22,6 +22,30 @@ export const metadata: Metadata = {
   description:
     "Front-end consultant, developer advocate, and engineering manager who writes about web development, speaks at conferences, and occasionally makes things that work.",
   metadataBase: new URL("https://www.davebitter.com"),
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/img/favicons/favicon.ico", sizes: "any" },
+      {
+        url: "/img/favicons/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/img/favicons/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+    ],
+    shortcut: ["/img/favicons/favicon.ico"],
+    apple: [
+      {
+        url: "/img/favicons/apple-icon-180x180.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
   openGraph: {
     type: "website",
     siteName: "Dave Bitter",
