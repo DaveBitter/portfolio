@@ -6,9 +6,14 @@ import { renderMarkdown } from "@/lib/markdown";
 interface ResumePitchProps {
   pitch: string;
   showLink?: boolean;
+  maxWidth?: string;
 }
 
-export function ResumePitch({ pitch, showLink = true }: ResumePitchProps) {
+export function ResumePitch({
+  pitch,
+  showLink = true,
+  maxWidth = "65ch",
+}: ResumePitchProps) {
   const html = renderMarkdown(pitch);
 
   return (
@@ -17,7 +22,7 @@ export function ResumePitch({ pitch, showLink = true }: ResumePitchProps) {
         as="div"
         size="3"
         color="gray"
-        style={{ lineHeight: 1.8, maxWidth: "65ch" }}
+        style={{ lineHeight: 1.8, maxWidth }}
         dangerouslySetInnerHTML={{ __html: html }}
       />
       {showLink && (

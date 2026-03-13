@@ -55,7 +55,7 @@ export default async function HomePage() {
       </Section>
 
       <ContentSection title="About me">
-        <ResumePitch pitch={copy.elevatorPitch} />
+        <ResumePitch pitch={copy.elevatorPitch} maxWidth="82ch" />
       </ContentSection>
 
       <ContentSection title="Fresh off the press">
