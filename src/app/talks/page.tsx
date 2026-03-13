@@ -15,7 +15,7 @@ export default function TalksPage() {
 
   return (
     <>
-      <SiteHeader title="Talks" lead={copy.talksLead} />
+      <SiteHeader title="Talks" lead={copy.talksLead} interactive />
       <Section size="3">
         <Container size="4" px="4">
           <ArticleTeasers articles={talks} />

@@ -23,7 +23,7 @@ export default function TagsPage() {
 
   return (
     <>
-      <SiteHeader title="Tags" lead="Browse all content by tag" />
+      <SiteHeader title="Tags" lead="Browse all content by tag" interactive />
       <div className="mx-auto max-w-5xl px-4 pb-16">
         <div className="flex flex-wrap gap-3">
           {Object.entries(tags)
@@ -34,7 +34,7 @@ export default function TagsPage() {
                   variant="soft"
                   color="gray"
                   size="3"
-                  className="cursor-pointer transition-colors hover:bg-[var(--site-surface-hover)]"
+                  className="cursor-pointer transition-colors hover:bg-(--site-surface-hover)"
                 >
                   {label} ({tagCounts[key] || 0})
                 </Badge>

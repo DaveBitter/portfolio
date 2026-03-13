@@ -15,7 +15,7 @@ export default function QuickBitsPage() {
 
   return (
     <>
-      <SiteHeader title="Quick Bits" lead={copy.quickBitsLead} />
+      <SiteHeader title="Quick Bits" lead={copy.quickBitsLead} interactive />
       <Section size="3">
         <Container size="4" px="4">
           <ArticleTeasers articles={quickBits} />

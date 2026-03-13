@@ -12,6 +12,7 @@ import { ResumeProfileChart } from "@/components/resume/resume-profile-chart";
 import { ResumeWorkExperience } from "@/components/resume/resume-work-experience";
 import { ResumeEducation } from "@/components/resume/resume-education";
 import { Socials } from "@/components/socials";
+import { HomeHeroBackground } from "@/components/home/home-hero-background";
 import { getCopy, getWorkExperience, getEducation } from "@/lib/content";
 import type { Metadata } from "next";
 
@@ -28,31 +29,33 @@ export default function ResumePage() {
 
   return (
     <>
-      <Section size="3" pb="0">
+      <Section size="3" pb="0" className="home-hero-section">
         <Container size="4" px="4">
-          <Flex direction="column" align="center" gap="4">
-            <div className="relative h-32 w-32 overflow-hidden rounded-full">
-              <Image
-                src="/img/dave.webp"
-                alt="Dave Bitter"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <Flex direction="column" align="center" gap="2">
-              <Heading size="8" className="text-gradient" align="center">
-                Dave Bitter
-              </Heading>
-              <Text size="3" color="gray" align="center">
-                Senior Front-end Consultant · Developer Advocate · Engineering
-                Manager
-              </Text>
-              <Box mt="2">
-                <Socials />
-              </Box>
+          <HomeHeroBackground>
+            <Flex direction="column" align="center" gap="4">
+              <div className="relative h-32 w-32 overflow-hidden rounded-full ring-1 ring-white/10">
+                <Image
+                  src="/img/dave.webp"
+                  alt="Dave Bitter"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <Flex direction="column" align="center" gap="2">
+                <Heading size="8" className="text-gradient" align="center">
+                  Dave Bitter
+                </Heading>
+                <Text size="3" color="gray" align="center">
+                  Senior Front-end Consultant · Developer Advocate · Engineering
+                  Manager
+                </Text>
+                <Box mt="2">
+                  <Socials />
+                </Box>
+              </Flex>
             </Flex>
-          </Flex>
+          </HomeHeroBackground>
         </Container>
       </Section>
 

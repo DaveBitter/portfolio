@@ -16,7 +16,7 @@ export default async function FridayTipsPage() {
 
   return (
     <>
-      <SiteHeader title="Friday Tips" lead={copy.fridayTipsLead} />
+      <SiteHeader title="Friday Tips" lead={copy.fridayTipsLead} interactive />
       <Section size="3">
         <Container size="4" px="4">
           {fridayTips.length > 0 ? (

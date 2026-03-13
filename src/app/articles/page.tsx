@@ -15,7 +15,7 @@ export default function ArticlesPage() {
 
   return (
     <>
-      <SiteHeader title="Articles" lead={copy.articlesLead} />
+      <SiteHeader title="Articles" lead={copy.articlesLead} interactive />
       <Section size="3">
         <Container size="4" px="4">
           <ArticleTeasers articles={articles} />
