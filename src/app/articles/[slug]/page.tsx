@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import { Article } from "@/components/article/article";
+import { JsonLd } from "@/components/json-ld";
 import { getArticles } from "@/lib/content";
 import type { Metadata } from "next";
 import { buildArticleMetadata } from "@/lib/page-metadata";
+import { buildArticlePageJsonLd } from "@/lib/structured-data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -36,6 +38,16 @@ export default async function ArticlePage({ params }: PageProps) {
         a.tags?.some((tag) => article.tags?.includes(tag))
     )
     .slice(0, 4);
+  const jsonLd = buildArticlePageJsonLd({
+    article,
+    path: `/articles/${slug}`,
+    breadcrumbParent: { name: "Articles", path: "/articles" },
+  });
 
-  return <Article article={article} relatedArticles={relatedArticles} />;
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <Article article={article} relatedArticles={relatedArticles} />
+    </>
+  );
 }

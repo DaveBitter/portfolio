@@ -1,6 +1,22 @@
 let resolveTransition: (() => void) | null = null;
 let transitionTimeout: ReturnType<typeof setTimeout> | null = null;
 
+type ViewTransitionCapableDocument = Document & {
+  startViewTransition: Exclude<Document["startViewTransition"], undefined>;
+};
+
+declare global {
+  interface Window {
+    __vtResolve?: () => void;
+  }
+}
+
+function supportsViewTransition(
+  doc: Document
+): doc is ViewTransitionCapableDocument {
+  return typeof (doc as ViewTransitionCapableDocument).startViewTransition === "function";
+}
+
 export function onNavigationComplete(): void {
   if (transitionTimeout) {
     clearTimeout(transitionTimeout);
@@ -11,15 +27,15 @@ export function onNavigationComplete(): void {
     resolveTransition = null;
   }
 
-  if (typeof window !== "undefined" && (window as any).__vtResolve) {
-    (window as any).__vtResolve();
+  if (typeof window !== "undefined" && window.__vtResolve) {
+    window.__vtResolve();
   }
 }
 
 export function navigateWithTransition(navigate: () => void): void {
   if (
     typeof document === "undefined" ||
-    !("startViewTransition" in document)
+    !supportsViewTransition(document)
   ) {
     navigate();
     return;

@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import { Article } from "@/components/article/article";
+import { JsonLd } from "@/components/json-ld";
 import { getFridayTips } from "@/lib/content";
 import type { Metadata } from "next";
 import { buildArticleMetadata } from "@/lib/page-metadata";
+import { buildVideoPageJsonLd } from "@/lib/structured-data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -33,6 +35,15 @@ export default async function FridayTipPage({ params }: PageProps) {
   const relatedTips = fridayTips
     .filter((t) => t.slug !== slug)
     .slice(0, 4);
+  const jsonLd = buildVideoPageJsonLd({
+    article: tip,
+    path: `/friday-tips/${slug}`,
+  });
 
-  return <Article article={tip} relatedArticles={relatedTips} />;
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <Article article={tip} relatedArticles={relatedTips} />
+    </>
+  );
 }

@@ -11,9 +11,11 @@ import { ResumePitch } from "@/components/resume/resume-pitch";
 import { ResumeProfileChart } from "@/components/resume/resume-profile-chart";
 import { ResumeWorkExperience } from "@/components/resume/resume-work-experience";
 import { ResumeEducation } from "@/components/resume/resume-education";
+import { JsonLd } from "@/components/json-ld";
 import { Socials } from "@/components/socials";
 import { HomeHeroBackground } from "@/components/home/home-hero-background";
 import { getCopy, getWorkExperience, getEducation } from "@/lib/content";
+import { buildResumePageJsonLd } from "@/lib/structured-data";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,12 +25,21 @@ export const metadata: Metadata = {
 };
 
 export default function ResumePage() {
+  const description =
+    "Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, and Engineering Manager";
   const copy = getCopy();
   const workExperience = getWorkExperience();
   const education = getEducation();
+  const jsonLd = buildResumePageJsonLd({
+    path: "/resume",
+    description,
+    workExperience,
+    education,
+  });
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <Section size="3" pb="0" className="home-hero-section">
         <Container size="4" px="4">
           <HomeHeroBackground>

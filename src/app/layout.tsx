@@ -4,8 +4,10 @@ import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteBreadcrumbs } from "@/components/site/site-breadcrumbs";
 import { Analytics } from "@/components/analytics";
+import { JsonLd } from "@/components/json-ld";
 import { ViewTransitionHandler } from "@/components/view-transition-handler";
 import { ThemeProvider, ThemeWrapper } from "@/components/theme-provider";
+import { buildSiteJsonLd } from "@/lib/structured-data";
 import "./globals.css";
 
 const publicSans = Public_Sans({
@@ -70,6 +72,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const siteJsonLd = buildSiteJsonLd();
+
   return (
     <html lang="en" className={publicSans.variable} suppressHydrationWarning>
       <head>
@@ -80,6 +84,7 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
+        <JsonLd data={siteJsonLd} />
         <ThemeProvider>
           <ThemeWrapper>
             <div className="flex min-h-dvh flex-col">

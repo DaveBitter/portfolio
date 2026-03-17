@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import { Article } from "@/components/article/article";
+import { JsonLd } from "@/components/json-ld";
 import { getQuickBits } from "@/lib/content";
 import type { Metadata } from "next";
 import { buildArticleMetadata } from "@/lib/page-metadata";
+import { buildArticlePageJsonLd } from "@/lib/structured-data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -36,6 +38,16 @@ export default async function QuickBitPage({ params }: PageProps) {
         a.tags?.some((tag) => article.tags?.includes(tag))
     )
     .slice(0, 4);
+  const jsonLd = buildArticlePageJsonLd({
+    article,
+    path: `/quick-bits/${slug}`,
+    breadcrumbParent: { name: "Quick Bits", path: "/quick-bits" },
+  });
 
-  return <Article article={article} relatedArticles={relatedArticles} />;
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <Article article={article} relatedArticles={relatedArticles} />
+    </>
+  );
 }

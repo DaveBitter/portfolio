@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import { Article } from "@/components/article/article";
+import { JsonLd } from "@/components/json-ld";
 import { getTalks } from "@/lib/content";
 import type { Metadata } from "next";
 import { buildArticleMetadata } from "@/lib/page-metadata";
+import { buildArticlePageJsonLd } from "@/lib/structured-data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -36,6 +38,16 @@ export default async function TalkPage({ params }: PageProps) {
         t.tags?.some((tag) => talk.tags?.includes(tag))
     )
     .slice(0, 4);
+  const jsonLd = buildArticlePageJsonLd({
+    article: talk,
+    path: `/talks/${slug}`,
+    breadcrumbParent: { name: "Talks", path: "/talks" },
+  });
 
-  return <Article article={talk} relatedArticles={relatedTalks} />;
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <Article article={talk} relatedArticles={relatedTalks} />
+    </>
+  );
 }

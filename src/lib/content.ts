@@ -49,6 +49,7 @@ export interface Article {
   city?: string;
   countryCode?: string;
   summary?: string;
+  youtubeVideoId?: string;
 }
 
 export interface FridayTip {

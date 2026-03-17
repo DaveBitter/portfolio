@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
 
+function subscribe(): () => void {
+  return () => {};
+}
+
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false);
 
   if (!mounted) {
     return <button className="rounded-lg p-1.5" aria-label="Toggle theme"><span className="block size-[18px]" /></button>;

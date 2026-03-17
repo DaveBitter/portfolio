@@ -10,16 +10,23 @@ import Image from "next/image";
 import { ResumePitch } from "@/components/resume/resume-pitch";
 import { ContentSection } from "@/components/content-section";
 import { ArticleMasonryGrid } from "@/components/article/article-teaser";
+import { JsonLd } from "@/components/json-ld";
 import { Socials } from "@/components/socials";
 import { HomeHeroBackground } from "@/components/home/home-hero-background";
 import { getAllContentWithFridayTips, getCopy } from "@/lib/content";
+import { buildHomePageJsonLd } from "@/lib/structured-data";
 
 export default async function HomePage() {
   const copy = getCopy();
   const latest = (await getAllContentWithFridayTips()).slice(0, 10);
+  const jsonLd = buildHomePageJsonLd({
+    description: copy.pageDescription,
+    latestItems: latest,
+  });
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <Section size="3" pb="0" className="home-hero-section">
         <Container size="4" px="4">
           <HomeHeroBackground>

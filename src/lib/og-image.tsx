@@ -63,8 +63,11 @@ export async function generateOGImage(
                 flexShrink: 0,
               }}
             >
+              {/* `next/image` is not available inside `next/og` image rendering. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={imageDataUrl}
+                alt=""
                 width={579}
                 height={502}
                 style={{

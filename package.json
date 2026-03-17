@@ -7,7 +7,7 @@
     "build": "next build",
     "postbuild": "tsx scripts/generate-api.ts && tsx scripts/export-og-images.ts",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "optimize-images": "tsx scripts/optimize-images.ts",
     "import-articles": "tsx scripts/import-articles.ts"
   },
@@ -39,7 +39,7 @@
     "@types/node": "^25.3.5",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "eslint": "^10.0.3",
+    "eslint": "^9.39.4",
     "eslint-config-next": "^16.1.6",
     "postcss": "^8.5.8",
     "sharp": "^0.34.5",

@@ -69,7 +69,7 @@ function toWebpFilename(filename: string): string {
   return filename;
 }
 
-function buildTeaserImage(images: string[], slug: string): string {
+function buildTeaserImage(images: string[]): string {
   if (!images || images.length === 0) return "";
   const imgPath = images[0];
   const filename = path.basename(imgPath);
@@ -180,7 +180,7 @@ async function main() {
     for (const t of mappedTags) allNewTags.add(t);
 
     const body = normalizeMarkdown(fixImagePaths(content.trim(), slug));
-    const teaserImage = buildTeaserImage(data.images, slug);
+    const teaserImage = buildTeaserImage(data.images);
     const title = cleanTitle(data.title);
     const date = `${data.date}T00:00:00.000Z`;
 

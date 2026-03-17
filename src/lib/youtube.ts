@@ -40,6 +40,7 @@ function toFridayTip(item: YouTubePlaylistItem): Article {
     teaserCopy: snippet.description,
     teaserImage: "/img/friday-tips.webp",
     title: snippet.title.replace("#", ""),
+    youtubeVideoId: snippet.resourceId.videoId,
   };
 }
 
