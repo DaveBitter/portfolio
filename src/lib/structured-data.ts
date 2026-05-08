@@ -229,7 +229,7 @@ export function buildArticlePageJsonLd({
   imagePath,
   breadcrumbParent,
 }: DetailPageInput) {
-  const docUrl = article.canonicalUrl ?? toAbsoluteUrl(path);
+  const url = toAbsoluteUrl(path);
   const image = imagePath ?? article.teaserImage;
   const schemaType = toArticleSchemaType(article.type);
 
@@ -243,8 +243,8 @@ export function buildArticlePageJsonLd({
         description: article.teaserCopy,
         datePublished: toIsoDate(article.date),
         dateModified: toIsoDate(article.date),
-        url: docUrl,
-        mainEntityOfPage: docUrl,
+        url,
+        mainEntityOfPage: url,
         author: { "@id": PERSON_ID },
         publisher: { "@id": PERSON_ID },
         image: toAbsoluteUrl(image),
@@ -303,7 +303,7 @@ export function buildVideoPageJsonLd({
     });
   }
 
-  const docUrl = article.canonicalUrl ?? toAbsoluteUrl(path);
+  const url = toAbsoluteUrl(path);
 
   return {
     "@context": "https://schema.org",
@@ -316,7 +316,7 @@ export function buildVideoPageJsonLd({
         embedUrl: `https://www.youtube.com/embed/${article.youtubeVideoId}`,
         contentUrl: `https://www.youtube.com/watch?v=${article.youtubeVideoId}`,
         thumbnailUrl: [toAbsoluteUrl(article.teaserImage)],
-        url: docUrl,
+        url,
         inLanguage: "en",
         publisher: { "@id": PERSON_ID },
         author: { "@id": PERSON_ID },

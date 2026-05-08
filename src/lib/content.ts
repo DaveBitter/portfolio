@@ -50,8 +50,6 @@ export interface Article {
   countryCode?: string;
   summary?: string;
   youtubeVideoId?: string;
-  /** When set, points to the original publication (e.g. Techhub) for `<link rel="canonical">` and structured data. */
-  canonicalUrl?: string;
 }
 
 export interface FridayTip {
