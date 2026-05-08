@@ -189,6 +189,7 @@ export function ArticleMasonryGrid({ articles }: { articles: Article[] }) {
             key={`${article.type}-${article.slug}`}
             className={`masonry-item${isFeatured ? " sm:col-span-2" : ""}`}
             style={{ animationDelay: `${index * 75}ms` }}
+            data-home-card
           >
             {isFeatured ? (
               <ArticleTeaserFeatured

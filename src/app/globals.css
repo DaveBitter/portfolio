@@ -151,6 +151,10 @@ html.light body {
     animation: none !important;
   }
 
+  .home-scroll-progress {
+    display: none;
+  }
+
   .home-hero-grid,
   .home-hero-glow-primary,
   .home-hero-glow-secondary,
@@ -170,6 +174,62 @@ html.light body {
 
 .home-hero-section {
   padding-top: 2rem;
+}
+
+.home-scroll-progress {
+  position: fixed;
+  top: 24vh;
+  right: clamp(0.75rem, 2vw, 1.5rem);
+  z-index: 30;
+  width: 2px;
+  height: 52vh;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+  pointer-events: none;
+}
+
+.home-scroll-progress-bar {
+  width: 100%;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: top;
+  background: linear-gradient(
+    180deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  box-shadow: 0 0 18px rgb(255 84 32 / 0.44);
+}
+
+.home-scroll-section {
+  --section-accent-scale: 0;
+  position: relative;
+  isolation: isolate;
+}
+
+.home-scroll-section::before {
+  content: "";
+  position: absolute;
+  top: 1.75rem;
+  left: max(1rem, calc(50% - 38rem));
+  width: min(14rem, 42vw);
+  height: 2px;
+  transform: scaleX(var(--section-accent-scale));
+  transform-origin: left;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-secondary),
+    rgb(255 19 67 / 0)
+  );
+  box-shadow: 0 0 18px rgb(255 84 32 / 0.42);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.has-home-scroll-animations .masonry-item {
+  animation: none;
 }
 
 .home-hero {

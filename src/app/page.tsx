@@ -13,6 +13,7 @@ import { ArticleMasonryGrid } from "@/components/article/article-teaser";
 import { JsonLd } from "@/components/json-ld";
 import { Socials } from "@/components/socials";
 import { HomeHeroBackground } from "@/components/home/home-hero-background";
+import { HomeScrollAnimations } from "@/components/home/home-scroll-animations";
 import { getAllContentWithFridayTips, getCopy } from "@/lib/content";
 import { buildHomePageJsonLd } from "@/lib/structured-data";
 
@@ -27,6 +28,7 @@ export default async function HomePage() {
   return (
     <>
       <JsonLd data={jsonLd} />
+      <HomeScrollAnimations />
       <Section size="3" pb="0" className="home-hero-section">
         <Container size="4" px="4">
           <HomeHeroBackground>
@@ -35,7 +37,10 @@ export default async function HomePage() {
               align="center"
               gap="4"
             >
-              <div className="relative h-32 w-32 overflow-hidden rounded-full ring-1 ring-white/10">
+              <div
+                className="relative h-32 w-32 overflow-hidden rounded-full ring-1 ring-white/10"
+                data-home-hero-avatar
+              >
                 <Image
                   src="/img/dave.webp"
                   alt="Dave Bitter"
@@ -45,15 +50,26 @@ export default async function HomePage() {
                 />
               </div>
               <Flex direction="column" align="center" gap="2">
-                <Heading size="8" className="text-gradient" align="center">
+                <Heading
+                  size="8"
+                  className="text-gradient"
+                  align="center"
+                  data-home-hero-title
+                >
                   Hi, I&apos;m Dave
                 </Heading>
-                <Text size="3" color="gray" align="center" className="max-w-2xl">
+                <Text
+                  size="3"
+                  color="gray"
+                  align="center"
+                  className="max-w-2xl"
+                  data-home-hero-subtitle
+                >
                   Senior Front-end Consultant · Developer Advocate ·{" "}
                   <span className="text-gradient font-medium">AI Enthusiast</span>{" "}
                   · Engineering Manager
                 </Text>
-                <Box mt="2">
+                <Box mt="2" data-home-hero-socials>
                   <Socials />
                 </Box>
               </Flex>
@@ -62,11 +78,11 @@ export default async function HomePage() {
         </Container>
       </Section>
 
-      <ContentSection title="About me">
+      <ContentSection title="About me" animationId="about">
         <ResumePitch pitch={copy.elevatorPitch} maxWidth="82ch" />
       </ContentSection>
 
-      <ContentSection title="Fresh off the press">
+      <ContentSection title="Fresh off the press" animationId="latest">
         <ArticleMasonryGrid articles={latest} />
       </ContentSection>
     </>

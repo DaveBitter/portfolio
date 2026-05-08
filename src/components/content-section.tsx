@@ -12,6 +12,7 @@ interface ContentSectionProps {
   title: string;
   href?: string;
   linkLabel?: string;
+  animationId?: string;
   children: React.ReactNode;
 }
 
@@ -19,12 +20,22 @@ export function ContentSection({
   title,
   href,
   linkLabel,
+  animationId,
   children,
 }: ContentSectionProps) {
   return (
-    <Section size="2">
+    <Section
+      size="2"
+      className={animationId ? "home-scroll-section" : undefined}
+      data-home-section={animationId}
+    >
       <Container size="4" px="4">
-        <Flex justify="between" align="baseline" mb="5">
+        <Flex
+          justify="between"
+          align="baseline"
+          mb="5"
+          data-home-section-heading={animationId ? "" : undefined}
+        >
           <Heading size="5" weight="bold">
             {title}
           </Heading>
@@ -42,7 +53,9 @@ export function ContentSection({
             </TransitionLink>
           )}
         </Flex>
-        {children}
+        <div data-home-section-content={animationId ? "" : undefined}>
+          {children}
+        </div>
       </Container>
     </Section>
   );
