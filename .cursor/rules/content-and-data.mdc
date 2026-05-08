@@ -10,7 +10,7 @@ alwaysApply: false
 
 Markdown with YAML frontmatter in `content/`. Loaded by `src/lib/content.ts`.
 
-- `content/articles/{slug}.md` — Articles (type: "articles"), one file per article
+- `content/articles/{slug}.md` — Articles (type: "articles"), one file per article. Optional frontmatter `canonicalUrl` (absolute URL) when the piece was published first elsewhere (e.g. Techhub); sets `<link rel="canonical">`, Open Graph `url`, and JSON-LD `url` / `mainEntityOfPage`.
 - `content/quick-bits/{slug}.md` — Quick Bits (type: "quick-bits"), one file per quick bit
 - `content/talks/{slug}.md` — Talks (type: "talks"), one file per talk
 - `content/resume/workExperience.md` — Work experience (supports `subEntries` for grouped roles)

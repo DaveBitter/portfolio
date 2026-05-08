@@ -20,6 +20,9 @@ export function buildArticleMetadata(
     description: article.teaserCopy,
     authors: [{ name: AUTHOR_NAME }],
     keywords: article.tags,
+    ...(article.canonicalUrl
+      ? { alternates: { canonical: article.canonicalUrl } }
+      : {}),
     openGraph: {
       type: "article",
       title: article.title,
@@ -28,6 +31,7 @@ export function buildArticleMetadata(
       authors: [AUTHOR_NAME],
       tags: article.tags,
       section,
+      ...(article.canonicalUrl ? { url: article.canonicalUrl } : {}),
       images: [
         {
           url: image,
