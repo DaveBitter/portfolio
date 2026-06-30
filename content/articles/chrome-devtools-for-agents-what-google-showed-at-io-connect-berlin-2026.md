@@ -34,7 +34,7 @@ The agent is essentially blind to what happens after it writes code. You become 
 
 The main announcement for me was [chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp), an open-source [MCP](https://modelcontextprotocol.io/) server that connects a coding agent to a live Chrome browser instance using the [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro).
 
-Once installed, the agent can read [console output](https://developer.chrome.com/docs/devtools/console) directly (errors, warnings, logs) without you touching the browser. It can inspect [network traffic](https://developer.chrome.com/docs/devtools/network/overview), record and evaluate [performance traces](https://developer.chrome.com/docs/devtools/performance/overview) to find long tasks and [INP](https://web.dev/articles/inp) issues, run [Lighthouse audits](https://developer.chrome.com/docs/devtools/lighthouse) and act on the results, and walk the [accessibility tree](https://developer.chrome.com/docs/devtools/accessibility/reference).
+Once installed, the agent can read [console output](https://developer.chrome.com/docs/devtools/console) directly (errors, warnings, logs) without you touching the browser. It can inspect [network traffic](https://developer.chrome.com/docs/devtools/network/overview), record and evaluate [performance traces](https://developer.chrome.com/docs/devtools/performance/overview) to find long tasks and [INP](https://web.dev/articles/inp) issues, run [Lighthouse audits](https://developer.chrome.com/docs/devtools/lighthouse), including the new [Agentic Browsing category](/articles/is-your-site-ready-for-ai-agents-lighthouse-now-has-an-answer), and act on the results, and walk the [accessibility tree](https://developer.chrome.com/docs/devtools/accessibility/reference).
 
 The demo shown in the sessions had an agent check performance on a page, identify a long task blocking the main thread, trace it to a specific function, and propose a fix using [scheduler.yield](https://developer.chrome.com/docs/web-platform/scheduler-yield). All from a single prompt, with the agent driving Chrome directly.
 
@@ -131,5 +131,9 @@ The agent then only suggests features within that window and adds fallbacks wher
 ## Both together
 
 The sessions presented these two tools as a pair. Modern Web Guidance reduces the chance of stale or broken code. Chrome DevTools for agents catches and fixes what still goes wrong, without the developer acting as a messenger. Neither is a complete solution on its own. Together they address the debugging loop from both ends.
+
+## Where this fits
+
+These tools are about coding agents helping you build better. The other side is whether the site you ship works for user-facing agents trying to book, buy, or navigate on it. I've written about that separately: [Lighthouse's new Agentic Browsing category](/articles/is-your-site-ready-for-ai-agents-lighthouse-now-has-an-answer) measures agent readiness on production pages, and [WebMCP](/articles/web-mcp-making-the-web-ai-agent-ready) is how you expose structured actions for agents to use.
 
 At the time of writing both are in early preview, but the [chrome-devtools-mcp repository](https://github.com/ChromeDevTools/chrome-devtools-mcp) is already active and the [official get started guide](https://developer.chrome.com/docs/devtools/agents/get-started) has instructions for every major agent.
