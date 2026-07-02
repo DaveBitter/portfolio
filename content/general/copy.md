@@ -1,16 +1,16 @@
 ---
 items:
   - key: "pageDescription"
-    value: Front-end consultant, developer advocate, and engineering manager who writes about web development, speaks at conferences, and occasionally makes things that work.
+    value: Senior front-end consultant, developer advocate, Google Developer Expert for Web, and engineering manager who builds web applications, leads technical teams, and shares practical knowledge with developers.
   - key: "greetingIntro"
     value: >-
-      I build things for the web, lead teams, and talk about it way too much.
+      I build sophisticated web applications, lead technical teams, and turn complex ideas into practical knowledge for developers.
   - key: "elevatorPitch"
     value: >-
-      I combine deep technical expertise in React.js, Next.js, and TypeScript with a growing focus on AI — from browser-based machine learning and built-in AI APIs to AI-powered developer workflows. As a Developer Advocate and Google Developer Expert for Web, I transform complex concepts into accessible knowledge through speaking, writing, and mentorship.
+      I combine deep technical expertise in React.js, Next.js, and TypeScript with people leadership, architecture, and developer advocacy. As a Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, and Engineering Manager, I build sophisticated, user-centered web applications while developing high-performing technical teams.
 
 
-      As Engineering Manager at iO, I lead ~35 seconded consultants, providing strategic career guidance while strengthening the organization's market position. My collaborative approach bridges organizational divides, connecting teams across departments to foster innovation and knowledge sharing.
+      At iO, I lead a department of 35+ seconded consultants, provide strategic career guidance, and help establish technical standards across teams. I also continue to turn complex technical concepts into accessible knowledge through speaking, writing, mentorship, and AI-powered product work that improves how consultants and managers deliver value.
   - key: "latestLead"
     value: A mix of talks, articles, Quick Bits and Friday Tips — whatever I've been up to lately.
   - key: "articlesLead"

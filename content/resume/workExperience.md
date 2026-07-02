@@ -31,20 +31,22 @@ items:
         endDate: 2025-10-01T00:00:00.000Z
         present: true
         body: >-
-          Led the technical transformation of iO Resumator, a critical tool for iO's secondment delivery model, by migrating from a React SPA to NextJS with the App Router and server components, implementing iO's Bonzai AI platform for automation, and driving organizational adoption across multiple stakeholder groups.
+          Technical Lead on iO Resumator, an internal platform supporting iO's secondment delivery model. Led the evolution of the product from a resume maintenance tool into a broader talent, proposal, and manager enablement platform, driving architecture, AI integration, product quality, and adoption across consultants and managers.
 
 
-          * Architected and executed a major technical refactor migrating the platform from React SPA to NextJS using the new App Router, server components, and a server-first approach for data handling and authentication
+          * Led the platform architecture migration from a React SPA to a unified Next.js App Router architecture, introducing server-side data services, standardized API routes, typed CRUD services, and stronger ownership and security boundaries
 
-          * Improved code reusability, consistency, and development efficiency by creating numerous new components and enhancing the overall project architecture
+          * Built and evolved AI-powered workflows covering resume import with automatic content extraction, translation, motivation writing, vacancy tailoring, resume optimization, interview preparation, and match explanations
 
-          * Enhanced user experience by collaborating with designers to identify and resolve UX issues, ensuring a more intuitive and effective platform
+          * Optimized AI model usage and costs with usage and cost telemetry, while maintaining stakeholder communication and advocating for product adoption across the organization
 
-          * Integrated iO's Bonzai AI platform to automate previously manual processes, including automatic resume content extraction for new employees, uniform rewriting of work experiences, AI-powered personalized interview preparation with scoped questions and tailored tips, and automated motivation letter tailoring based on complete resumes and job vacancies
+          * Developed manager-facing tools including semantic candidate search, the Match Tool, Client Network, resume peek overlays, overview metrics, release notes, AI Costs dashboard, and duplicate resume resolution workflows
 
-          * Optimized AI model usage and costs while leading a development team, building features alongside the team, and maintaining communication with organizational stakeholders to advocate for platform adoption
+          * Improved resume quality and user experience through tailored versions, inline optimizer fixes, profile and image handling, OpenGraph previews, localized UI and content, and better PDF and editor behavior
 
           * Initiated the RBAC (role-based access control) feature to improve platform usability for large organizations and drive more efficient workflows across iO
+
+          * Hardened delivery quality by expanding Cypress and Vitest coverage, stabilizing flaky end-to-end flows, improving fixture ownership, and accelerating CI/CD with parallel lint, typecheck, test, and deployment pipelines
       - title: Engineering Manager
         startDate: 2024-06-01T00:00:00.000Z
         endDate: 2024-06-01T00:00:00.000Z

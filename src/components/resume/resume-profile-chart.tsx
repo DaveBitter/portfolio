@@ -5,13 +5,13 @@ import * as d3 from "d3";
 
 const SKILLS_DATA: Array<{ label: string; value: number }> = [
   { label: "Front-end Engineer", value: 0.95 },
-  { label: "Leadership", value: 0.9 },
-  { label: "Accessibility", value: 0.9 },
+  { label: "Technical Leadership", value: 0.92 },
+  { label: "Team Management", value: 0.9 },
   { label: "Developer Advocacy", value: 0.9 },
-  { label: "UX Design", value: 0.75 },
-  { label: "DevOps", value: 0.55 },
-  { label: "Back-end JS", value: 0.6 },
-  { label: "Team Management", value: 0.85 },
+  { label: "AI Workflows", value: 0.82 },
+  { label: "Technical Standards", value: 0.85 },
+  { label: "Career Development", value: 0.88 },
+  { label: "UX Collaboration", value: 0.78 },
 ];
 
 const DEFAULT_SIZE = 400;

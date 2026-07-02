@@ -18,15 +18,16 @@ import { getCopy, getWorkExperience, getEducation } from "@/lib/content";
 import { buildResumePageJsonLd } from "@/lib/structured-data";
 import type { Metadata } from "next";
 
+const PROFESSIONAL_TITLE =
+  "Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, and Engineering Manager";
+
 export const metadata: Metadata = {
   title: "Resume",
-  description:
-    "Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, and Engineering Manager",
+  description: PROFESSIONAL_TITLE,
 };
 
 export default function ResumePage() {
-  const description =
-    "Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, and Engineering Manager";
+  const description = PROFESSIONAL_TITLE;
   const copy = getCopy();
   const workExperience = getWorkExperience();
   const education = getEducation();
@@ -58,9 +59,8 @@ export default function ResumePage() {
                   Dave Bitter
                 </Heading>
                 <Text size="3" color="gray" align="center">
-                  Senior Front-end Consultant · Developer Advocate ·{" "}
-                  <span className="text-gradient font-medium">AI Enthusiast</span>{" "}
-                  · Engineering Manager
+                  Senior Front-end Consultant · Developer Advocate · Google Developer
+                  Expert for Web · Engineering Manager
                 </Text>
                 <Box mt="2">
                   <Socials />

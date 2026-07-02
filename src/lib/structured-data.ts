@@ -132,15 +132,19 @@ function buildPerson() {
     image: PERSON_IMAGE,
     description: PERSON_DESCRIPTION,
     email: "mailto:dave.bitter@iodigital.com",
-    jobTitle: "Senior Front-end Consultant",
+    jobTitle:
+      "Senior Front-end Consultant, Developer Advocate, Google Developer Expert for Web, and Engineering Manager",
     knowsAbout: [
       "Front-end development",
       "React",
       "Next.js",
       "TypeScript",
+      "Technical leadership",
       "Developer advocacy",
       "Engineering management",
       "Artificial intelligence",
+      "Team management",
+      "Career development",
     ],
     homeLocation: {
       "@type": "Place",
@@ -165,7 +169,7 @@ export function buildSiteJsonLd() {
         url: SITE_URL,
         name: SITE_NAME,
         description:
-          "Front-end consultant, developer advocate, and engineering manager who writes about web development, speaks at conferences, and occasionally makes things that work.",
+          "Senior front-end consultant, developer advocate, Google Developer Expert for Web, and engineering manager who builds web applications, leads technical teams, and shares practical knowledge with developers.",
         inLanguage: "en",
         publisher: { "@id": PERSON_ID },
       },

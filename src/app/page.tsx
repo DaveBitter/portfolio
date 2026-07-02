@@ -17,6 +17,9 @@ import { HomeScrollAnimations } from "@/components/home/home-scroll-animations";
 import { getAllContentWithFridayTips, getCopy } from "@/lib/content";
 import { buildHomePageJsonLd } from "@/lib/structured-data";
 
+const TITLE_LINE =
+  "Senior Front-end Consultant · Developer Advocate · Google Developer Expert for Web · Engineering Manager";
+
 export default async function HomePage() {
   const copy = getCopy();
   const latest = (await getAllContentWithFridayTips()).slice(0, 10);
@@ -65,9 +68,7 @@ export default async function HomePage() {
                   className="max-w-2xl"
                   data-home-hero-subtitle
                 >
-                  Senior Front-end Consultant · Developer Advocate ·{" "}
-                  <span className="text-gradient font-medium">AI Enthusiast</span>{" "}
-                  · Engineering Manager
+                  {TITLE_LINE}
                 </Text>
                 <Box mt="2" data-home-hero-socials>
                   <Socials />
