@@ -36,16 +36,22 @@
     "last 2 Edge versions"
   ],
   "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@babel/eslint-parser": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "@babel/preset-react": "^8.0.1",
+    "@babel/preset-typescript": "^8.0.1",
     "@tailwindcss/postcss": "^4.3.2",
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@typescript/native-preview": "7.0.0-dev.20260707.2",
     "eslint": "^10.6.0",
     "eslint-config-next": "^16.2.10",
     "postcss": "^8.5.16",
     "sharp": "^0.35.3",
     "tailwindcss": "^4.3.2",
     "tsx": "^4.23.0",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   }
 }
