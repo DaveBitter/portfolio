@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { navigateWithTransition } from "@/lib/view-transitions";
 import type { ComponentProps, MouseEvent } from "react";
 
-type TransitionLinkProps = ComponentProps<typeof Link>;
+type TransitionLinkProps = Omit<ComponentProps<typeof Link>, "key">;
 
 export function TransitionLink({
   href,
