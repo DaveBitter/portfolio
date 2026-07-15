@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { TransitionLink } from "@/components/transition-link";
+import { TiltCard } from "@/components/tilt-card";
 import { Card, Text } from "@radix-ui/themes";
 import { ArticleTypeBadge } from "./article-type-badge";
 import { TagList } from "@/components/tag";
@@ -56,7 +57,7 @@ function TeaserMeta({
         {article.teaserCopy}
       </Text>
       {article.tags && article.tags.length > 0 && (
-        <div className="sm:mt-auto sm:pt-2">
+        <div className="relative z-20 sm:mt-auto sm:pt-2">
           <TagList tags={article.tags} size="small" />
         </div>
       )}
@@ -68,10 +69,15 @@ export function ArticleTeaser({ article }: { article: Article }) {
   const href = getArticleHref(article);
 
   return (
-    <TransitionLink href={href} className="group block sm:h-full">
+    <TiltCard className="group sm:h-full">
+      <TransitionLink
+        href={href}
+        aria-label={article.title}
+        className="absolute inset-0 z-10 rounded-[var(--card-border-radius)]"
+      />
       <Card
         size="2"
-        className="shadow-md shadow-black/25 transition-all hover:bg-[var(--site-surface-hover)] hover:shadow-lg hover:shadow-black/30 sm:h-full"
+        className="shadow-md shadow-black/25 transition-all group-hover:bg-[var(--site-surface-hover)] group-hover:shadow-lg group-hover:shadow-black/30 sm:h-full"
       >
         <div className="flex flex-col sm:h-full">
           {article.teaserImage && (
@@ -91,7 +97,7 @@ export function ArticleTeaser({ article }: { article: Article }) {
           <TeaserMeta article={article} />
         </div>
       </Card>
-    </TransitionLink>
+    </TiltCard>
   );
 }
 
@@ -105,8 +111,13 @@ function ArticleTeaserFeatured({
   const href = getArticleHref(article);
 
   return (
-    <TransitionLink href={href} className="group block h-full">
-      <div className="flex h-full flex-col overflow-hidden rounded-[var(--radius-3)] bg-[var(--site-surface)] shadow-md shadow-black/25 transition-all hover:bg-[var(--site-surface-hover)] hover:shadow-lg hover:shadow-black/30 sm:min-h-[420px] sm:flex-row">
+    <TiltCard className="group h-full">
+      <TransitionLink
+        href={href}
+        aria-label={article.title}
+        className="absolute inset-0 z-10 rounded-[var(--radius-3)]"
+      />
+      <div className="flex h-full flex-col overflow-hidden rounded-[var(--radius-3)] bg-[var(--site-surface)] shadow-md shadow-black/25 transition-all group-hover:bg-[var(--site-surface-hover)] group-hover:shadow-lg group-hover:shadow-black/30 sm:min-h-[420px] sm:flex-row">
         {article.teaserImage && (
           <div
             className={`relative aspect-video sm:aspect-auto sm:w-1/2${imageRight ? " sm:order-2" : ""}`}
@@ -125,13 +136,13 @@ function ArticleTeaserFeatured({
           className={`flex flex-col p-4 sm:w-1/2 sm:p-8${imageRight ? " sm:order-1" : ""}`}
         >
           <TeaserMeta
-              article={article}
-              titleSize="5"
-              clampClass=""
-            />
+            article={article}
+            titleSize="5"
+            clampClass=""
+          />
         </div>
       </div>
-    </TransitionLink>
+    </TiltCard>
   );
 }
 

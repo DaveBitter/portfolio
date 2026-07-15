@@ -14,6 +14,8 @@ import { ResumeEducation } from "@/components/resume/resume-education";
 import { JsonLd } from "@/components/json-ld";
 import { Socials } from "@/components/socials";
 import { HomeHeroBackground } from "@/components/home/home-hero-background";
+import { HomeScrollAnimations } from "@/components/home/home-scroll-animations";
+import { ScrambleText } from "@/components/scramble-text";
 import { getCopy, getWorkExperience, getEducation } from "@/lib/content";
 import { buildResumePageJsonLd } from "@/lib/structured-data";
 import type { Metadata } from "next";
@@ -41,6 +43,7 @@ export default function ResumePage() {
   return (
     <>
       <JsonLd data={jsonLd} />
+      <HomeScrollAnimations />
       <Section size="3" pb="0" className="home-hero-section">
         <Container size="4" px="4">
           <HomeHeroBackground>
@@ -56,7 +59,7 @@ export default function ResumePage() {
               </div>
               <Flex direction="column" align="center" gap="2">
                 <Heading size="8" className="text-gradient" align="center">
-                  Dave Bitter
+                  <ScrambleText text="Dave Bitter" trigger="mount" />
                 </Heading>
                 <Text size="3" color="gray" align="center">
                   Senior Front-end Consultant · Developer Advocate · Google Developer
@@ -80,7 +83,7 @@ export default function ResumePage() {
           >
             <Box flexGrow="1" flexShrink="1" style={{ minWidth: 0 }}>
               <Heading size="5" mb="4" className="text-gradient">
-                About me
+                <ScrambleText text="About me" />
               </Heading>
               <ResumePitch pitch={copy.elevatorPitch} showLink={false} />
             </Box>
@@ -89,7 +92,7 @@ export default function ResumePage() {
               width={{ initial: "100%", md: "320px" }}
             >
               <Heading size="5" mb="4" className="text-gradient">
-                Skill Proficiency
+                <ScrambleText text="Skill Proficiency" />
               </Heading>
               <ResumeProfileChart />
             </Box>

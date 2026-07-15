@@ -32,7 +32,7 @@ export function ResumePitch({
               variant="soft"
               color="tomato"
               size="3"
-              className="cursor-pointer"
+              className="btn-juice cursor-pointer"
             >
               View my resume
               <ArrowRightIcon width={16} height={16} />

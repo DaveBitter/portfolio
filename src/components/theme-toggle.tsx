@@ -21,7 +21,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="rounded-lg p-1.5 text-(--color-text-muted) transition-colors hover:text-(--color-text)"
+      className="icon-pop rounded-lg p-1.5 text-(--color-text-muted) transition-colors hover:text-(--color-text)"
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
       {isDark ? <SunIcon width={18} height={18} /> : <MoonIcon width={18} height={18} />}

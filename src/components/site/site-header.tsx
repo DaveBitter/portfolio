@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Container, Section, Flex, Heading, Text } from "@radix-ui/themes";
 import { Socials } from "@/components/socials";
 import { HomeHeroBackground } from "@/components/home/home-hero-background";
+import { HomeScrollAnimations } from "@/components/home/home-scroll-animations";
+import { ScrambleText } from "@/components/scramble-text";
 
 interface SiteHeaderProps {
   title: string;
@@ -27,7 +29,7 @@ export function SiteHeader({
     >
       <Flex direction="column" gap="3" flexGrow="1">
         <Heading size={{ initial: "8", md: "9" }} className="text-gradient">
-          {title}
+          <ScrambleText text={title} trigger="mount" />
         </Heading>
         {lead && (
           <Text
@@ -59,9 +61,12 @@ export function SiteHeader({
     <Section size="3" pb="0" className={interactive ? "home-hero-section" : undefined}>
       <Container size="4" px="4">
         {interactive ? (
-          <HomeHeroBackground className="px-6 py-12 sm:px-10 sm:py-16">
-            {content}
-          </HomeHeroBackground>
+          <>
+            <HomeScrollAnimations />
+            <HomeHeroBackground className="px-6 py-12 sm:px-10 sm:py-16">
+              {content}
+            </HomeHeroBackground>
+          </>
         ) : (
           content
         )}

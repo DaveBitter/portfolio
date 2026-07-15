@@ -7,6 +7,7 @@ import {
 } from "@radix-ui/themes";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { TransitionLink } from "@/components/transition-link";
+import { ScrambleText } from "@/components/scramble-text";
 
 interface ContentSectionProps {
   title: string;
@@ -37,7 +38,7 @@ export function ContentSection({
           data-home-section-heading={animationId ? "" : undefined}
         >
           <Heading size="5" weight="bold">
-            {title}
+            <ScrambleText text={title} />
           </Heading>
           {href && linkLabel && (
             <TransitionLink href={href}>
@@ -45,7 +46,7 @@ export function ContentSection({
                 variant="ghost"
                 color="tomato"
                 size="2"
-                className="cursor-pointer"
+                className="btn-juice cursor-pointer"
               >
                 {linkLabel}
                 <ArrowRightIcon width={14} height={14} />

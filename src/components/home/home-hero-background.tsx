@@ -195,6 +195,19 @@ export function HomeHeroBackground({
       }
     };
 
+    const handleSpotlightMove = (event: PointerEvent) => {
+      if (reducedMotionRef.current || event.pointerType !== "mouse") {
+        return;
+      }
+
+      const rect = container.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+      container.style.setProperty("--spot-x", `${x}%`);
+      container.style.setProperty("--spot-y", `${y}%`);
+    };
+
     container.style.setProperty("--hero-parallax-x", "0px");
     container.style.setProperty("--hero-parallax-y", "0px");
     handleMotionPreference();
@@ -202,6 +215,7 @@ export function HomeHeroBackground({
     window.addEventListener("pointermove", handlePointerMove);
     window.addEventListener("pointerleave", handlePointerLeave);
     window.addEventListener("touchstart", enableGyroIfAvailable, { once: true });
+    container.addEventListener("pointermove", handleSpotlightMove);
     reducedMotionQuery.addEventListener("change", handleMotionPreference);
     coarsePointerQuery.addEventListener("change", handleMotionPreference);
 
@@ -214,6 +228,7 @@ export function HomeHeroBackground({
       window.removeEventListener("pointerleave", handlePointerLeave);
       window.removeEventListener("touchstart", enableGyroIfAvailable);
       window.removeEventListener("deviceorientation", handleDeviceOrientation);
+      container.removeEventListener("pointermove", handleSpotlightMove);
       gyroEnabledRef.current = false;
       reducedMotionQuery.removeEventListener("change", handleMotionPreference);
       coarsePointerQuery.removeEventListener("change", handleMotionPreference);
@@ -237,6 +252,7 @@ export function HomeHeroBackground({
         <div className="home-hero-grid absolute inset-0" />
         <div className="home-hero-glow home-hero-glow-primary absolute" />
         <div className="home-hero-glow home-hero-glow-secondary absolute" />
+        <div className="home-hero-spotlight absolute inset-0" />
 
         <svg
           viewBox="0 0 760 440"

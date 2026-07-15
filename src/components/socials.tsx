@@ -63,7 +63,7 @@ export function Socials() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
-          className="text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-primary)]"
+          className="icon-pop text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-primary)]"
         >
           <Icon width={20} height={20} />
         </a>

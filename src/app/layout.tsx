@@ -7,6 +7,7 @@ import { Analytics } from "@/components/analytics";
 import { JsonLd } from "@/components/json-ld";
 import { ViewTransitionHandler } from "@/components/view-transition-handler";
 import { ThemeProvider, ThemeWrapper } from "@/components/theme-provider";
+import { DotMatrixBackground } from "@/components/dot-matrix-background";
 import { buildSiteJsonLd } from "@/lib/structured-data";
 import "./globals.css";
 
@@ -84,6 +85,7 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
+        <DotMatrixBackground />
         <JsonLd data={siteJsonLd} />
         <ThemeProvider>
           <ThemeWrapper>
