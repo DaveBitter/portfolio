@@ -19,7 +19,7 @@ title: Element-scoped View Transitions
 ---
 Every animation I added with `document.startViewTransition()` came with a cost I never mentioned: while it runs, the whole page stops listening.
 
-In a demo with a list and a button you never feel it. In a real app you do. My [two lines of code article](https://techhub.iodigital.com/articles/view-transitions-api-animated-interactions) from 2023 didn't cover it, and Chrome 147 ([released on 7 April 2026](https://developer.chrome.com/blog/new-in-chrome-147/)) now fixes it with [element-scoped view transitions](https://developer.chrome.com/blog/element-scoped-view-transitions). Let's have a look at what changed.
+In a demo with a list and a button you never feel it. In a real app you do. My [two lines of code article](/articles/view-transitions-api-animated-interactions) from 2023 didn't cover it, and Chrome 147 ([released on 7 April 2026](https://developer.chrome.com/blog/new-in-chrome-147/)) now fixes it with [element-scoped view transitions](https://developer.chrome.com/blog/element-scoped-view-transitions). Let's have a look at what changed.
 
 ## Why the whole page freezes
 
@@ -146,7 +146,7 @@ Two related features from [Chrome's I/O 2026 web UI round-up](https://developer.
 
 ## Let the page keep listening
 
-Keep document-level transitions for navigating between pages: `document.startViewTransition()` for route changes in a single-page app, and a single `@view-transition` rule for multi-page apps, which I covered in [View Transitions for Multi-page Apps](https://techhub.iodigital.com/articles/view-transitions-for-multi-page-apps). For everything smaller, scope it. Your animation still runs, and the page keeps listening.
+Keep document-level transitions for navigating between pages: `document.startViewTransition()` for route changes in a single-page app, and a single `@view-transition` rule for multi-page apps, which I covered in [View Transitions for Multi-page Apps](/articles/view-transitions-for-multi-page-apps). For everything smaller, scope it. Your animation still runs, and the page keeps listening.
 
 ## Sources
 
@@ -156,5 +156,5 @@ Keep document-level transitions for navigating between pages: `document.startVie
 - [New in Chrome 147](https://developer.chrome.com/blog/new-in-chrome-147/)
 - [What's new in web UI (I/O 2026)](https://developer.chrome.com/blog/new-in-web-ui-io26)
 - [Element-scoped view transitions, web features explorer](https://web-platform-dx.github.io/web-features-explorer/features/view-transitions-element-scoped/)
-- [Make awesome animated interactions with two lines of code](https://techhub.iodigital.com/articles/view-transitions-api-animated-interactions)
-- [View Transitions for Multi-page Apps](https://techhub.iodigital.com/articles/view-transitions-for-multi-page-apps)
+- [Make awesome animated interactions with two lines of code](/articles/view-transitions-api-animated-interactions)
+- [View Transitions for Multi-page Apps](/articles/view-transitions-for-multi-page-apps)
